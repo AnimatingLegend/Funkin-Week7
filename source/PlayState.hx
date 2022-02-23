@@ -548,13 +548,13 @@ class PlayState extends MusicBeatState
 	
 					tower = new FlxSprite(100, 120);
 					tower.frames = Paths.getSparrowAtlas('warzone/tankWatchtower');
-					tower.animation.addByPrefix('idle', 'watchtower gradient color', 24, false);
+					tower.animation.addByPrefix('idle', 'watchtower gradient color', 24, true);
 					tower.antialiasing = true;
 					add(tower);
 	
 					var tankRolling = new FlxSprite(300,300);
 					tankRolling.frames = Paths.getSparrowAtlas('tankRolling');
-					tankRolling.animation.addByPrefix('idle', 'BG tank w lighting ', 24, true);
+					tankRolling.animation.addByPrefix('idle', 'BG tank w lighting ', 24);
 					tankRolling.scrollFactor.set(0.5, 0.5);
 					tankRolling.antialiasing = true;
 					tankRolling.animation.play('idle');			
@@ -570,7 +570,7 @@ class PlayState extends MusicBeatState
 					
 					var tankBop1 = new FlxSprite(-500,650);
 					tankBop1.frames = Paths.getSparrowAtlas('warzone/tank0');
-					tankBop1.animation.addByPrefix('bop', 'fg tankhead far right', 24);
+					tankBop1.animation.addByPrefix('bop', 'fg tankhead far right instance', 24, true);
 					tankBop1.scrollFactor.set(1.7, 1.5);
 					tankBop1.antialiasing = true;
 					add(tankBop1);
@@ -578,7 +578,7 @@ class PlayState extends MusicBeatState
 					
 					var tankBop2 = new FlxSprite(-300,750);
 					tankBop2.frames = Paths.getSparrowAtlas('warzone/tank1');
-					tankBop2.animation.addByPrefix('bop','fg tankhead 5', 24);
+					tankBop2.animation.addByPrefix('bop','fg tankhead 5 instance', 24, true);
 					tankBop2.scrollFactor.set(2.0, 0.2);
 					tankBop2.antialiasing = true;
 					add(tankBop2);
@@ -586,7 +586,7 @@ class PlayState extends MusicBeatState
 					
 					var tankBop3 = new FlxSprite(450,940);
 					tankBop3.frames = Paths.getSparrowAtlas('warzone/tank2');
-					tankBop3.animation.addByPrefix('bop','foreground man 3', 24);
+					tankBop3.animation.addByPrefix('bop','foreground man 3 instance', 24, true);
 					tankBop3.scrollFactor.set(1.5, 1.5);
 					tankBop3.antialiasing = true;
 					add(tankBop3);
@@ -594,7 +594,7 @@ class PlayState extends MusicBeatState
 					
 					var tankBop4 = new FlxSprite(1300,1200);
 					tankBop4.frames = Paths.getSparrowAtlas('warzone/tank3');
-					tankBop4.animation.addByPrefix('bop','fg tankhead 4', 24);
+					tankBop4.animation.addByPrefix('bop','fg tankhead 4 instace', 24, true);
 					tankBop4.scrollFactor.set(3.5, 2.5);
 					tankBop4.antialiasing = true;
 					add(tankBop4);
@@ -602,14 +602,14 @@ class PlayState extends MusicBeatState
 					
 					var tankBop5 = new FlxSprite(1300,900);
 					tankBop5.frames = Paths.getSparrowAtlas('warzone/tank4');
-					tankBop5.animation.addByPrefix('bop','fg tankman bobbin 3', 24);
+					tankBop5.animation.addByPrefix('bop','fg tankman bobbin 3 instance', 24, true);
 					tankBop5.scrollFactor.set(1.5, 1.5);
 					tankBop5.antialiasing = true;
 					add(tankBop5);
 					
 					var tankBop6 = new FlxSprite(1620,700);
 					tankBop6.frames = Paths.getSparrowAtlas('warzone/tank5');
-					tankBop6.animation.addByPrefix('bop','fg tankhead far right', 24);
+					tankBop6.animation.addByPrefix('bop','fg tankhead far right instance', 24, true);
 					tankBop6.scrollFactor.set(1.5, 1.5);
 					tankBop6.antialiasing = true;
 					add(tankBop6);
