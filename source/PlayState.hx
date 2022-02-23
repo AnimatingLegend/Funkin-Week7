@@ -615,7 +615,7 @@ class PlayState extends MusicBeatState
 					add(tankBop6);
 								
 
-		          }
+		     }
 		          default:
 		          {
 		                  defaultCamZoom = 0.9;
@@ -2507,6 +2507,16 @@ class PlayState extends MusicBeatState
 				upperBoppers.animation.play('bop', true);
 				bottomBoppers.animation.play('bop', true);
 				santa.animation.play('idle', true);
+
+			case 'warzone':
+				tankBop1.animation.play('bop', false);
+				tankBop2.animation.play('bop', false);
+				tankBop3.animation.play('bop', false);
+				tankBop4.animation.play('bop', false);
+				tankBop5.animation.play('bop', false);
+				tankBop6.animation.play('bop', false);
+				tower.animation.play('idle', false);
+			
 
 			case 'limo':
 				grpLimoDancers.forEach(function(dancer:BackgroundDancer)
