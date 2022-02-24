@@ -492,9 +492,9 @@ class PlayState extends MusicBeatState
 		                  add(bg);
 
 						}
-						case 'ugh' | 'guns':
+					//	case 'ugh' | 'guns':
 						{
-							defaultCamZoom = 0.9;
+							/*defaultCamZoom = 0.9;
 							curStage = 'warzone';
 							var sky:FlxSprite = new FlxSprite(-400,-400).loadGraphic(Paths.image('warzone/tankSky'));
 							sky.scrollFactor.set(0, 0);
@@ -608,8 +608,7 @@ class PlayState extends MusicBeatState
 							tankBop6.animation.addByPrefix('bop','fg tankhead far right', 24, false);
 							tankBop6.scrollFactor.set(1.5, 1.5);
 							tankBop6.antialiasing = true;
-							add(tankBop6);
-	
+							add(tankBop6);*
 								
 
 		   		  }
@@ -1857,9 +1856,9 @@ class PlayState extends MusicBeatState
 		}
 	}
 
+	}	
 	var endingSong:Bool = false;
-
-	private function popUpScore(strumtime:Float):Void
+    private function popUpScore(strumtime:Float):Void
 	{
 		var noteDiff:Float = Math.abs(strumtime - Conductor.songPosition);
 		// boyfriend.playAnim('hey');
@@ -1893,15 +1892,32 @@ class PlayState extends MusicBeatState
 			score = 200;
 		}
 
-		songScore += score;
+		var splashes:FlxSprite = new FlxSprite(daNote.x, playerStrums.members[daNote.noteData].y);
+			if (!curStage.startsWith('school'))
+			{
+				var tex:flixel.graphics.frames.FlxAtlasFrames = Paths.getSparrowAtlas('noteSplashes');
+				splashes.frames = tex;
+				splashes.animation.addByPrefix('splash 0 0', 'note impact 1 purple', 24, false);
+				splashes.animation.addByPrefix('splash 0 1', 'note impact 1  blue', 24, false);
+				splashes.animation.addByPrefix('splash 0 2', 'note impact 1 green', 24, false);
+				splashes.animation.addByPrefix('splash 0 3', 'note impact 1 red', 24, false);
+				splashes.animation.addByPrefix('splash 1 0', 'note impact 2 purple', 24, false);
+				splashes.animation.addByPrefix('splash 1 1', 'note impact 2 blue', 24, false);
+				splashes.animation.addByPrefix('splash 1 2', 'note impact 2 green', 24, false);
+				splashes.animation.addByPrefix('splash 1 3', 'note impact 2 red', 24, false);
+				if (daRating = 'sick')
+				{
+					add(splashes);
+					splashes.cameras = [camHUD];
+					splashes.animation.play('splash ' + FlxG.random.int(0, 1) + " " + daNote.noteData);
+					splashes.alpha = 0.6;
+					splashes.offset.x += 90;
+					splashes.offset.y += 80;
+					splashes.animation.finishCallback = function(name) splashes.kill();
+				}
+			}
 
-		/* if (combo > 60)
-				daRating = 'sick';
-			else if (combo > 12)
-				daRating = 'good'
-			else if (combo > 4)
-				daRating = 'bad';
-		 */
+		songScore += score;
 
 		var pixelShitPart1:String = "";
 		var pixelShitPart2:String = '';
@@ -1993,7 +2009,7 @@ class PlayState extends MusicBeatState
 		 */
 
 		coolText.text = Std.string(seperatedScore);
-		// add(coolText);
+		add(coolText);
 
 		FlxTween.tween(rating, {alpha: 0}, 0.2, {
 			startDelay: Conductor.crochet * 0.001
