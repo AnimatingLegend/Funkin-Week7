@@ -1846,9 +1846,8 @@ class PlayState extends MusicBeatState
 
 			daLoop++;
 
-// There could be a better way to do this but it works so what ever. [Line 1850 - 1858]
 
-			if (combo >= 10)
+			/*if (combo >= 10)
 				{
 					add(comboSpr);
 				}
@@ -1856,7 +1855,7 @@ class PlayState extends MusicBeatState
 			else if (combo == 0)
 				{
 					comboSpr.destroy();
-				}
+				}*/
 				
 
 		}
