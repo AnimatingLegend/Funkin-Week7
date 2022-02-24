@@ -748,6 +748,11 @@ class PlayState extends MusicBeatState
 				boyfriend.y += 220;
 				gf.x += 180;
 				gf.y += 300;
+
+				case 'warzone':
+				gf.y += -55;
+				gf.x -= 200;
+				boyfriend.x += 40;
 		}
 
 		add(gf);
