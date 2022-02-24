@@ -4,7 +4,8 @@ This is the repository for Friday Night Funkin, a game originally made for Ludum
 
 Play the Ludum Dare prototype here: https://ninja-muffin24.itch.io/friday-night-funkin
 Play the Newgrounds one here: https://www.newgrounds.com/portal/view/770371
-Support the project on the both of these pages: https://ninja-muffin24.itch.io/funkin || https://www.kickstarter.com/projects/funkin/friday-night-funkin-the-full-ass-game
+Support the project on the both of these pages: https://ninja-muffin24.itch.io/funkin |
+https://www.kickstarter.com/projects/funkin/friday-night-funkin-the-full-ass-game
 
 IF YOU MAKE A MOD AND DISTRIBUTE A MODIFIED / RECOMPILED VERSION, YOU MUST OPEN SOURCE YOUR MOD AS WELL
 
