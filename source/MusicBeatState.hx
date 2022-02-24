@@ -1,6 +1,7 @@
 package;
 
 import Conductor.BPMChangeEvent;
+import flixel.FlxSubState;
 import flixel.FlxG;
 import flixel.addons.transition.FlxTransitionableState;
 import flixel.addons.ui.FlxUIState;
@@ -18,14 +19,6 @@ class MusicBeatState extends FlxUIState
 
 	inline function get_controls():Controls
 		return PlayerSettings.player1.controls;
-
-	override function create()
-	{
-		if (transIn != null)
-			trace('reg ' + transIn.region);
-
-		super.create();
-	}
 
 	override function update(elapsed:Float)
 	{

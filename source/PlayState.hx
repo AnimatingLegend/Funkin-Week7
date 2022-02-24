@@ -105,6 +105,18 @@ class PlayState extends MusicBeatState
 	var grpLimoDancers:FlxTypedGroup<BackgroundDancer>;
 	var fastCar:FlxSprite;
 
+	var tower:FlxSprite;
+	var tankRolling:FlxSprite;
+	var tankmanRun:FlxTypedGroup<BackgroundTankmen>;
+	var tankBop1:FlxSprite;
+	var tankBop2:FlxSprite;
+	var tankBop3:FlxSprite;
+	var tankBop4:FlxSprite;
+	var tankBop5:FlxSprite;
+	var tankBop6:FlxSprite;
+	var smokeRight:FlxSprite;
+	var smokeLeft:FlxSprite;
+
 	var upperBoppers:FlxSprite;
 	var bottomBoppers:FlxSprite;
 	var santa:FlxSprite;
@@ -480,12 +492,12 @@ class PlayState extends MusicBeatState
 		                  add(bg);
 
 					}
-					case 'ugh':
+					case 'ugh' | 'guns':
 					{
 						defaultCamZoom = 0.9;
 
 						curStage = 'warzone';
-						var sky:FlxSprite = new FlxSprite(-400,-400).loadGraphic(Paths.image('tankSky'));
+						var sky:FlxSprite = new FlxSprite(-400,-400).loadGraphic(Paths.image('warzone/tankSky'));
 						sky.scrollFactor.set(0, 0);
 						sky.antialiasing = true;
 						sky.setGraphicSize(Std.int(sky.width * 1.5));
@@ -498,21 +510,21 @@ class PlayState extends MusicBeatState
 						clouds.updateHitbox();
 						add(clouds);
 					
-						var mountains:FlxSprite = new FlxSprite(-300,-20).loadGraphic(Paths.image('tankMountains'));
+						var mountains:FlxSprite = new FlxSprite(-300,-20).loadGraphic(Paths.image('warzone/tankMountains'));
 						mountains.scrollFactor.set(0.2, 0.2);
 						mountains.setGraphicSize(Std.int(1.2 * mountains.width));
 						mountains.updateHitbox();
 						mountains.antialiasing = true;
 						add(mountains);
 					
-						var buildings:FlxSprite = new FlxSprite(-200,0).loadGraphic(Paths.image('tankBuildings'));
+						var buildings:FlxSprite = new FlxSprite(-200,0).loadGraphic(Paths.image('warzone/tankBuildings'));
 						buildings.scrollFactor.set(0.3, 0.3);
 						buildings.setGraphicSize(Std.int(buildings.width * 1.1));
 						buildings.updateHitbox();
 						buildings.antialiasing = true;
 						add(buildings);
 					
-						var ruins:FlxSprite = new FlxSprite(-200,0).loadGraphic(Paths.image('tankRuins'));
+						var ruins:FlxSprite = new FlxSprite(-200,0).loadGraphic(Paths.image('warzone/tankRuins'));
 						ruins.scrollFactor.set(0.35, 0.35);
 						ruins.setGraphicSize(Std.int(ruins.width * 1.1));
 						ruins.updateHitbox();
@@ -528,7 +540,7 @@ class PlayState extends MusicBeatState
 						add(smokeLeft);
 					
 						var smokeRight:FlxSprite = new FlxSprite(1100,-100);
-						smokeRight.frames = Paths.getSparrowAtlas('smokeRight');
+						smokeRight.frames = Paths.getSparrowAtlas('warzone/smokeRight');
 						smokeRight.animation.addByPrefix('idle', 'SmokeRight ', 24, true);
 						smokeRight.scrollFactor.set(0.4, 0.4);
 						smokeRight.antialiasing = true;
@@ -536,7 +548,7 @@ class PlayState extends MusicBeatState
 						add(smokeRight);
 	
 						var tower = new FlxSprite(100, 120);
-						tower.frames = Paths.getSparrowAtlas('tankWatchtower');
+						tower.frames = Paths.getSparrowAtlas('warzone/tankWatchtower');
 						tower.animation.addByPrefix('idle', 'watchtower gradient color', 24, true);
 						tower.antialiasing = true;
 						add(tower);
@@ -559,9 +571,9 @@ class PlayState extends MusicBeatState
 
 						// TankBop Shit
 					
-					/*	var tankBop1 = new FlxSprite(-500,650);
+						var tankBop1 = new FlxSprite(-500,650);
 						tankBop1.frames = Paths.getSparrowAtlas('warzone/tank0');
-						tankBop1.animation.addByPrefix('bop', 'fg tankhead far right', 24, false);
+						tankBop1.animation.addByPrefix('boppin', 'fg tankhead far right', 24);
 						tankBop1.scrollFactor.set(1.7, 1.5);
 						tankBop1.antialiasing = true;
 						add(tankBop1);
@@ -569,21 +581,21 @@ class PlayState extends MusicBeatState
 					
 						var tankBop2 = new FlxSprite(-300,750);
 						tankBop2.frames = Paths.getSparrowAtlas('warzone/tank1');
-						tankBop2.animation.addByPrefix('bop','fg tankhead 5', 24, false);
+						tankBop2.animation.addByPrefix('boppin','fg tankhead 5', 24);
 						tankBop2.scrollFactor.set(2.0, 0.2);
 						tankBop2.antialiasing = true;
 						add(tankBop2);		
 					
 						var tankBop3 = new FlxSprite(450,940);
 						tankBop3.frames = Paths.getSparrowAtlas('warzone/tank2');
-						tankBop3.animation.addByPrefix('bop','foreground man 3', 24, false);
+						tankBop3.animation.addByPrefix('boppin','foreground man 3', 24);
 						tankBop3.scrollFactor.set(1.5, 1.5);
 						tankBop3.antialiasing = true;
 						add(tankBop3);
 									
 						var tankBop4 = new FlxSprite(1300,1200);
 						tankBop4.frames = Paths.getSparrowAtlas('warzone/tank3');
-						tankBop4.animation.addByPrefix('bop','fg tankhead 4', 24, false);
+						tankBop4.animation.addByPrefix('boppin','fg tankhead 4', 24);
 						tankBop4.scrollFactor.set(3.5, 2.5);
 						tankBop4.antialiasing = true;
 						add(tankBop4);
@@ -591,17 +603,17 @@ class PlayState extends MusicBeatState
 					
 						var tankBop5 = new FlxSprite(1300,900);
 						tankBop5.frames = Paths.getSparrowAtlas('warzone/tank4');
-						tankBop5.animation.addByPrefix('bop','fg tankman bobbin 3', 24, false);
+						tankBop5.animation.addByPrefix('boppin','fg tankman bobbin 3', 24);
 						tankBop5.scrollFactor.set(1.5, 1.5);
 						tankBop5.antialiasing = true;
 						add(tankBop5);
 					
 						var tankBop6 = new FlxSprite(1620,700);
 						tankBop6.frames = Paths.getSparrowAtlas('warzone/tank5');
-						tankBop6.animation.addByPrefix('bop','fg tankhead far right', 24,);
+						tankBop6.animation.addByPrefix('boppin','fg tankhead far right', 24);
 						tankBop6.scrollFactor.set(1.5, 1.5);
 						tankBop6.antialiasing = true;
-						add(tankBop6); */
+						add(tankBop6); 
 									  
 
 		          }
@@ -1962,6 +1974,18 @@ class PlayState extends MusicBeatState
 			if (combo >= 10 || combo == 0)
 				add(numScore);
 
+			if (combo >= 10)
+				{
+					add(comboSpr);
+				}
+
+			else if (combo == 0)
+				{
+					comboSpr.destroy();
+				}
+
+
+
 			FlxTween.tween(numScore, {alpha: 0}, 0.2, {
 				onComplete: function(tween:FlxTween)
 				{
@@ -1971,18 +1995,6 @@ class PlayState extends MusicBeatState
 			});
 
 			daLoop++;
-
-
-			/*if (combo >= 10)
-				{
-					add(comboSpr);
-				}
-
-			else if (combo == 0)
-				{
-					comboSpr.destroy();
-				}*/
-				
 
 		}
 
@@ -2495,7 +2507,7 @@ class PlayState extends MusicBeatState
 				upperBoppers.animation.play('bop', true);
 				bottomBoppers.animation.play('bop', true);
 				santa.animation.play('idle', true);
-
+	
 			case 'limo':
 				grpLimoDancers.forEach(function(dancer:BackgroundDancer)
 				{
