@@ -22,7 +22,7 @@ THESE INSTRUCTIONS ARE FOR COMPILING THE GAME'S SOURCE CODE!!!
 
 IF YOU WANT TO JUST DOWNLOAD AND INSTALL AND PLAY THE GAME NORMALLY, GO TO ITCH.IO TO DOWNLOAD THE GAME FOR PC, MAC, AND LINUX!!
 
-https://ninja-muffin24.itch.io/funkin | https://www.kickstarter.com/projects/funkin/friday-night-funkin-the-full-ass-game
+[Ninja Muffers site](https://ninja-muffin24.itch.io/funkin) [support the kickstarter also!!!](https://www.kickstarter.com/projects/funkin/friday-night-funkin-the-full-ass-game)
 
 IF YOU WANT TO COMPILE THE GAME YOURSELF, CONTINUE READING!!!
 
