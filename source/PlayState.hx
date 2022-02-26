@@ -1633,8 +1633,8 @@ class PlayState extends MusicBeatState
 		iconP1.x = healthBar.x + (healthBar.width * (FlxMath.remapToRange(healthBar.percent, 0, 100, 100, 0) * 0.01) - iconOffset);
 		iconP2.x = healthBar.x + (healthBar.width * (FlxMath.remapToRange(healthBar.percent, 0, 100, 100, 0) * 0.01)) - (iconP2.width - iconOffset);
 
-		if (health > 3)
-			health = 3;
+		if (health > 2)
+			health = 2;
 
 
 		#if debug
@@ -2047,10 +2047,19 @@ class PlayState extends MusicBeatState
 
 		var comboSpr:FlxSprite = new FlxSprite().loadGraphic(Paths.image(pixelShitPart1 + 'combo' + pixelShitPart2));
 		comboSpr.screenCenter();
-		comboSpr.x += 135;
-		comboSpr.y += 80;
+		comboSpr.x = coolText.x;
 		comboSpr.acceleration.y = 600;
 		comboSpr.velocity.y -= 150;
+		comboSpr.velocity.x += FlxG.random.int(1, 10);
+
+		var comboBr:FlxSprite = new FlxSprite().loadGraphic(Paths.image('comboBreak'));
+		comboBr.screenCenter();
+		comboBr.x += 135;
+		comboBr.y += 80;
+		comboBr.acceleration.y = 600;
+		comboBr.velocity.y -= 150;
+
+
 
 		comboSpr.velocity.x += FlxG.random.int(1, 10);
 		add(rating);
@@ -2061,14 +2070,18 @@ class PlayState extends MusicBeatState
 			rating.antialiasing = true;
 			comboSpr.setGraphicSize(Std.int(comboSpr.width * 0.7));
 			comboSpr.antialiasing = true;
+			comboBr.setGraphicSize(Std.int(comboBr.width * 0.7));
+			comboBr.antialiasing = true;
 		}
 		else
 		{
 			rating.setGraphicSize(Std.int(rating.width * daPixelZoom * 0.7));
 			comboSpr.setGraphicSize(Std.int(comboSpr.width * daPixelZoom * 0.7));
+			comboBr.setGraphicSize(Std.int(comboBr.width * daPixelZoom * 0.7));
 		}
 
 		comboSpr.updateHitbox();
+		comboBr.updateHitbox();
 		rating.updateHitbox();
 
 		var seperatedScore:Array<Int> = [];
@@ -2100,19 +2113,22 @@ class PlayState extends MusicBeatState
 			numScore.velocity.y -= FlxG.random.int(140, 160);
 			numScore.velocity.x = FlxG.random.float(-5, 5);
 
-			if (combo >= 10 || combo == 0)
+			if (combo >= 5 || combo == 0)
 				add(numScore);
 			
 		// this may looks stupid or make no sense but its a WIP so stfu lol
 
-				if (combo == 0)
+				/*if (combo == 0)
 					{
-						add(comboSpr);
+						add(comboBr);
+						rating.destroy();
+						numScore.destroy();
 					}
-			else if (combo >= 10)
+			else if (combo >= 5)
 					{
-						comboSpr.destroy();
-					}	
+						comboBr.destroy();
+						add(numScore);
+					}*/	
 				
 
 
@@ -2318,7 +2334,7 @@ class PlayState extends MusicBeatState
 		if (!boyfriend.stunned)
 		{
 			health -= 0.04;
-			if (combo > 10 && gf.animOffsets.exists('sad'))
+			if (combo > 5 && gf.animOffsets.exists('sad'))
 			{
 				gf.playAnim('sad');
 			}

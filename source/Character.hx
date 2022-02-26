@@ -478,8 +478,8 @@ class Character extends FlxSprite
 				animation.play('firstDeath');
 
 				addOffset('firstDeath', 29, 25);
-				addOffset('deathLoop', 29, 11);
-				addOffset('deathConfirm', 29, 41);
+				addOffset('deathLoop', 29, 9);
+				addOffset('deathConfirm', 29, 40);
 				playAnim('firstDeath');
 
 				flipX = true;
