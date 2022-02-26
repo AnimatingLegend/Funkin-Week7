@@ -431,7 +431,7 @@ class Character extends FlxSprite
 				animation.addByPrefix('deathConfirm', "RETRY CONFIRM", 24, false);
 				animation.play('firstDeath');
 
-				addOffset('firstDeath', -30, -12);
+				addOffset('firstDeath');
 				addOffset('deathLoop', -30, -12);
 				addOffset('deathConfirm', -30, -12);
 				playAnim('firstDeath');
