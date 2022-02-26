@@ -53,6 +53,7 @@ class PlayState extends MusicBeatState
 	public static var storyWeek:Int = 0;
 	public static var storyPlaylist:Array<String> = [];
 	public static var storyDifficulty:Int = 1;
+	public static var deathCounter:Int = 0;
 
 	var halloweenLevel:Bool = false;
 
@@ -625,9 +626,6 @@ class PlayState extends MusicBeatState
 				{
 					defaultCamZoom = 0.85;
 
-				//	picoStep = Json.parse(openfl.utils.Assets.getText(Paths.json('picospeaker')));
-				//	tankStep = Json.parse(openfl.utils.Assets.getText(Paths.json('tankSpawn')));
-
 					curStage = 'warzone-stress';
 					var sky:FlxSprite = new FlxSprite(-400,-400).loadGraphic(Paths.image('warzone/tankSky'));
 					sky.scrollFactor.set(0, 0);
@@ -688,7 +686,7 @@ class PlayState extends MusicBeatState
 							
 					tankRolling = new FlxSprite(300,300);
 					tankRolling.frames = Paths.getSparrowAtlas('tank/tankRolling');
-					tankRolling.animation.addByPrefix('idle', 'BG tank w lighting ', 24, true);
+					tankRolling.animation.addByPrefix('idle', 'BG tank w lighting ', 24, false);
 					tankRolling.scrollFactor.set(0.5, 0.5);
 					tankRolling.antialiasing = true;
 					tankRolling.animation.play('idle');
@@ -1624,9 +1622,6 @@ class PlayState extends MusicBeatState
 			#end
 		}
 
-		// FlxG.watch.addQuick('VOL', vocals.amplitudeLeft);
-		// FlxG.watch.addQuick('VOLRight', vocals.amplitudeRight);
-
 		iconP1.setGraphicSize(Std.int(FlxMath.lerp(150, iconP1.width, 0.50)));
 		iconP2.setGraphicSize(Std.int(FlxMath.lerp(150, iconP2.width, 0.50)));
 
@@ -1634,21 +1629,13 @@ class PlayState extends MusicBeatState
 		iconP2.updateHitbox();
 
 		var iconOffset:Int = 26;
-
+		
 		iconP1.x = healthBar.x + (healthBar.width * (FlxMath.remapToRange(healthBar.percent, 0, 100, 100, 0) * 0.01) - iconOffset);
 		iconP2.x = healthBar.x + (healthBar.width * (FlxMath.remapToRange(healthBar.percent, 0, 100, 100, 0) * 0.01)) - (iconP2.width - iconOffset);
 
-		if (health > 2)
-			health = 2;
+		if (health > 3)
+			health = 3;
 
-		if (healthBar.percent < 20)
-			iconP1.animation.curAnim.curFrame = 1;
-		
-		if (healthBar.percent > 80)
-			iconP2.animation.curAnim.curFrame = 1;
-
-		/* if (FlxG.keys.justPressed.NINE)
-			FlxG.switchState(new Charting()); */
 
 		#if debug
 		if (FlxG.keys.justPressed.EIGHT)
@@ -1811,8 +1798,6 @@ class PlayState extends MusicBeatState
 			FlxG.sound.music.stop();
 
 			openSubState(new GameOverSubstate(boyfriend.getScreenPosition().x, boyfriend.getScreenPosition().y));
-
-			// FlxG.switchState(new GameOverState(boyfriend.getScreenPosition().x, boyfriend.getScreenPosition().y));
 			
 			#if desktop
 			// Game Over doesn't get his own variable because it's only used here
@@ -2118,11 +2103,17 @@ class PlayState extends MusicBeatState
 			if (combo >= 10 || combo == 0)
 				add(numScore);
 			
-			/*if (combo >= 10)
-				add(comboSpr)
+		// this may looks stupid or make no sense but its a WIP so stfu lol
 
-			else if (combo == 0)
-				comboSpr.destroy();*/
+				if (combo == 0)
+					{
+						add(comboSpr);
+					}
+			else if (combo >= 10)
+					{
+						comboSpr.destroy();
+					}	
+				
 
 
 			FlxTween.tween(numScore, {alpha: 0}, 0.2, {
@@ -2327,7 +2318,7 @@ class PlayState extends MusicBeatState
 		if (!boyfriend.stunned)
 		{
 			health -= 0.04;
-			if (combo > 5 && gf.animOffsets.exists('sad'))
+			if (combo > 10 && gf.animOffsets.exists('sad'))
 			{
 				gf.playAnim('sad');
 			}
@@ -2336,10 +2327,9 @@ class PlayState extends MusicBeatState
 			songScore -= 10;
 
 			FlxG.sound.play(Paths.soundRandom('missnote', 1, 3), FlxG.random.float(0.1, 0.2));
-			// FlxG.sound.play(Paths.sound('missnote1'), 1, false);
-			// FlxG.log.add('played imss note');
 
 			boyfriend.stunned = true;
+			deathCounter++;
 
 			// get stunned for 5 seconds
 			new FlxTimer().start(5 / 60, function(tmr:FlxTimer)
