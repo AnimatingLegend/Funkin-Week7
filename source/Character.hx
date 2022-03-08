@@ -545,29 +545,27 @@ class Character extends FlxSprite
 
 				antialiasing = false;
 
-				case 'tankman':
+			case 'tankman':
 				tex = Paths.getSparrowAtlas('tankmanCaptain');
 				frames = tex;
 				animation.addByPrefix('idle', "Tankman Idle Dance", 24);
-				animation.addByPrefix('oldSingUP', 'Tankman UP note ', 24, false);
-				animation.addByPrefix('singUP', 'Tankman UP note ', 24, false);
-				animation.addByPrefix('oldSingDOWN', 'Tankman DOWN note ', 24, false);
-				animation.addByPrefix('singDOWN', 'Tankman DOWN note ', 24, false);
-				animation.addByPrefix('singLEFT', 'Tankman Right Note ', 24, false);
-				animation.addByPrefix('singRIGHT', 'Tankman Note Left ', 24, false);
+				animation.addByPrefix('singUP', 'Tankman UP note', 24, false);
+				animation.addByPrefix('singDOWN', 'Tankman DOWN note', 24, false);
+				animation.addByPrefix('singLEFT', 'Tankman Right Note', 24, false);
+				animation.addByPrefix('singRIGHT', 'Tankman Note Left', 24, false);
 	
-				animation.addByPrefix('ughAnim', 'TANKMAN UGH', 24, false);
-				animation.addByPrefix('prettyGoodAnim', 'PRETTY GOOD', 24, false);
+				animation.addByPrefix('Ugh', 'TANKMAN UGH', 24, false);
+				animation.addByPrefix('Pretty Good', 'PRETTY GOOD', 24, false);
 	
 				addOffset('idle');
-				addOffset("singUP", 24, 56);
-				addOffset("oldSingUP", 24, 56);
-				addOffset("singRIGHT", -1, -7);
-				addOffset("singLEFT", 100, -14);
-				addOffset("singDOWN", 98, -90);
-				addOffset("oldSingDOWN", 98, -90);
-				addOffset("ughAnim", 45, 0);
-				addOffset("prettyGoodAnim", 45, 20);
+				addOffset("singUP", 24, 55);
+				addOffset("singRIGHT", -56, -17);
+				addOffset("singLEFT", 103, -4);
+				addOffset("singDOWN", 88, -100);
+
+				addOffset("Ugh", -14, -9);
+				addOffset("Pretty Good", 100, 15);
+
 				playAnim('idle');
 				
 				flipX = true;
@@ -581,7 +579,6 @@ class Character extends FlxSprite
 				animation.addByPrefix('singRIGHT', 'Parent Right Note Dad', 24, false);
 
 				animation.addByPrefix('singUP-alt', 'Parent Up Note Mom', 24, false);
-
 				animation.addByPrefix('singDOWN-alt', 'Parent Down Note Mom', 24, false);
 				animation.addByPrefix('singLEFT-alt', 'Parent Left Note Mom', 24, false);
 				animation.addByPrefix('singRIGHT-alt', 'Parent Right Note Mom', 24, false);
@@ -591,6 +588,7 @@ class Character extends FlxSprite
 				addOffset("singRIGHT", -1, -23);
 				addOffset("singLEFT", -30, 16);
 				addOffset("singDOWN", -31, -29);
+				
 				addOffset("singUP-alt", -47, 24);
 				addOffset("singRIGHT-alt", -1, -24);
 				addOffset("singLEFT-alt", -30, 15);

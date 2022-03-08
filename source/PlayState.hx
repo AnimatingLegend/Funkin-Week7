@@ -2130,7 +2130,7 @@ class PlayState extends MusicBeatState
 			
 		// [line 2117 - 2128] it makes no sense, but it (kinda) works so dont mind it 
 
-		if (!boyfriend.stunned && combo == 0)
+		/*if (!boyfriend.stunned && combo == 0)
 			{
 				add(comboBr);
 				rating.destroy();
@@ -2141,7 +2141,7 @@ class PlayState extends MusicBeatState
 				comboBr.destroy();
 				add(numScore);
 				add(rating);
-			}
+			}*/
 				
 
 
@@ -2599,46 +2599,6 @@ class PlayState extends MusicBeatState
 			camHUD.zoom += 0.03;
 		}
 
-		/*if(SONG.song.toLowerCase() == 'stress')
-			{
-				//RIGHT
-				for(i in 0...picoStep.right.length)
-				{
-					if (curStep == picoStep.right[i])
-					{
-						gf.playAnim('shoot' + FlxG.random.int(1, 2), true);
-					}
-				}
-				//LEFT
-				for(i in 0...picoStep.left.length)
-				{
-					if (curStep == picoStep.left[i])
-					{
-						gf.playAnim('shoot' + FlxG.random.int(3, 4), true);
-					}
-				}
-				//Left tankspawn
-				for (i in 0...tankStep.left.length)
-				{
-					if (curStep == tankStep.left[i]){
-						var tankmanRunner:BackgroundTankmen = new BackgroundTankmen();
-						tankmanRunner.resetShit(FlxG.random.int(630, 730) * -1, 255, true, 1, 1.5);
-	
-						tankmanRun.add(tankmanRunner);
-					}
-				}
-	
-				//Right spawn
-				for(i in 0...tankStep.right.length)
-				{
-					if (curStep == tankStep.right[i]){
-						var tankmanRunner:BackgroundTankmen = new BackgroundTankmen();
-						tankmanRunner.resetShit(FlxG.random.int(1500, 1700) * 1, 275, false, 1, 1.5);
-						tankmanRun.add(tankmanRunner);
-					}
-				}
-			}*/
-
 		iconP1.setGraphicSize(Std.int(iconP1.width + 30));
 		iconP2.setGraphicSize(Std.int(iconP2.width + 30));
 
@@ -2660,16 +2620,27 @@ class PlayState extends MusicBeatState
 			boyfriend.playAnim('hey', true);
 		}
 
+		if (curBeat == 192 && curSong == 'Blammed')
+		{
+			boyfriend.playAnim('hey', true);
+		}
+
 		if (curBeat % 16 == 15 && SONG.song == 'Tutorial' && dad.curCharacter == 'gf' && curBeat > 16 && curBeat < 48)
 		{
 			boyfriend.playAnim('hey', true);
 			dad.playAnim('cheer', true);
 		}
 
+		if (curBeat == 15 && SONG.song == 'Ugh' && dad.curCharacter == 'tankman' && curBeat > 15 && curBeat < 111)
+			{
+				dad.playAnim('Ugh', true);
+			}
+
 		if (curBeat == 184 && SONG.song == 'Stress' && dad.curCharacter == 'tankman')
 			{
-				dad.playAnim('prettyGoodAnim', true);
+				dad.playAnim('Pretty Good', true);
 			}
+
 
 		switch (curStage)
 		{
@@ -2724,6 +2695,8 @@ class PlayState extends MusicBeatState
 					phillyCityLights.members[curLight].visible = true;
 					// phillyCityLights.members[curLight].alpha = 1;
 				}
+
+
 
 				if (curBeat % 8 == 4 && FlxG.random.bool(30) && !trainMoving && trainCooldown > 8)
 				{

@@ -52,7 +52,7 @@ class TitleState extends MusicBeatState
 		curWacky = FlxG.random.getObject(getIntroTextShit());
 
 		// DEBUG BULLSHIT
-
+		swagShader = new ColorSwap();
 		super.create();
 
 		NGio.noLogin(APIStuff.API);
@@ -100,6 +100,7 @@ class TitleState extends MusicBeatState
 		#end
 	}
 
+	var swagShader:ColorSwap = null;
 	var logoBl:FlxSprite;
 	var gfDance:FlxSprite;
 	var danceLeft:Bool = false;
@@ -140,10 +141,13 @@ class TitleState extends MusicBeatState
 		var bg:FlxSprite = new FlxSprite().makeGraphic(FlxG.width, FlxG.height, FlxColor.BLACK);
 		add(bg);
 
+		swagShader = new ColorSwap();
+
 		logoBl = new FlxSprite(-150, -100);
 		logoBl.frames = Paths.getSparrowAtlas('logoBumpin');
 		logoBl.antialiasing = true;
 		logoBl.animation.addByPrefix('bump', 'logo bumpin', 24);
+		logoBl.shader = swagShader.shader;
 		logoBl.animation.play('bump');
 		logoBl.updateHitbox();
 		add(logoBl);
@@ -152,6 +156,7 @@ class TitleState extends MusicBeatState
 		gfDance.frames = Paths.getSparrowAtlas('gfDanceTitle');
 		gfDance.animation.addByIndices('danceLeft', 'gfDance', [30, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14], "", 24, false);
 		gfDance.animation.addByIndices('danceRight', 'gfDance', [15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29], "", 24, false);
+		gfDance.shader = swagShader.shader;
 		gfDance.antialiasing = true;
 		add(gfDance);
 
@@ -164,10 +169,6 @@ class TitleState extends MusicBeatState
 		titleText.updateHitbox();
 		add(titleText);
 
-		var logo:FlxSprite = new FlxSprite().loadGraphic(Paths.image('logo'));
-		logo.screenCenter();
-		logo.antialiasing = true;
-
 		credGroup = new FlxGroup();
 		add(credGroup);
 		textGroup = new FlxGroup();
@@ -177,7 +178,6 @@ class TitleState extends MusicBeatState
 
 		credTextShit = new Alphabet(0, 0, "ninjamuffin99\nPhantomArcade\nkawaisprite\nevilsk8er", true);
 		credTextShit.screenCenter();
-
 		credTextShit.visible = false;
 
 		ngSpr = new FlxSprite(0, FlxG.height * 0.55).loadGraphic(Paths.image('newgrounds_logo'));
@@ -277,10 +277,8 @@ class TitleState extends MusicBeatState
 				if (version.trim() != NGio.GAME_VER_NUMS.trim() && !OutdatedSubState.leftState)
 				{
 					FlxG.switchState(new MainMenuState());
-					trace('OLD VERSION!');
 					trace(version.trim());
-					trace('cur ver');
-					trace(NGio.GAME_VER_NUMS.trim());
+					trace('current version');
 				}
 				else
 				{
@@ -295,8 +293,16 @@ class TitleState extends MusicBeatState
 			skipIntro();
 		}
 
+		if(swagShader != null)
+			{
+				if(controls.LEFT) swagShader.hue -= elapsed * 0.1;
+				if(controls.RIGHT) swagShader.hue += elapsed * 0.1;
+			}
+
 		super.update(elapsed);
 	}
+
+
 
 	function createCoolText(textArray:Array<String>)
 	{
