@@ -22,7 +22,6 @@ class PauseSubState extends MusicBeatSubstate
 	var curSelected:Int = 0;
 
 	var pauseMusic:FlxSound;
-	var blueballedTxt:FlxText;
 
 	public function new(x:Float, y:Float)
 	{
@@ -53,15 +52,7 @@ class PauseSubState extends MusicBeatSubstate
 		levelDifficulty.updateHitbox();
 		add(levelDifficulty);
 
-	    var blueballedTxt:FlxText = new FlxText(20, 15 + 64, 0, "", 32);
-		blueballedTxt.text = "BlueBalled: " + PlayState.deathCounter;
-		blueballedTxt.scrollFactor.set();
-		blueballedTxt.setFormat(Paths.font('vcr.ttf'), 32);
-		blueballedTxt.updateHitbox();
-		add(blueballedTxt);
-
 		levelDifficulty.alpha = 0;
-		blueballedTxt.alpha = 0;
 		levelInfo.alpha = 0;
 
 		levelInfo.x = FlxG.width - (levelInfo.width + 20);

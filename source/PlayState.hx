@@ -210,6 +210,8 @@ class PlayState extends MusicBeatState
 				iconRPC = 'monster';
 			case 'mom-car':
 				iconRPC = 'mom';
+			case 'tankman':
+				iconRPC = 'tankman'	
 		}
 
 		// String that contains the mode defined here so it isn't necessary to call changePresence for each mode
@@ -2620,9 +2622,11 @@ class PlayState extends MusicBeatState
 			boyfriend.playAnim('hey', true);
 		}
 
-		if (curBeat == 192 && curSong == 'Blammed')
+		if (curBeat == 192 && curSong == 'Blammed' && dad.curCharacter == 'gf')
 		{
 			boyfriend.playAnim('hey', true);
+			dad.playAnim('cheer', true);
+
 		}
 
 		if (curBeat % 16 == 15 && SONG.song == 'Tutorial' && dad.curCharacter == 'gf' && curBeat > 16 && curBeat < 48)
@@ -2631,16 +2635,10 @@ class PlayState extends MusicBeatState
 			dad.playAnim('cheer', true);
 		}
 
-		if (curBeat == 15 && SONG.song == 'Ugh' && dad.curCharacter == 'tankman' && curBeat > 15 && curBeat < 111)
-			{
-				dad.playAnim('Ugh', true);
-			}
-
 		if (curBeat == 184 && SONG.song == 'Stress' && dad.curCharacter == 'tankman')
 			{
 				dad.playAnim('Pretty Good', true);
 			}
-
 
 		switch (curStage)
 		{
