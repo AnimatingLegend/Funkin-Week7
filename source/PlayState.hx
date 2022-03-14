@@ -211,7 +211,7 @@ class PlayState extends MusicBeatState
 			case 'mom-car':
 				iconRPC = 'mom';
 			case 'tankman':
-				iconRPC = 'tankman'	
+				iconRPC = 'tankman';	
 		}
 
 		// String that contains the mode defined here so it isn't necessary to call changePresence for each mode
@@ -1594,6 +1594,7 @@ class PlayState extends MusicBeatState
 					}
 				}
 				// phillyCityLights.members[curLight].alpha -= (Conductor.crochet / 1000) * FlxG.elapsed;
+			
 		}
 
 		super.update(elapsed);
@@ -2130,23 +2131,19 @@ class PlayState extends MusicBeatState
 			if (combo >= 10 || combo == 0)
 				add(numScore);
 			
-		// [line 2117 - 2128] it makes no sense, but it (kinda) works so dont mind it 
+	// [line 2117 - 2150] it makes no sense, but it (kinda) works so dont mind it 
 
 		/*if (!boyfriend.stunned && combo == 0)
 			{
 				add(comboBr);
 				rating.destroy();
-				numScore.destroy();
 			}
-	else if	(!boyfriend.stunned && combo > 10)
+	else if	(!boyfriend.stunned && combo >= 10)
 			{
 				comboBr.destroy();
-				add(numScore);
 				add(rating);
 			}*/
 				
-
-
 			FlxTween.tween(numScore, {alpha: 0}, 0.2, {
 				onComplete: function(tween:FlxTween)
 				{
@@ -2622,17 +2619,31 @@ class PlayState extends MusicBeatState
 			boyfriend.playAnim('hey', true);
 		}
 
-		if (curBeat == 192 && curSong == 'Blammed' && dad.curCharacter == 'gf')
+		if (curBeat == 192 && curSong == 'Blammed')
 		{
 			boyfriend.playAnim('hey', true);
-			dad.playAnim('cheer', true);
-
 		}
 
 		if (curBeat % 16 == 15 && SONG.song == 'Tutorial' && dad.curCharacter == 'gf' && curBeat > 16 && curBeat < 48)
 		{
 			boyfriend.playAnim('hey', true);
 			dad.playAnim('cheer', true);
+		}
+
+		if (dad.curCharacter == 'tankman' && SONG.song == 'Ugh')
+			{
+				if (curBeat == 14 || curBeat == 110 || curBeat == 130 || curBeat == 206)
+				{
+					dad.addOffset("singUP", 24, 55);
+					
+					dad.animation.getByName('singUP').frames = dad.animation.getByName('ughAnim').frames;
+				}
+
+		 /*if (curBeat == 16 || curBeat == 111 || curBeat == 131 || curBeat == 208)
+			{
+				dad.addOffset("singUP", 24, 55);
+				dad.animation.getByName('singUP').frames = dad.animation.getByName('singUP-alt').frames;
+			}*/
 		}
 
 		if (curBeat == 184 && SONG.song == 'Stress' && dad.curCharacter == 'tankman')

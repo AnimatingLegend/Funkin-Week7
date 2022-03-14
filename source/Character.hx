@@ -123,7 +123,7 @@ class Character extends FlxSprite
 				antialiasing = false;
 
 			case 'gf-tankmen':
-				frames = Paths.getSparrowAtlas('gfTankmen');
+				frames = Paths.getSparrowAtlas('WarzoneCharacters/gfTankmen');
 				animation.addByIndices('sad', 'GF Crying at Gunpoint ', [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12], "", 24, false);
 				animation.addByIndices('danceLeft', 'GF Dancing at Gunpoint', [30, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14], "", 24, false);
 				animation.addByIndices('danceRight', 'GF Dancing at Gunpoint', [15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29], "", 24, false);
@@ -137,7 +137,7 @@ class Character extends FlxSprite
 
 			case 'pico-speaker':
 				
-				tex = Paths.getSparrowAtlas('picoSpeaker');
+				tex = Paths.getSparrowAtlas('WarzoneCharacters/picoSpeaker');
 				frames = tex;
 					
 				animation.addByIndices('idle', 'Pico shoot 1', [10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24], "", 24, true);
@@ -443,7 +443,7 @@ class Character extends FlxSprite
 
 			case 'bf-holding-gf':
 				
-				frames = Paths.getSparrowAtlas('bfAndGF');
+				frames = Paths.getSparrowAtlas('WarzoneCharacters/bfAndGF');
 				animation.addByPrefix('idle', 'BF idle dance w gf0', 24, false);
 				animation.addByPrefix('singUP', 'BF NOTE UP0', 24, false);
 				animation.addByPrefix('singLEFT', 'BF NOTE LEFT0', 24, false);
@@ -470,7 +470,7 @@ class Character extends FlxSprite
 
 			case 'bf-holding-gf-DEAD':
 
-				frames = Paths.getSparrowAtlas('bfHoldingGF-DEAD');
+				frames = Paths.getSparrowAtlas('WarzoneCharacters/bfHoldingGF-DEAD');
 				animation.addByPrefix('singUP', "BF Dies with GF", 24, false);
 				animation.addByPrefix('firstDeath', "BF Dies with GF", 24, false);
 				animation.addByPrefix('deathLoop', "BF Dead with GF Loop", 24, true);
@@ -546,13 +546,18 @@ class Character extends FlxSprite
 				antialiasing = false;
 
 			case 'tankman':
-				tex = Paths.getSparrowAtlas('tankmanCaptain');
+				tex = Paths.getSparrowAtlas('WarzoneCharacters/tankmanCaptain');
 				frames = tex;
 				animation.addByPrefix('idle', "Tankman Idle Dance", 24);
 				animation.addByPrefix('singUP', 'Tankman UP note', 24, false);
 				animation.addByPrefix('singDOWN', 'Tankman DOWN note', 24, false);
 				animation.addByPrefix('singLEFT', 'Tankman Right Note', 24, false);
 				animation.addByPrefix('singRIGHT', 'Tankman Note Left', 24, false);
+
+				animation.addByPrefix('singUP-alt', 'Tankman UP note', 24, false);
+				animation.addByPrefix('singDOWN-alt', 'Tankman DOWN note', 24, false);
+				animation.addByPrefix('singLEFT-alt', 'Tankman Right Note', 24, false);
+				animation.addByPrefix('singRIGHT-alt', 'Tankman Note Left', 24, false);
 	
 				animation.addByPrefix('Ugh', 'TANKMAN UGH', 24, false);
 				animation.addByPrefix('Pretty Good', 'PRETTY GOOD', 24, false);
@@ -562,6 +567,11 @@ class Character extends FlxSprite
 				addOffset("singRIGHT", -56, -17);
 				addOffset("singLEFT", 103, -4);
 				addOffset("singDOWN", 88, -100);
+
+				addOffset("singUP-alt", 24, 55);
+				addOffset("singRIGHT-alt", -56, -17);
+				addOffset("singLEFT-alt", 103, -4);
+				addOffset("singDOWN-alt", 88, -100);
 
 				addOffset("Ugh", -14, -9);
 				addOffset("Pretty Good", 100, 15);
