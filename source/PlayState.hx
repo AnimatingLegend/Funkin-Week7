@@ -2632,18 +2632,18 @@ class PlayState extends MusicBeatState
 
 		if (dad.curCharacter == 'tankman' && SONG.song == 'Ugh')
 			{
-				if (curBeat == 14 || curBeat == 110 || curBeat == 130 || curBeat == 206)
+				if (curBeat == 14 || curBeat == 110 || curBeat == 131 || curBeat == 206)
 				{
-					dad.addOffset("singUP", 24, 55);
+					dad.addOffset("singUP", -14, 9);
 					
-					dad.animation.getByName('singUP').frames = dad.animation.getByName('ughAnim').frames;
+					dad.animation.getByName('singUP').frames = dad.animation.getByName('Ugh').frames;
 				}
 
-		 /*if (curBeat == 16 || curBeat == 111 || curBeat == 131 || curBeat == 208)
+		 if (curBeat == 16 || curBeat == 112 || curBeat == 132 || curBeat == 208)
 			{
 				dad.addOffset("singUP", 24, 55);
 				dad.animation.getByName('singUP').frames = dad.animation.getByName('singUP-alt').frames;
-			}*/
+			}
 		}
 
 		if (curBeat == 184 && SONG.song == 'Stress' && dad.curCharacter == 'tankman')
