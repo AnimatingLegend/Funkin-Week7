@@ -52,7 +52,7 @@ class StoryMenuState extends MusicBeatState
 		"daddy dearest",
 		"spooky month",
 		"pico",
-		"MOMMY MUST MURDER",
+		"mommy must murder",
 		"red snow",
 		"hating simulator ft. moawling",
 		"tankman"
