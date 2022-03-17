@@ -278,7 +278,7 @@ class TitleState extends MusicBeatState
 				{
 					FlxG.switchState(new MainMenuState());
 					trace(version.trim());
-					trace('current version');
+					trace('current version ^^');
 				}
 				else
 				{
