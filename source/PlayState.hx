@@ -209,9 +209,7 @@ class PlayState extends MusicBeatState
 			case 'monster-christmas':
 				iconRPC = 'monster';
 			case 'mom-car':
-				iconRPC = 'mom';
-			case 'tankman':
-				iconRPC = 'tankman';	
+				iconRPC = 'mom';	
 		}
 
 		// String that contains the mode defined here so it isn't necessary to call changePresence for each mode
@@ -2719,40 +2717,4 @@ class PlayState extends MusicBeatState
 			lightningStrikeShit();
 		}
 	}
-
-	var tankX = 400;
-	var tankAngle:Float = FlxG.random.int(-90, 45);
-	var tankSpeed:Float = FlxG.random.float(5, 7);
-
-	function moveTank()
-	{
-		tankAngle += FlxG.elapsed * tankSpeed;
-		tankRolling.angle = tankAngle - 90 + 15;
-		tankRolling.x = tankX + 1500 * FlxMath.fastCos(FlxAngle.asRadians(tankAngle + 180));
-		tankRolling.y = 1300 + 1100 * FlxMath.fastSin(FlxAngle.asRadians(tankAngle + 180));
-	}
-
-	function again()
-	{
-		tankRolling.x = 300;
-		tankRolling.y = 300;
-		tankRolling.angle = tankAngle - 90 + 15;
-		moveTank();
-	}	
-
-	var curLight:Int = 0;
-}
-
-//picoshoot
-typedef Ps = 
-{
-	var right:Array<Int>;
-	var left:Array<Int>;
-}
-
-//tank spawns
-typedef Ts = 
-{
-	var right:Array<Int>;
-	var left:Array<Int>;
 }
