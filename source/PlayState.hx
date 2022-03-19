@@ -1,5 +1,6 @@
 package;
 
+import haxe.macro.Expr.Case;
 #if desktop
 import Discord.DiscordClient;
 #end
@@ -119,8 +120,8 @@ class PlayState extends MusicBeatState
 	var smokeRight:FlxSprite;
 	var smokeLeft:FlxSprite;
 
-	var picoStep:Ps;
 	var tankStep:Ts;
+	var picoStep:Ps;
 
 	var upperBoppers:FlxSprite;
 	var bottomBoppers:FlxSprite;
@@ -210,8 +211,6 @@ class PlayState extends MusicBeatState
 				iconRPC = 'monster';
 			case 'mom-car':
 				iconRPC = 'mom';
-			case 'tankman':
-				iconRPC = 'tankman';	
 		}
 
 		// String that contains the mode defined here so it isn't necessary to call changePresence for each mode
@@ -627,8 +626,8 @@ class PlayState extends MusicBeatState
 				{
 					defaultCamZoom = 0.85;
 
-					picoStep = Json.parse(openfl.utils.Assets.getText(Paths.json('stress/picospeaker')));
 					tankStep = Json.parse(openfl.utils.Assets.getText(Paths.json('stress/tankSpawn')));
+					picoStep = Json.parse(openfl.utils.Assets.getText(Paths.json('stress/picospeaker')));
 
 					curStage = 'warzone-stress';
 					var sky:FlxSprite = new FlxSprite(-400,-400).loadGraphic(Paths.image('warzone/tankSky'));
@@ -686,22 +685,6 @@ class PlayState extends MusicBeatState
 					tower.animation.addByPrefix('idle', 'watchtower gradient color', 24, false);
 					tower.antialiasing = true;
 					add(tower);
-							
-							
-					tankRolling = new FlxSprite(300,300);
-					tankRolling.frames = Paths.getSparrowAtlas('tank/tankRolling');
-					tankRolling.animation.addByPrefix('idle', 'BG tank w lighting ', 24, false);
-					tankRolling.scrollFactor.set(0.5, 0.5);
-					tankRolling.antialiasing = true;
-					tankRolling.animation.play('idle');
-					tankAngle += FlxG.elapsed * tankSpeed;
-					tankRolling.angle = tankAngle - 90 + 15;
-					tankRolling.x = tankX + 1500 * FlxMath.fastCos(FlxAngle.asRadians(tankAngle + 180));
-					tankRolling.y = 1300 + 1100 * FlxMath.fastSin(FlxAngle.asRadians(tankAngle + 180));
-					add(tankRolling);
-
-					tankmanRun = new FlxTypedGroup<BackgroundTankmen>();
-					add(tankmanRun);
 			
 					var ground:FlxSprite = new FlxSprite(-420, -150).loadGraphic(Paths.image('warzone/tankGround'));
 					ground.scrollFactor.set();
@@ -2646,6 +2629,55 @@ class PlayState extends MusicBeatState
 			}
 		}
 
+		// Tankmen Spawing in
+		if (SONG.song == 'Stress')
+			{
+				// Left Tankmen spawn
+				for (i in 0...tankStep.left.length)
+					{
+						if (curBeat == tankStep.left[i]){
+						var tankmanRunner:BackgroundTankmen = new BackgroundTankmen();
+						tankmanRunner.resetShit(FlxG.random.int(630, 730) * -1, 255, true, 1, 1.5);
+
+						tankmanRun.add(tankmanRunner);
+					}
+				}
+			
+					// Right Tankmen spawn
+					for(i in 0...tankStep.right.length)
+					{
+						if (curBeat == tankStep.right[i])
+					{
+						var tankmanRunner:BackgroundTankmen = new BackgroundTankmen();
+						tankmanRunner.resetShit(FlxG.random.int(1500, 1700) * 1, 275, false, 1, 1.5);
+
+						tankmanRun.add(tankmanRunner);
+					}
+				}
+			}
+
+		if(SONG.song.toLowerCase() == 'stress' && dad.curCharacter == 'picoSpeaker')
+			{
+				// Pico Right
+				for(i in 0...picoStep.right.length)
+				{
+					if (curBeat == picoStep.right[i])
+					{
+						dad.playAnim('shoot' + FlxG.random.int(1, 2), true);
+						var tankmanRunner:BackgroundTankmen = new BackgroundTankmen();
+					}
+				}
+
+				// Pico Left
+				for(i in 0...picoStep.left.length)
+				{
+					if (curBeat == picoStep.left[i])
+					{
+						dad.playAnim('shoot' + FlxG.random.int(3, 4), false);
+					}
+				}
+			}
+				
 		if (curBeat == 184 && SONG.song == 'Stress' && dad.curCharacter == 'tankman')
 			{
 				dad.playAnim('Pretty Good', true);
@@ -2679,15 +2711,19 @@ class PlayState extends MusicBeatState
 				tankBop5.animation.play('boppin 5', true);
 				tankBop6.animation.play('boppin 6', true);
 				tower.animation.play('idle', true);
+				moveTank();
 	
+
+
 			case 'limo':
 				grpLimoDancers.forEach(function(dancer:BackgroundDancer)
 				{
 					dancer.dance();
 				});
-
 				if (FlxG.random.bool(10) && fastCarCanDrive)
 					fastCarDrive();
+
+
 			case "philly":
 				if (!trainMoving)
 					trainCooldown += 1;
@@ -2705,13 +2741,12 @@ class PlayState extends MusicBeatState
 					// phillyCityLights.members[curLight].alpha = 1;
 				}
 
-
-
 				if (curBeat % 8 == 4 && FlxG.random.bool(30) && !trainMoving && trainCooldown > 8)
 				{
 					trainCooldown = FlxG.random.int(-4, 0);
 					trainStart();
 				}
+
 		}
 
 		if (isHalloween && FlxG.random.bool(10) && curBeat > lightningStrikeBeat + lightningOffset)
@@ -2719,7 +2754,7 @@ class PlayState extends MusicBeatState
 			lightningStrikeShit();
 		}
 	}
-
+	
 	var tankX = 400;
 	var tankAngle:Float = FlxG.random.int(-90, 45);
 	var tankSpeed:Float = FlxG.random.float(5, 7);
@@ -2743,15 +2778,15 @@ class PlayState extends MusicBeatState
 	var curLight:Int = 0;
 }
 
-//picoshoot
-typedef Ps = 
+// Tankmen Spawning in
+typedef Ts =
 {
 	var right:Array<Int>;
 	var left:Array<Int>;
 }
 
-//tank spawns
-typedef Ts = 
+// Pico Shooting Tankmen
+typedef Ps =
 {
 	var right:Array<Int>;
 	var left:Array<Int>;
