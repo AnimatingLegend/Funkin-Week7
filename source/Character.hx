@@ -449,20 +449,26 @@ class Character extends FlxSprite
 				animation.addByPrefix('singLEFT', 'BF NOTE LEFT0', 24, false);
 				animation.addByPrefix('singRIGHT', 'BF NOTE RIGHT0', 24, false);
 				animation.addByPrefix('singDOWN', 'BF NOTE DOWN0', 24, false);
+
 				animation.addByPrefix('singUPmiss', 'BF NOTE UP MISS0', 24, false);
 				animation.addByPrefix('singLEFTmiss', 'BF NOTE LEFT MISS0', 24, false);
 				animation.addByPrefix('singRIGHTmiss', 'BF NOTE RIGHT MISS0', 24, false);
 				animation.addByPrefix('singDOWNmiss', 'BF NOTE DOWN MISS0', 24, false);
+
+				animation.addByPrefix('Catch', 'BF catches GF', 24, false);
 
 				addOffset('idle', 0, 0);
 				addOffset("singUP", -29, 10);
 				addOffset("singRIGHT", -41, 23);
 				addOffset("singLEFT", 12, 7);
 				addOffset("singDOWN", -10, -10);
+
 				addOffset("singUPmiss", -29, 10);
 				addOffset("singRIGHTmiss", -41, 23);
 				addOffset("singLEFTmiss", 12, 7);
 				addOffset("singDOWNmiss", -10, -10);
+
+				addOffset("Catch", 0, 91);
 		
 				playAnim('idle');
 	
