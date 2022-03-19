@@ -50,10 +50,10 @@ class BackgroundTankmen extends FlxSprite
   override public function new()
   {
       super();
-      frames = Paths.getSparrowAtlas("warzone/tankmanKilled1");
+      frames = Paths.getSparrowAtlas("tank/tankmanKilled1");
       antialiasing = true;
-      animation.addByPrefix("run", "tankman running", 24, false);
-      animation.addByPrefix("shot", "John Shot" + FlxG.random.int(1,2), 24, false);
+      animation.addByPrefix("run", "tankman running ", 24, false);
+      animation.addByPrefix("shot", "John Shot " + FlxG.random.int(1,2), 24, false);
       animation.play("run");
       
       updateHitbox();
