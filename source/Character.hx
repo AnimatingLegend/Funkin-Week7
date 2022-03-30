@@ -586,6 +586,25 @@ class Character extends FlxSprite
 				
 				flipX = true;
 
+			case 'legend':
+				tex = Paths.getSparrowAtlas('vs legend');
+				frames = tex;
+				animation.addByPrefix('idle', "Legend Idle dance", 24);
+				animation.addByPrefix('singUP', "Legend UP NOTE instance", 24, false);
+				animation.addByPrefix('singDOWN', "Legend DOWN NOTE instance", 24, false);
+				animation.addByPrefix('singLEFT', "Legend RIGHT NOTE instance", 24, false);
+				animation.addByPrefix('singRIGHT', "Legend LEFT NOTE instance", 24, false);
+
+				addOffset('idle');
+				addOffset("singUP");
+				addOffset("singRIGHT", -40, -10);
+				addOffset("singLEFT", 0, -10);
+				addOffset("singDOWN", 40, -50);
+
+				playAnim('idle');
+
+				flipX = true;
+
 			case 'parents-christmas':
 				frames = Paths.getSparrowAtlas('christmas/mom_dad_christmas_assets');
 				animation.addByPrefix('idle', 'Parent Christmas Idle', 24, false);
