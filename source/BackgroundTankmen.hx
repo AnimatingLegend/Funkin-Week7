@@ -88,13 +88,6 @@ class BackgroundTankmen extends FlxSprite
     {
         super.update(elapsed);
         
-
-        if(animation.curAnim.name == "run" && animation.curAnim.finished == true && runAnimPlayedTimes < runAnimPlayedTimesMax)
-        {
-            animation.play("run", true);
-            runAnimPlayedTimes++;        
-        }
-
         if(animation.curAnim.name == "run" && animation.curAnim.finished == true && runAnimPlayedTimes >= runAnimPlayedTimesMax)
         {   
             animation.play("shot", true);
