@@ -554,6 +554,14 @@ class PlayState extends MusicBeatState
 						smokeRight.antialiasing = true;
 						smokeRight.animation.play('idle');							
 						add(smokeRight);
+
+						var tankRolling = new FlxSprite(300, 500);
+						tankRolling.frames = Paths.getSparrowAtlas('tank/tankRolling');
+						tankRolling.animation.addByPrefix('idle', 'BG tank w lighting instance ', 24, true);
+						tankRolling.scrollFactor.set(1,1);
+						tankRolling.antialiasing = true;
+						tankRolling.animation.play('idle');
+						add(tankRolling);
 	
 					    tower = new FlxSprite(100, 120);
 						tower.frames = Paths.getSparrowAtlas('warzone/tankWatchtower');
@@ -679,6 +687,23 @@ class PlayState extends MusicBeatState
 					smokeRight.antialiasing = true;
 					smokeRight.animation.play('idle');		
 					add(smokeRight);
+
+					tankRolling = new FlxSprite(300,300);
+					tankRolling.frames = Paths.getSparrowAtlas('tank/tankRolling');
+					tankRolling.animation.addByPrefix('idle', 'BG tank w lighting ', 24, true);
+					tankRolling.scrollFactor.set(0.5, 0.5);
+					tankRolling.antialiasing = true;
+					tankRolling.animation.play('idle');
+					tankAngle += FlxG.elapsed * tankSpeed; // The angle when the tank turns.
+					tankRolling.angle = tankAngle = tankAngle = 90 + 15;
+					tankRolling.x = tankX + 1500 * FlxMath.fastCos(FlxAngle.asRadians(tankAngle + 180));
+					tankRolling.y = 1300 + 1100 * FlxMath.fastSin(FlxAngle.asRadians(tankAngle + 180));
+					add(tankRolling);
+
+					tankmanRun = new FlxTypedGroup<BackgroundTankmen>();
+					add(tankmanRun);
+						
+				
 
 					tower = new FlxSprite(100, 120);
 					tower.frames = Paths.getSparrowAtlas('warzone/tankWatchtower');
@@ -841,6 +866,8 @@ class PlayState extends MusicBeatState
 				camPos.set(dad.getGraphicMidpoint().x + 300, dad.getGraphicMidpoint().y);
 			case 'tankman':
 				dad.y += 215;	
+			case 'legend':
+				dad.y += 53;
 		}
 
 		boyfriend = new Boyfriend(770, 450, SONG.player1);
@@ -867,13 +894,8 @@ class PlayState extends MusicBeatState
 				gf.x += 180;
 				gf.y += 300;
 			case 'schoolEvil':
-				// trailArea.scrollFactor.set();
-
 				var evilTrail = new FlxTrail(dad, null, 4, 24, 0.3, 0.069);
-				// evilTrail.changeValuesEnabled(false, false, false, false);
-				// evilTrail.changeGraphic()
 				add(evilTrail);
-				// evilTrail.scrollFactor.set(1.1, 1.1);
 
 				boyfriend.x += 200;
 				boyfriend.y += 220;
@@ -901,8 +923,6 @@ class PlayState extends MusicBeatState
 		add(boyfriend);
 
 		var doof:DialogueBox = new DialogueBox(false, dialogue);
-		// doof.x += 70;
-		// doof.y = FlxG.height * 0.5;
 		doof.scrollFactor.set();
 		doof.finishThing = startCountdown;
 
@@ -963,7 +983,7 @@ class PlayState extends MusicBeatState
 		iconP2.y = healthBar.y - (iconP2.height / 2);
 		add(iconP2);
 
-		strumLineNotes.cameras = [camHUD];
+		strumLineNotes.cameras = [camHUD];	
 		notes.cameras = [camHUD];
 		healthBar.cameras = [camHUD];
 		healthBarBG.cameras = [camHUD];
@@ -1789,7 +1809,6 @@ class PlayState extends MusicBeatState
 		if (health <= 0)
 		{
 			boyfriend.stunned = true;
-			deathCounter++;
 
 			persistentUpdate = false;
 			persistentDraw = false;
@@ -2113,19 +2132,6 @@ class PlayState extends MusicBeatState
 
 			if (combo >= 10 || combo == 0)
 				add(numScore);
-			
-	// [line 2117 - 2150] it makes no sense, but it (kinda) works so dont mind it 
-
-		/*if (!boyfriend.stunned && combo == 0)
-			{
-				add(comboBr);
-				rating.destroy();
-			}
-	else if	(!boyfriend.stunned && combo >= 10)
-			{
-				comboBr.destroy();
-				add(rating);
-			}*/
 				
 			FlxTween.tween(numScore, {alpha: 0}, 0.2, {
 				onComplete: function(tween:FlxTween)
@@ -2328,7 +2334,7 @@ class PlayState extends MusicBeatState
 	{
 		if (!boyfriend.stunned)
 		{
-			health -= 0.04;
+			health -= 0.05;
 			if (combo > 10 && gf.animOffsets.exists('sad'))
 			{
 				gf.playAnim('sad');
@@ -2628,55 +2634,6 @@ class PlayState extends MusicBeatState
 				dad.animation.getByName('singUP').frames = dad.animation.getByName('singUP-alt').frames;
 			}
 		}
-
-		// Tankmen Spawing in
-		if (SONG.song == 'Stress')
-			{
-				// Left Tankmen spawn
-				for (i in 0...tankStep.left.length)
-					{
-						if (curBeat == tankStep.left[i]){
-						var tankmanRunner:BackgroundTankmen = new BackgroundTankmen();
-						tankmanRunner.resetShit(FlxG.random.int(630, 730) * -1, 255, true, 1, 1.5);
-
-						tankmanRun.add(tankmanRunner);
-					}
-				}
-			
-					// Right Tankmen spawn
-					for(i in 0...tankStep.right.length)
-					{
-						if (curBeat == tankStep.right[i])
-					{
-						var tankmanRunner:BackgroundTankmen = new BackgroundTankmen();
-						tankmanRunner.resetShit(FlxG.random.int(1500, 1700) * 1, 275, false, 1, 1.5);
-
-						tankmanRun.add(tankmanRunner);
-					}
-				}
-			}
-
-		if(SONG.song.toLowerCase() == 'stress' && dad.curCharacter == 'picoSpeaker')
-			{
-				// Pico Right
-				for(i in 0...picoStep.right.length)
-				{
-					if (curBeat == picoStep.right[i])
-					{
-						dad.playAnim('shoot' + FlxG.random.int(1, 2), true);
-						var tankmanRunner:BackgroundTankmen = new BackgroundTankmen();
-					}
-				}
-
-				// Pico Left
-				for(i in 0...picoStep.left.length)
-				{
-					if (curBeat == picoStep.left[i])
-					{
-						dad.playAnim('shoot' + FlxG.random.int(3, 4), false);
-					}
-				}
-			}
 				
 		if (curBeat == 184 && SONG.song == 'Stress' && dad.curCharacter == 'tankman')
 			{
@@ -2711,9 +2668,34 @@ class PlayState extends MusicBeatState
 				tankBop5.animation.play('boppin 5', true);
 				tankBop6.animation.play('boppin 6', true);
 				tower.animation.play('idle', true);
-				moveTank();
-	
 
+				// Left Tankmen spawn
+						/*if (curBeat == tankStep.left)
+							{
+								var tankmanRunner:BackgroundTankmen = new BackgroundTankmen();
+								tankmanRunner.resetShit(FlxG.random.int(630, 730) * -1, 255, true, 1, 1.5);
+							}
+				
+				// Right Tankmen spawn
+						if (curBeat == tankStep.right)
+						{
+							var tankmanRunner:BackgroundTankmen = new BackgroundTankmen();
+							tankmanRunner.resetShit(FlxG.random.int(1500, 1700) * 1, 275, true, 1, 1.5);
+						}
+
+				// Pico Right
+						if (curBeat == picoStep.right)
+						{
+							gf.playAnim('shoot' + FlxG.random.int(1, 2), false);
+							var tankmanRunner:BackgroundTankmen = new BackgroundTankmen();
+						}
+	
+				// Pico Left
+						if (curBeat == picoStep.left)
+						{
+							gf.playAnim('shoot' + FlxG.random.int(3, 4), false);
+							var tankmanRunner:BackgroundTankmen = new BackgroundTankmen();
+						}*/
 
 			case 'limo':
 				grpLimoDancers.forEach(function(dancer:BackgroundDancer)
@@ -2754,7 +2736,7 @@ class PlayState extends MusicBeatState
 			lightningStrikeShit();
 		}
 	}
-	
+
 	var tankX = 400;
 	var tankAngle:Float = FlxG.random.int(-90, 45);
 	var tankSpeed:Float = FlxG.random.float(5, 7);
@@ -2765,29 +2747,20 @@ class PlayState extends MusicBeatState
 		tankRolling.angle = tankAngle - 90 + 15;
 		tankRolling.x = tankX + 1500 * FlxMath.fastCos(FlxAngle.asRadians(tankAngle + 180));
 		tankRolling.y = 1300 + 1100 * FlxMath.fastSin(FlxAngle.asRadians(tankAngle + 180));
+		moveTank();	
 	}
-
-	function again()
-	{
-		tankRolling.x = 300;
-		tankRolling.y = 300;
-		tankRolling.angle = tankAngle - 90 + 15;
-		moveTank();
-	}	
 
 	var curLight:Int = 0;
 }
 
-// Tankmen Spawning in
-typedef Ts =
-{
-	var right:Array<Int>;
-	var left:Array<Int>;
-}
+	// Tankmen Spawning in
+	typedef Ts = {
+		var right:Array<Int>;
+		var left:Array<Int>;
+	}
 
-// Pico Shooting Tankmen
-typedef Ps =
-{
-	var right:Array<Int>;
-	var left:Array<Int>;
-}
+	// Pico Shooting Tankmen
+	typedef Ps = {
+		var right:Array<Int>;
+		var left:Array<Int>;	
+	}
