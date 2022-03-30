@@ -1,0 +1,4 @@
+- pico shoot and tankmen run song event - stress
+- CutScene Handler
+
+- Change all charting (optional, but very likey)
