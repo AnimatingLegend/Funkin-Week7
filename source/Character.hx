@@ -603,7 +603,6 @@ class Character extends FlxSprite
 
 				playAnim('idle');
 
-				flipX = true;
 
 			case 'parents-christmas':
 				frames = Paths.getSparrowAtlas('christmas/mom_dad_christmas_assets');
