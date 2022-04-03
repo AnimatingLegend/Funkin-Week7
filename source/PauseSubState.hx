@@ -109,7 +109,6 @@ class PauseSubState extends MusicBeatSubstate
 				case "Restart Song":
 					FlxG.resetState();
 				case "Exit to menu":
-					PlayState.deathCounter = 0;
 					if (PlayState.isStoryMode)
 						FlxG.switchState(new StoryMenuState());
 					else
