@@ -3,4 +3,7 @@ BIG MAJOR THINGS I NEED TODO BUT DONT KNOW HOW TO DO:
 - Cutscene Handler [For Week7 Songs]
 - Pico Shoot, & Tankmen running/getting shot during each beat
 - Make tank move in the back also every 10-20 seconds
+
+SOMETHING IK HOW TO ADD BUT IM TOO LAZY TO DO:
 - Change (almost) ALL or the charting [Optional but likey]
+- Add NoteSplashes
