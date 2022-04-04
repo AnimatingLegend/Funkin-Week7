@@ -54,7 +54,6 @@ class PlayState extends MusicBeatState
 	public static var storyWeek:Int = 0;
 	public static var storyPlaylist:Array<String> = [];
 	public static var storyDifficulty:Int = 1;
-	public static var deathCounter:Int = 0;
 
 	var halloweenLevel:Bool = false;
 
@@ -235,12 +234,12 @@ class PlayState extends MusicBeatState
                         case 'spookeez' | 'monster' | 'south': 
                         {
                                 curStage = 'spooky';
-	                          halloweenLevel = true;
+	                            halloweenLevel = true;
 
 		                  var hallowTex = Paths.getSparrowAtlas('halloween_bg');
 
 	                          halloweenBG = new FlxSprite(-200, -100);
-		                  halloweenBG.frames = hallowTex;
+		                  	  halloweenBG.frames = hallowTex;
 	                          halloweenBG.animation.addByPrefix('idle', 'halloweem bg0');
 	                          halloweenBG.animation.addByPrefix('lightning', 'halloweem bg lightning strike', 24, false);
 	                          halloweenBG.animation.play('idle');
@@ -257,7 +256,7 @@ class PlayState extends MusicBeatState
 		                  bg.scrollFactor.set(0.1, 0.1);
 		                  add(bg);
 
-	                          var city:FlxSprite = new FlxSprite(-10).loadGraphic(Paths.image('philly/city'));
+	                      var city:FlxSprite = new FlxSprite(-10).loadGraphic(Paths.image('philly/city'));
 		                  city.scrollFactor.set(0.3, 0.3);
 		                  city.setGraphicSize(Std.int(city.width * 0.85));
 		                  city.updateHitbox();
@@ -418,7 +417,7 @@ class PlayState extends MusicBeatState
 		          {
 		                  curStage = 'school';
 
-		                  // defaultCamZoom = 0.9;
+		            //    defaultCamZoom = 0.9;
 
 		                  var bgSky = new FlxSprite().loadGraphic(Paths.image('weeb/weebSky'));
 		                  bgSky.scrollFactor.set(0.1, 0.1);
@@ -483,19 +482,21 @@ class PlayState extends MusicBeatState
 		          }
 		          case 'thorns':
 		          {
+					//	  defaultCamZoom = 0.9;
+						
 		                  curStage = 'schoolEvil';
 
 		                  var waveEffectBG = new FlxWaveEffect(FlxWaveMode.ALL, 2, -1, 3, 2);
 		                  var waveEffectFG = new FlxWaveEffect(FlxWaveMode.ALL, 2, -1, 5, 2);
 
 		                  var posX = 400;
-	                          var posY = 200;
+	                      var posY = 200;
 
 		                  var bg:FlxSprite = new FlxSprite(posX, posY);
 		                  bg.frames = Paths.getSparrowAtlas('weeb/animatedEvilSchool');
 		                  bg.animation.addByPrefix('idle', 'background 2', 24);
 		                  bg.animation.play('idle');
-		                  bg.scrollFactor.set(0.8, 0.9);
+		                  bg.scrollFactor.set(0.85, 0.85);
 		                  bg.scale.set(6, 6);
 		                  add(bg);
 
@@ -1179,7 +1180,7 @@ class PlayState extends MusicBeatState
 
 			{
 				case 0:
-					FlxG.sound.play(Paths.sound('intro3'), 0.6);
+					FlxG.sound.play(Paths.sound('intro3' + altSuffix), 0.6);
 				case 1:
 					var ready:FlxSprite = new FlxSprite().loadGraphic(Paths.image(introAlts[0]));
 					ready.scrollFactor.set();
@@ -1197,7 +1198,7 @@ class PlayState extends MusicBeatState
 							ready.destroy();
 						}
 					});
-					FlxG.sound.play(Paths.sound('intro2'), 0.6);
+					FlxG.sound.play(Paths.sound('intro2' + altSuffix), 0.6);
 				case 2:
 					var set:FlxSprite = new FlxSprite().loadGraphic(Paths.image(introAlts[1]));
 					set.scrollFactor.set();
@@ -1214,7 +1215,7 @@ class PlayState extends MusicBeatState
 							set.destroy();
 						}
 					});
-					FlxG.sound.play(Paths.sound('intro1'), 0.6);
+					FlxG.sound.play(Paths.sound('intro1' + altSuffix), 0.6);
 				case 3:
 					var go:FlxSprite = new FlxSprite().loadGraphic(Paths.image(introAlts[2]));
 					go.scrollFactor.set();
@@ -1233,7 +1234,7 @@ class PlayState extends MusicBeatState
 							go.destroy();
 						}
 					});
-					FlxG.sound.play(Paths.sound('introGo'), 0.6);
+					FlxG.sound.play(Paths.sound('introGo' + altSuffix), 0.6);
 				case 4:
 			}
 
