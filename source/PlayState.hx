@@ -2140,8 +2140,9 @@ class PlayState extends MusicBeatState
 			if (combo == 0)
 				{
 					comboSpr.destroy();
-				}		
-		*/		
+				}	
+		*/
+				
 			FlxTween.tween(numScore, {alpha: 0}, 0.2, {
 				onComplete: function(tween:FlxTween)
 				{
