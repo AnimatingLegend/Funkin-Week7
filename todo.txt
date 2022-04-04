@@ -1,4 +1,8 @@
-- pico shoot and tankmen run song event - stress
-- CutScene Handler
+BIG MAJOR THINGS I NEED TODO BUT DONT KNOW HOW TO DO:
 
-- Change all charting (optional, but very likey)
+- Cutscene Handler [For Week7 Songs]
+
+- Pico Shoot, & Tankmen running/getting shot during each beat
+- Make tank move in the back also every 10-20 seconds
+
+- Change (almost) ALL or the charting [Optional but likey]
