@@ -802,6 +802,7 @@ class PlayState extends MusicBeatState
 		          }
               }
 
+
 		var gfVersion:String = 'gf';
 
 		switch (curStage)
@@ -2620,6 +2621,7 @@ class PlayState extends MusicBeatState
 
 		if (curBeat == 192 && curSong == 'Blammed')
 		{
+			gf.playAnim('cheer', true);
 			boyfriend.playAnim('hey', true);
 		}
 
