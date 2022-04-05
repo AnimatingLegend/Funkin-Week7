@@ -579,7 +579,7 @@ class Character extends FlxSprite
 				addOffset("singLEFT-alt", 103, -4);
 				addOffset("singDOWN-alt", 88, -100);
 
-				addOffset("Ugh", -14, 9);
+				addOffset("Ugh", -14, -9);
 				addOffset("Pretty Good", 100, 15);
 
 				playAnim('idle');
