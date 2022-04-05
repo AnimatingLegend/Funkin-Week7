@@ -6,5 +6,4 @@ BIG MAJOR THINGS I NEED TODO, BUT DONT KNOW HOW TO DO:
 - Tankman's gameover lines
 
 SOMETHING IK HOW TO ADD, BUT IM TOO LAZY TO DO:
-- Change (almost) ALL or the charting [Optional but likey] - [DONE]
 - Add NoteSplashes
