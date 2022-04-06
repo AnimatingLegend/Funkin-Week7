@@ -587,7 +587,7 @@ class Character extends FlxSprite
 				flipX = true;
 
 			case 'legend':
-				tex = Paths.getSparrowAtlas('legend_Assets');
+				tex = Paths.getSparrowAtlas('Characters/legend_Assets');
 				frames = tex;
 				animation.addByPrefix('idle', "Legend Idle dance", 24);
 				animation.addByPrefix('singUP', "Legend UP NOTE instance", 24, false);
