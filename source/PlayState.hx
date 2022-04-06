@@ -483,7 +483,7 @@ class PlayState extends MusicBeatState
 		          }
 		          case 'thorns':
 		          {
-					//	  defaultCamZoom = 0.9;
+						  defaultCamZoom = 0.9;
 						
 		                  curStage = 'schoolEvil';
 
@@ -498,10 +498,10 @@ class PlayState extends MusicBeatState
 		                  bg.animation.addByPrefix('idle', 'background 2', 24);
 		                  bg.animation.play('idle');
 		                  bg.scrollFactor.set(0.85, 0.85);
-		                  bg.scale.set(6, 6);
+		                  bg.scale.set(7, 7);
 		                  add(bg);
+				  }
 
-				}
 				case 'ugh' | 'guns':
 				{
 					defaultCamZoom = 0.9;
@@ -690,7 +690,7 @@ class PlayState extends MusicBeatState
 					smokeRight.animation.play('idle');		
 					add(smokeRight);
 
-					tankRolling = new FlxSprite(300,300);
+				/*	tankRolling = new FlxSprite(300,300);
 					tankRolling.frames = Paths.getSparrowAtlas('tank/tankRolling');
 					tankRolling.animation.addByPrefix('idle', 'BG tank w lighting ', 24, true);
 					tankRolling.scrollFactor.set(0.5, 0.5);
@@ -701,6 +701,7 @@ class PlayState extends MusicBeatState
 					tankRolling.x = tankX + 1500 * FlxMath.fastCos(FlxAngle.asRadians(tankAngle + 180));
 					tankRolling.y = 1300 + 1100 * FlxMath.fastSin(FlxAngle.asRadians(tankAngle + 180));
 					add(tankRolling);
+				*/	
 
 					tankmanRun = new FlxTypedGroup<BackgroundTankmen>();
 					add(tankmanRun);
@@ -2617,6 +2618,7 @@ class PlayState extends MusicBeatState
 		if (curBeat % 8 == 7 && curSong == 'Bopeebo')
 		{
 			boyfriend.playAnim('hey', true);
+			gf.playAnim('cheer', true);
 		}
 
 		if (curBeat == 192 && curSong == 'Blammed')
@@ -2722,7 +2724,7 @@ class PlayState extends MusicBeatState
 		}
 	}
 
-	var tankX = 400;
+	/*var tankX = 400;
 	var tankAngle:Float = FlxG.random.int(-90, 45);
 	var tankSpeed:Float = FlxG.random.float(5, 7);
 
@@ -2733,7 +2735,7 @@ class PlayState extends MusicBeatState
 		tankRolling.x = tankX + 1500 * FlxMath.fastCos(FlxAngle.asRadians(tankAngle + 180));
 		tankRolling.y = 1300 + 1100 * FlxMath.fastSin(FlxAngle.asRadians(tankAngle + 180));
 		moveTank();	
-	}
+	}*/
 
 	var curLight:Int = 0;
 }
@@ -2743,7 +2745,7 @@ class PlayState extends MusicBeatState
 		var right:Array<Int>;
 		var left:Array<Int>;
 	}
-
+	
 	// Pico Shooting Tankmen
 	typedef Ps = {
 		var right:Array<Int>;
