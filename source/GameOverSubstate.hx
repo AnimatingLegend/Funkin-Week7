@@ -39,6 +39,17 @@ class GameOverSubstate extends MusicBeatSubstate
 		bf = new Boyfriend(x, y, daBf);
 		add(bf);
 
+		if (daBf == 'bf-holding-gf-DEAD')
+			{
+				new FlxTimer().start(2.0, function(tmr:FlxTimer)
+				{
+					if (FlxG.random.bool(60))
+					{
+						FlxG.sound.play(Paths.sound('assets/sounds/jeffGameover'));
+					}
+				});
+			}
+
 		camFollow = new FlxObject(bf.getGraphicMidpoint().x, bf.getGraphicMidpoint().y, 1, 1);
 		add(camFollow);
 
