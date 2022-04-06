@@ -13,6 +13,7 @@ class GameOverSubstate extends MusicBeatSubstate
 	var camFollow:FlxObject;
 
 	var stageSuffix:String = "";
+	var soundSuffix:String = "";
 
 	public function new(x:Float, y:Float)
 	{
@@ -45,7 +46,7 @@ class GameOverSubstate extends MusicBeatSubstate
 				{
 					if (FlxG.random.bool(60))
 					{
-						FlxG.sound.play(Paths.sound('assets/sounds/jeffGameover'));
+						FlxG.sound.play(Paths.sound('jeffGameover-'));
 					}
 				});
 			}
@@ -99,13 +100,13 @@ class GameOverSubstate extends MusicBeatSubstate
 		}
 	}
 
-	override function beatHit()
+/*	override function beatHit()
 	{
 		super.beatHit();
 
 		FlxG.log.add('beat');
 	}
-
+*/
 	var isEnding:Bool = false;
 
 	function endBullshit():Void
