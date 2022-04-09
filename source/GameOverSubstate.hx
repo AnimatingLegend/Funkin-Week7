@@ -13,7 +13,6 @@ class GameOverSubstate extends MusicBeatSubstate
 	var camFollow:FlxObject;
 
 	var stageSuffix:String = "";
-	var soundSuffix:String = "";
 
 	public function new(x:Float, y:Float)
 	{
@@ -40,16 +39,6 @@ class GameOverSubstate extends MusicBeatSubstate
 		bf = new Boyfriend(x, y, daBf);
 		add(bf);
 
-		if (daBf == 'bf-holding-gf-DEAD')
-			{
-				new FlxTimer().start(2.0, function(tmr:FlxTimer)
-				{
-					if (FlxG.random.bool(60))
-					{
-						FlxG.sound.play(Paths.sound('jeffGameover-'));
-					}
-				});
-			}
 
 		camFollow = new FlxObject(bf.getGraphicMidpoint().x, bf.getGraphicMidpoint().y, 1, 1);
 		add(camFollow);

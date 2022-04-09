@@ -123,6 +123,10 @@ class PlayState extends MusicBeatState
 	var tankStep:Ts;
 	var picoStep:Ps;
 
+	var tankX = 400;
+	var tankAngle:Float = FlxG.random.int(-90, 45);
+	var tankSpeed:Float = FlxG.random.float(5, 7);
+
 	var upperBoppers:FlxSprite;
 	var bottomBoppers:FlxSprite;
 	var santa:FlxSprite;
@@ -557,12 +561,17 @@ class PlayState extends MusicBeatState
 					smokeRight.animation.play('idle');							
 					add(smokeRight);
 
-					var tankRolling = new FlxSprite(300, 500);
+					tankRolling = new FlxSprite(300,300);
 					tankRolling.frames = Paths.getSparrowAtlas('tank/tankRolling');
-					tankRolling.animation.addByPrefix('idle', 'BG tank w lighting instance ', 24, true);
-					tankRolling.scrollFactor.set(1,1);
+					tankRolling.animation.addByPrefix('idle', 'BG tank w lighting ', 24, true);
+					tankRolling.scrollFactor.set(0.5, 0.5);
 					tankRolling.antialiasing = true;
 					tankRolling.animation.play('idle');
+
+					tankAngle += FlxG.elapsed * tankSpeed;
+					tankRolling.angle = tankAngle - 90 + 15;
+					tankRolling.x = tankX + 1500 * FlxMath.fastCos(FlxAngle.asRadians(tankAngle + 180));
+					tankRolling.y = 1300 + 1100 * FlxMath.fastSin(FlxAngle.asRadians(tankAngle + 180));
 					add(tankRolling);
 	
 				    tower = new FlxSprite(100, 120);
@@ -586,16 +595,13 @@ class PlayState extends MusicBeatState
 					tankBop1.animation.addByPrefix('boppin 1', 'fg tankhead far right', 24, false);
 					tankBop1.scrollFactor.set(1.7, 1.5);
 					tankBop1.antialiasing = true;
-					tankBop1.updateHitbox();
-					add(tankBop1);
-									
+					add(tankBop1);						
 					
 					tankBop2 = new FlxSprite(-300,750);
 					tankBop2.frames = Paths.getSparrowAtlas('tank/tank1');
 					tankBop2.animation.addByPrefix('boppin 2','fg tankhead 5', 24, false);
 					tankBop2.scrollFactor.set(2.0, 0.2);
 					tankBop2.antialiasing = true;
-					tankBop2.updateHitbox();
 					add(tankBop2);		
 					
 					tankBop3 = new FlxSprite(450,940);
@@ -603,7 +609,6 @@ class PlayState extends MusicBeatState
 					tankBop3.animation.addByPrefix('boppin 3','foreground man 3', 24, false);
 					tankBop3.scrollFactor.set(1.5, 1.5);
 					tankBop3.antialiasing = true;
-					tankBop3.updateHitbox();
 					add(tankBop3);
 									
 					tankBop4 = new FlxSprite(1300,1200);
@@ -613,14 +618,12 @@ class PlayState extends MusicBeatState
 					tankBop4.antialiasing = true;
 					tankBop4.updateHitbox();
 					add(tankBop4);
-								
-					
+									
 					tankBop5 = new FlxSprite(1300,900);
 					tankBop5.frames = Paths.getSparrowAtlas('tank/tank4');
 					tankBop5.animation.addByPrefix('boppin 5','fg tankman bobbin 3', 24, false);
 					tankBop5.scrollFactor.set(1.5, 1.5);
 					tankBop5.antialiasing = true;
-					tankBop5.updateHitbox();
 					add(tankBop5);
 					
 					tankBop6 = new FlxSprite(1620,700);
@@ -628,13 +631,12 @@ class PlayState extends MusicBeatState
 					tankBop6.animation.addByPrefix('boppin 6','fg tankhead far right', 24, false);
 					tankBop6.scrollFactor.set(1.5, 1.5);
 					tankBop6.antialiasing = true;
-					tankBop6.updateHitbox();
 					add(tankBop6);
 
 				}
 				case 'stress':
 				{
-					defaultCamZoom = 0.85;
+					defaultCamZoom = 0.9;
 
 					tankStep = Json.parse(openfl.utils.Assets.getText(Paths.json('stress/tankSpawn')));
 					picoStep = Json.parse(openfl.utils.Assets.getText(Paths.json('stress/picospeaker')));
@@ -690,23 +692,19 @@ class PlayState extends MusicBeatState
 					smokeRight.animation.play('idle');		
 					add(smokeRight);
 
-				/*	tankRolling = new FlxSprite(300,300);
+					tankRolling = new FlxSprite(300,300);
 					tankRolling.frames = Paths.getSparrowAtlas('tank/tankRolling');
 					tankRolling.animation.addByPrefix('idle', 'BG tank w lighting ', 24, true);
 					tankRolling.scrollFactor.set(0.5, 0.5);
 					tankRolling.antialiasing = true;
 					tankRolling.animation.play('idle');
-					tankAngle += FlxG.elapsed * tankSpeed; // The angle when the tank turns.
-					tankRolling.angle = tankAngle = tankAngle = 90 + 15;
+
+					tankAngle += FlxG.elapsed * tankSpeed;
+					tankRolling.angle = tankAngle - 90 + 15;
 					tankRolling.x = tankX + 1500 * FlxMath.fastCos(FlxAngle.asRadians(tankAngle + 180));
 					tankRolling.y = 1300 + 1100 * FlxMath.fastSin(FlxAngle.asRadians(tankAngle + 180));
 					add(tankRolling);
-				*/	
-
-					tankmanRun = new FlxTypedGroup<BackgroundTankmen>();
-					add(tankmanRun);
-						
-				
+					
 
 					tower = new FlxSprite(100, 120);
 					tower.frames = Paths.getSparrowAtlas('warzone/tankWatchtower');
@@ -729,7 +727,6 @@ class PlayState extends MusicBeatState
 					tankBop1.animation.addByPrefix('boppin 1', 'fg tankhead far right instance 1', 24, false);
 					tankBop1.scrollFactor.set(1.7, 1.5);
 					tankBop1.antialiasing = true;
-					tankBop1.updateHitbox();
 					add(tankBop1);
 			
 					tankBop2 = new FlxSprite(-300,750);
@@ -737,7 +734,6 @@ class PlayState extends MusicBeatState
 					tankBop2.animation.addByPrefix('boppin 2','fg tankhead 5 instance 1', 24, false);
 					tankBop2.scrollFactor.set(2.0, 0.2);
 					tankBop2.antialiasing = true;
-					tankBop2.updateHitbox();
 					add(tankBop2);
 			
 					tankBop3 = new FlxSprite(450,940);
@@ -745,16 +741,13 @@ class PlayState extends MusicBeatState
 					tankBop3.animation.addByPrefix('boppin 3','foreground man 3 instance 1', 24, false);
 					tankBop3.scrollFactor.set(1.5, 1.5);
 					tankBop3.antialiasing = true;
-					tankBop3.updateHitbox();
 					add(tankBop3);
-		
 			
 					tankBop4 = new FlxSprite(1300,1200);
 					tankBop4.frames = Paths.getSparrowAtlas('tank/tank3');
 					tankBop4.animation.addByPrefix('boppin 4','fg tankhead 4 instance 1', 24, false);
 					tankBop4.scrollFactor.set(3.5, 2.5);
 					tankBop4.antialiasing = true;
-					tankBop4.updateHitbox();
 					add(tankBop4);
 			
 					tankBop5 = new FlxSprite(1300,900);
@@ -762,7 +755,6 @@ class PlayState extends MusicBeatState
 					tankBop5.animation.addByPrefix('boppin 5','fg tankman bobbin 3 instance 1', 24, false);
 					tankBop5.scrollFactor.set(1.5, 1.5);
 					tankBop5.antialiasing = true;
-					tankBop5.updateHitbox();
 					add(tankBop5);			
 			
 					tankBop6 = new FlxSprite(1620,700);
@@ -770,7 +762,6 @@ class PlayState extends MusicBeatState
 					tankBop6.animation.addByPrefix('boppin 6','fg tankhead far right instance 1', 24, false);
 					tankBop6.scrollFactor.set(1.5, 1.5);
 					tankBop6.antialiasing = true;	
-					tankBop5.updateHitbox();
 					add(tankBop6);
 
 		          }
@@ -778,8 +769,8 @@ class PlayState extends MusicBeatState
 		          {
 		             defaultCamZoom = 0.9;
 		             curStage = 'stage';
-		            var bg:FlxSprite = new FlxSprite(-600, -200).loadGraphic(Paths.image('stageback'));
-		            bg.antialiasing = true;
+		             var bg:FlxSprite = new FlxSprite(-600, -200).loadGraphic(Paths.image('stageback'));
+		             bg.antialiasing = true;
 		             bg.scrollFactor.set(0.9, 0.9);
 		             bg.active = false;
 		             add(bg);
@@ -788,7 +779,7 @@ class PlayState extends MusicBeatState
 		             stageFront.setGraphicSize(Std.int(stageFront.width * 1.1));
 		             stageFront.updateHitbox();
 		             stageFront.antialiasing = true;
-		            stageFront.scrollFactor.set(0.9, 0.9);
+		             stageFront.scrollFactor.set(0.9, 0.9);
 		             stageFront.active = false;
 		             add(stageFront);
 
@@ -2134,7 +2125,7 @@ class PlayState extends MusicBeatState
 			if (combo >= 10 || combo == 0)
 				add(numScore);
 
-		/*	if (combo >= 10)
+			if (combo >= 10)
 				{
 					add(comboSpr);
 				}
@@ -2143,7 +2134,7 @@ class PlayState extends MusicBeatState
 				{
 					comboSpr.destroy();
 				}	
-		*/
+		
 				
 			FlxTween.tween(numScore, {alpha: 0}, 0.2, {
 				onComplete: function(tween:FlxTween)
@@ -2672,6 +2663,7 @@ class PlayState extends MusicBeatState
 				tankBop5.animation.play('boppin 5', true);
 				tankBop6.animation.play('boppin 6', true);
 				tower.animation.play('idle', true);
+				moveTank();
 
 
 			case 'warzone-stress':
@@ -2682,6 +2674,7 @@ class PlayState extends MusicBeatState
 				tankBop5.animation.play('boppin 5', true);
 				tankBop6.animation.play('boppin 6', true);
 				tower.animation.play('idle', true);
+				moveTank();
 
 
 			case 'limo':
@@ -2724,18 +2717,20 @@ class PlayState extends MusicBeatState
 		}
 	}
 
-	/*var tankX = 400;
-	var tankAngle:Float = FlxG.random.int(-90, 45);
-	var tankSpeed:Float = FlxG.random.float(5, 7);
-
 	function moveTank()
 	{
 		tankAngle += FlxG.elapsed * tankSpeed;
 		tankRolling.angle = tankAngle - 90 + 15;
 		tankRolling.x = tankX + 1500 * FlxMath.fastCos(FlxAngle.asRadians(tankAngle + 180));
 		tankRolling.y = 1300 + 1100 * FlxMath.fastSin(FlxAngle.asRadians(tankAngle + 180));
-		moveTank();	
-	}*/
+	}
+
+	function again()
+	{
+		tankRolling.x = 300;
+		tankRolling.y = 300;
+		tankRolling.angle = tankAngle - 90 + 15;
+	}	
 
 	var curLight:Int = 0;
 }

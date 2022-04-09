@@ -580,13 +580,13 @@ class Character extends FlxSprite
 				addOffset("singDOWN-alt", 88, -100);
 
 				addOffset("Ugh", -14, -9);
-				addOffset("Pretty Good", 100, 15);
+				addOffset("Pretty Good", 75, 15);
 
 				playAnim('idle');
 				
 				flipX = true;
 
-			case 'legend':
+		/*	case 'legend':
 				tex = Paths.getSparrowAtlas('Characters/legend_Assets');
 				frames = tex;
 				animation.addByPrefix('idle', "Legend Idle dance", 24);
@@ -597,11 +597,14 @@ class Character extends FlxSprite
 
 				addOffset('idle');
 				addOffset("singUP");
-				addOffset("singRIGHT", -40, -10);
-				addOffset("singLEFT", 0, -10);
-				addOffset("singDOWN", 40, -50);
+				addOffset("singRIGHT");
+				addOffset("singLEFT");
+				addOffset("singDOWN");
 
 				playAnim('idle');
+
+				flipX = true; 
+		*/
 
 
 			case 'parents-christmas':
