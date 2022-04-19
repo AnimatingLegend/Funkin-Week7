@@ -382,8 +382,8 @@ class PlayState extends MusicBeatState
 		                  bottomBoppers.frames = Paths.getSparrowAtlas('christmas/bottomBop');
 		                  bottomBoppers.animation.addByPrefix('bop', 'Bottom Level Boppers', 24, false);
 		                  bottomBoppers.antialiasing = true;
-	                          bottomBoppers.scrollFactor.set(0.9, 0.9);
-	                          bottomBoppers.setGraphicSize(Std.int(bottomBoppers.width * 1));
+	                      bottomBoppers.scrollFactor.set(0.9, 0.9);
+	                      bottomBoppers.setGraphicSize(Std.int(bottomBoppers.width * 1));
 		                  bottomBoppers.updateHitbox();
 		                  add(bottomBoppers);
 
@@ -606,7 +606,7 @@ class PlayState extends MusicBeatState
 					
 					tankBop3 = new FlxSprite(450,940);
 					tankBop3.frames = Paths.getSparrowAtlas('tank/tank2');
-					tankBop3.animation.addByPrefix('boppin 3','foreground man 3', 24, false);
+					tankBop3.animation.addByPrefix('boppin 3','foreground man 3', 24);
 					tankBop3.scrollFactor.set(1.5, 1.5);
 					tankBop3.antialiasing = true;
 					add(tankBop3);
@@ -724,7 +724,7 @@ class PlayState extends MusicBeatState
 			
 					tankBop1 = new FlxSprite(-500,650);
 					tankBop1.frames = Paths.getSparrowAtlas('tank/tank0');
-					tankBop1.animation.addByPrefix('boppin 1', 'fg tankhead far right instance 1', 24, false);
+					tankBop1.animation.addByPrefix('boppin 1', 'fg tankhead far right instance 1', 24);
 					tankBop1.scrollFactor.set(1.7, 1.5);
 					tankBop1.antialiasing = true;
 					add(tankBop1);
@@ -738,7 +738,7 @@ class PlayState extends MusicBeatState
 			
 					tankBop3 = new FlxSprite(450,940);
 					tankBop3.frames = Paths.getSparrowAtlas('tank/tank2');
-					tankBop3.animation.addByPrefix('boppin 3','foreground man 3 instance 1', 24, false);
+					tankBop3.animation.addByPrefix('boppin 3','foreground man 3 instance 1', 24);
 					tankBop3.scrollFactor.set(1.5, 1.5);
 					tankBop3.antialiasing = true;
 					add(tankBop3);
@@ -2061,17 +2061,11 @@ class PlayState extends MusicBeatState
 
 		var comboSpr:FlxSprite = new FlxSprite().loadGraphic(Paths.image(pixelShitPart1 + 'combo' + pixelShitPart2));
 		comboSpr.screenCenter();
-		comboSpr.x = coolText.x;
-		comboSpr.acceleration.y = 600;
+		comboSpr.x = coolText.x + 55;
+		comboSpr.y += 90;
+		comboSpr.acceleration.y = 550;
 		comboSpr.velocity.y -= 150;
 		comboSpr.velocity.x += FlxG.random.int(1, 10);
-
-		var comboBr:FlxSprite = new FlxSprite().loadGraphic(Paths.image(pixelShitPart1 + 'comboBreak' + pixelShitPart2));
-		comboBr.screenCenter();
-		comboBr.x = coolText.x;
-		comboBr.acceleration.y = 600;
-		comboBr.velocity.y -= 150;
-		comboBr.velocity.x += FlxG.random.int(2, 10);
 
 		if (!curStage.startsWith('school'))
 		{
@@ -2079,18 +2073,14 @@ class PlayState extends MusicBeatState
 			rating.antialiasing = true;
 			comboSpr.setGraphicSize(Std.int(comboSpr.width * 0.7));
 			comboSpr.antialiasing = true;
-			comboBr.setGraphicSize(Std.int(comboBr.width * 0.7));
-			comboBr.antialiasing = true;
 		}
 		else
 		{
 			rating.setGraphicSize(Std.int(rating.width * daPixelZoom * 0.7));
 			comboSpr.setGraphicSize(Std.int(comboSpr.width * daPixelZoom * 0.7));
-			comboBr.setGraphicSize(Std.int(comboBr.width * daPixelZoom * 0.7));
 		}
 
 		comboSpr.updateHitbox();
-	    comboBr.updateHitbox();
 		rating.updateHitbox();
 
 		var seperatedScore:Array<Int> = [];
@@ -2342,6 +2332,43 @@ class PlayState extends MusicBeatState
 			{
 				gf.playAnim('sad');
 			}
+
+			
+
+			// Combo-Break Feature, dont mind this [Line 2344 - 2370] | ffs i hate myself
+
+			var pixelShitPart1:String = "";
+			var pixelShitPart2:String = '';
+
+			if (curStage.startsWith('school'))
+			{
+				pixelShitPart1 = 'weeb/pixelUI/';
+				pixelShitPart2 = '-pixel';
+			}
+
+			var comboBr = new FlxSprite().loadGraphic(Paths.image(pixelShitPart1 + 'comboBreak' + pixelShitPart2));
+			comboBr.screenCenter();
+			comboBr.acceleration.y = 600;
+			comboBr.velocity.y -= 150;
+			comboBr.antialiasing = true;
+			comboBr.updateHitbox();
+			comboBr.velocity.x += FlxG.random.int(1, 10);
+	
+			if (!curStage.startsWith('school'))
+			{
+				comboBr.setGraphicSize(Std.int(comboBr.width * 0.7));
+				comboBr.antialiasing = true;
+			}
+			else
+			{
+				comboBr.setGraphicSize(Std.int(comboBr.width * daPixelZoom * 0.7));
+			}
+
+			if (combo > 10)
+			{
+				add(comboBr);
+			}
+
 			combo = 0;
 
 			songScore -= 10;
