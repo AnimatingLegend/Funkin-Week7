@@ -606,7 +606,7 @@ class PlayState extends MusicBeatState
 					
 					tankBop3 = new FlxSprite(450,940);
 					tankBop3.frames = Paths.getSparrowAtlas('tank/tank2');
-					tankBop3.animation.addByPrefix('boppin 3','foreground man 3', 24);
+					tankBop3.animation.addByPrefix('boppin 3','foreground man 3', 24, false);
 					tankBop3.scrollFactor.set(1.5, 1.5);
 					tankBop3.antialiasing = true;
 					add(tankBop3);
@@ -724,7 +724,7 @@ class PlayState extends MusicBeatState
 			
 					tankBop1 = new FlxSprite(-500,650);
 					tankBop1.frames = Paths.getSparrowAtlas('tank/tank0');
-					tankBop1.animation.addByPrefix('boppin 1', 'fg tankhead far right instance 1', 24);
+					tankBop1.animation.addByPrefix('boppin 1', 'fg tankhead far right instance 1', 24, false);
 					tankBop1.scrollFactor.set(1.7, 1.5);
 					tankBop1.antialiasing = true;
 					add(tankBop1);
@@ -738,7 +738,7 @@ class PlayState extends MusicBeatState
 			
 					tankBop3 = new FlxSprite(450,940);
 					tankBop3.frames = Paths.getSparrowAtlas('tank/tank2');
-					tankBop3.animation.addByPrefix('boppin 3','foreground man 3 instance 1', 24);
+					tankBop3.animation.addByPrefix('boppin 3','foreground man 3 instance 1', 24, false);
 					tankBop3.scrollFactor.set(1.5, 1.5);
 					tankBop3.antialiasing = true;
 					add(tankBop3);
@@ -2333,9 +2333,7 @@ class PlayState extends MusicBeatState
 				gf.playAnim('sad');
 			}
 
-			
-
-			// Combo-Break Feature, dont mind this [Line 2344 - 2370] | ffs i hate myself
+			// Combo-Break Feature, dont mind this [Line 2344 - 2368] | ffs i hate myself
 
 			var pixelShitPart1:String = "";
 			var pixelShitPart2:String = '';
