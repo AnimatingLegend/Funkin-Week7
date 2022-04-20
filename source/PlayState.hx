@@ -238,10 +238,12 @@ class PlayState extends MusicBeatState
 		{
                         case 'spookeez' | 'monster' | 'south': 
                         {
-                                curStage = 'spooky';
-	                            halloweenLevel = true;
+                              curStage = 'spooky';
+	                          halloweenLevel = true;
 
-		                  var hallowTex = Paths.getSparrowAtlas('halloween_bg');
+							// defaultCamZoom = 0.5;
+
+		                 	  var hallowTex = Paths.getSparrowAtlas('halloween_bg');
 
 	                          halloweenBG = new FlxSprite(-200, -100);
 		                  	  halloweenBG.frames = hallowTex;
@@ -251,7 +253,7 @@ class PlayState extends MusicBeatState
 	                          halloweenBG.antialiasing = true;
 	                          add(halloweenBG);
 
-		                  isHalloween = true;
+		                  	  isHalloween = true;
 		          }
 		          case 'pico' | 'blammed' | 'philly': 
                         {
@@ -298,7 +300,7 @@ class PlayState extends MusicBeatState
 		          case 'milf' | 'satin-panties' | 'high':
 		          {
 		                  curStage = 'limo';
-		                  defaultCamZoom = 0.90;
+		                  defaultCamZoom = 0.9;
 
 		                  var skyBG:FlxSprite = new FlxSprite(-120, -50).loadGraphic(Paths.image('limo/limoSunset'));
 		                  skyBG.scrollFactor.set(0.1, 0.1);
@@ -344,9 +346,9 @@ class PlayState extends MusicBeatState
 		          }
 		          case 'cocoa' | 'eggnog':
 		          {
-	                          curStage = 'mall';
+	                     curStage = 'mall';
 
-		                  defaultCamZoom = 0.80;
+		                //  defaultCamZoom = 0.8;
 
 		                  var bg:FlxSprite = new FlxSprite(-1000, -500).loadGraphic(Paths.image('christmas/bgWalls'));
 		                  bg.antialiasing = true;
@@ -420,9 +422,9 @@ class PlayState extends MusicBeatState
                         }
 		          case 'senpai' | 'roses':
 		          {
-		                  curStage = 'school';
+		                 curStage = 'school';
 
-		            //    defaultCamZoom = 0.9;
+		               //  defaultCamZoom = 0.5;
 
 		                  var bgSky = new FlxSprite().loadGraphic(Paths.image('weeb/weebSky'));
 		                  bgSky.scrollFactor.set(0.1, 0.1);
@@ -479,7 +481,7 @@ class PlayState extends MusicBeatState
 		                  if (SONG.song.toLowerCase() == 'roses')
 	                          {
 		                          bgGirls.getScared();
-		                  }
+		                 	  }
 
 		                  bgGirls.setGraphicSize(Std.int(bgGirls.width * daPixelZoom));
 		                  bgGirls.updateHitbox();
@@ -487,7 +489,7 @@ class PlayState extends MusicBeatState
 		          }
 		          case 'thorns':
 		          {
-						  defaultCamZoom = 0.9;
+					     defaultCamZoom = 0.9;
 						
 		                  curStage = 'schoolEvil';
 
@@ -1789,6 +1791,7 @@ class PlayState extends MusicBeatState
 		{
 			health = 0;
 			trace("RESET = True");
+			FlxG.log.add('RESET = True');
 		}
 
 		// CHEAT = brandon's a pussy
@@ -1796,6 +1799,7 @@ class PlayState extends MusicBeatState
 		{
 			health += 1;
 			trace("User is cheating!");
+			FlxG.log.add('User is cheating!!');
 		}
 
 		if (health <= 0)
@@ -2333,7 +2337,7 @@ class PlayState extends MusicBeatState
 				gf.playAnim('sad');
 			}
 
-			// Combo-Break Feature, dont mind this [Line 2344 - 2368] | ffs i hate myself
+		// Combo-Break Feature, dont mind this [Line 2344 - 2376] | Programming go BRRRRRRRRRRRRRRRRRRR
 
 			var pixelShitPart1:String = "";
 			var pixelShitPart2:String = '';
@@ -2366,6 +2370,10 @@ class PlayState extends MusicBeatState
 			{
 				add(comboBr);
 			}
+
+			FlxTween.tween(comboBr, {alpha: 0.001}, 0.1, {
+			startDelay: Conductor.crochet * 0.001
+			});
 
 			combo = 0;
 
