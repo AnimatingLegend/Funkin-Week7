@@ -346,7 +346,7 @@ class TitleState extends MusicBeatState
 		else
 			gfDance.animation.play('danceLeft');
 
-		FlxG.log.add(curBeat);
+		// FlxG.log.add(curBeat);
 
 		switch (curBeat)
 		{
