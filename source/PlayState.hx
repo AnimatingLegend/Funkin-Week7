@@ -348,7 +348,7 @@ class PlayState extends MusicBeatState
 		          {
 	                     curStage = 'mall';
 
-		                //  defaultCamZoom = 0.8;
+		                  defaultCamZoom = 0.8;
 
 		                  var bg:FlxSprite = new FlxSprite(-1000, -500).loadGraphic(Paths.image('christmas/bgWalls'));
 		                  bg.antialiasing = true;
@@ -2337,7 +2337,7 @@ class PlayState extends MusicBeatState
 				gf.playAnim('sad');
 			}
 
-		// Combo-Break Feature, dont mind this [Line 2344 - 2376] | Programming go BRRRRRRRRRRRRRRRRRRR
+		// Combo-Break Feature, dont mind this [Line 2344 - 2373] | holy shit feel like dying
 
 			var pixelShitPart1:String = "";
 			var pixelShitPart2:String = '';
@@ -2350,6 +2350,7 @@ class PlayState extends MusicBeatState
 
 			var comboBr = new FlxSprite().loadGraphic(Paths.image(pixelShitPart1 + 'comboBreak' + pixelShitPart2));
 			comboBr.screenCenter();
+			comboBr.x += 100;
 			comboBr.acceleration.y = 600;
 			comboBr.velocity.y -= 150;
 			comboBr.antialiasing = true;
@@ -2363,7 +2364,7 @@ class PlayState extends MusicBeatState
 			}
 			else
 			{
-				comboBr.setGraphicSize(Std.int(comboBr.width * daPixelZoom * 0.7));
+				comboBr.setGraphicSize(Std.int(comboBr.width * daPixelZoom * 0.1));
 			}
 
 			if (combo > 10)
