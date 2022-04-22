@@ -596,10 +596,10 @@ class Character extends FlxSprite
 				animation.addByPrefix('singRIGHT', "Legend LEFT NOTE instance", 24, false);
 
 				addOffset('idle');
-				addOffset("singUP");
-				addOffset("singRIGHT");
-				addOffset("singLEFT");
-				addOffset("singDOWN");
+				addOffset("singUP", 0, -1);
+				addOffset("singRIGHT", -120, -20);
+				addOffset("singLEFT", 160, -17);
+				addOffset("singDOWN", 40, -55);
 
 				playAnim('idle');
 
