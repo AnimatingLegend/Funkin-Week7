@@ -2152,9 +2152,6 @@ class PlayState extends MusicBeatState
 			onComplete: function(tween:FlxTween)
 			{
 				coolText.destroy();
-				comboSpr.destroy();
-
-				rating.destroy();
 			},
 			startDelay: Conductor.crochet * 0.001
 		});
@@ -2337,7 +2334,7 @@ class PlayState extends MusicBeatState
 				gf.playAnim('sad');
 			}
 
-		// Combo-Break Feature, dont mind this [Line 2344 - 2373] | holy shit feel like dying
+		// Combo-Break Feature, dont mind this [Line 2344 - 23] | this is basically just a whole copy and paste or the rating system
 
 			var pixelShitPart1:String = "";
 			var pixelShitPart2:String = '';
@@ -2364,7 +2361,7 @@ class PlayState extends MusicBeatState
 			}
 			else
 			{
-				comboBr.setGraphicSize(Std.int(comboBr.width * daPixelZoom * 0.1));
+				comboBr.setGraphicSize(Std.int(comboBr.width * daPixelZoom * 0.02));
 			}
 
 			if (combo > 10)
