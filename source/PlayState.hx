@@ -2334,7 +2334,7 @@ class PlayState extends MusicBeatState
 				gf.playAnim('sad');
 			}
 
-		// Combo-Break Feature, dont mind this [Line 2344 - 23] | this is basically just a whole copy and paste or the rating system
+		// Combo-Break Feature, dont mind this [Line 2344 - 2374] | This is gonna be the death of me
 
 			var pixelShitPart1:String = "";
 			var pixelShitPart2:String = '';

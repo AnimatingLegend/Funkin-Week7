@@ -586,7 +586,7 @@ class Character extends FlxSprite
 				
 				flipX = true;
 
-		/*	case 'legend':
+			case 'legend':
 				tex = Paths.getSparrowAtlas('Characters/legend_Assets');
 				frames = tex;
 				animation.addByPrefix('idle', "Legend Idle dance", 24);
@@ -603,9 +603,7 @@ class Character extends FlxSprite
 
 				playAnim('idle');
 
-				flipX = true; 
-		*/
-
+				flipX = true;
 
 			case 'parents-christmas':
 				frames = Paths.getSparrowAtlas('christmas/mom_dad_christmas_assets');
