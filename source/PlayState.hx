@@ -864,7 +864,7 @@ class PlayState extends MusicBeatState
 			case 'tankman':
 				dad.y += 215;
 			case 'legend':
-				dad.y += 53;
+				dad.y += 63;
 		}
 
 		boyfriend = new Boyfriend(770, 450, SONG.player1);
@@ -905,6 +905,7 @@ class PlayState extends MusicBeatState
 				gf.y += -155;
 				gf.x -= 90;
 				boyfriend.x += 40;
+				moveTank();
 		}
 
 		add(gf);
@@ -2066,7 +2067,7 @@ class PlayState extends MusicBeatState
 		var comboSpr:FlxSprite = new FlxSprite().loadGraphic(Paths.image(pixelShitPart1 + 'combo' + pixelShitPart2));
 		comboSpr.screenCenter();
 		comboSpr.x = coolText.x + 55;
-		comboSpr.y += 90;
+		comboSpr.y += 80;
 		comboSpr.acceleration.y = 550;
 		comboSpr.velocity.y -= 150;
 		comboSpr.velocity.x += FlxG.random.int(1, 10);
@@ -2694,7 +2695,6 @@ class PlayState extends MusicBeatState
 				tankBop5.animation.play('boppin 5', true);
 				tankBop6.animation.play('boppin 6', true);
 				tower.animation.play('idle', true);
-				moveTank();
 
 
 			case 'warzone-stress':
@@ -2705,7 +2705,6 @@ class PlayState extends MusicBeatState
 				tankBop5.animation.play('boppin 5', true);
 				tankBop6.animation.play('boppin 6', true);
 				tower.animation.play('idle', true);
-				moveTank();
 
 
 			case 'limo':
@@ -2719,7 +2718,7 @@ class PlayState extends MusicBeatState
 
 			case "philly":
 				if (!trainMoving)
-					trainCooldown += 1;
+					trainCooldown += 2;
 
 				if (curBeat % 4 == 0)
 				{
