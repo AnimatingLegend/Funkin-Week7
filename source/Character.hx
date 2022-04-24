@@ -578,9 +578,9 @@ class Character extends FlxSprite
 				addOffset("singRIGHT-alt", -56, -17);
 				addOffset("singLEFT-alt", 103, -4);
 				addOffset("singDOWN-alt", 88, -100);
-
+				
 				addOffset("Ugh", -14, -9);
-				addOffset("Pretty Good", 75, 15);
+				addOffset("Pretty Good", 101, 15);
 
 				playAnim('idle');
 				
@@ -597,8 +597,8 @@ class Character extends FlxSprite
 
 				addOffset('idle');
 				addOffset("singUP", 0, -1);
-				addOffset("singRIGHT", -120, -20);
-				addOffset("singLEFT", 160, -17);
+				addOffset("singRIGHT", -10, -20);
+				addOffset("singLEFT", 20, -17);
 				addOffset("singDOWN", 40, -55);
 
 				playAnim('idle');
