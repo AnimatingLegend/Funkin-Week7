@@ -569,18 +569,18 @@ class Character extends FlxSprite
 				animation.addByPrefix('Pretty Good', 'PRETTY GOOD', 24, false);
 	
 				addOffset('idle');
-				addOffset("singUP", 24, 55);
-				addOffset("singRIGHT", -56, -17);
-				addOffset("singLEFT", 103, -4);
-				addOffset("singDOWN", 88, -100);
+				addOffset("singUP", 54, 49);
+				addOffset("singRIGHT", -23, -31);
+				addOffset("singLEFT", 100, -24);
+				addOffset("singDOWN", 81, -105);
 
-				addOffset("singUP-alt", 24, 55);
-				addOffset("singRIGHT-alt", -56, -17);
-				addOffset("singLEFT-alt", 103, -4);
-				addOffset("singDOWN-alt", 88, -100);
+				addOffset("singUP-alt", 54, 49);
+				addOffset("singRIGHT-alt", -23, -31);
+				addOffset("singLEFT-alt", 100, -24);
+				addOffset("singDOWN-alt", 81, -105);
 				
 				addOffset("Ugh", -14, -9);
-				addOffset("Pretty Good", 101, 15);
+				addOffset("Pretty Good", 2, 16);
 
 				playAnim('idle');
 				
