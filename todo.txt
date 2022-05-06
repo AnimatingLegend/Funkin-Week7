@@ -5,5 +5,8 @@ BIG MAJOR THINGS I NEED TODO, BUT DONT KNOW HOW TO DO:
 - Make tank move in the back also every 10-20 seconds
 - Tankman's gameover lines
 
+- Layering issues with week 7 stage and Tankman
+- More week 6 shit [Diolouge bugs, Gameplay issue ETC]
+
 SOMETHING IK HOW TO ADD, BUT IM TOO LAZY TO DO:
 - Add NoteSplashes
