@@ -100,8 +100,8 @@ class DialogueBox extends FlxSpriteGroup
 		portraitLeft.setGraphicSize(Std.int(portraitLeft.width * PlayState.daPixelZoom * 0.9));
 		portraitLeft.updateHitbox();
 		portraitLeft.scrollFactor.set();
-		add(portraitLeft);
 		portraitLeft.visible = false;
+		add(portraitLeft);
 
 		portraitRight = new FlxSprite(0, 40);
 		portraitRight.frames = Paths.getSparrowAtlas('weeb/bfPortrait');
@@ -109,8 +109,8 @@ class DialogueBox extends FlxSpriteGroup
 		portraitRight.setGraphicSize(Std.int(portraitRight.width * PlayState.daPixelZoom * 0.9));
 		portraitRight.updateHitbox();
 		portraitRight.scrollFactor.set();
-		add(portraitRight);
 		portraitRight.visible = false;
+		add(portraitRight);
 		
 		box.animation.play('normalOpen');
 		box.setGraphicSize(Std.int(box.width * PlayState.daPixelZoom * 0.9));
@@ -121,6 +121,7 @@ class DialogueBox extends FlxSpriteGroup
 		portraitLeft.screenCenter(X);
 
 		handSelect = new FlxSprite(FlxG.width * 0.9, FlxG.height * 0.9).loadGraphic(Paths.image('weeb/pixelUI/hand_textbox'));
+		handSelect.setGraphicSize(Std.int(handSelect.width * 2.0));
 		add(handSelect);
 
 
