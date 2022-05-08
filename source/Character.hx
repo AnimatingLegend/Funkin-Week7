@@ -98,8 +98,7 @@ class Character extends FlxSprite
 				frames = tex;
 				animation.addByIndices('singUP', 'GF Dancing Beat Hair blowing CAR', [0], "", 24, false);
 				animation.addByIndices('danceLeft', 'GF Dancing Beat Hair blowing CAR', [30, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14], "", 24, false);
-				animation.addByIndices('danceRight', 'GF Dancing Beat Hair blowing CAR', [15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29], "", 24,
-					false);
+				animation.addByIndices('danceRight', 'GF Dancing Beat Hair blowing CAR', [15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29], "", 24, false);
 
 				addOffset('danceLeft', 0);
 				addOffset('danceRight', 0);
@@ -171,6 +170,7 @@ class Character extends FlxSprite
 				addOffset("singDOWN", 0, -30);
 
 				playAnim('idle');
+
 			case 'spooky':
 				tex = Paths.getSparrowAtlas('spooky_kids_assets');
 				frames = tex;
@@ -190,6 +190,7 @@ class Character extends FlxSprite
 				addOffset("singDOWN", -50, -130);
 
 				playAnim('danceRight');
+
 			case 'mom':
 				tex = Paths.getSparrowAtlas('Mom_Assets');
 				frames = tex;
@@ -229,6 +230,7 @@ class Character extends FlxSprite
 				addOffset("singDOWN", 20, -160);
 
 				playAnim('idle');
+
 			case 'monster':
 				tex = Paths.getSparrowAtlas('Monster_Assets');
 				frames = tex;
@@ -244,6 +246,7 @@ class Character extends FlxSprite
 				addOffset("singLEFT", -30);
 				addOffset("singDOWN", -30, -40);
 				playAnim('idle');
+
 			case 'monster-christmas':
 				tex = Paths.getSparrowAtlas('christmas/monsterChristmas');
 				frames = tex;
@@ -259,6 +262,7 @@ class Character extends FlxSprite
 				addOffset("singLEFT", -30);
 				addOffset("singDOWN", -40, -94);
 				playAnim('idle');
+
 			case 'pico':
 				tex = Paths.getSparrowAtlas('Pico_FNF_assetss');
 				frames = tex;
@@ -365,6 +369,7 @@ class Character extends FlxSprite
 				playAnim('idle');
 
 				flipX = true;
+
 			case 'bf-car':
 				var tex = Paths.getSparrowAtlas('bfCar');
 				frames = tex;
@@ -390,6 +395,7 @@ class Character extends FlxSprite
 				playAnim('idle');
 
 				flipX = true;
+
 			case 'bf-pixel':
 				frames = Paths.getSparrowAtlas('weeb/bfPixel');
 				animation.addByPrefix('idle', 'BF IDLE', 24, false);
@@ -423,6 +429,33 @@ class Character extends FlxSprite
 				antialiasing = false;
 
 				flipX = true;
+
+			case 'bf-pixel-opponent':
+				frames = Paths.getSparrowAtlas('weeb/bfPixel');
+				animation.addByPrefix('idle', 'BF IDLE', 24, false);
+				animation.addByPrefix('singUP', 'BF UP NOTE', 24, false);
+				animation.addByPrefix('singLEFT', 'BF LEFT NOTE', 24, false);
+				animation.addByPrefix('singRIGHT', 'BF RIGHT NOTE', 24, false);
+				animation.addByPrefix('singDOWN', 'BF DOWN NOTE', 24, false);
+
+				addOffset('idle');
+				addOffset("singUP");
+				addOffset("singRIGHT");
+				addOffset("singLEFT");
+				addOffset("singDOWN");
+
+				setGraphicSize(Std.int(width * 6));
+				updateHitbox();
+
+				playAnim('idle');
+
+				width -= 100;
+				height -= 100;
+
+				antialiasing = false;
+
+				flipX = true;
+
 			case 'bf-pixel-dead':
 				frames = Paths.getSparrowAtlas('weeb/bfPixelsDEAD');
 				animation.addByPrefix('singUP', "BF Dies pixel", 24, false);
@@ -435,8 +468,8 @@ class Character extends FlxSprite
 				addOffset('deathLoop', -30, -12);
 				addOffset('deathConfirm', -30, -12);
 				playAnim('firstDeath');
-				// pixel bullshit
-				setGraphicSize(Std.int(width * 6));
+
+				setGraphicSize(Std.int(width * 6)); // <-- pixel bullshit (dont mind it)
 				updateHitbox();
 				antialiasing = false;
 				flipX = true;
@@ -510,6 +543,7 @@ class Character extends FlxSprite
 				updateHitbox();
 
 				antialiasing = false;
+
 			case 'senpai-angry':
 				frames = Paths.getSparrowAtlas('weeb/senpai');
 				animation.addByPrefix('idle', 'Angry Senpai Idle', 24, false);
@@ -584,25 +618,6 @@ class Character extends FlxSprite
 
 				playAnim('idle');
 				
-				flipX = true;
-
-			case 'legend':
-				tex = Paths.getSparrowAtlas('Characters/legend_Assets');
-				frames = tex;
-				animation.addByPrefix('idle', "Legend Idle dance", 24);
-				animation.addByPrefix('singUP', "Legend UP NOTE instance", 24, false);
-				animation.addByPrefix('singDOWN', "Legend DOWN NOTE instance", 24, false);
-				animation.addByPrefix('singLEFT', "Legend RIGHT NOTE instance", 24, false);
-				animation.addByPrefix('singRIGHT', "Legend LEFT NOTE instance", 24, false);
-
-				addOffset('idle');
-				addOffset("singUP", 0, -1);
-				addOffset("singRIGHT", -10, -20);
-				addOffset("singLEFT", 20, -17);
-				addOffset("singDOWN", 40, -55);
-
-				playAnim('idle');
-
 				flipX = true;
 
 			case 'parents-christmas':

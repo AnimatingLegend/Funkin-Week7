@@ -590,50 +590,48 @@ class PlayState extends MusicBeatState
 					ground.updateHitbox();
 					add(ground);
 
-					// TankBop Shit
-					
-					tankBop1 = new FlxSprite(-500,650);
-					tankBop1.frames = Paths.getSparrowAtlas('tank/tank0');
-					tankBop1.animation.addByPrefix('boppin 1', 'fg tankhead far right', 24, false);
-					tankBop1.scrollFactor.set(1.7, 1.5);
+					//TankBop shit
+					tankBop = new FlxSprite(-500,650);
+					tankBop.frames = Paths.getSparrowAtlas('tank/tank0');
+					tankBop.animation.addByPrefix('boppin 1', 'fg tankhead far right instance 1', 24, false);
+					tankBop.scrollFactor.set(1.7, 1.5);
+					tankBop.antialiasing = true;
+					add(tankBop);
+			
+					tankBop1 = new FlxSprite(-300,750);
+					tankBop1.frames = Paths.getSparrowAtlas('tank/tank1');
+					tankBop1.animation.addByPrefix('boppin 2','fg tankhead 5 instance 1', 24, false);
+					tankBop1.scrollFactor.set(2.0, 0.2);
 					tankBop1.antialiasing = true;
-					add(tankBop1);						
-					
-					tankBop2 = new FlxSprite(-300,750);
-					tankBop2.frames = Paths.getSparrowAtlas('tank/tank1');
-					tankBop2.animation.addByPrefix('boppin 2','fg tankhead 5', 24, false);
-					tankBop2.scrollFactor.set(2.0, 0.2);
+					add(tankBop1);
+			
+					tankBop2 = new FlxSprite(450,940);
+					tankBop2.frames = Paths.getSparrowAtlas('tank/tank2');
+					tankBop2.animation.addByPrefix('boppin 3','foreground man 3 instance 1', 24, false);
+					tankBop2.scrollFactor.set(1.5, 1.5);
 					tankBop2.antialiasing = true;
-					add(tankBop2);		
-					
-					tankBop3 = new FlxSprite(450,940);
-					tankBop3.frames = Paths.getSparrowAtlas('tank/tank2');
-					tankBop3.animation.addByPrefix('boppin 3','foreground man 3', 24, false);
-					tankBop3.scrollFactor.set(1.5, 1.5);
+					add(tankBop2);
+			
+					tankBop3 = new FlxSprite(1300,1200);
+					tankBop3.frames = Paths.getSparrowAtlas('tank/tank3');
+					tankBop3.animation.addByPrefix('boppin 4','fg tankhead 4 instance 1', 24, false);
+					tankBop3.scrollFactor.set(3.5, 2.5);
 					tankBop3.antialiasing = true;
-					add(tankBop3);
-									
-					tankBop4 = new FlxSprite(1300,1200);
-					tankBop4.frames = Paths.getSparrowAtlas('tank/tank3');
-					tankBop4.animation.addByPrefix('boppin 4','fg tankhead 4', 24, false);
-					tankBop4.scrollFactor.set(3.5, 2.5);
-					tankBop4.antialiasing = true;
-					tankBop4.updateHitbox();
 					add(tankBop4);
-									
-					tankBop5 = new FlxSprite(1300,900);
-					tankBop5.frames = Paths.getSparrowAtlas('tank/tank4');
-					tankBop5.animation.addByPrefix('boppin 5','fg tankman bobbin 3', 24, false);
+			
+					tankBop4 = new FlxSprite(1300,900);
+					tankBop4.frames = Paths.getSparrowAtlas('tank/tank4');
+					tankBop4.animation.addByPrefix('boppin 5','fg tankman bobbin 3 instance 1', 24, false);
+					tankBop4.scrollFactor.set(1.5, 1.5);
+					tankBop4.antialiasing = true;
+					add(tankBop5);			
+			
+					tankBop5 = new FlxSprite(1620,700);
+					tankBop5.frames = Paths.getSparrowAtlas('tank/tank5');
+					tankBop5.animation.addByPrefix('boppin 6','fg tankhead far right instance 1', 24, false);
 					tankBop5.scrollFactor.set(1.5, 1.5);
-					tankBop5.antialiasing = true;
+					tankBop5.antialiasing = true;	
 					add(tankBop5);
-					
-					tankBop6 = new FlxSprite(1620,700);
-					tankBop6.frames = Paths.getSparrowAtlas('tank/tank5');
-					tankBop6.animation.addByPrefix('boppin 6','fg tankhead far right', 24, false);
-					tankBop6.scrollFactor.set(1.5, 1.5);
-					tankBop6.antialiasing = true;
-					add(tankBop6);
 
 				}
 				case 'stress':
@@ -722,49 +720,48 @@ class PlayState extends MusicBeatState
 					ground.updateHitbox();
 					add(ground);
 
-					// TankBop shit
+					//TankBop shit
+					tankBop = new FlxSprite(-500,650);
+					tankBop.frames = Paths.getSparrowAtlas('tank/tank0');
+					tankBop.animation.addByPrefix('boppin 1', 'fg tankhead far right instance 1', 24, false);
+					tankBop.scrollFactor.set(1.7, 1.5);
+					tankBop.antialiasing = true;
+					add(tankBop);
 			
-					tankBop1 = new FlxSprite(-500,650);
-					tankBop1.frames = Paths.getSparrowAtlas('tank/tank0');
-					tankBop1.animation.addByPrefix('boppin 1', 'fg tankhead far right instance 1', 24, false);
-					tankBop1.scrollFactor.set(1.7, 1.5);
+					tankBop1 = new FlxSprite(-300,750);
+					tankBop1.frames = Paths.getSparrowAtlas('tank/tank1');
+					tankBop1.animation.addByPrefix('boppin 2','fg tankhead 5 instance 1', 24, false);
+					tankBop1.scrollFactor.set(2.0, 0.2);
 					tankBop1.antialiasing = true;
 					add(tankBop1);
 			
-					tankBop2 = new FlxSprite(-300,750);
-					tankBop2.frames = Paths.getSparrowAtlas('tank/tank1');
-					tankBop2.animation.addByPrefix('boppin 2','fg tankhead 5 instance 1', 24, false);
-					tankBop2.scrollFactor.set(2.0, 0.2);
+					tankBop2 = new FlxSprite(450,940);
+					tankBop2.frames = Paths.getSparrowAtlas('tank/tank2');
+					tankBop2.animation.addByPrefix('boppin 3','foreground man 3 instance 1', 24, false);
+					tankBop2.scrollFactor.set(1.5, 1.5);
 					tankBop2.antialiasing = true;
 					add(tankBop2);
 			
-					tankBop3 = new FlxSprite(450,940);
-					tankBop3.frames = Paths.getSparrowAtlas('tank/tank2');
-					tankBop3.animation.addByPrefix('boppin 3','foreground man 3 instance 1', 24, false);
-					tankBop3.scrollFactor.set(1.5, 1.5);
+					tankBop3 = new FlxSprite(1300,1200);
+					tankBop3.frames = Paths.getSparrowAtlas('tank/tank3');
+					tankBop3.animation.addByPrefix('boppin 4','fg tankhead 4 instance 1', 24, false);
+					tankBop3.scrollFactor.set(3.5, 2.5);
 					tankBop3.antialiasing = true;
-					add(tankBop3);
-			
-					tankBop4 = new FlxSprite(1300,1200);
-					tankBop4.frames = Paths.getSparrowAtlas('tank/tank3');
-					tankBop4.animation.addByPrefix('boppin 4','fg tankhead 4 instance 1', 24, false);
-					tankBop4.scrollFactor.set(3.5, 2.5);
-					tankBop4.antialiasing = true;
 					add(tankBop4);
 			
-					tankBop5 = new FlxSprite(1300,900);
-					tankBop5.frames = Paths.getSparrowAtlas('tank/tank4');
-					tankBop5.animation.addByPrefix('boppin 5','fg tankman bobbin 3 instance 1', 24, false);
-					tankBop5.scrollFactor.set(1.5, 1.5);
-					tankBop5.antialiasing = true;
+					tankBop4 = new FlxSprite(1300,900);
+					tankBop4.frames = Paths.getSparrowAtlas('tank/tank4');
+					tankBop4.animation.addByPrefix('boppin 5','fg tankman bobbin 3 instance 1', 24, false);
+					tankBop4.scrollFactor.set(1.5, 1.5);
+					tankBop4.antialiasing = true;
 					add(tankBop5);			
 			
-					tankBop6 = new FlxSprite(1620,700);
-					tankBop6.frames = Paths.getSparrowAtlas('tank/tank5');
-					tankBop6.animation.addByPrefix('boppin 6','fg tankhead far right instance 1', 24, false);
-					tankBop6.scrollFactor.set(1.5, 1.5);
-					tankBop6.antialiasing = true;	
-					add(tankBop6);
+					tankBop5 = new FlxSprite(1620,700);
+					tankBop5.frames = Paths.getSparrowAtlas('tank/tank5');
+					tankBop5.animation.addByPrefix('boppin 6','fg tankhead far right instance 1', 24, false);
+					tankBop5.scrollFactor.set(1.5, 1.5);
+					tankBop5.antialiasing = true;	
+					add(tankBop5);
 
 		          }
 		          default:
@@ -863,8 +860,6 @@ class PlayState extends MusicBeatState
 				camPos.set(dad.getGraphicMidpoint().x + 300, dad.getGraphicMidpoint().y);
 			case 'tankman':
 				dad.y += 215;
-			case 'legend':
-				dad.y += 63;
 		}
 
 		boyfriend = new Boyfriend(770, 450, SONG.player1);
@@ -901,6 +896,7 @@ class PlayState extends MusicBeatState
 				gf.y += -55;
 				gf.x -= 200;
 				boyfriend.x += 40;
+				moveTank();
 				case 'warzone-stress':
 				gf.y += -155;
 				gf.x -= 90;
@@ -2067,7 +2063,7 @@ class PlayState extends MusicBeatState
 		var comboSpr:FlxSprite = new FlxSprite().loadGraphic(Paths.image(pixelShitPart1 + 'combo' + pixelShitPart2));
 		comboSpr.screenCenter();
 		comboSpr.x = coolText.x + 55;
-		comboSpr.y += 80;
+		comboSpr.y += 85;
 		comboSpr.acceleration.y = 550;
 		comboSpr.velocity.y -= 150;
 		comboSpr.velocity.x += FlxG.random.int(1, 10);
@@ -2335,9 +2331,9 @@ class PlayState extends MusicBeatState
 				gf.playAnim('sad');
 			}
 
-		// Combo-Break Feature, dont mind this [Line 2344 - 2374] | This is gonna be the death of me
+		// Combo-Break Feature, dont mind this [Line 2344 - 2374] | aughhh
 
-			var pixelShitPart1:String = "";
+			var pixelShitPart1:String = ""; // pixel prefixes
 			var pixelShitPart2:String = '';
 
 			if (curStage.startsWith('school'))
@@ -2641,15 +2637,14 @@ class PlayState extends MusicBeatState
 		if (curBeat % 8 == 7 && curSong == 'Bopeebo')
 		{
 			boyfriend.playAnim('hey', true);
-			gf.playAnim('cheer', true);
 		}
 
-		if (curBeat == 192 && curSong == 'Blammed')
+	
+	/*	if (curBeat == 192 && curSong == 'Blammed')
 		{
-			gf.playAnim('cheer', true);
 			boyfriend.playAnim('hey', true);
 		}
-
+	*/
 		if (curBeat % 16 == 15 && SONG.song == 'Tutorial' && dad.curCharacter == 'gf' && curBeat > 16 && curBeat < 48)
 		{
 			boyfriend.playAnim('hey', true);
@@ -2688,22 +2683,21 @@ class PlayState extends MusicBeatState
 				santa.animation.play('idle', true);
 
 			case 'warzone':
-				tankBop1.animation.play('boppin 1', true);
-				tankBop2.animation.play('boppin 2', true);
-				tankBop3.animation.play('boppin 3', true);
-				tankBop4.animation.play('boppin 4', true);
-				tankBop5.animation.play('boppin 5', true);
-				tankBop6.animation.play('boppin 6', true);
+				tankBop.animation.play('boppin 1', true);
+				tankBop1.animation.play('boppin 2', true);
+				tankBop2.animation.play('boppin 3', true);
+				tankBop3.animation.play('boppin 4', true);
+				tankBop4.animation.play('boppin 5', true);
+				tankBop5.animation.play('boppin 6', true);
 				tower.animation.play('idle', true);
-
-
+				
 			case 'warzone-stress':
-				tankBop1.animation.play('boppin 1', true);
-				tankBop2.animation.play('boppin 2', true);
-				tankBop3.animation.play('boppin 3', true);
-				tankBop4.animation.play('boppin 4', true);
-				tankBop5.animation.play('boppin 5', true);
-				tankBop6.animation.play('boppin 6', true);
+				tankBop.animation.play('boppin 1', true);
+				tankBop1.animation.play('boppin 2', true);
+				tankBop2.animation.play('boppin 3', true);
+				tankBop3.animation.play('boppin 4', true);
+				tankBop4.animation.play('boppin 5', true);
+				tankBop5.animation.play('boppin 6', true);
 				tower.animation.play('idle', true);
 
 
