@@ -111,12 +111,12 @@ class PlayState extends MusicBeatState
 	var tower:FlxSprite;
 	var tankRolling:FlxSprite;
 	var tankmanRun:FlxTypedGroup<BackgroundTankmen>;
+	var tankBop:FlxSprite;
 	var tankBop1:FlxSprite;
 	var tankBop2:FlxSprite;
 	var tankBop3:FlxSprite;
 	var tankBop4:FlxSprite;
 	var tankBop5:FlxSprite;
-	var tankBop6:FlxSprite;
 	var smokeRight:FlxSprite;
 	var smokeLeft:FlxSprite;
 
@@ -624,7 +624,7 @@ class PlayState extends MusicBeatState
 					tankBop4.animation.addByPrefix('boppin 5','fg tankman bobbin 3 instance 1', 24, false);
 					tankBop4.scrollFactor.set(1.5, 1.5);
 					tankBop4.antialiasing = true;
-					add(tankBop5);			
+					add(tankBop4);			
 			
 					tankBop5 = new FlxSprite(1620,700);
 					tankBop5.frames = Paths.getSparrowAtlas('tank/tank5');
@@ -754,7 +754,7 @@ class PlayState extends MusicBeatState
 					tankBop4.animation.addByPrefix('boppin 5','fg tankman bobbin 3 instance 1', 24, false);
 					tankBop4.scrollFactor.set(1.5, 1.5);
 					tankBop4.antialiasing = true;
-					add(tankBop5);			
+					add(tankBop4);			
 			
 					tankBop5 = new FlxSprite(1620,700);
 					tankBop5.frames = Paths.getSparrowAtlas('tank/tank5');
