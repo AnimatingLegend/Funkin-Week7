@@ -55,6 +55,10 @@ class PlayState extends MusicBeatState
 	public static var storyPlaylist:Array<String> = [];
 	public static var storyDifficulty:Int = 1;
 
+	public var noteData:Int = 0;
+
+	public var grpNoteSplashes:FlxTypedGroup<NoteSplash>;
+
 	var halloweenLevel:Bool = false;
 
 	private var vocals:FlxSound;
@@ -82,7 +86,6 @@ class PlayState extends MusicBeatState
 	private var gfSpeed:Int = 1;
 	private var health:Float = 1;
 	private var combo:Int = 0;
-
 
 	private var healthBarBG:FlxSprite;
 	private var healthBar:FlxBar;
@@ -169,6 +172,7 @@ class PlayState extends MusicBeatState
 
 		FlxG.cameras.reset(camGame);
 		FlxG.cameras.add(camHUD);
+		grpNoteSplashes = new FlxTypedGroup<NoteSplash>();
 
 
 		FlxCamera.defaultCameras = [camGame];
@@ -809,7 +813,7 @@ class PlayState extends MusicBeatState
 			case 'warzone':
 				gfVersion = 'gf-tankmen';
 			case 'warzone-stress':
-				gfVersion = 'pico-speaker';	
+				gfVersion = 'gf-tankmen'; // <--- Pico & Tankmen shit still being worked on so i added this as a place holder for now.
 		}
 
 		if (curStage == 'limo')
@@ -880,24 +884,29 @@ class PlayState extends MusicBeatState
 			case 'mallEvil':
 				boyfriend.x += 320;
 				dad.y -= 80;
+
 			case 'school':
 				boyfriend.x += 200;
 				boyfriend.y += 220;
 				gf.x += 180;
 				gf.y += 300;
+
 			case 'schoolEvil':
 				var evilTrail = new FlxTrail(dad, null, 4, 24, 0.3, 0.069);
 				add(evilTrail);
+
 				boyfriend.x += 200;
 				boyfriend.y += 220;
 				gf.x += 180;
 				gf.y += 300;
-				case 'warzone':
+
+			case 'warzone':
 				gf.y += -55;
 				gf.x -= 200;
 				boyfriend.x += 40;
 				moveTank();
-				case 'warzone-stress':
+
+			case 'warzone-stress':
 				gf.y += -155;
 				gf.x -= 90;
 				boyfriend.x += 40;
@@ -924,6 +933,11 @@ class PlayState extends MusicBeatState
 
 		strumLineNotes = new FlxTypedGroup<FlxSprite>();
 		add(strumLineNotes);
+		add(grpNoteSplashes);
+
+		var splash:NoteSplash = new NoteSplash(100, 100, 0);
+		grpNoteSplashes.add(splash);
+		splash.alpha = 0.0;
 
 		playerStrums = new FlxTypedGroup<FlxSprite>();
 
@@ -954,12 +968,10 @@ class PlayState extends MusicBeatState
 		healthBarBG.scrollFactor.set();
 		add(healthBarBG);
 
-		healthBar = new FlxBar(healthBarBG.x + 4, healthBarBG.y + 4, RIGHT_TO_LEFT, Std.int(healthBarBG.width - 8), Std.int(healthBarBG.height - 8), this,
-			'health', 0, 2);
+		healthBar = new FlxBar(healthBarBG.x + 4, healthBarBG.y + 4, RIGHT_TO_LEFT, Std.int(healthBarBG.width - 8), Std.int(healthBarBG.height - 8), this, 'health', 0, 2);
 		healthBar.scrollFactor.set();
-		healthBar.createFilledBar(0xFFFF0000, 0xFF66FF33);
-		// healthBar
-		add(healthBar);
+		healthBar.createFilledBar(0xFFFF0000, 0xFF66FF33);=
+		add(healthBar); // <--- health bar
 
 		scoreTxt = new FlxText(healthBarBG.x + healthBarBG.width - 190, healthBarBG.y + 30, 0, "", 20);
 		scoreTxt.setFormat(Paths.font("vcr.ttf"), 16, FlxColor.WHITE, RIGHT);
@@ -974,7 +986,8 @@ class PlayState extends MusicBeatState
 		iconP2.y = healthBar.y - (iconP2.height / 2);
 		add(iconP2);
 
-		strumLineNotes.cameras = [camHUD];	
+		strumLineNotes.cameras = [camHUD];
+		grpNoteSplashes.cameras = [camHUD];
 		notes.cameras = [camHUD];
 		healthBar.cameras = [camHUD];
 		healthBarBG.cameras = [camHUD];
@@ -1788,7 +1801,6 @@ class PlayState extends MusicBeatState
 		{
 			health = 0;
 			trace("RESET = True");
-			FlxG.log.add('RESET = True');
 		}
 
 		// CHEAT = brandon's a pussy
@@ -2039,8 +2051,12 @@ class PlayState extends MusicBeatState
 			score = 200;
 		}
 
-		songScore += score;
+		if(daRating == 'sick')
+			{
+				spawnNoteSplashOnNote(notes);
+			}
 
+		songScore += score;
 
 		var pixelShitPart1:String = "";
 		var pixelShitPart2:String = '';
@@ -2275,6 +2291,7 @@ class PlayState extends MusicBeatState
 				}
 			});
 		}
+		
 
 		if (boyfriend.holdTimer > Conductor.stepCrochet * 4 * 0.001 && !up && !down && !right && !left)
 		{
@@ -2474,6 +2491,18 @@ class PlayState extends MusicBeatState
 		}
 	}
 
+/*	function spawnNoteSplashOnNote(note:Note) 
+	{
+		if(noteSplashes && note != null) 
+		{
+			var strum:StrumNote = playerStrums.members[note.noteData];
+			if(strum != null) 
+			{
+				spawnNoteSplash(strum.x, strum.y, note.noteData, note);
+			}
+		}
+	}
+*/
 	var fastCarCanDrive:Bool = true;
 
 	function resetFastCar():Void
@@ -2640,19 +2669,16 @@ class PlayState extends MusicBeatState
 		}
 
 	
-	/*	if (curBeat == 192 && curSong == 'Blammed')
-		{
-			boyfriend.playAnim('hey', true);
-		}
-	*/
 		if (curBeat % 16 == 15 && SONG.song == 'Tutorial' && dad.curCharacter == 'gf' && curBeat > 16 && curBeat < 48)
 		{
 			boyfriend.playAnim('hey', true);
 			dad.playAnim('cheer', true);
 		}
 
+		// Week 7 Mid-Song Events
+		// hard coding because im just like that
 		if (dad.curCharacter == 'tankman' && SONG.song == 'Ugh')
-			{
+		{
 				if (curBeat == 14 || curBeat == 110 || curBeat == 131 || curBeat == 206)
 				{
 					dad.addOffset("singUP", -14, 9);
@@ -2754,7 +2780,7 @@ class PlayState extends MusicBeatState
 		tankRolling.x = 300;
 		tankRolling.y = 300;
 		tankRolling.angle = tankAngle - 90 + 15;
-	}	
+	}
 
 	var curLight:Int = 0;
 }
