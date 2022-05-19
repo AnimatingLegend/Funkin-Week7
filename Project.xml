@@ -100,7 +100,7 @@
 	<!-- <template path='mods' /> -->
 	
 	<assets path="CHANGELOG.md" rename='changelog.txt'/>
-	<assets path="READMEREADMEREADME.txt" rename='SERIOUS WEEK 7 README SHIT'/>
+	<assets path="art/week7 readme.txt" rename='SERIOUS WEEK 7 README SHIT.txt'/>
 
 	<!-- NOTE FOR FUTURE SELF SINCE FONTS ARE ALWAYS FUCKY 
 		TO FIX ONE OF THEM, I CONVERTED IT TO OTF. DUNNO IF YOU NEED TO
