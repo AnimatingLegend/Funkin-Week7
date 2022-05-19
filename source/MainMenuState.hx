@@ -21,15 +21,10 @@ using StringTools;
 
 class MainMenuState extends MusicBeatState
 {
-	var curSelected:Int = 0;
-
+	public static var curSelected:Int = 0;
 	var menuItems:FlxTypedGroup<FlxSprite>;
 
-	#if !switch
 	var optionShit:Array<String> = ['story mode', 'freeplay', 'donate'];
-	#else
-	var optionShit:Array<String> = ['story mode', 'freeplay'];
-	#end
 
 	var magenta:FlxSprite;
 	var camFollow:FlxObject;
