@@ -863,7 +863,7 @@ class PlayState extends MusicBeatState
 				dad.y += 100;
 				camPos.set(dad.getGraphicMidpoint().x + 300, dad.getGraphicMidpoint().y);
 			case 'tankman':
-				dad.y += 215;
+				dad.y += 220;
 		}
 
 		boyfriend = new Boyfriend(770, 450, SONG.player1);
@@ -907,8 +907,8 @@ class PlayState extends MusicBeatState
 				moveTank();
 
 			case 'warzone-stress':
-				gf.y += -155;
-				gf.x -= 90;
+				gf.y += -55;
+				gf.x -= 200;
 				boyfriend.x += 40;
 				moveTank();
 		}
@@ -970,7 +970,7 @@ class PlayState extends MusicBeatState
 
 		healthBar = new FlxBar(healthBarBG.x + 4, healthBarBG.y + 4, RIGHT_TO_LEFT, Std.int(healthBarBG.width - 8), Std.int(healthBarBG.height - 8), this, 'health', 0, 2);
 		healthBar.scrollFactor.set();
-		healthBar.createFilledBar(0xFFFF0000, 0xFF66FF33);=
+		healthBar.createFilledBar(0xFFFF0000, 0xFF66FF33);
 		add(healthBar); // <--- health bar
 
 		scoreTxt = new FlxText(healthBarBG.x + healthBarBG.width - 190, healthBarBG.y + 30, 0, "", 20);
@@ -2028,12 +2028,12 @@ class PlayState extends MusicBeatState
 		var coolText:FlxText = new FlxText(0, 0, 0, placement, 32);
 		coolText.screenCenter();
 		coolText.x = FlxG.width * 0.55;
-		//
 
 		var rating:FlxSprite = new FlxSprite();
 		var score:Int = 350;
 
 		var daRating:String = "sick";
+		var spawnNoteSplashOnNote:Bool = false;
 
 		if (noteDiff > Conductor.safeZoneOffset * 0.9)
 		{
@@ -2053,9 +2053,9 @@ class PlayState extends MusicBeatState
 
 		if(daRating == 'sick')
 			{
-				spawnNoteSplashOnNote(notes);
+				add(grpNoteSplashes);
 			}
-
+	
 		songScore += score;
 
 		var pixelShitPart1:String = "";
