@@ -11,8 +11,10 @@ PhantomArcade: https://twitter.com/PhantomArcade3K
 KawaiiSprite: https://twitter.com/kawaisprite
 EvilSk8er: https://twitter.com/evilsk8r
 ---------------------------------------------
-GitHub:
+Funkin Source Code:
 https://github.com/ninjamuffin99/Funkin
+---------------------------------------------
+Week 7 Source Code:
 https://github.com/LegendLOL/Funkin-Week7
 ---------------------------------------------
-Thank you, and hope you enjoy this build.
+Thank you, and hope you enjoy this build!!!
