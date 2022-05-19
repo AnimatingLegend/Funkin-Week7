@@ -7,3 +7,8 @@ BIG MAJOR THINGS I NEED TODO, BUT DONT KNOW HOW TO DO:
 
 SOMETHING IK HOW TO ADD, BUT IM TOO LAZY TO DO:
 - Add NoteSplashes
+
+MISC THINGS
+- Update freeplay menu 
+- Make Options menu 
+- Add MORB
