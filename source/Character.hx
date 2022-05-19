@@ -517,7 +517,7 @@ class Character extends FlxSprite
 				animation.play('firstDeath');
 
 				addOffset('firstDeath', 29, 25);
-				addOffset('deathLoop', 29, 9);
+				addOffset('deathLoop', 29, 8);
 				addOffset('deathConfirm', 29, 40);
 				playAnim('firstDeath');
 
@@ -592,6 +592,8 @@ class Character extends FlxSprite
 				animation.addByPrefix('singUP', 'Tankman UP note', 24, false);
 				animation.addByPrefix('singDOWN', 'Tankman DOWN note', 24, false);
 				animation.addByPrefix('singLEFT', 'Tankman Right Note', 24, false);
+				// ANIMATION IS CALLED TANKMAN RIGHT NOTE BUT ITS FOR THE LEFT ^^^
+				// CUZ DAVE IS DUMB!
 				animation.addByPrefix('singRIGHT', 'Tankman Note Left', 24, false);
 
 				animation.addByPrefix('singUP-alt', 'Tankman UP note', 24, false);
@@ -603,18 +605,18 @@ class Character extends FlxSprite
 				animation.addByPrefix('Pretty Good', 'PRETTY GOOD', 24, false);
 	
 				addOffset('idle');
-				addOffset("singUP", 24, 55);
-				addOffset("singRIGHT", -56, -17);
-				addOffset("singLEFT", 103, -4);
+				addOffset("singUP", 54, 49);
+				addOffset("singRIGHT", -23, -31);
+				addOffset("singLEFT", 89, -12);
 				addOffset("singDOWN", 88, -100);
 
-				addOffset("singUP-alt", 24, 55);
-				addOffset("singRIGHT-alt", -56, -17);
-				addOffset("singLEFT-alt", 103, -4);
+				addOffset("singUP-alt", 54, 49);
+				addOffset("singRIGHT-alt", -23, -31);
+				addOffset("singLEFT-alt", 89, -12);
 				addOffset("singDOWN-alt", 88, -100);
 				
-				addOffset("Ugh", -14, -9);
-				addOffset("Pretty Good", 101, 15);
+				addOffset("Ugh", -14, -8);
+				addOffset("Pretty Good", 2, 16);
 
 				playAnim('idle');
 				
