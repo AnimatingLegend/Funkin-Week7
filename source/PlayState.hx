@@ -621,7 +621,7 @@ class PlayState extends MusicBeatState
 					tankBop3.animation.addByPrefix('boppin 4','fg tankhead 4 instance 1', 24, false);
 					tankBop3.scrollFactor.set(3.5, 2.5);
 					tankBop3.antialiasing = true;
-					add(tankBop4);
+					add(tankBop3);
 			
 					tankBop4 = new FlxSprite(1300,900);
 					tankBop4.frames = Paths.getSparrowAtlas('tank/tank4');
@@ -751,7 +751,7 @@ class PlayState extends MusicBeatState
 					tankBop3.animation.addByPrefix('boppin 4','fg tankhead 4 instance 1', 24, false);
 					tankBop3.scrollFactor.set(3.5, 2.5);
 					tankBop3.antialiasing = true;
-					add(tankBop4);
+					add(tankBop3);
 			
 					tankBop4 = new FlxSprite(1300,900);
 					tankBop4.frames = Paths.getSparrowAtlas('tank/tank4');
