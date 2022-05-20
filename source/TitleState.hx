@@ -135,7 +135,14 @@ class TitleState extends MusicBeatState
 			FlxG.sound.music.fadeIn(4, 0, 0.7);
 		}
 
+		#if desktop
+		Conductor.changeBPM(110);
+		#end
+
+		#if HTML5
 		Conductor.changeBPM(102);
+		#end
+
 		persistentUpdate = true;
 
 		var bg:FlxSprite = new FlxSprite().makeGraphic(FlxG.width, FlxG.height, FlxColor.BLACK);
@@ -349,52 +356,54 @@ class TitleState extends MusicBeatState
 
 		switch (curBeat)
 		{
-			case 1:
+			case 0:
+				deleteCoolText();
+			case 2:
 				createCoolText(['ninjamuffin99', 'phantomArcade', 'kawaisprite', 'evilsk8er']);
 			// credTextShit.visible = false;
-			case 3:
+			case 4:
 				addMoreText('present');
 			// credTextShit.text += '\npresent...';
 			// credTextShit.addText();
-			case 4:
+			case 5:
 				deleteCoolText();
 			// credTextShit.visible = false;
 			// credTextShit.text = 'In association \nwith';
 			// credTextShit.screenCenter();
-			case 5:
+			case 6:
 				createCoolText(['In association', 'with']);
-			case 7:
+			case 8:
 				addMoreText('newgrounds');
 				ngSpr.visible = true;
 			// credTextShit.text += '\nNewgrounds';
-			case 8:
+			case 9:
 				deleteCoolText();
 				ngSpr.visible = false;
 			// credTextShit.visible = false;
 
 			// credTextShit.text = 'Shoutouts Tom Fulp';
 			// credTextShit.screenCenter();
-			case 9:
+			case 10:
 				createCoolText([curWacky[0]]);
 			// credTextShit.visible = true;
-			case 11:
+			case 12:
 				addMoreText(curWacky[1]);
 			// credTextShit.text += '\nlmao';
-			case 12:
+			case 13:
 				deleteCoolText();
 			// credTextShit.visible = false;
 			// credTextShit.text = "Friday";
 			// credTextShit.screenCenter();
-			case 13:
+			case 14:
 				addMoreText('Friday');
 			// credTextShit.visible = true;
-			case 14:
+			case 15:
 				addMoreText('Night');
 			// credTextShit.text += '\nNight';
-			case 15:
+			case 16:
 				addMoreText('Funkin'); // credTextShit.text += '\nFunkin';
 
-			case 16:
+			case 17:
 				skipIntro();
 		}
 	}
