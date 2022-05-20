@@ -813,7 +813,7 @@ class PlayState extends MusicBeatState
 			case 'warzone':
 				gfVersion = 'gf-tankmen';
 			case 'warzone-stress':
-				gfVersion = 'gf-tankmen'; // <--- Pico & Tankmen shit still being worked on so i added this as a place holder for now.
+				gfVersion = 'pico-speaker';
 		}
 
 		if (curStage == 'limo')
@@ -907,8 +907,8 @@ class PlayState extends MusicBeatState
 				moveTank();
 
 			case 'warzone-stress':
-				gf.y += -55;
-				gf.x -= 200;
+				gf.y += -150;
+				gf.x -= 90;
 				boyfriend.x += 40;
 				moveTank();
 		}
@@ -2051,11 +2051,13 @@ class PlayState extends MusicBeatState
 			score = 200;
 		}
 
-		if(daRating == 'sick')
+		// WIP 
+
+	/*	if(daRating == 'sick')
 			{
 				add(grpNoteSplashes);
 			}
-	
+	*/
 		songScore += score;
 
 		var pixelShitPart1:String = "";
