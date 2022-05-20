@@ -173,9 +173,9 @@ class Note extends FlxSprite
 
 		if (mustPress)
 		{
-			// The * 0.5 is so that it's easier to hit them too late, instead of too early
-			if (strumTime > Conductor.songPosition - (Conductor.safeZoneOffset * 1.6)
-				&& strumTime < Conductor.songPosition + (Conductor.safeZoneOffset * 0.6))
+			// The * 1.5 is so that it's easier to hit them too late, instead of too early
+			if (strumTime > Conductor.songPosition - (Conductor.safeZoneOffset * 1.5)
+				&& strumTime < Conductor.songPosition + (Conductor.safeZoneOffset * 0.5))
 				canBeHit = true;
 			else
 				canBeHit = false;

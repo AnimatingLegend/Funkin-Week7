@@ -2440,10 +2440,10 @@ class PlayState extends MusicBeatState
 	{
 		if (keyP)
 			goodNoteHit(note);
-	/*	else
+		else
 		{
-			badNoteCheck();
-		} */
+			goodNoteHit(note);
+		} 
 	}
 
 	function goodNoteHit(note:Note):Void
