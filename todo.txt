@@ -6,9 +6,9 @@ BIG MAJOR THINGS I NEED TODO, BUT DONT KNOW HOW TO DO:
 - Tankman's gameover lines
 
 SOMETHING IK HOW TO ADD, BUT IM TOO LAZY TO DO:
-- Add NoteSplashes
+- Add NoteSplashes [WIP]
 
 MISC THINGS
 - Update freeplay menu 
 - Make Options menu 
-- Add MORB
+- Janky Note Inputs [DONE]
