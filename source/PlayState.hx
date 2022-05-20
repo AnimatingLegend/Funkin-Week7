@@ -2220,7 +2220,7 @@ class PlayState extends MusicBeatState
 				var daNote = possibleNotes[0];
 
 				if (perfectMode)
-					noteCheck(true, daNote);
+					noteCheck(false, daNote);
 
 				// Jump notes
 				if (possibleNotes.length >= 2)
@@ -2239,8 +2239,8 @@ class PlayState extends MusicBeatState
 									if (controlArray[ignoreList[shit]])
 										inIgnoreList = true;
 								}
-								if (!inIgnoreList)
-									badNoteCheck();
+								/*if (!inIgnoreList)
+									badNoteCheck();*/
 							}
 						}
 					}
@@ -2440,10 +2440,10 @@ class PlayState extends MusicBeatState
 	{
 		if (keyP)
 			goodNoteHit(note);
-		else
+	/*	else
 		{
 			badNoteCheck();
-		}
+		} */
 	}
 
 	function goodNoteHit(note:Note):Void
