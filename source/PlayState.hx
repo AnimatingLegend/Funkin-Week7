@@ -2683,14 +2683,14 @@ class PlayState extends MusicBeatState
 		{
 				if (curBeat == 14 || curBeat == 110 || curBeat == 131 || curBeat == 206)
 				{
-					dad.addOffset("singUP", -14, 9);
+					dad.addOffset("singUP", -14, -8);
 					
 					dad.animation.getByName('singUP').frames = dad.animation.getByName('Ugh').frames;
 				}
 
 		 if (curBeat == 16 || curBeat == 112 || curBeat == 132 || curBeat == 208)
 			{
-				dad.addOffset("singUP", 24, 55);
+				dad.addOffset("singUP", 54, 49);
 				dad.animation.getByName('singUP').frames = dad.animation.getByName('singUP-alt').frames;
 			}
 		}
