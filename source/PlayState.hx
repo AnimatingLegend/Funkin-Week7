@@ -2220,7 +2220,7 @@ class PlayState extends MusicBeatState
 				var daNote = possibleNotes[0];
 
 				if (perfectMode)
-					noteCheck(false, daNote);
+					noteCheck(true, daNote);
 
 				// Jump notes
 				if (possibleNotes.length >= 2)
