@@ -30,7 +30,7 @@ class FreeplayState extends MusicBeatState
 	var lerpScore:Int = 0;
 	var intendedScore:Int = 0;
 
-	public static var coolColors:Array<Int> = [0xFF9271FD, 0xFF7C689E, -14535868, 0xFFA8E060, 0xFFFF87FF, 0xFF8EE8FF, 0xFFFF8CCD, 0xFFFF9900];
+	public static var coolColors:Array<Int> = [0xFF9271FD, 0xFF9271FD, -14535868, 0xFFA8E060, 0xFFFF87FF, 0xFF8EE8FF, 0xFFFF8CCD, 0xFFFF9900];
 	private var scoreBG:FlxSprite;
 	private	var bg:FlxSprite;
 
@@ -47,7 +47,6 @@ class FreeplayState extends MusicBeatState
 
 	override function create()
 	{
-					// DONT MIND THIS IS IS PRACTICALLY USELESS RN \\
 		var initSonglist = CoolUtil.coolTextFile(Paths.txt('freeplaySonglist'));
 
 		for (i in 0...initSonglist.length)
@@ -58,6 +57,8 @@ class FreeplayState extends MusicBeatState
 			if(color != null)
 				actualColor = FlxColor.fromString(color);
 		}
+
+		// DONT MIND THIS IS IS PRACTICALLY USELESS RN \\
 
 	/*	for (i in 0...initSonglist.length)
 		{
