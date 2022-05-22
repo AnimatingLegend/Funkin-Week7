@@ -2055,7 +2055,7 @@ class PlayState extends MusicBeatState
 
 	/*	if(daRating == 'sick')
 			{
-				add(grpNoteSplashes);
+				spawnNoteSplashOnNote(notes);
 			}
 	*/
 		songScore += score;
@@ -2075,13 +2075,13 @@ class PlayState extends MusicBeatState
 		rating.y -= 60;
 		rating.acceleration.y = 550;
 		rating.velocity.y -= FlxG.random.int(140, 175);
-		rating.velocity.x -= FlxG.random.int(0, 10);
+		rating.velocity.x += FlxG.random.int(0, 10);
 		add(rating);
 
 		var comboSpr:FlxSprite = new FlxSprite().loadGraphic(Paths.image(pixelShitPart1 + 'combo' + pixelShitPart2));
 		comboSpr.screenCenter();
 		comboSpr.x = coolText.x + 55;
-		comboSpr.y += 85;
+		comboSpr.y += 80;
 		comboSpr.acceleration.y = 550;
 		comboSpr.velocity.y -= 150;
 		comboSpr.velocity.x += FlxG.random.int(1, 10);
@@ -2350,7 +2350,7 @@ class PlayState extends MusicBeatState
 				gf.playAnim('sad');
 			}
 
-		// Combo-Break Feature, dont mind this [Line 2344 - 2374] | aughhh
+		// Combo-Break Feature, dont mind this [Line 2344 - 2390] | amogus
 
 			var pixelShitPart1:String = ""; // pixel prefixes
 			var pixelShitPart2:String = '';
@@ -2385,7 +2385,8 @@ class PlayState extends MusicBeatState
 				add(comboBr);
 			}
 
-			FlxTween.tween(comboBr, {alpha: 0.001}, 0.1, {
+			FlxTween.tween(comboBr, {alpha: 0.001}, 0.1, 
+			{
 			startDelay: Conductor.crochet * 0.001
 			});
 
