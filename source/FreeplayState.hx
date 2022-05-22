@@ -12,6 +12,7 @@ import flixel.math.FlxMath;
 import flixel.text.FlxText;
 import flixel.util.FlxColor;
 import lime.utils.Assets;
+import flixel.tweens.FlxTween;
 
 using StringTools;
 
@@ -25,23 +26,44 @@ class FreeplayState extends MusicBeatState
 
 	var scoreText:FlxText;
 	var diffText:FlxText;
+	var speedText:FlxText;
 	var lerpScore:Int = 0;
 	var intendedScore:Int = 0;
+
+	public static var coolColors:Array<Int> = [0xFF9271FD, 0xFF7C689E, -14535868, 0xFFA8E060, 0xFFFF87FF, 0xFF8EE8FF, 0xFFFF8CCD, 0xFFFF9900];
+	private var scoreBG:FlxSprite;
+	private	var bg:FlxSprite;
 
 	private var grpSongs:FlxTypedGroup<Alphabet>;
 	private var curPlaying:Bool = false;
 
 	private var iconArray:Array<HealthIcon> = [];
 
+	//stolen from psych engine lolol
+	var colorTween:FlxTween;
+	var intendedColor:Int;
+
+	var actualColor:Null<FlxColor> = null;
+
 	override function create()
 	{
+					// DONT MIND THIS IS IS PRACTICALLY USELESS RN \\
 		var initSonglist = CoolUtil.coolTextFile(Paths.txt('freeplaySonglist'));
 
 		for (i in 0...initSonglist.length)
 		{
-			songs.push(new SongMetadata(initSonglist[i], 1, 'gf'));
+			var listArray = initSonglist[i].split(":");
+			var color = listArray[4];
+
+			if(color != null)
+				actualColor = FlxColor.fromString(color);
 		}
 
+	/*	for (i in 0...initSonglist.length)
+		{
+			songs.push(new SongMetadata(initSonglist[i], 1, 'gf'));
+		}
+	*/
 		#if desktop
 		// Updating Discord Rich Presence
 		DiscordClient.changePresence("In the Menus", null);
@@ -54,7 +76,7 @@ class FreeplayState extends MusicBeatState
 		#end
 
 		if (StoryMenuState.weekUnlocked[2] || isDebug)
-			addWeek(['Bopeebo', 'Fresh', 'Dadbattle'], 1, ['dad']);
+			addWeek(['Tutorial', 'Bopeebo', 'Fresh', 'Dadbattle'], 1, ['gf', 'dad', 'dad', 'dad']); // This is the only option i have tbh
 
 		if (StoryMenuState.weekUnlocked[2] || isDebug)
 			addWeek(['Spookeez', 'South'], 2, ['spooky']);
@@ -75,15 +97,15 @@ class FreeplayState extends MusicBeatState
 			addWeek(['Ugh', 'Guns', 'Stress'], 7, ['tankman']);
 
 		// LOAD MUSIC
-
 		// LOAD CHARACTERS
 
-		var bg:FlxSprite = new FlxSprite().loadGraphic(Paths.image('menuBGBlue'));
+		bg = new FlxSprite().loadGraphic(Paths.image('menuDesat'));
 		add(bg);
 
 		grpSongs = new FlxTypedGroup<Alphabet>();
 		add(grpSongs);
 
+			
 		for (i in 0...songs.length)
 		{
 			var songText:Alphabet = new Alphabet(0, (70 * i) + 30, songs[i].songName, true, false);
@@ -104,11 +126,9 @@ class FreeplayState extends MusicBeatState
 		}
 
 		scoreText = new FlxText(FlxG.width * 0.7, 5, 0, "", 32);
-		// scoreText.autoSize = false;
 		scoreText.setFormat(Paths.font("vcr.ttf"), 32, FlxColor.WHITE, RIGHT);
-		// scoreText.alignment = RIGHT;
 
-		var scoreBG:FlxSprite = new FlxSprite(scoreText.x - 6, 0).makeGraphic(Std.int(FlxG.width * 0.35), 66, 0xFF000000);
+		scoreBG = new FlxSprite(scoreText.x - 6, 0).makeGraphic(Std.int(FlxG.width * 0.35), 66, 0xFF000000);
 		scoreBG.alpha = 0.6;
 		add(scoreBG);
 
@@ -116,8 +136,14 @@ class FreeplayState extends MusicBeatState
 		diffText.font = scoreText.font;
 		add(diffText);
 
-		add(scoreText);
+		speedText = new FlxText(FlxG.width, diffText.y + 36, 0, "", 24);
+		speedText.font = scoreText.font;
 
+		add(scoreText);
+	
+		if(curSelected >= songs.length) curSelected = 0;
+		bg.color = songs[curSelected].color;
+		intendedColor = bg.color;
 		changeSelection();
 		changeDiff();
 
@@ -127,7 +153,6 @@ class FreeplayState extends MusicBeatState
 
 		selector.size = 40;
 		selector.text = ">";
-		// add(selector);
 
 		var swag:Alphabet = new Alphabet(1, 0, "swag");
 
@@ -185,7 +210,17 @@ class FreeplayState extends MusicBeatState
 		if (Math.abs(lerpScore - intendedScore) <= 10)
 			lerpScore = intendedScore;
 
+
+		var funnyObject:FlxText = scoreText;
+	
+		if(speedText.width >= scoreText.width && speedText.width >= diffText.width)
+			funnyObject = speedText;
+
+		if(diffText.width >= scoreText.width && diffText.width >= speedText.width)
+			funnyObject = diffText;
+	
 		scoreText.text = "PERSONAL BEST:" + lerpScore;
+	//	scoreText.x = FlxG.width - scoreText.width;
 
 		var upP = controls.UP_P;
 		var downP = controls.DOWN_P;
@@ -263,6 +298,23 @@ class FreeplayState extends MusicBeatState
 		if (curSelected >= songs.length)
 			curSelected = 0;
 
+		var newColor:Int = songs[curSelected].color;
+		if(newColor != intendedColor) 
+		{
+			if(colorTween != null) 
+			{
+				colorTween.cancel();
+			}
+			intendedColor = newColor;
+			colorTween = FlxTween.color(bg, 1, bg.color, intendedColor, 
+			{
+				onComplete: function(twn:FlxTween) 
+				{
+					colorTween = null;
+				}
+			});
+		}
+
 		// selector.y = (70 * curSelected) + 30;
 
 		#if !switch
@@ -289,15 +341,14 @@ class FreeplayState extends MusicBeatState
 			bullShit++;
 
 			item.alpha = 0.6;
-			// item.setGraphicSize(Std.int(item.width * 0.8));
 
 			if (item.targetY == 0)
 			{
 				item.alpha = 1;
-				// item.setGraphicSize(Std.int(item.width));
 			}
 		}
 	}
+
 }
 
 class SongMetadata
@@ -305,11 +356,23 @@ class SongMetadata
 	public var songName:String = "";
 	public var week:Int = 0;
 	public var songCharacter:String = "";
+	public var color:FlxColor = FlxColor.WHITE;
 
-	public function new(song:String, week:Int, songCharacter:String)
+	public function new(song:String, week:Int, songCharacter:String, ?color:FlxColor)
 	{
 		this.songName = song;
 		this.week = week;
 		this.songCharacter = songCharacter;
+
+		if(color != null)
+			this.color = color;
+
+		else
+			{
+				if(FreeplayState.coolColors.length - 1 >= this.week)
+					this.color = FreeplayState.coolColors[this.week];
+				else
+					this.color = FreeplayState.coolColors[0];
+			}
 	}
 }

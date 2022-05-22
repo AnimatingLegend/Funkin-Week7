@@ -9,6 +9,6 @@ SOMETHING IK HOW TO ADD, BUT IM TOO LAZY TO DO:
 - Add NoteSplashes [WIP]
 
 MISC THINGS
-- Update freeplay menu 
-- Make Options menu 
-- Janky Note Inputs [DONE]
+- Update Options menu 
+- Update freeplay menu [DONE]
+- Fix Janky Note Inputs [DONE]
