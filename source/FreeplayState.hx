@@ -60,11 +60,11 @@ class FreeplayState extends MusicBeatState
 
 		// DONT MIND THIS IS IS PRACTICALLY USELESS RN \\
 
-	/*	for (i in 0...initSonglist.length)
+		for (i in 0...initSonglist.length)
 		{
 			songs.push(new SongMetadata(initSonglist[i], 1, 'gf'));
 		}
-	*/
+	
 		#if desktop
 		// Updating Discord Rich Presence
 		DiscordClient.changePresence("In the Menus", null);
@@ -77,7 +77,7 @@ class FreeplayState extends MusicBeatState
 		#end
 
 		if (StoryMenuState.weekUnlocked[2] || isDebug)
-			addWeek(['Tutorial', 'Bopeebo', 'Fresh', 'Dadbattle'], 1, ['gf', 'dad', 'dad', 'dad']); // This is the only option i have tbh
+			addWeek(['Bopeebo', 'Fresh', 'Dadbattle'], 1, ['dad']);
 
 		if (StoryMenuState.weekUnlocked[2] || isDebug)
 			addWeek(['Spookeez', 'South'], 2, ['spooky']);
@@ -103,10 +103,11 @@ class FreeplayState extends MusicBeatState
 		bg = new FlxSprite().loadGraphic(Paths.image('menuDesat'));
 		add(bg);
 
+
+		// this SHOULD help reduce lag spikes
 		grpSongs = new FlxTypedGroup<Alphabet>();
 		add(grpSongs);
-
-			
+		
 		for (i in 0...songs.length)
 		{
 			var songText:Alphabet = new Alphabet(0, (70 * i) + 30, songs[i].songName, true, false);
