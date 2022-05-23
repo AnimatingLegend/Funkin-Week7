@@ -14,7 +14,15 @@ EvilSk8er: https://twitter.com/evilsk8r
 Funkin Source Code:
 https://github.com/ninjamuffin99/Funkin
 ---------------------------------------------
-Week 7 Source Code:
-https://github.com/LegendLOL/Funkin-Week7
+What is changed in this week 7 build?
+- Updated FPS (capped to 140)
+- Fixed janky Input system (still a WIP)
+- LOADS of gameplay fixes
+- Some charting Changes
+- Keybindings (DF JK)
+- ETC
+---------------------------------------------
+If you want to check out those changes then its always open sourced. - https://github.com/LegendLOL/Funkin-Week7
+We also release Desktop versions for you to play! - https://github.com/LegendLOL/Funkin-Week7/releases
 ---------------------------------------------
 Thank you, and hope you enjoy this build!!!
