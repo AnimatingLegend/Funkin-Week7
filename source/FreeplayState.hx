@@ -58,8 +58,6 @@ class FreeplayState extends MusicBeatState
 				actualColor = FlxColor.fromString(color);
 		}
 
-		// DONT MIND THIS IS IS PRACTICALLY USELESS RN \\
-
 		for (i in 0...initSonglist.length)
 		{
 			songs.push(new SongMetadata(initSonglist[i], 1, 'gf'));
@@ -121,10 +119,6 @@ class FreeplayState extends MusicBeatState
 			// using a FlxGroup is too much fuss!
 			iconArray.push(icon);
 			add(icon);
-
-			// songText.x += 40;
-			// DONT PUT X IN THE FIRST PARAMETER OF new ALPHABET() !!
-			// songText.screenCenter(X);
 		}
 
 		scoreText = new FlxText(FlxG.width * 0.7, 5, 0, "", 32);
@@ -215,14 +209,14 @@ class FreeplayState extends MusicBeatState
 
 		var funnyObject:FlxText = scoreText;
 	
-		if(speedText.width >= scoreText.width && speedText.width >= diffText.width)
-			funnyObject = speedText;
+		if(scoreText.width >= speedText.width && scoreText.width >= diffText.width)
+			funnyObject = scoreText;
 
 		if(diffText.width >= scoreText.width && diffText.width >= speedText.width)
 			funnyObject = diffText;
 	
 		scoreText.text = "PERSONAL BEST:" + lerpScore;
-	//	scoreText.x = FlxG.width - scoreText.width;
+		diffText.x  = 1020; // <--- DIFFUCULTY TXT
 
 		var upP = controls.UP_P;
 		var downP = controls.DOWN_P;
@@ -279,18 +273,16 @@ class FreeplayState extends MusicBeatState
 		switch (curDifficulty)
 		{
 			case 0:
-				diffText.text = "EASY";
+				diffText.text = ' < EASY >';
 			case 1:
-				diffText.text = 'NORMAL';
+				diffText.text = '< NORMAL >';
 			case 2:
-				diffText.text = "HARD";
+				diffText.text = ' < HARD >';
 		}
 	}
 
 	function changeSelection(change:Int = 0)
 	{
-
-		// NGio.logEvent('Fresh');
 		FlxG.sound.play(Paths.sound('scrollMenu'), 0.4);
 
 		curSelected += change;
@@ -308,7 +300,7 @@ class FreeplayState extends MusicBeatState
 				colorTween.cancel();
 			}
 			intendedColor = newColor;
-			colorTween = FlxTween.color(bg, 1, bg.color, intendedColor, 
+			colorTween = FlxTween.color(bg, 0.5, bg.color, intendedColor, 
 			{
 				onComplete: function(twn:FlxTween) 
 				{
