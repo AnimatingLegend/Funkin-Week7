@@ -4,6 +4,7 @@ BIG MAJOR THINGS I NEED TODO, BUT DONT KNOW HOW TO DO:
 - Pico Shoot, & Tankmen running/getting shot during each beat
 - Make tank move in the back also every 10-20 seconds
 - Tankman's gameover lines
+- Week 7 stage layering [FIXED/DONE]
 
 SOMETHING IK HOW TO ADD, BUT IM TOO LAZY TO DO:
 - Add NoteSplashes [WIP]
