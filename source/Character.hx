@@ -596,6 +596,7 @@ class Character extends FlxSprite
 				// CUZ DAVE IS DUMB!
 				animation.addByPrefix('singRIGHT', 'Tankman Note Left', 24, false);
 
+				// this is just a copy n paste of the other poses (only reason why i made alterante animations for them is because of mid-song event/ coding issues)	
 				animation.addByPrefix('singUP-alt', 'Tankman UP note', 24, false);
 				animation.addByPrefix('singDOWN-alt', 'Tankman DOWN note', 24, false);
 				animation.addByPrefix('singLEFT-alt', 'Tankman Right Note', 24, false);
@@ -610,6 +611,7 @@ class Character extends FlxSprite
 				addOffset("singLEFT", 89, -12);
 				addOffset("singDOWN", 88, -100);
 
+				// this is just a copy n paste of the other poses (only reason why i made alterante animations for them is because of mid-song event/ coding issues)
 				addOffset("singUP-alt", 54, 49);
 				addOffset("singRIGHT-alt", -23, -31);
 				addOffset("singLEFT-alt", 89, -12);
