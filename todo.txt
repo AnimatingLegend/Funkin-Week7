@@ -10,6 +10,6 @@ SOMETHING IK HOW TO ADD, BUT IM TOO LAZY TO DO:
 - Add NoteSplashes [WIP]
 
 MISC THINGS
-- Update Options menu 
+- Update Options menu [WIP]
 - Update freeplay menu [DONE]
 - Fix Janky Note Inputs [DONE]
