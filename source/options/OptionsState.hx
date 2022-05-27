@@ -1,4 +1,4 @@
-package;
+package options;
 
 #if desktop
 import Discord.DiscordClient;
@@ -15,9 +15,7 @@ import lime.utils.Assets;
 import flixel.FlxSubState;
 import flash.text.TextField;
 import flixel.FlxG;
-import flixel.FlxSprite;
 import flixel.util.FlxSave;
-import haxe.Json;
 import flixel.tweens.FlxEase;
 import flixel.tweens.FlxTween;
 import flixel.util.FlxTimer;
@@ -29,7 +27,7 @@ using StringTools;
 
 class OptionsState extends MusicBeatState
 {
-    var options:Array<String> = ['Prefrences', 'Controls', 'Graphics', 'Exit'];
+    var options:Array<String> = ['Prefrences', 'Controls', /*'Graphics',*/ 'Exit'];
 
     private var grpOptions:FlxTypedGroup<Alphabet>;
     private var curSelected: Int = 0;
@@ -99,11 +97,11 @@ class OptionsState extends MusicBeatState
 
             switch(optionChoices)
             {
-                /*case 'Prefrences':
-                    openSubState(new PreferencesSubstate()); 
-                    trace("Prefrence Option Seleceted");*/
+                case 'Prefrences':
+                    FlxG.switchState(new PrefrencesSubState());
+                    trace("Prefrence Option Seleceted");
                 case 'Controls': 
-                    openSubState(new ControlsSubState());
+                    FlxG.switchState(new ControlsSubState());
                     trace("Control Option Selected");
                 /*case 'Graphics': 
                      openSubState(new GraphicsSubState());
