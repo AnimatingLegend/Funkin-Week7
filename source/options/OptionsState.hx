@@ -27,7 +27,7 @@ using StringTools;
 
 class OptionsState extends MusicBeatState
 {
-    var options:Array<String> = ['Prefrences', 'Controls', /*'Graphics',*/ 'Exit'];
+    var options:Array<String> = ['Prefrences', 'Controls', 'Graphics', 'Exit'];
 
     private var grpOptions:FlxTypedGroup<Alphabet>;
     private var curSelected: Int = 0;
@@ -103,9 +103,9 @@ class OptionsState extends MusicBeatState
                 case 'Controls': 
                     FlxG.switchState(new ControlsSubState());
                     trace("Control Option Selected");
-                /*case 'Graphics': 
-                     openSubState(new GraphicsSubState());
-                    trace("Graphic Option Selected");*/
+                case 'Graphics': 
+                     FlxG.switchState(new GraphicsSubState());
+                    trace("Graphic Option Selected");
                 case 'Exit':
                     FlxG.sound.play(Paths.sound('cancelMenu'));
                     FlxG.switchState(new MainMenuState());
