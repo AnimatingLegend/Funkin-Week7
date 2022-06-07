@@ -12,15 +12,27 @@ using StringTools;
 
 class PrefrencesSubState extends MusicBeatState
 {
+
+    private var menuBG:FlxSprite;
     
    public function new()
     {
         super();
 
-        if (controls.BACK)
+        menuBG = new FlxSprite().loadGraphic(Paths.image('menuDesat'));
+        menuBG.setGraphicSize(Std.int(menuBG.width * 1.1));
+        menuBG.updateHitbox();
+        menuBG.screenCenter();
+        menuBG.antialiasing = true;
+        add(menuBG);
+    }
+
+    override function update(elapsed:Float) 
+    {
+            if (controls.BACK)
             {
                 FlxG.sound.play(Paths.sound('cancelMenu'));
-                FlxG.switchState(new OptionsState());
-            }	
+                FlxG.switchState(new OptionsMenuState());
+            }  
     }
 }

@@ -25,8 +25,9 @@ import Controls;
 
 using StringTools;
 
-class OptionsState extends MusicBeatState
+class OptionsMenuState extends MusicBeatState
 {
+
     var options:Array<String> = ['Prefrences', 'Controls', 'Graphics', 'Exit'];
 
     private var grpOptions:FlxTypedGroup<Alphabet>;
@@ -56,14 +57,9 @@ class OptionsState extends MusicBeatState
             grpOptions.add(optionText);
         }
         
-        changeSelection();
+        changeItem();
 
         super.create();
-    }
-
-    override function closeSubState() {
-        super.closeSubState();
-        changeSelection();
     }
 
     override function update(elasped:Float) 
@@ -72,12 +68,12 @@ class OptionsState extends MusicBeatState
 
         if (controls.UP_P)
         {
-            changeSelection(-1);
+            changeItem(-1);
         }
 
         if (controls.DOWN_P)
         {
-            changeSelection(1);
+            changeItem(1);
         }
         
         if (controls.BACK)
@@ -114,7 +110,7 @@ class OptionsState extends MusicBeatState
         }    
     }
     
-    function changeSelection(change:Int = 0) 
+    function changeItem(change:Int = 0) 
      {
 		curSelected += change;
 		if (curSelected < 0)
