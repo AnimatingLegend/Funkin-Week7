@@ -6,9 +6,6 @@ BIG MAJOR THINGS I NEED TODO, BUT DONT KNOW HOW TO DO:
 - Tankman's gameover lines
 - Week 7 stage layering [FIXED/DONE]
 
-SOMETHING IK HOW TO ADD, BUT IM TOO LAZY TO DO:
-- Add NoteSplashes [WIP]
-
 MISC THINGS
 - Update Options menu [WIP]
 - Update freeplay menu [DONE]

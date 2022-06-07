@@ -57,8 +57,6 @@ class PlayState extends MusicBeatState
 
 	public var noteData:Int = 0;
 
-	public var grpNoteSplashes:FlxTypedGroup<NoteSplash>;
-
 	var halloweenLevel:Bool = false;
 
 	private var vocals:FlxSound;
@@ -172,7 +170,6 @@ class PlayState extends MusicBeatState
 
 		FlxG.cameras.reset(camGame);
 		FlxG.cameras.add(camHUD);
-		grpNoteSplashes = new FlxTypedGroup<NoteSplash>();
 
 
 		FlxCamera.defaultCameras = [camGame];
@@ -832,7 +829,7 @@ class PlayState extends MusicBeatState
 				dad.y += 100;
 				camPos.set(dad.getGraphicMidpoint().x + 300, dad.getGraphicMidpoint().y);
 			case 'tankman':
-				dad.y += 225;
+				dad.y += 215;
 		}
 
 		boyfriend = new Boyfriend(770, 450, SONG.player1);
@@ -890,7 +887,7 @@ class PlayState extends MusicBeatState
 		add(dad);
 		add(boyfriend);
 
-	// Week 7 shit (dont mind bad layering)
+	// Week 7 shit (this ALSO has shitty layering)
 	// Ugh & Guns Stage
 		if (curStage == 'warzone')
 			add(dad);
@@ -920,11 +917,6 @@ class PlayState extends MusicBeatState
 
 		strumLineNotes = new FlxTypedGroup<FlxSprite>();
 		add(strumLineNotes);
-		add(grpNoteSplashes);
-
-		var splash:NoteSplash = new NoteSplash(100, 100, 0);
-		grpNoteSplashes.add(splash);
-		splash.alpha = 0.0;
 
 		playerStrums = new FlxTypedGroup<FlxSprite>();
 
@@ -974,7 +966,6 @@ class PlayState extends MusicBeatState
 		add(iconP2);
 
 		strumLineNotes.cameras = [camHUD];
-		grpNoteSplashes.cameras = [camHUD];
 		notes.cameras = [camHUD];
 		healthBar.cameras = [camHUD];
 		healthBarBG.cameras = [camHUD];
