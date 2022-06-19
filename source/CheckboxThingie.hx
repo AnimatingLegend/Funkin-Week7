@@ -1,70 +1,52 @@
 package;
 
+import flixel.FlxG;
 import flixel.FlxSprite;
+import flixel.animation.FlxBaseAnimation;
 import flixel.graphics.frames.FlxAtlasFrames;
+import flixel.group.FlxSpriteGroup;
+
+using StringTools;
 
 class CheckboxThingie extends FlxSprite
 {
-	public var sprTracker:FlxSprite;
-	public var daValue(default, set):Bool;
-	public var copyAlpha:Bool = true;
-	public var offsetX:Float = 0;
-	public var offsetY:Float = 0;
-	public function new(x:Float = 0, y:Float = 0, ?checked = false) {
-		super(x, y);
 
-		frames = Paths.getSparrowAtlas('checkboxThingie');
-		animation.addByPrefix("unchecked", "Check Box unselected ", 24, false);
-		animation.addByPrefix("unchecking", "Check Box selecting animation ", 24, false);
-		animation.addByPrefix("checking", "Check Box selecting animation ", 24, false);
-		animation.addByPrefix("checked", "Check Box Selected Static ", 24, false);
+	public var sprTracker:FlxSpriteGroup;
 
-		antialiasing = true;
-		setGraphicSize(Std.int(0.9 * width));
-		updateHitbox();
-
-		animationFinished(checked ? 'checking' : 'unchecking');
-		animation.finishCallback = animationFinished;
-		daValue = checked;
-	}
-
-	override function update(elapsed:Float) {
-		if (sprTracker != null) {
-			setPosition(sprTracker.x - 130 + offsetX, sprTracker.y + 30 + offsetY);
-			if(copyAlpha) {
-				alpha = sprTracker.alpha;
-			}
-		}
-		super.update(elapsed);
-	}
-
-	private function set_daValue(check:Bool):Bool {
-		if(check) 
-		{
-			if(animation.curAnim.name != 'checked' && animation.curAnim.name != 'checking') 
-			{
-				animation.play('checking', true);
-				offset.set(34, 25);
-			}
-		} else if(animation.curAnim.name != 'unchecked' && animation.curAnim.name != 'unchecking') 
-		{
-			animation.play("unchecking", true);
-			offset.set(25, 28);
-		}
-		return check;
-	}
-
-	private function animationFinished(name:String)
+	public override function new(x:Float, y:Float, ?checked:Bool = false)
 	{
-		switch(name)
-		{
-			case 'checking':
-				animation.play('checked', true);
-				offset.set(3, 12);
+		super(x, y);
+		frames = Paths.getSparrowAtlas('checkboxThingie');
+		animation.addByPrefix("selecting", "Check Box selecting animation0", 24, false);
+		animation.addByPrefix("selected", "Check Box Selected Static0", 24, false);
+		animation.addByPrefix('unchecked', "Check Box unselected0", 24, false);
+		antialiasing = true;
+		setGraphicSize(Std.int(width * 0.7));
+		updateHitbox();
+		set_daValue(checked);
+	}
 
-			case 'unchecking':
-				animation.play('unchecked', true);
-				offset.set(0, 2);
+	public override function update(elapsed:Float)
+	{
+		super.update(elapsed);
+
+		switch (animation.curAnim.name) 
+		{
+			case "unchecked":
+				offset.set(5, 15);
+			case "selected":
+				offset.set(15, 27);
 		}
+
+		if (sprTracker != null)
+			setPosition(10, sprTracker.y - 30);
+		else
+			destroy();
+
+	}
+
+	public function set_daValue(checked:Bool)
+	{
+		checked ? animation.play("selected", true) : animation.play("unchecked");
 	}
 }

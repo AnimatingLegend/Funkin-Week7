@@ -176,7 +176,7 @@ class OptionsMenuState extends MusicBeatState
 						grpControls.add(ctrl);
 						ctrl.isMenuItem = true;
 						checkBoxesArray[curSelected].sprTracker = grpControls.members[curSelected];
-						//checkBoxesArray[curSelected].set_daValue(currentSelectedCat.getOptions()[curSelected].getAccept());
+						checkBoxesArray[curSelected].set_daValue(currentSelectedCat.getOptions()[curSelected].getAccept());
 						//updateCheckboxes();
 					}
 				}

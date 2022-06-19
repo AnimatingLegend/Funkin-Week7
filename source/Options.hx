@@ -84,7 +84,7 @@ class FPSOption extends Option
 		if(changeData)
 		{
 			FlxG.save.data.fps = !FlxG.save.data.fps;
-		// (cast (Lib.current.getChildAt(0), Main)).toggleFPS(FlxG.save.data.fps);
+			(cast (Lib.current.getChildAt(0), Main)).toggleFPS(FlxG.save.data.fps);
 		}
 			
 		acceptValues = FlxG.save.data.fps;

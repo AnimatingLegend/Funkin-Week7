@@ -7,6 +7,7 @@ import openfl.Lib;
 import openfl.display.FPS;
 import openfl.display.Sprite;
 import openfl.events.Event;
+import flixel.FlxG;
 
 class Main extends Sprite
 {
@@ -19,6 +20,14 @@ class Main extends Sprite
 	var startFullscreen:Bool = false; // Whether to start the game in fullscreen on desktop targets
 
 	// You can pretty much ignore everything from here on - your code should go in your states.
+
+	public static function setupSaveData()
+		{
+			if(FlxG.save.data.fps == null)
+				FlxG.save.data.fps = true;
+			if(FlxG.save.data.fullscreen == null)
+				FlxG.save.data.fullscreen = false;
+		}
 
 	public static function main():Void
 	{
@@ -70,7 +79,19 @@ class Main extends Sprite
 		addChild(new FlxGame(gameWidth, gameHeight, initialState, zoom, framerate, framerate, skipSplash, startFullscreen));
 
 		#if !mobile
-		addChild(new FPS(10, 3, 0xFFFFFF));
+		fpsCounter = new FPS(10, 3, 0xFFFFFFF);
+		addChild(fpsCounter);
+		if(FlxG.save.data.fps == null)
+			FlxG.save.data.fps = true;
+		toggleFPS(FlxG.save.data.fps);
 		#end
+
+		setupSaveData();
+		Conductor.offset = FlxG.save.data.notesOffset;
+	}
+	var fpsCounter:FPS;
+
+	public function toggleFPS(fpsEnabled:Bool):Void {
+		fpsCounter.visible = fpsEnabled;
 	}
 }
