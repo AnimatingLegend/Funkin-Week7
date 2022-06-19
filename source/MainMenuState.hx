@@ -24,7 +24,7 @@ class MainMenuState extends MusicBeatState
 	public static var curSelected:Int = 0;
 	var menuItems:FlxTypedGroup<FlxSprite>;
 
-	var optionShit:Array<String> = ['story mode', 'freeplay', 'donate'];
+	var optionShit:Array<String> = ['story mode', 'freeplay', 'donate', 'options'];
 
 	var magenta:FlxSprite;
 	var camFollow:FlxObject;
@@ -77,7 +77,7 @@ class MainMenuState extends MusicBeatState
 
 		for (i in 0...optionShit.length)
 		{
-			var menuItem:FlxSprite = new FlxSprite(0, 95 + (i * 195));
+			var menuItem:FlxSprite = new FlxSprite(0, 65 + (i * 165));
 			menuItem.frames = tex;
 			menuItem.animation.addByPrefix('idle', optionShit[i] + " basic", 24);
 			menuItem.animation.addByPrefix('selected', optionShit[i] + " white", 24);
@@ -127,6 +127,7 @@ class MainMenuState extends MusicBeatState
 			if (controls.BACK)
 			{
 				FlxG.switchState(new TitleState());
+				FlxG.sound.play(Paths.sound('cancelMenu'));
 			}
 
 			if (controls.ACCEPT)
@@ -173,7 +174,7 @@ class MainMenuState extends MusicBeatState
 										FlxG.switchState(new FreeplayState());
 										trace("Freeplay Menu Selected");
 									case 'options': 
-										FlxG.switchState(new options.OptionsMenuState());
+										FlxG.switchState(new OptionsMenuState());
 										trace("Options Menu Selected");
 								}
 							});

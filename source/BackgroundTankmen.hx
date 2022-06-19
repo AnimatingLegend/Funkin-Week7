@@ -1,103 +1,74 @@
 package;
 
+import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.graphics.frames.FlxAtlasFrames;
-import Paths;
-import Song;
-import Conductor;
-import Math;
-import openfl.geom.Matrix;
-import openfl.display.BitmapData;
-import openfl.utils.AssetType;
-import lime.graphics.Image;
-import flixel.graphics.FlxGraphic;
-import openfl.utils.AssetManifest;
-import openfl.utils.AssetLibrary;
-import flixel.system.FlxAssets;
-import flixel.FlxBasic;
-import flixel.FlxG;
-import flixel.FlxGame;
-import flixel.FlxObject;
-import flixel.math.FlxMath;
-import flixel.math.FlxPoint;
-import flixel.math.FlxRect;
-import lime.utils.Assets;
-import openfl.geom.Matrix;
-import openfl.display.BitmapData;
-import openfl.utils.AssetType;
-import lime.graphics.Image;
-import flixel.graphics.FlxGraphic;
-
-import openfl.utils.AssetManifest;
-import openfl.utils.AssetLibrary;
-
-#if cpp
-import Sys;
-import sys.FileSystem;
-#end
-
-
-using StringTools;
 
 class BackgroundTankmen extends FlxSprite
 {
-  
-  public var tankSpeed:Float = 0.7 * 1000;
-  public var goingRight:Bool = false;
-  var runAnimPlayedTimes:Int = 0;
-  var runAnimPlayedTimesMax:Int = 1;
+	public static var animationNotes:Array<Dynamic> = [];
+	private var tankSpeed:Float;
+	private var endingOffset:Float;
+	private var goingRight:Bool;
+	public var strumTime:Float;
 
-  override public function new()
-  {
-      super();
-      frames = Paths.getSparrowAtlas("tank/tankmanKilled1");
-      antialiasing = true;
-      animation.addByPrefix("run", "tankman running ", 24, false);
-      animation.addByPrefix("shot", "John Shot " + FlxG.random.int(1,2), 24, false);
-      animation.play("run");
-      
-      updateHitbox();
-      setGraphicSize(Std.int(width * 0.8));
-      updateHitbox();
-  }
+	public function new(x:Float, y:Float, facingRight:Bool)
+	{
+		tankSpeed = 0.7;
+		goingRight = false;
+		strumTime = 0;
+		goingRight = facingRight;
+		super(x, y);
 
-  public function resetShit (xPos:Float, yPos:Float, right:Bool, ?stepsMax:Int, ?speedModifier:Float = 1)
-  {
-      x = xPos;
-      y = yPos;
+		frames = Paths.getSparrowAtlas('tankmanKilled1');
+		animation.addByPrefix('run', 'tankman running', 24, true);
+		animation.addByPrefix('shot', 'John Shot ' + FlxG.random.int(1, 2), 24, true);
+		animation.play('run');
+		animation.curAnim.curFrame = FlxG.random.int(0, animation.curAnim.frames.length - 1);
+		antialiasing = true;
 
-      goingRight = right;
+		updateHitbox();
+		setGraphicSize(Std.int(0.8 * width));
+		updateHitbox();
+	}
 
-      if(stepsMax == null)
-        {
-            stepsMax = 1;
-        }
+	public function resetShit(x:Float, y:Float, goingRight:Bool):Void
+	{
+		this.x = x;
+		this.y = y;
+		this.goingRight = goingRight;
+		endingOffset = FlxG.random.float(50, 200);
+		tankSpeed = FlxG.random.float(0.6, 1);
+		flipX = goingRight;
+	}
 
-      if(speedModifier == null)
-        {
-            speedModifier = 1;
-        } 
-        
-        runAnimPlayedTimesMax = stepsMax;
+	override function update(elapsed:Float)
+	{
+		super.update(elapsed);
 
-        var newSpeedModifier:Float = speedModifier * 2;
+		visible = (x > -0.5 * FlxG.width && x < 1.2 * FlxG.width);
 
-        tankSpeed = FlxG.random.float(0.5, 1) * 165;
-  } 
-  override public function update(elapsed:Float)
-    {
-        super.update(elapsed);
-        
-        if(animation.curAnim.name == "run" && animation.curAnim.finished == true && runAnimPlayedTimes >= runAnimPlayedTimesMax)
-        {   
-            animation.play("shot", true);
-            runAnimPlayedTimes = 0;                     
-        }
+		if(animation.curAnim.name == "run")
+		{
+			var speed:Float = (Conductor.songPosition - strumTime) * tankSpeed;
+			if(goingRight)
+				x = (0.02 * FlxG.width - endingOffset) + speed;
+			else
+				x = (0.74 * FlxG.width + endingOffset) - speed;
+		}
+		else if(animation.curAnim.finished)
+		{
+			kill();
+		}
 
-        if(animation.curAnim.name == "shot" && animation.curAnim.curFrame >= animation.curAnim.frames.length - 1)
-        {
-            destroy();
-        }
-    }
-
+		if(Conductor.songPosition > strumTime)
+		{
+			animation.play('shot');
+			if(goingRight)
+			{
+				offset.x = 300;
+				offset.y = 200;
+			}
+		}
+	}
 }

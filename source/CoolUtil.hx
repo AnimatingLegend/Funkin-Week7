@@ -3,6 +3,7 @@ package;
 import lime.utils.Assets;
 import openfl.utils.Assets;
 import lime.utils.Assets as LimeAssets;
+import flixel.FlxG;
 
 using StringTools;
 
@@ -26,6 +27,15 @@ class CoolUtil
 
 		return daList;
 	}
+
+	public static function camLerpShit(a:Float):Float
+		{
+			return FlxG.elapsed / 0.016666666666666666 * a;
+		}
+		public static function coolLerp(a:Float, b:Float, c:Float):Float
+		{
+			return a + CoolUtil.camLerpShit(c) * (b - a);
+		}
 
 	public static function numberArray(max:Int, ?min = 0):Array<Int>
 	{

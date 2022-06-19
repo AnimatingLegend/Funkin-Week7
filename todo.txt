@@ -7,6 +7,6 @@ BIG MAJOR THINGS I NEED TODO, BUT DONT KNOW HOW TO DO:
 - Week 7 stage layering [FIXED/DONE]
 
 MISC THINGS
-- Update Options menu [WIP]
 - Update freeplay menu [DONE]
-- Fix Janky Note Inputs [DONE]
+- Update Options menu [DONE, But still a WIP]
+- Update/Fix Note Inputs [FIXED, But still a WIP]
