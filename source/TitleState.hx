@@ -84,6 +84,8 @@ class TitleState extends MusicBeatState
 		FlxG.switchState(new FreeplayState());
 		#elseif CHARTING
 		FlxG.switchState(new ChartingState());
+		#elseif OPTIONS
+		FlxG.switchState(new OptionsMenuState());
 		#end
 		
 		new FlxTimer().start(0.5, function(tmr:FlxTimer)
@@ -178,8 +180,8 @@ class TitleState extends MusicBeatState
 
 		credTextShit = new Alphabet(0, 0, "ninjamuffin99\nPhantomArcade\nkawaisprite\nevilsk8er", false);
 		credTextShit.screenCenter();
-		credTextShit.visible = false;
-
+		credTextShit.visible = true;
+	
 		ngSpr = new FlxSprite(0, FlxG.height * 0.55).loadGraphic(Paths.image('newgrounds_logo'));
 		ngSpr.visible = false;
 		ngSpr.setGraphicSize(Std.int(ngSpr.width * 0.8));
@@ -188,7 +190,7 @@ class TitleState extends MusicBeatState
 		ngSpr.antialiasing = true;
 		add(ngSpr);
 
-		FlxTween.tween(credTextShit, {y: credTextShit.y + 20}, 2.9, {ease: FlxEase.quadInOut, type: PINGPONG});
+		FlxTween.tween(credTextShit, {y: credTextShit.y + 20}, 2.5, {ease: FlxEase.quadInOut, type: PINGPONG});
 
 		FlxG.mouse.visible = false;
 
@@ -268,7 +270,7 @@ class TitleState extends MusicBeatState
 			transitioning = true;
 			// FlxG.sound.music.stop();
 
-			new FlxTimer().start(2, function(tmr:FlxTimer)
+			new FlxTimer().start(0.5, function(tmr:FlxTimer)
 			{
 				// Check if version is outdated
 
@@ -345,7 +347,7 @@ class TitleState extends MusicBeatState
 		else
 			gfDance.animation.play('danceLeft');
 
-		FlxG.log.add(curBeat);
+	//	FlxG.log.add(curBeat);
 
 		switch (curBeat)
 		{
@@ -406,9 +408,8 @@ class TitleState extends MusicBeatState
 		if (!skippedIntro)
 		{
 			remove(ngSpr);
-
-			FlxG.camera.flash(FlxColor.WHITE, 4);
 			remove(credGroup);
+			FlxG.camera.flash(FlxColor.WHITE, 4);
 			skippedIntro = true;
 		}
 	}
