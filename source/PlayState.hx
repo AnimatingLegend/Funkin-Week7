@@ -1366,7 +1366,7 @@ class PlayState extends MusicBeatState
 					babyArrow.animation.add('green', [6]);
 					babyArrow.animation.add('red', [7]);
 					babyArrow.animation.add('blue', [5]);
-					babyArrow.animation.add('purplel', [4]);
+					babyArrow.animation.add('purple', [4]);
 
 					babyArrow.setGraphicSize(Std.int(babyArrow.width * daPixelZoom));
 					babyArrow.updateHitbox();
@@ -2040,18 +2040,20 @@ class PlayState extends MusicBeatState
 		}
 
 		rating.loadGraphic(Paths.image(pixelShitPart1 + daRating + pixelShitPart2));
+	//	rating.cameras = [camHUD];
 		rating.screenCenter();
 		rating.x = coolText.x - 40;
-		rating.y -= 60;
+		rating.y += 50;
 		rating.acceleration.y = 550;
 		rating.velocity.y -= FlxG.random.int(140, 175);
 		rating.velocity.x += FlxG.random.int(0, 10);
 		add(rating);
 
 		var comboSpr:FlxSprite = new FlxSprite().loadGraphic(Paths.image(pixelShitPart1 + 'combo' + pixelShitPart2));
+	//	comboSpr.cameras = [camHUD];
 		comboSpr.screenCenter();
 		comboSpr.x = coolText.x + 55;
-		comboSpr.y += 80;
+		comboSpr.y += 180;
 		comboSpr.acceleration.y = 550;
 		comboSpr.velocity.y -= 150;
 		comboSpr.velocity.x += FlxG.random.int(1, 10);
@@ -2082,9 +2084,10 @@ class PlayState extends MusicBeatState
 		for (i in seperatedScore)
 		{
 			var numScore:FlxSprite = new FlxSprite().loadGraphic(Paths.image(pixelShitPart1 + 'num' + Std.int(i) + pixelShitPart2));
+		//	numScore.cameras = [camHUD];
 			numScore.screenCenter();
 			numScore.x = coolText.x + (43 * daLoop) - 90;
-			numScore.y += 80;
+			numScore.y += 180;
 
 			if (!curStage.startsWith('school'))
 			{
@@ -2144,7 +2147,8 @@ class PlayState extends MusicBeatState
 		curSection += 1;
 	}
 
-	private function keyShit():Void
+
+	private function keyShit():Void // all of this will be redone. (soon though teehee) [line 2148 - 2240]
 	{
 		// HOLDING
 		var up = controls.UP;
@@ -2332,6 +2336,7 @@ class PlayState extends MusicBeatState
 			}
 
 			var comboBr = new FlxSprite().loadGraphic(Paths.image(pixelShitPart1 + 'comboBreak' + pixelShitPart2));
+		//	comboBr.cameras = [camHUD];
 			comboBr.screenCenter();
 			comboBr.x += 100;
 			comboBr.acceleration.y = 600;
