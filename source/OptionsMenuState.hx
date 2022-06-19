@@ -24,7 +24,6 @@ class OptionsMenuState extends MusicBeatState
 
 	var options:Array<OptionCatagory> = [
 		new OptionCatagory("Preferences", [
-			new FramerateOption(),
 			new FPSOption(),
 			new FullscreenOption(),
 		]),

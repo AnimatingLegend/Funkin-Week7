@@ -15,7 +15,7 @@ class CheckboxThingie extends FlxSprite
 
 		frames = Paths.getSparrowAtlas('checkboxThingie');
 		animation.addByPrefix("unchecked", "Check Box unselected ", 24, false);
-		animation.addByPrefix("unchecking", "checkbox anim reverse ", 24, false);
+		animation.addByPrefix("unchecking", "Check Box selecting animation ", 24, false);
 		animation.addByPrefix("checking", "Check Box selecting animation ", 24, false);
 		animation.addByPrefix("checked", "Check Box Selected Static ", 24, false);
 

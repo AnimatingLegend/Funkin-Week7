@@ -187,16 +187,21 @@ class ControlsSubState extends MusicBeatState
                     FlxG.sound.play(Paths.sound("scrollMenu"), false);
 				}
 
-                if (controls.ACCEPT){
+                if (controls.ACCEPT)
+                {
                     FlxG.sound.play(Paths.sound("confirmMenu"), false);
                    
                     state = "input"; 
                 }
-                else if(controls.BACK){
+
+                else if(controls.BACK)
+                {
                     FlxG.sound.play(Paths.sound('cancelMenu'));
                     quit();
                 }
-				else if (FlxG.keys.justPressed.BACKSPACE){
+                
+				else if (FlxG.keys.justPressed.BACKSPACE)
+                {
                     FlxG.sound.play(Paths.sound('cancelMenu'));
                     reset();
                 }
