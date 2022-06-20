@@ -34,8 +34,10 @@ class CheckboxThingie extends FlxSprite
 		{
 			case "unchecked":
 				offset.set(5, 15);
-			case "selected":
-				offset.set(15, 27);
+			case "selecting":
+				offset.set(25, 65);
+			case selected:
+				offset.set(35, 95);	
 		}
 
 		if (sprTracker != null)
@@ -47,6 +49,6 @@ class CheckboxThingie extends FlxSprite
 
 	public function set_daValue(checked:Bool)
 	{
-		checked ? animation.play("selected", true) : animation.play("unchecked");
+		checked ? animation.play("selecting", true) : animation.play("unchecked");
 	}
 }
