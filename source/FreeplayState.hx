@@ -30,7 +30,7 @@ class FreeplayState extends MusicBeatState
 	var lerpScore:Int = 0;
 	var intendedScore:Int = 0;
 
-	public static var coolColors:Array<Int> = [0xFF9271FD, 0xFF9271FD, -14535868, 0xFFA8E060, 0xFFFF87FF, 0xFF8EE8FF, 0xFFFF8CCD, 0xFFFF9900];
+	public static var freeplayColors:Array<Int> = [0xFF9271FD, 0xFF9271FD, -14535868, 0xFFA8E060, 0xFFFF87FF, 0xFF8EE8FF, 0xFFFF8CCD, 0xFFFF9900];
 	private var scoreBG:FlxSprite;
 	private	var bg:FlxSprite;
 
@@ -38,6 +38,7 @@ class FreeplayState extends MusicBeatState
 	private var curPlaying:Bool = false;
 
 	private var iconArray:Array<HealthIcon> = [];
+//	private var grpIcons:FlxTypedGroup<HealthIcon>;
 
 	//stolen from psych engine lolol
 	var colorTween:FlxTween;
@@ -119,6 +120,11 @@ class FreeplayState extends MusicBeatState
 			// using a FlxGroup is too much fuss!
 			iconArray.push(icon);
 			add(icon);
+		/*
+			// Using FlxGroup's reduce lag u bimbo!!
+			grpIcons = new FlxTypedGroup<HealthIcon>();
+			add(grpIcons);
+		*/	
 		}
 
 		scoreText = new FlxText(FlxG.width * 0.7, 5, 0, "", 32);
@@ -328,6 +334,19 @@ class FreeplayState extends MusicBeatState
 		}
 
 		iconArray[curSelected].alpha = 1;
+	
+		/*for (item in grpIcons.members)
+		{
+			item = bullShit + curSelected;
+			bullShit;
+
+			item.alpha = 0.6;
+
+			if (item == 0)
+			{
+				item.alpha = 1;
+			}	
+		}*/
 
 		for (item in grpSongs.members)
 		{
@@ -363,10 +382,10 @@ class SongMetadata
 
 		else
 			{
-				if(FreeplayState.coolColors.length - 1 >= this.week)
-					this.color = FreeplayState.coolColors[this.week];
+				if(FreeplayState.freeplayColors.length - 1 >= this.week)
+					this.color = FreeplayState.freeplayColors[this.week];
 				else
-					this.color = FreeplayState.coolColors[0];
+					this.color = FreeplayState.freeplayColors[0];
 			}
 	}
 }
