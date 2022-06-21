@@ -138,8 +138,9 @@ class PlayState extends MusicBeatState
 	var talking:Bool = true;
 	var songScore:Int = 0;
 	var scoreTxt:FlxText;
-	
 
+	public static var deathCounter:Int = 0;
+	
 	public static var campaignScore:Int = 0;
 
 	var defaultCamZoom:Float = 1.05;
@@ -1813,6 +1814,7 @@ class PlayState extends MusicBeatState
 			vocals.stop();
 			FlxG.sound.music.stop();
 
+			deathCounter++;
 			openSubState(new GameOverSubstate(boyfriend.getScreenPosition().x, boyfriend.getScreenPosition().y));
 			
 			#if desktop
@@ -1927,11 +1929,14 @@ class PlayState extends MusicBeatState
 				{
 					missNote = daNote.y > FlxG.height;
 				}
+
 				if(missNote && daNote.mustPress)
 				{
 					if(daNote.tooLate || !daNote.wasGoodHit)
 					{
 						noteMiss(daNote.noteData);
+
+						vocals.volume = 0;
 					}
 
 					daNote.active = false;

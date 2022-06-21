@@ -52,15 +52,25 @@ class PauseSubState extends MusicBeatSubstate
 		levelDifficulty.updateHitbox();
 		add(levelDifficulty);
 
+		var levelDeathCounter:FlxText = new FlxText(20, 15 + 64, 0, "", 32);
+		levelDeathCounter.text += "Blueballed: " + PlayState.deathCounter;
+		levelDeathCounter.scrollFactor.set();
+		levelDeathCounter.setFormat(Paths.font('vcr.ttf'), 32);
+		levelDeathCounter.updateHitbox();
+		add(levelDeathCounter);
+
 		levelDifficulty.alpha = 0;
 		levelInfo.alpha = 0;
+		levelDeathCounter.alpha = 0;
 
 		levelInfo.x = FlxG.width - (levelInfo.width + 20);
 		levelDifficulty.x = FlxG.width - (levelDifficulty.width + 20);
+		levelDeathCounter.x = FlxG.width - (levelDeathCounter.width + 20);
 
 		FlxTween.tween(bg, {alpha: 0.6}, 0.4, {ease: FlxEase.quartInOut});
 		FlxTween.tween(levelInfo, {alpha: 1, y: 20}, 0.4, {ease: FlxEase.quartInOut, startDelay: 0.3});
 		FlxTween.tween(levelDifficulty, {alpha: 1, y: levelDifficulty.y + 5}, 0.4, {ease: FlxEase.quartInOut, startDelay: 0.5});
+		FlxTween.tween(levelDeathCounter, {alpha: 1, y: levelDeathCounter.y + 5}, 0.4, {ease: FlxEase.quartInOut, startDelay: 0.7});
 
 		grpMenuShit = new FlxTypedGroup<Alphabet>();
 		add(grpMenuShit);
