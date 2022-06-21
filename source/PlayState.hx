@@ -1872,7 +1872,7 @@ class PlayState extends MusicBeatState
 			}
 			else
 			{
-				daNote.y = (strumLine.y - (Conductor.songPosition - daNote.strumTime) * (0.45 * FlxMath.roundDecimal(SONG.speed, 2)));
+				daNote.y = (strumLine.y - (Conductor.songPosition - daNote.strumTime) - (0.45 * FlxMath.roundDecimal(SONG.speed, 2)));
 				if(daNote.isSustainNote)
 				{
 					if( (!daNote.mustPress || daNote.wasGoodHit || daNote.prevNote.wasGoodHit && !daNote.canBeHit) && daNote.y + daNote.offset.y * daNote.scale.y <= c)
@@ -1922,35 +1922,25 @@ class PlayState extends MusicBeatState
 				// WIP interpolation shit? Need to fix the pause issue
 				// daNote.y = (strumLine.y - (songTime - daNote.strumTime) * (0.45 * PlayState.SONG.speed));
 
-			/*	if (daNote.y < -daNote.height)
-					{
-						if (daNote.tooLate || !daNote.wasGoodHit)
-						{
-							health -= 0.0475;
-							vocals.volume = 0;
-						}
-		
-						daNote.active = false;
-						daNote.visible = false;
-		
-						daNote.kill();
-						notes.remove(daNote, true);
-						daNote.destroy();
-					}
-			*/		
-
-				if (daNote.y < -daNote.height)
+			var missNote:Bool = daNote.y < -daNote.height;
+				if(FlxG.save.data.downscroll)
 				{
+					missNote = daNote.y > FlxG.height;
+				}
+				if(missNote && daNote.mustPress)
+				{
+					if(daNote.tooLate || !daNote.wasGoodHit)
+					{
+						noteMiss(daNote.noteData);
+					}
+
 					daNote.active = false;
 					daNote.visible = false;
 
-				}
-				else
-				{
-					daNote.active = true;
-					daNote.visible = true;
-				}
-				
+					daNote.kill();
+					notes.remove(daNote, true);
+					daNote.destroy();
+				}	
 			});
 		}
 
