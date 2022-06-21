@@ -920,6 +920,11 @@ class PlayState extends MusicBeatState
 
 		playerStrums = new FlxTypedGroup<FlxSprite>();
 
+		if (FlxG.save.data.downscroll)
+			{
+				strumLine.y = FlxG.height - 150;
+			}
+			
 		generateSong(SONG.song);
 
 		camFollow = new FlxObject(0, 0, 1, 1);
@@ -943,6 +948,8 @@ class PlayState extends MusicBeatState
 		FlxG.fixedTimestep = false;
 
 		healthBarBG = new FlxSprite(0, FlxG.height * 0.9).loadGraphic(Paths.image('healthBar'));
+		if (FlxG.save.data.downscroll)
+			healthBarBG.y = FlxG.height * 0.1;
 		healthBarBG.screenCenter(X);
 		healthBarBG.scrollFactor.set();
 		add(healthBarBG);
@@ -1440,6 +1447,12 @@ class PlayState extends MusicBeatState
 				babyArrow.alpha = 0;
 				FlxTween.tween(babyArrow, {y: babyArrow.y + 10, alpha: 1}, 1, {ease: FlxEase.circOut, startDelay: 0.5 + (0.2 * i)});
 			}
+			else
+			{
+				FlxG.save.data.downscroll ? babyArrow.y += 100 : babyArrow.y -= 100;
+				babyArrow.alpha = 0.4;
+				FlxTween.tween(babyArrow, {y: FlxG.save.data.downscroll ? babyArrow.y - 100 : babyArrow.y + 100, alpha: 1}, 1, {ease: FlxEase.circOut, startDelay: 0.6 + (0.15 * i)});	
+			}	
 
 			babyArrow.ID = i;
 
@@ -1835,20 +1848,42 @@ class PlayState extends MusicBeatState
 					daNote.active = true;
 				}
 
-				daNote.y = (strumLine.y - (Conductor.songPosition - daNote.strumTime) * (0.45 * FlxMath.roundDecimal(SONG.speed, 2)));
-
-				// i am so fucking sorry for this if condition
-				if (daNote.isSustainNote
-					&& daNote.y + daNote.offset.y <= strumLine.y + Note.swagWidth / 2
-					&& (!daNote.mustPress || (daNote.wasGoodHit || (daNote.prevNote.wasGoodHit && !daNote.canBeHit))))
+			 /*daNote.y = (strumLine.y - (Conductor.songPosition - daNote.strumTime) * (0.45 * FlxMath.roundDecimal(SONG.speed, 2)));*/ // keeping this archived just incase teehee
+			// Code taken from triangle Engine :p [line 1854 - 1887]	
+			var c = strumLineNotes.members[daNote.noteData + (daNote.mustPress ? 4 : 0)].y + Note.swagWidth / 2;
+			if(FlxG.save.data.downscroll)
+			{
+				daNote.y = (strumLine.y + (Conductor.songPosition - daNote.strumTime) + (0.45 * FlxMath.roundDecimal(SONG.speed, 2)));
+				if(daNote.isSustainNote)
 				{
-					var swagRect = new FlxRect(0, strumLine.y + Note.swagWidth / 2 - daNote.y, daNote.width * 2, daNote.height * 2);
-					swagRect.y /= daNote.scale.y;
-					swagRect.height -= swagRect.y;
+					if(daNote.animation.curAnim.name.endsWith("end") && daNote.prevNote != null)
+						daNote.y = daNote.y + daNote.prevNote.height;
+					else
+						daNote.y = daNote.y + daNote.height / 2;
 
-					daNote.clipRect = swagRect;
+					if( (!daNote.mustPress || daNote.wasGoodHit || daNote.prevNote.wasGoodHit && !daNote.canBeHit) && daNote.y - daNote.offset.y * daNote.scale.y + daNote.height >= c)
+					{
+						var d = new FlxRect(0, 0, daNote.frameWidth, daNote.frameHeight);
+							d.height = (c - daNote.y) / daNote.scale.y;
+							d.y = daNote.frameHeight - d.height;
+							daNote.clipRect = d;
+					}
 				}
-
+			}
+			else
+			{
+				daNote.y = (strumLine.y - (Conductor.songPosition - daNote.strumTime) * (0.45 * FlxMath.roundDecimal(SONG.speed, 2)));
+				if(daNote.isSustainNote)
+				{
+					if( (!daNote.mustPress || daNote.wasGoodHit || daNote.prevNote.wasGoodHit && !daNote.canBeHit) && daNote.y + daNote.offset.y * daNote.scale.y <= c)
+					{
+						var d = new FlxRect(0, 0, daNote.width / daNote.scale.x, daNote.height / daNote.scale.y);
+							d.y = (c - daNote.y) / daNote.scale.y;
+							d.height -= d.y;
+							daNote.clipRect = d;
+					}
+				}
+			}
 				if (!daNote.mustPress && daNote.wasGoodHit)
 				{
 					if (SONG.song != 'Tutorial')
@@ -1887,21 +1922,35 @@ class PlayState extends MusicBeatState
 				// WIP interpolation shit? Need to fix the pause issue
 				// daNote.y = (strumLine.y - (songTime - daNote.strumTime) * (0.45 * PlayState.SONG.speed));
 
+			/*	if (daNote.y < -daNote.height)
+					{
+						if (daNote.tooLate || !daNote.wasGoodHit)
+						{
+							health -= 0.0475;
+							vocals.volume = 0;
+						}
+		
+						daNote.active = false;
+						daNote.visible = false;
+		
+						daNote.kill();
+						notes.remove(daNote, true);
+						daNote.destroy();
+					}
+			*/		
+
 				if (daNote.y < -daNote.height)
 				{
-					if (daNote.tooLate || !daNote.wasGoodHit)
-					{
-						health -= 0.0475;
-						vocals.volume = 0;
-					}
-
 					daNote.active = false;
 					daNote.visible = false;
 
-					daNote.kill();
-					notes.remove(daNote, true);
-					daNote.destroy();
 				}
+				else
+				{
+					daNote.active = true;
+					daNote.visible = true;
+				}
+				
 			});
 		}
 
@@ -2267,7 +2316,6 @@ class PlayState extends MusicBeatState
 				}
 			});
 		}
-		
 
 		if (boyfriend.holdTimer > Conductor.stepCrochet * 4 * 0.001 && !up && !down && !right && !left)
 		{

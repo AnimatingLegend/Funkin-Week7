@@ -94,7 +94,7 @@ class FPSOption extends Option
 
 	private override function updateDisplay():String
 	{
-		return "FPS Counter "/* + (!FlxG.save.data.fps ? "off" : "on")*/;
+		return "FPS Counter ";
 	}
 }
 
@@ -118,6 +118,29 @@ class FullscreenOption extends Option
 
 	private override function updateDisplay():String
 	{
-		return "Fullscreen "/* + (!FlxG.save.data.fullscreen ? "off" : "on")*/;
+		return "Fullscreen ";
+	}
+
+}
+
+class DownscrollOption extends Option
+{
+	public function new()
+	{
+		super();
+	}
+
+	public override function press(changeData:Bool):Bool
+	{
+		if(changeData)
+			FlxG.save.data.downscroll = !FlxG.save.data.downscroll;
+		acceptValues = FlxG.save.data.downscroll;
+		display = updateDisplay();
+		return true;
+	}
+
+	private override function updateDisplay():String
+	{
+		return "Downscroll ";
 	}
 }

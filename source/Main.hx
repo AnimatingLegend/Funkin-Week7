@@ -23,8 +23,12 @@ class Main extends Sprite
 
 	public static function setupSaveData()
 		{
+			if(FlxG.save.data.downscroll == null)
+				FlxG.save.data.downscroll = false;
+
 			if(FlxG.save.data.fps == null)
 				FlxG.save.data.fps = true;
+			
 			if(FlxG.save.data.fullscreen == null)
 				FlxG.save.data.fullscreen = false;
 		}

@@ -26,8 +26,10 @@ class OptionsMenuState extends MusicBeatState
 		new OptionCatagory("Preferences", [
 			new FPSOption(),
 			new FullscreenOption(),
+			new DownscrollOption(),
 		]),
 		new OptionCatagory("Controls",[]),
+		new OptionCatagory("Login", []),
 		new OptionCatagory("Exit",[]),
 	];
 	
@@ -63,9 +65,9 @@ class OptionsMenuState extends MusicBeatState
 		for (i in 0...options.length)
 		{
 			var controlLabel:Alphabet = new Alphabet(0, (100 * i) + 105, options[i].getName(), true, false);
+			controlLabel.screenCenter();
+			controlLabel.y += (100 * (i - (options.length / 2))) + 50;
 			grpControls.add(controlLabel);
-
-			// DONT PUT X IN THE FIRST PARAMETER OF new ALPHABET() !!
 		}
 
 		FlxG.camera.follow(camFollow, null, 0.06);
@@ -110,9 +112,7 @@ class OptionsMenuState extends MusicBeatState
 			});
 		}
 
-			if (controls.BACK && !isCat)
-				FlxG.switchState(new MainMenuState());
-			else if (controls.BACK)
+			if (controls.BACK)
 			{
 				isCat = false;
 				grpControls.clear();
@@ -121,8 +121,6 @@ class OptionsMenuState extends MusicBeatState
 			        
 					remove(checkBoxesArray[i]);
 					checkBoxesArray[i].destroy();
-					
-				    
 				}
 				
 				checkBoxesArray = [];
@@ -130,6 +128,8 @@ class OptionsMenuState extends MusicBeatState
 				for (i in 0...options.length)
 					{
 						var controlLabel:Alphabet = new Alphabet(0, (100 * i) + 105, options[i].getName(), true, false);
+						controlLabel.screenCenter();
+						controlLabel.y += (100 * (i - (options.length / 2))) + 50;
 						grpControls.add(controlLabel);
 						// DONT PUT X IN THE FIRST PARAMETER OF new ALPHABET() !!
 					}
@@ -186,7 +186,17 @@ class OptionsMenuState extends MusicBeatState
                         if(options[curSelected].getName() == "Controls")
 						{
 							FlxG.switchState(new ControlsSubState());
+
 						}
+						else if(options[curSelected].getName() == 'Login')
+						{
+							
+							#if linux
+							Sys.command('/usr/bin/xdg-open', ["https://www.newgrounds.com/login", "&"]);
+							#else
+							FlxG.openURL('https://www.newgrounds.com/login');
+							#end
+						}	
 						else if(options[curSelected].getName() == "Exit")
 						{
 							FlxG.switchState(new MainMenuState());
@@ -228,7 +238,8 @@ class OptionsMenuState extends MusicBeatState
 					grpControls.add(ctrl);
 					ctrl.isMenuItem = true;
 				}
-			}else if (controls.RIGHT_P && isCat)
+			}
+			else if (controls.RIGHT_P && isCat)
 			{
 				if(currentSelectedCat.getOptions()[curSelected].right())
 				{
@@ -270,7 +281,7 @@ class OptionsMenuState extends MusicBeatState
 		// NGio.logEvent("Fresh");
 		#end
 		
-		FlxG.sound.play(Paths.sound("scrollMenu"), 0.4, false);
+		FlxG.sound.play(Paths.sound("scrollMenu"), 0.5, false);
 
 		curSelected += change;
 
@@ -281,8 +292,6 @@ class OptionsMenuState extends MusicBeatState
 
 		camFollow.screenCenter();
 
-		// selector.y = (70 * curSelected) + 30;
-
 		var bullShit:Int = 0;
 
 		for (item in grpControls.members)
@@ -291,12 +300,10 @@ class OptionsMenuState extends MusicBeatState
 			bullShit++;
 
 			item.alpha = 0.6;
-			// item.setGraphicSize(Std.int(item.width * 0.8));
 
 			if (item.targetY == 0)
 			{
 				item.alpha = 1;
-				// item.setGraphicSize(Std.int(item.width));
 			}
 			
 		}		
