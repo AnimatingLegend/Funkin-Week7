@@ -3,7 +3,7 @@ BIG MAJOR THINGS I NEED TODO, BUT DONT KNOW HOW TO DO:
 - Cutscene Handler [For Week7 Songs]
 - Pico Shoot, & Tankmen running/getting shot during each beat
 - Make tank move in the back also every 10-20 seconds
-- Tankman's gameover lines
+- Tankman's gameover lines [DONE]
 - Week 7 stage layering [FIXED/DONE]
 
 MISC THINGS
