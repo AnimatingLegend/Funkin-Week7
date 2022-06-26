@@ -6,6 +6,7 @@ import flixel.FlxSubState;
 import flixel.math.FlxPoint;
 import flixel.util.FlxColor;
 import flixel.util.FlxTimer;
+import lime.utils.Assets;
 
 class GameOverSubstate extends MusicBeatSubstate
 {
@@ -31,6 +32,11 @@ class GameOverSubstate extends MusicBeatSubstate
 			default:
 				daBf = 'bf';
 		}
+
+		if(stageSuffix == 'warzone' && 'warzone-stress')
+		{
+			FlxG.sound.play(Paths.sound('assets/week7/sounds/jeffGameover'));
+		}	
 
 		super();
 
@@ -66,6 +72,7 @@ class GameOverSubstate extends MusicBeatSubstate
 		if (controls.BACK)
 		{
 			FlxG.sound.music.stop();
+			PlayState.deathCounter = 0;
 
 			if (PlayState.isStoryMode)
 				FlxG.switchState(new StoryMenuState());
