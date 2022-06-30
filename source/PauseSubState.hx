@@ -18,7 +18,9 @@ class PauseSubState extends MusicBeatSubstate
 {
 	var grpMenuShit:FlxTypedGroup<Alphabet>;
 
-	var menuItems:Array<String> = ['Resume', 'Restart Song', 'Exit to menu'];
+	var menuItems:Array<String> = ['Resume', 'Restart Song', 'Change Difficulty', 'Exit to menu'];
+	var menuItemsALT:Array<String> = ['Resume', 'Restart Song', 'Change Difficulty', 'Exit to menu'];
+	var difficultyChoices:Array<String> = ["Easy", "Normal", "Hard", "Back"];
 	var curSelected:Int = 0;
 
 	var pauseMusic:FlxSound;
@@ -118,6 +120,31 @@ class PauseSubState extends MusicBeatSubstate
 					close();
 				case "Restart Song":
 					FlxG.resetState();
+				case "Change Difficulty":
+					menuItems = difficultyChoices;
+					regenMenu();
+				case "Easy":
+					PlayState.SONG = Song.loadFromJson(PlayState.SONG.song.toLowerCase() + "-easy", PlayState.SONG.song.toLowerCase());
+					PlayState.storyDifficulty = 0;
+						
+					FlxG.switchState(new PlayState());
+						
+				case "Normal":
+					PlayState.SONG = Song.loadFromJson(PlayState.SONG.song.toLowerCase(), PlayState.SONG.song.toLowerCase());
+					PlayState.storyDifficulty = 1;
+						
+					FlxG.switchState(new PlayState());
+						
+				case "Hard":
+					PlayState.SONG = Song.loadFromJson(PlayState.SONG.song.toLowerCase() + "-hard", PlayState.SONG.song.toLowerCase());
+					PlayState.storyDifficulty = 2;
+						
+					FlxG.switchState(new PlayState());
+						
+				case "Back":
+					menuItems = menuItemsALT;
+					regenMenu();
+
 				case "Exit to menu":
 					if (PlayState.isStoryMode)
 						FlxG.switchState(new StoryMenuState());
@@ -138,6 +165,23 @@ class PauseSubState extends MusicBeatSubstate
 		pauseMusic.destroy();
 
 		super.destroy();
+	}
+
+	function regenMenu() 
+	{
+			
+		grpMenuShit.clear();
+				
+		for (a in 0 ... menuItems.length) 
+		{
+			var songText:Alphabet = new Alphabet(0, (70 * a) + 30, menuItems[a], true, false);
+			songText.isMenuItem = true;
+			songText.targetY = a;
+			grpMenuShit.add(songText);
+		} 
+			
+		curSelected = 0;
+		changeSelection();
 	}
 
 	function changeSelection(change:Int = 0):Void
