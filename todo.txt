@@ -1,6 +1,6 @@
 BIG MAJOR THINGS I NEED TODO, BUT DONT KNOW HOW TO DO:
 
-- Cutscene Handler [For Week7 Songs]
+- Cutscene Handler [For Week7 Songs] [DONE, But still a WIP]
 - Pico Shoot, & Tankmen running/getting shot during each beat
 - Make tank move in the back also every 10-20 seconds
 - Tankman's gameover lines [DONE, But still a WIP]
@@ -8,5 +8,5 @@ BIG MAJOR THINGS I NEED TODO, BUT DONT KNOW HOW TO DO:
 
 MISC THINGS
 - Update freeplay menu [DONE]
-- Update Options menu [DONE, But still a WIP]
-- Update/Fix Note Inputs [FIXED, But still a WIP]
+- Update Options menu [DONE]
+- Update/Fix Note Inputs [DONE/FIXED, But still a WIP]

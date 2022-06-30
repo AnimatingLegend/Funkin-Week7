@@ -32,30 +32,12 @@ class GameOverSubstate extends MusicBeatSubstate
 				daBf = 'bf';
 		}
 
-		if (daStage == 'warzone-stress')
-			{            
-				var exclude:Array<Int> = [];
-				// coolStartDeath(0.2);
-
-				new FlxTimer().start(2.5, function(tmr:FlxTimer)
-				{
-					FlxG.sound.play(Paths.sound('jeffGameover/jeffGameover-' + FlxG.random.int(1, 25, exclude)), 1, false, null, true, function() 
-						{
-							if(!isEnding)
-							{
-								FlxG.sound.music.fadeIn(0.2, 1, 4);
-							}
-						});
-				});	
-			}
-
 		super();
 
 		Conductor.songPosition = 0;
 
 		bf = new Boyfriend(x, y, daBf);
 		add(bf);
-
 
 		camFollow = new FlxObject(bf.getGraphicMidpoint().x, bf.getGraphicMidpoint().y, 1, 1);
 		add(camFollow);
@@ -82,9 +64,9 @@ class GameOverSubstate extends MusicBeatSubstate
 
 		if (controls.BACK)
 		{
-			FlxG.sound.music.stop();
 			PlayState.deathCounter = 0;
-
+			FlxG.sound.music.stop();
+		
 			if (PlayState.isStoryMode)
 				FlxG.switchState(new StoryMenuState());
 			else
@@ -96,9 +78,25 @@ class GameOverSubstate extends MusicBeatSubstate
 			FlxG.camera.follow(camFollow, LOCKON, 0.01);
 		}
 
-		if (bf.animation.curAnim.name == 'firstDeath' && bf.animation.curAnim.finished)
+	/*	if (bf.animation.curAnim.name == 'firstDeath' && bf.animation.curAnim.finished)
 		{
 			FlxG.sound.playMusic(Paths.music('gameOver' + stageSuffix));
+		}
+	*/	
+		var daStage = PlayState.curStage;
+
+		if (bf.animation.curAnim.name == 'firstDeath' && bf.animation.curAnim.finished)
+		{
+				FlxG.sound.playMusic(Paths.music('gameOver' + stageSuffix));
+				
+				if (daStage == 'warzone' || daStage == 'warzone-stress')
+				{	
+					new FlxTimer().start(0.2, function(tmr:FlxTimer)
+					{
+						FlxG.sound.play(Paths.sound('jeffGameover/jeffGameover-' + FlxG.random.int(1, 25)));
+						FlxG.sound.music.fadeIn(0.2, 1, 4);
+					});	
+				}
 		}
 
 		if (FlxG.sound.music.playing)
@@ -115,12 +113,6 @@ class GameOverSubstate extends MusicBeatSubstate
 	}
 */
 	var isEnding:Bool = false;
-
-/*	function coolStartDeath(?volume:Float = 1):Void
-		{
-			FlxG.sound.playMusic(Paths.music('gameOver' + stageSuffix), volume);
-		}
-*/
 
 	function endBullshit():Void
 	{
