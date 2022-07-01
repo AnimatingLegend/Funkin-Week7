@@ -27,6 +27,7 @@ class OptionsMenuState extends MusicBeatState
 			new FPSOption(),
 			new FullscreenOption(),
 			new DownscrollOption(),
+			new GhostTappingOption(),
 		]),
 		new OptionCatagory("Controls",[]),
 		new OptionCatagory("Login", []),
@@ -177,7 +178,6 @@ class OptionsMenuState extends MusicBeatState
 						ctrl.isMenuItem = true;
 						checkBoxesArray[curSelected].sprTracker = grpControls.members[curSelected];
 						checkBoxesArray[curSelected].set_daValue(currentSelectedCat.getOptions()[curSelected].getAccept());
-						//updateCheckboxes();
 					}
 				}
 				else
@@ -276,11 +276,7 @@ class OptionsMenuState extends MusicBeatState
 	}
 
 	function changeSelection(change:Int = 0)
-	{
-		#if !switch
-		// NGio.logEvent("Fresh");
-		#end
-		
+	{	
 		FlxG.sound.play(Paths.sound("scrollMenu"), 0.5, false);
 
 		curSelected += change;

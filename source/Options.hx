@@ -123,6 +123,28 @@ class FullscreenOption extends Option
 
 }
 
+class GhostTappingOption extends Option
+{
+	public function new()
+	{
+		super();
+	}
+
+	public override function press(changeData:Bool):Bool
+	{
+		if(changeData)
+			FlxG.save.data.ghostTapping = !FlxG.save.data.ghostTapping;
+		acceptValues = FlxG.save.data.ghostTapping;
+		display = updateDisplay();
+		return true;
+	}
+
+	private override function updateDisplay():String
+	{
+		return "GhostTapping ";
+	}
+}
+
 class DownscrollOption extends Option
 {
 	public function new()

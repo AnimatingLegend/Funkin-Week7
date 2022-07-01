@@ -1945,7 +1945,7 @@ class PlayState extends MusicBeatState
 					daNote.kill();
 					notes.remove(daNote, true);
 					daNote.destroy();
-				}	
+				}
 			});
 		}
 
@@ -2084,20 +2084,18 @@ class PlayState extends MusicBeatState
 		}
 
 		rating.loadGraphic(Paths.image(pixelShitPart1 + daRating + pixelShitPart2));
-	//	rating.cameras = [camHUD];
 		rating.screenCenter();
 		rating.x = coolText.x - 40;
-		rating.y += 50;
+		rating.y -= 60;	
 		rating.acceleration.y = 550;
 		rating.velocity.y -= FlxG.random.int(140, 175);
 		rating.velocity.x += FlxG.random.int(0, 10);
 		add(rating);
 
 		var comboSpr:FlxSprite = new FlxSprite().loadGraphic(Paths.image(pixelShitPart1 + 'combo' + pixelShitPart2));
-	//	comboSpr.cameras = [camHUD];
 		comboSpr.screenCenter();
 		comboSpr.x = coolText.x + 55;
-		comboSpr.y += 180;
+		comboSpr.y += 50;
 		comboSpr.acceleration.y = 550;
 		comboSpr.velocity.y -= 150;
 		comboSpr.velocity.x += FlxG.random.int(1, 10);
@@ -2128,10 +2126,9 @@ class PlayState extends MusicBeatState
 		for (i in seperatedScore)
 		{
 			var numScore:FlxSprite = new FlxSprite().loadGraphic(Paths.image(pixelShitPart1 + 'num' + Std.int(i) + pixelShitPart2));
-		//	numScore.cameras = [camHUD];
 			numScore.screenCenter();
 			numScore.x = coolText.x + (43 * daLoop) - 90;
-			numScore.y += 180;
+			numScore.y += 80;
 
 			if (!curStage.startsWith('school'))
 			{
@@ -2257,8 +2254,6 @@ class PlayState extends MusicBeatState
 									if (controlArray[ignoreList[shit]])
 										inIgnoreList = true;
 								}
-								/*if (!inIgnoreList)
-									badNoteCheck();*/
 							}
 						}
 					}
@@ -2282,7 +2277,15 @@ class PlayState extends MusicBeatState
 			}
 			else
 			{
-				badNoteCheck();
+				if(FlxG.save.data.ghostTapping)
+				{
+					//badNoteCheck();
+				}
+				else
+				{
+					badNoteCheck();
+				}	
+					
 			}
 		}
 

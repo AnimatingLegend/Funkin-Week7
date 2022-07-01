@@ -31,6 +31,9 @@ class Main extends Sprite
 			
 			if(FlxG.save.data.fullscreen == null)
 				FlxG.save.data.fullscreen = false;
+
+			if(FlxG.save.data.ghostTapping == null)
+				FlxG.save.data.ghostTapping = false;
 		}
 
 	public static function main():Void
