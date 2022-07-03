@@ -18,8 +18,8 @@ class PauseSubState extends MusicBeatSubstate
 {
 	var grpMenuShit:FlxTypedGroup<Alphabet>;
 
-	var menuItems:Array<String> = ['Resume', 'Restart Song', 'Change Difficulty', 'Exit to menu'];
-	var menuItemsALT:Array<String> = ['Resume', 'Restart Song', 'Change Difficulty', 'Exit to menu'];
+	var menuItems:Array<String> = ['Resume', 'Restart Song', 'Change Difficulty', 'Options', 'Exit to menu'];
+	var menuItemsALT:Array<String> = ['Resume', 'Restart Song', 'Change Difficulty', 'Options', 'Exit to menu'];
 	var difficultyChoices:Array<String> = ["Easy", "Normal", "Hard", "Back"];
 	var curSelected:Int = 0;
 
@@ -140,7 +140,11 @@ class PauseSubState extends MusicBeatSubstate
 					PlayState.storyDifficulty = 2;
 						
 					FlxG.switchState(new PlayState());
-						
+				
+				case "Options":
+					FlxG.switchState(new OptionsMenuState());
+					OptionsMenuState.ingame = true;	
+					
 				case "Back":
 					menuItems = menuItemsALT;
 					regenMenu();

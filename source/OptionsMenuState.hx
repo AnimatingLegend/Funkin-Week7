@@ -22,6 +22,8 @@ class OptionsMenuState extends MusicBeatState
 	var selector:FlxText;
 	var curSelected:Int = 0;
 
+	public static var ingame:Bool = false;
+
 	var options:Array<OptionCatagory> = [
 		new OptionCatagory("Preferences", [
 			new FPSOption(),
@@ -200,7 +202,12 @@ class OptionsMenuState extends MusicBeatState
 						}	
 						else if(options[curSelected].getName() == "Exit")
 						{
-							FlxG.switchState(new MainMenuState());
+
+							if (ingame)
+								FlxG.switchState(new PlayState());
+							else
+								FlxG.switchState(new MainMenuState());
+
 							FlxG.sound.play(Paths.sound("cancelMenu"), false);
 						}
 						else
