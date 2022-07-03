@@ -56,6 +56,7 @@ class PlayState extends MusicBeatState
 	public static var storyDifficulty:Int = 1;
 
 	public var noteData:Int = 0;
+	public var grpNoteSplashes:FlxTypedGroup<NoteSplash>;
 
 	var halloweenLevel:Bool = false;
 
@@ -171,6 +172,10 @@ class PlayState extends MusicBeatState
 
 		FlxG.cameras.reset(camGame);
 		FlxG.cameras.add(camHUD);
+
+		grpNoteSplashes = new FlxTypedGroup<NoteSplash>();
+		var noteSplash0:NoteSplash = new NoteSplash(100, 100, 0);
+		grpNoteSplashes.add(noteSplash0);
 
 
 		FlxCamera.defaultCameras = [camGame];
@@ -918,6 +923,7 @@ class PlayState extends MusicBeatState
 
 		strumLineNotes = new FlxTypedGroup<FlxSprite>();
 		add(strumLineNotes);
+		add(grpNoteSplashes);
 
 		playerStrums = new FlxTypedGroup<FlxSprite>();
 
@@ -974,6 +980,7 @@ class PlayState extends MusicBeatState
 		add(iconP2);
 
 		strumLineNotes.cameras = [camHUD];
+		grpNoteSplashes.cameras = [camHUD];
 		notes.cameras = [camHUD];
 		healthBar.cameras = [camHUD];
 		healthBarBG.cameras = [camHUD];
@@ -2040,7 +2047,7 @@ class PlayState extends MusicBeatState
 
 	var endingSong:Bool = false;
 
-	private function popUpScore(strumtime:Float):Void
+	private function popUpScore(strumtime:Float, note:Note):Void
 	{
 		var noteDiff:Float = Math.abs(strumtime - Conductor.songPosition);
 		vocals.volume = 1;
@@ -2053,23 +2060,31 @@ class PlayState extends MusicBeatState
 
 		var rating:FlxSprite = new FlxSprite();
 		var score:Int = 350;
-
 		var daRating:String = "sick";
 
-		if (noteDiff > Conductor.safeZoneOffset * 0.9)
+		if (noteDiff <= Conductor.safeZoneOffset * 0.23)
 		{
-			daRating = 'shit';
-			score = 50;
+			daRating = 'sick';
+			if(FlxG.save.data.notesplash)
+				createNoteSplash(note);
+			else
+				createNoteSplash(note);
+			score = 350;
 		}
-		else if (noteDiff > Conductor.safeZoneOffset * 0.75)
-		{
-			daRating = 'bad';
-			score = 100;
-		}
-		else if (noteDiff > Conductor.safeZoneOffset * 0.2)
+		else if (noteDiff <= Conductor.safeZoneOffset * 0.7)
 		{
 			daRating = 'good';
 			score = 200;
+		}
+		else if (noteDiff <= Conductor.safeZoneOffset * 0.2)
+		{
+			daRating = 'bad';
+			score = 100;
+		}	
+		else
+		{
+			daRating = 'shit';
+			score = 50;
 		}
 
 		songScore += score;
@@ -2474,7 +2489,7 @@ class PlayState extends MusicBeatState
 		{
 			if (!note.isSustainNote)
 			{
-				popUpScore(note.strumTime);
+				popUpScore(note.strumTime, note);
 				combo += 1;
 			}
 
@@ -2513,6 +2528,13 @@ class PlayState extends MusicBeatState
 				note.destroy();
 			}
 		}
+	}
+
+	private function createNoteSplash(note:Note):Void
+	{
+		var splashShit:NoteSplash = grpNoteSplashes.recycle(NoteSplash);
+		splashShit.setupNoteSplash(note.x, note.y, note.noteData);
+		grpNoteSplashes.add(splashShit);
 	}
 
 	var fastCarCanDrive:Bool = true;

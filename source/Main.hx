@@ -34,6 +34,9 @@ class Main extends Sprite
 
 			if(FlxG.save.data.ghostTapping == null)
 				FlxG.save.data.ghostTapping = false;
+
+			if(FlxG.save.data.notesplash == null)
+				FlxG.save.data.notesplash = false;
 		}
 
 	public static function main():Void

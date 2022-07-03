@@ -166,3 +166,25 @@ class DownscrollOption extends Option
 		return "Downscroll ";
 	}
 }
+
+class NotesplashOption extends Option
+{
+	public function new()
+	{
+		super();
+	}
+
+	public override function press(changeData:Bool):Bool
+	{
+		if(changeData)
+			FlxG.save.data.notesplash = !FlxG.save.data.notesplash;
+		acceptValues = FlxG.save.data.notesplash;
+		display = updateDisplay();
+		return true;
+	}
+
+	private override function updateDisplay():String
+	{
+		return "Note Splashes ";
+	}
+}

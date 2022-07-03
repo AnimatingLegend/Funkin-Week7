@@ -10,3 +10,4 @@ MISC THINGS
 - Update freeplay menu [DONE]
 - Update Options menu [DONE]
 - Update/Fix Note Inputs [DONE/FIXED, But still a WIP]
+- Add NoteSplashes [DONE]
