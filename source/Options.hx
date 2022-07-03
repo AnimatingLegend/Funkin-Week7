@@ -141,7 +141,7 @@ class GhostTappingOption extends Option
 
 	private override function updateDisplay():String
 	{
-		return "GhostTapping ";
+		return "Ghost Tapping ";
 	}
 }
 
@@ -185,6 +185,6 @@ class NotesplashOption extends Option
 
 	private override function updateDisplay():String
 	{
-		return "Note Splashes ";
+		return "NoteSplashes ";
 	}
 }
