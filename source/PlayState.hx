@@ -2068,7 +2068,7 @@ class PlayState extends MusicBeatState
 			if(FlxG.save.data.notesplash)
 				createNoteSplash(note);
 			else
-				createNoteSplash(note);
+				// createNoteSplash(note);
 			score = 350;
 		}
 		else if (noteDiff <= Conductor.safeZoneOffset * 0.7)
