@@ -14,8 +14,6 @@ Play the Newgrounds one here: https://www.newgrounds.com/portal/view/770371
 
 Support the project on my itch.io page: https://ninja-muffin24.itch.io/funkin
 
-IF YOU MAKE A MOD AND DISTRIBUTE A MODIFIED / RECOMPILED VERSION, YOU MUST OPEN SOURCE YOUR MOD AS WELL
-
 ## Credits / shoutouts
 
 - [ninjamuffin99](https://twitter.com/ninja_muffin99) - Programmer
@@ -32,7 +30,7 @@ THESE INSTRUCTIONS ARE FOR COMPILING THE GAME'S SOURCE CODE!!!
 
 IF YOU WANT TO JUST DOWNLOAD AND INSTALL AND PLAY THE GAME NORMALLY, GO TO ITCH.IO TO DOWNLOAD THE GAME FOR PC, MAC, AND LINUX!!
 
-[Itch.io](https://ninja-muffin24.itch.io/funkin) | [The Kickstarter](https://www.kickstarter.com/projects/funkin/friday-night-funkin-the-full-ass-game)
+[Itch.io](https://ninja-muffin24.itch.io/funkin)
 
 IF YOU WANT TO COMPILE THE GAME YOURSELF, CONTINUE READING!!!
 
