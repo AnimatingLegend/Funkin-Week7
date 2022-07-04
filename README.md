@@ -9,7 +9,9 @@ I just want to say i dont own any rights to these assets or songs, let alone som
 ## Support Friday Night Funkin'
 
 Play the Ludum Dare prototype here: https://ninja-muffin24.itch.io/friday-night-funkin
+
 Play the Newgrounds one here: https://www.newgrounds.com/portal/view/770371
+
 Support the project on my itch.io page: https://ninja-muffin24.itch.io/funkin
 
 IF YOU MAKE A MOD AND DISTRIBUTE A MODIFIED / RECOMPILED VERSION, YOU MUST OPEN SOURCE YOUR MOD AS WELL
