@@ -137,10 +137,6 @@ class TitleState extends MusicBeatState
 			FlxG.sound.music.fadeIn(4, 0, 0.7);
 		}
 
-		#if debug
-		initialized = true;
-		#end
-
 		Conductor.changeBPM(102);
 		persistentUpdate = true;
 
@@ -293,7 +289,7 @@ class TitleState extends MusicBeatState
 			});
 		}
 
-		if (pressedEnter && !skippedIntro)
+		if (pressedEnter && !skippedIntro && initialized)
 		{
 			skipIntro();
 		}

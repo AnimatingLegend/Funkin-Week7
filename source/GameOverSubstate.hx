@@ -14,22 +14,24 @@ class GameOverSubstate extends MusicBeatSubstate
 
 	var stageSuffix:String = "";
 
+	var randomGameover:Int = 1;
+	var playingDeathSound:Bool = false;
+
 	public function new(x:Float, y:Float)
 	{
 		var daStage = PlayState.curStage;
 		var daBf:String = '';
 		switch (daStage)
 		{
-			case 'school':
+			case 'school' | 'schoolEvil':
 				stageSuffix = '-pixel';
 				daBf = 'bf-pixel-dead';
-			case 'schoolEvil':
-				stageSuffix = '-pixel';
-				daBf = 'bf-pixel-dead';
-			case 'warzone-stress':
-				daBf = 'bf-holding-gf-DEAD';	
 			default:
 				daBf = 'bf';
+		}
+		if (PlayState.SONG.song.toLowerCase() == 'stress')
+		{
+			daBf = 'bf-holding-gf-dead';
 		}
 
 		super();
@@ -51,6 +53,10 @@ class GameOverSubstate extends MusicBeatSubstate
 		FlxG.camera.target = null;
 
 		bf.playAnim('firstDeath');
+
+		var exclude = [];
+		
+		randomGameover = FlxG.random.int(1, 25, exclude);
 	}
 
 	override function update(elapsed:Float)
@@ -65,8 +71,10 @@ class GameOverSubstate extends MusicBeatSubstate
 		if (controls.BACK)
 		{
 			PlayState.deathCounter = 0;
+		//	PlayState.seenCutscene = false;
+
 			FlxG.sound.music.stop();
-		
+
 			if (PlayState.isStoryMode)
 				FlxG.switchState(new StoryMenuState());
 			else
@@ -78,25 +86,23 @@ class GameOverSubstate extends MusicBeatSubstate
 			FlxG.camera.follow(camFollow, LOCKON, 0.01);
 		}
 
-	/*	if (bf.animation.curAnim.name == 'firstDeath' && bf.animation.curAnim.finished)
+		if (PlayState.storyWeek == 7)
 		{
-			FlxG.sound.playMusic(Paths.music('gameOver' + stageSuffix));
+			if (bf.animation.curAnim.name == 'firstDeath' && bf.animation.curAnim.finished && !playingDeathSound)
+			{
+				playingDeathSound = true;
+				bf.startedDeath = true;
+				coolStartDeath(0.2);
+				FlxG.sound.play(Paths.sound('jeffGameover/jeffGameover-' + randomGameover), 1, false, null, true, function()
+				{
+					FlxG.sound.music.fadeIn(4, 0.2, 1);
+				});
+			}
 		}
-	*/	
-		var daStage = PlayState.curStage;
-
-		if (bf.animation.curAnim.name == 'firstDeath' && bf.animation.curAnim.finished)
+		else if (bf.animation.curAnim.name == 'firstDeath' && bf.animation.curAnim.finished)
 		{
-				FlxG.sound.playMusic(Paths.music('gameOver' + stageSuffix));
-				
-				if (daStage == 'warzone' || daStage == 'warzone-stress')
-				{	
-					new FlxTimer().start(0.2, function(tmr:FlxTimer)
-					{
-						FlxG.sound.play(Paths.sound('jeffGameover/jeffGameover-' + FlxG.random.int(1, 25)));
-						FlxG.sound.music.fadeIn(0.2, 1, 4);
-					});	
-				}
+			bf.startedDeath = true;
+			coolStartDeath();
 		}
 
 		if (FlxG.sound.music.playing)
@@ -105,13 +111,18 @@ class GameOverSubstate extends MusicBeatSubstate
 		}
 	}
 
-/*	override function beatHit()
+	function coolStartDeath(startVol:Float = 1)
+	{
+		FlxG.sound.playMusic(Paths.music('gameOver' + stageSuffix), startVol);
+	}
+
+	override function beatHit()
 	{
 		super.beatHit();
 
 		FlxG.log.add('beat');
 	}
-*/
+
 	var isEnding:Bool = false;
 
 	function endBullshit():Void

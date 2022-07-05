@@ -59,8 +59,7 @@ class VideoState extends MusicBeatState
         if (FlxG.game.contains(video))
             FlxG.game.removeChild(video);
          #end
-    
-     // TitleState.initialized = true;
+
         FlxG.switchState(new TitleState());
     }
 

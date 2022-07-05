@@ -1,6 +1,7 @@
 package;
 
 import flixel.FlxG;
+import Section.SwagSection;
 import flixel.FlxSprite;
 import flixel.animation.FlxBaseAnimation;
 import flixel.graphics.frames.FlxAtlasFrames;
@@ -16,6 +17,8 @@ class Character extends FlxSprite
 	public var curCharacter:String = 'bf';
 
 	public var holdTimer:Float = 0;
+
+	public var animationNotes:Array<Dynamic> = [];
 
 	public function new(x:Float, y:Float, ?character:String = "bf", ?isPlayer:Bool = false)
 	{
@@ -152,6 +155,8 @@ class Character extends FlxSprite
 				addOffset('shoot4', 439, -19);
 	
 				playAnim('shoot1');
+
+				loadMappedAnims();
 
 			case 'dad':
 				// DAD ANIMATION LOADING CODE
@@ -676,6 +681,26 @@ class Character extends FlxSprite
 		}
 	}
 
+	function loadMappedAnims()
+	{
+		var sections:Array<SwagSection> = Song.loadFromJson('picospeaker', 'stress').notes;
+		for (section in sections)
+		{
+			for (note in section.sectionNotes)
+			{
+				animationNotes.push(note);
+			}
+		}
+		TankmenBG.animationNotes = animationNotes;
+		trace(animationNotes);
+		animationNotes.sort(sortAnims);
+	}
+
+	function sortAnims(x, y)
+	{
+		return x[0] < y[0] ? -1 : x[0] > y[0] ? 1 : 0;
+	}
+
 	override function update(elapsed:Float)
 	{
 		if (!curCharacter.startsWith('bf'))
@@ -684,9 +709,9 @@ class Character extends FlxSprite
 			{
 				holdTimer += elapsed;
 			}
-
+	
 			var dadVar:Float = 4;
-
+	
 			if (curCharacter == 'dad')
 				dadVar = 6.1;
 			if (holdTimer >= Conductor.stepCrochet * dadVar * 0.001)
@@ -695,15 +720,33 @@ class Character extends FlxSprite
 				holdTimer = 0;
 			}
 		}
-
-		switch (curCharacter)
-		{
-			case 'gf':
-				if (animation.curAnim.name == 'hairFall' && animation.curAnim.finished)
-					playAnim('danceRight');
-		}
-
-		super.update(elapsed);
+		
+			switch (curCharacter)
+			{
+				case 'gf':
+					if (animation.curAnim.name == 'hairFall' && animation.curAnim.finished)
+						playAnim('danceRight');
+				case 'pico-speaker':
+					if (animationNotes.length > 0 && Conductor.songPosition > animationNotes[0][0])
+					{
+						trace("played shoot anim" + animationNotes[0][1]);
+						var shotDirection:Int = 1;
+						if (animationNotes[0][1] >= 2)
+						{
+							shotDirection = 3;
+						}
+						shotDirection += FlxG.random.int(0, 1);
+						
+						playAnim('shoot' + shotDirection, true);
+						animationNotes.shift();
+					}
+					if (animation.curAnim.finished)
+					{
+						playAnim(animation.curAnim.name, false, false, animation.curAnim.frames.length - 3);
+					}
+			}
+	
+			super.update(elapsed);
 	}
 
 	private var danced:Bool = false;
@@ -711,89 +754,36 @@ class Character extends FlxSprite
 	/**
 	 * FOR GF DANCING SHIT
 	 */
-	public function dance()
-	{
-		if (!debugMode)
+	 public function dance()
 		{
-			switch (curCharacter)
+			if (!debugMode)
 			{
-				case 'gf':
-					if (!animation.curAnim.name.startsWith('hair'))
-					{
-						danced = !danced;
-
-						if (danced)
-							playAnim('danceRight');
-						else
-							playAnim('danceLeft');
-					}
-
-				case 'gf-christmas':
-					if (!animation.curAnim.name.startsWith('hair'))
-					{
-						danced = !danced;
-
-						if (danced)
-							playAnim('danceRight');
-						else
-							playAnim('danceLeft');
-					}
-
-				case 'gf-car':
-					if (!animation.curAnim.name.startsWith('hair'))
-					{
-						danced = !danced;
-
-						if (danced)
-							playAnim('danceRight');
-						else
-							playAnim('danceLeft');
-					}
-				case 'gf-pixel':
-					if (!animation.curAnim.name.startsWith('hair'))
-					{
-						danced = !danced;
-
-						if (danced)
-							playAnim('danceRight');
-						else
-							playAnim('danceLeft');
-					}
-
-				case 'gf-tankmen':
-					if (!animation.curAnim.name.startsWith('hair'))
-					{
+				switch (curCharacter)
+				{
+					case 'gf' | 'gf-car' | 'gf-christmas' | 'gf-pixel' | 'gf-tankmen':
+						if (!animation.curAnim.name.startsWith('hair'))
+						{
+							danced = !danced;
+	
+							if (danced)
+								playAnim('danceRight');
+							else
+								playAnim('danceLeft');
+						}
+					case 'pico-speaker':
+						// do nothing LOL
+					case 'spooky':
 						danced = !danced;
 	
 						if (danced)
 							playAnim('danceRight');
 						else
 							playAnim('danceLeft');
-					}
-
-				case 'pico-speaker':
-					if (!animation.curAnim.name.startsWith('hair'))
-					{
-						danced = !danced;
-	
-						if (danced)
-							playAnim('idle');
-						else
-							playAnim('idle');
-					}
-
-				case 'spooky':
-					danced = !danced;
-
-					if (danced)
-						playAnim('danceRight');
-					else
-						playAnim('danceLeft');
-				default:
-					playAnim('idle');
+					default:
+						playAnim('idle');
+				}
 			}
 		}
-	}
 
 	public function playAnim(AnimName:String, Force:Bool = false, Reversed:Bool = false, Frame:Int = 0):Void
 	{

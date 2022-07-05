@@ -1,15 +1,16 @@
 TODO:
-- Pico Shoot, & Tankmen running/getting shot during each beat
-- Make tank move in the back also every 10-20 seconds
-- Week 7 Stage Re-code [make everything readable and clean]
+N/A
+
 
 DOING:
-Week 7 Stage Re-code
+- Pico Shoot, & Tankmen running/getting shot during each beat
 
 COMPLETED:
-Update freeplay menu
-Update Options menu 
-Add NoteSplashes
-Week 7 stage layering
-Tankman's gameover lines
-Cutscene Handler
+- Update freeplay menu
+- Update Options menu 
+- Add NoteSplashes
+- Week 7 stage layering
+- Tankman's gameover lines
+- Cutscene Handler
+- Make tank move in the back also every 10-20 seconds
+- Week 7 Stage Re-code
