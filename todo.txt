@@ -3,7 +3,7 @@ N/A
 
 
 DOING:
-- Pico Shoot, & Tankmen running/getting shot during each beat
+- Pico Shoot, & Tankmen running/getting shot during each beat [Practically complete, but more needs to be worked on.]
 
 COMPLETED:
 - Update freeplay menu
