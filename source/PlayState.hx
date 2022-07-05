@@ -1271,7 +1271,12 @@ class PlayState extends MusicBeatState
 
 	function sortByShit(Obj1:Note, Obj2:Note):Int
 	{
-		return FlxSort.byValues(FlxSort.ASCENDING, Obj1.strumTime, Obj2.strumTime);
+		return sortNotes(FlxSort.ASCENDING, Obj1, Obj2);
+	}
+
+	function sortNotes(Sort:Int = FlxSort.ASCENDING, Obj1:Note, Obj2:Note):Int
+	{
+		return Obj1.strumTime < Obj2.strumTime ? Sort : Obj1.strumTime > Obj2.strumTime ? -Sort : 0;
 	}
 
 	private function generateStaticArrows(player:Int):Void
@@ -1362,10 +1367,6 @@ class PlayState extends MusicBeatState
 				babyArrow.alpha = 0;
 				FlxTween.tween(babyArrow, {y: babyArrow.y + 10, alpha: 1}, 1, {ease: FlxEase.circOut, startDelay: 0.5 + (0.2 * i)});
 			}
-			else
-			{
-				babyArrow.alpha = 0.4;
-			}	
 
 			babyArrow.ID = i;
 
@@ -2590,9 +2591,12 @@ class PlayState extends MusicBeatState
 		super.beatHit();
 
 		if (generatedMusic)
-		{
-			notes.sort(FlxSort.byY, FlxSort.DESCENDING);
-		}
+			{
+				notes.members.sort(function (Obj1:Note, Obj2:Note)
+				{
+					return sortNotes(FlxSort.DESCENDING, Obj1, Obj2);
+				});
+			}
 
 		if (SONG.notes[Math.floor(curStep / 16)] != null)
 		{
