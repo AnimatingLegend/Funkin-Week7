@@ -16,7 +16,7 @@ class Paths
 		currentLevel = name.toLowerCase();
 	}
 
-	static function getPath(file:String, type:AssetType, library:Null<String>)
+	static public function getPath(file:String, type:AssetType, library:Null<String>)
 	{
 		if (library != null)
 			return getLibraryPath(file, library);
@@ -103,6 +103,11 @@ class Paths
 	inline static public function font(key:String)
 	{
 		return 'assets/fonts/$key';
+	}
+
+	inline static public function video(key:String, ?library:String)
+	{
+		return getPath('music/$key.mp4', TEXT, library);
 	}
 
 	inline static public function getSparrowAtlas(key:String, ?library:String)
