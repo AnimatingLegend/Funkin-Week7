@@ -1,13 +1,16 @@
-BIG MAJOR THINGS I NEED TODO, BUT DONT KNOW HOW TO DO:
+TODO:
+N/A
 
-- Cutscene Handler [For Week7 Songs] [DONE, But still a WIP]
-- Pico Shoot, & Tankmen running/getting shot during each beat
+
+DOING:
+- Pico Shoot, & Tankmen running/getting shot during each beat [Practically complete, but more needs to be worked on.]
+
+COMPLETED:
+- Update freeplay menu
+- Update Options menu 
+- Add NoteSplashes
+- Week 7 stage layering
+- Tankman's gameover lines
+- Cutscene Handler
 - Make tank move in the back also every 10-20 seconds
-- Tankman's gameover lines [DONE, But still a WIP]
-- Week 7 stage layering [FIXED/DONE]
-
-MISC THINGS
-- Update freeplay menu [DONE]
-- Update Options menu [DONE]
-- Update/Fix Note Inputs [DONE/FIXED, But still a WIP]
-- Add NoteSplashes [DONE]
+- Week 7 Stage Re-code
