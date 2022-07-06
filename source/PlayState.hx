@@ -1730,7 +1730,7 @@ class PlayState extends MusicBeatState
 			vocals.stop();
 			FlxG.sound.music.stop();
 
-			deathCounter ++ 1;
+			deathCounter += 1;
 			
 			openSubState(new GameOverSubstate(boyfriend.getScreenPosition().x, boyfriend.getScreenPosition().y));
 			
@@ -2326,7 +2326,7 @@ class PlayState extends MusicBeatState
 
 			if (!practiceMode)
 				songScore -= 10;
-			
+
 			var comboBr = new FlxSprite().loadGraphic(Paths.image(pixelShitPart1 + 'comboBreak' + pixelShitPart2));
 		//	comboBr.cameras = [camHUD];
 			comboBr.screenCenter();

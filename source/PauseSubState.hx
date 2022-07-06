@@ -18,10 +18,11 @@ class PauseSubState extends MusicBeatSubstate
 {
 	var grpMenuShit:FlxTypedGroup<Alphabet>;
 
-	var menuItems:Array<String> = ['Resume', 'Restart Song', 'Change Difficulty', 'Toggle Practice Mode' 'Exit to menu'];
-	var menuItemsALT:Array<String> = ['Resume', 'Restart Song', 'Change Difficulty', 'Exit to menu'];
+	var menuItems:Array<String> = ['Resume', 'Restart Song', 'Change Difficulty', 'Toggle Practice Mode', 'Exit to menu'];
+	var menuItemsALT:Array<String> = ['Resume', 'Restart Song', 'Change Difficulty', 'Toggle Practice Mode', 'Exit to menu'];
 	var difficultyChoices:Array<String> = ["Easy", "Normal", "Hard", "Back"];
 	var curSelected:Int = 0;
+	var practiceText:FlxText;
 
 	var pauseMusic:FlxSound;
 
@@ -152,7 +153,7 @@ class PauseSubState extends MusicBeatSubstate
 				case "Back":
 					menuItems = menuItemsALT;
 					regenMenu();
-					
+
 				case "Toggle Practice Mode":
 					PlayState.practiceMode = !PlayState.practiceMode;
 					practiceText.visible = PlayState.practiceMode;
