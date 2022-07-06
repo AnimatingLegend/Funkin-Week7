@@ -1,10 +1,11 @@
 # Friday Night Funkin' (Week 7 Port)
 
-This is a Github repository for Friday Night Funkin' v0.2.8, one of the versions of the game thats only on a select few of web-pages, and no site of an OFFICIAL source code.
+This is a Github repository for Friday Night Funkin' v0.2.8, one of the versions of the game thats only on a select few of web-pages, and no site of an OFFICIAL source code for that current version of the game.
 
 ## Disclaimer !!
 
 I just want to say i dont own any rights to these assets or songs, let alone some of the code in this repo. I only did this mini FNF project build for coding practice.
+This FNF version will be worked on regularly, with me adding new features, and adding more week 7 assets and junk, so be on the lookout for that!
 
 ## Support Friday Night Funkin'
 
