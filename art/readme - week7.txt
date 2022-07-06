@@ -1,6 +1,7 @@
 READ BEFORE YOU PLAY:
 
-Welcome to the final build of Friday Night Funkin ' (Week 7)!!! 
+This is a Desktop Build for Friday Night Funkin' v0.2.8, one of the versions of the game thats only on a select few of web-pages, and no site of an public source code, or any public desktop build
+for that current version of the game.
 
 I just want to say i dont own any rights to these assets or songs, I only did this mini FNF project build for coding practice. it would be nice if you actually support the the ACTUAL team who put this all together.
 (Credits below...)
@@ -15,12 +16,10 @@ Funkin Source Code:
 https://github.com/ninjamuffin99/Funkin
 ---------------------------------------------
 What is changed in this week 7 build?
-- Updated FPS (capped to 144)
-- Fixed janky Input system (still a WIP)
+- Fixed janky Input system
 - LOADS of gameplay fixes
 - Some charting Changes
-- Keybindings (DF JK)
-- Options menu (STILL A WIP)
+- Options menu + Customizable Keybindings
 - And MUCH more
 ---------------------------------------------
 If you want to check out those changes then its always open sourced. - https://github.com/LegendLOL/Funkin-Week7
