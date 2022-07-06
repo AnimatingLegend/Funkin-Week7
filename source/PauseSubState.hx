@@ -18,8 +18,8 @@ class PauseSubState extends MusicBeatSubstate
 {
 	var grpMenuShit:FlxTypedGroup<Alphabet>;
 
-	var menuItems:Array<String> = ['Resume', 'Restart Song', 'Change Difficulty', 'Options', 'Exit to menu'];
-	var menuItemsALT:Array<String> = ['Resume', 'Restart Song', 'Change Difficulty', 'Options', 'Exit to menu'];
+	var menuItems:Array<String> = ['Resume', 'Restart Song', 'Change Difficulty', 'Toggle Practice Mode' 'Exit to menu'];
+	var menuItemsALT:Array<String> = ['Resume', 'Restart Song', 'Change Difficulty', 'Exit to menu'];
 	var difficultyChoices:Array<String> = ["Easy", "Normal", "Hard", "Back"];
 	var curSelected:Int = 0;
 
@@ -60,6 +60,14 @@ class PauseSubState extends MusicBeatSubstate
 		levelDeathCounter.setFormat(Paths.font('vcr.ttf'), 32);
 		levelDeathCounter.updateHitbox();
 		add(levelDeathCounter);
+
+		practiceText = new FlxText(20, 15 + 96, 0, "PRACTICE MODE", 32);
+		practiceText.scrollFactor.set();
+		practiceText.setFormat(Paths.font('vcr.ttf'), 32);
+		practiceText.updateHitbox();
+		practiceText.x = FlxG.width - (practiceText.width + 20);
+		practiceText.visible = PlayState.practiceMode;
+		add(practiceText);
 
 		levelDifficulty.alpha = 0;
 		levelInfo.alpha = 0;
@@ -140,14 +148,14 @@ class PauseSubState extends MusicBeatSubstate
 					PlayState.storyDifficulty = 2;
 						
 					FlxG.switchState(new PlayState());
-				
-				case "Options":
-					FlxG.switchState(new OptionsMenuState());
-					OptionsMenuState.ingame = true;	
 					
 				case "Back":
 					menuItems = menuItemsALT;
 					regenMenu();
+					
+				case "Toggle Practice Mode":
+					PlayState.practiceMode = !PlayState.practiceMode;
+					practiceText.visible = PlayState.practiceMode;
 
 				case "Exit to menu":
 					if (PlayState.isStoryMode)

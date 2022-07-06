@@ -1,6 +1,7 @@
 package;
 
 import animate.FlxAnimate;
+import ui.PreferencesMenu;
 import haxe.macro.Expr.Case;
 #if desktop
 import Discord.DiscordClient;
@@ -56,6 +57,7 @@ class PlayState extends MusicBeatState
 	public static var storyPlaylist:Array<String> = [];
 	public static var storyDifficulty:Int = 1;
 	public static var deathCounter:Int = 0;
+	public static var practiceMode:Bool = false;
 	public static var seenCutscene:Bool = false;
 
 	public var noteData:Int = 0;
@@ -771,7 +773,7 @@ class PlayState extends MusicBeatState
 
 		playerStrums = new FlxTypedGroup<FlxSprite>();
 
-		if (FlxG.save.data.downscroll)
+		if (PreferencesMenu.getPref('downscroll'))
 			{
 				strumLine.y = FlxG.height - 150;
 			}
@@ -791,7 +793,7 @@ class PlayState extends MusicBeatState
 		add(camFollow);
 
 		FlxG.camera.zoom = defaultCamZoom;
-		FlxG.camera.follow(camFollow, LOCKON, 0.01);
+		FlxG.camera.follow(camFollow, LOCKON, 0.04);
 		FlxG.camera.focusOn(camFollow.getPosition());
 
 		FlxG.worldBounds.set(0, 0, FlxG.width, FlxG.height);
@@ -799,7 +801,7 @@ class PlayState extends MusicBeatState
 		FlxG.fixedTimestep = false;
 
 		healthBarBG = new FlxSprite(0, FlxG.height * 0.9).loadGraphic(Paths.image('healthBar'));
-		if (FlxG.save.data.downscroll)
+		if (PreferencesMenu.getPref('downscroll'))
 			healthBarBG.y = FlxG.height * 0.1;
 		healthBarBG.screenCenter(X);
 		healthBarBG.scrollFactor.set();
@@ -1717,7 +1719,7 @@ class PlayState extends MusicBeatState
 			FlxG.log.add('User is cheating!!');
 		}
 
-		if (health <= 0)
+		if (health <= 0 && !practiceMode)
 		{
 			boyfriend.stunned = true;
 
@@ -1728,7 +1730,8 @@ class PlayState extends MusicBeatState
 			vocals.stop();
 			FlxG.sound.music.stop();
 
-			deathCounter++;
+			deathCounter ++ 1;
+			
 			openSubState(new GameOverSubstate(boyfriend.getScreenPosition().x, boyfriend.getScreenPosition().y));
 			
 			#if desktop
@@ -1767,7 +1770,7 @@ class PlayState extends MusicBeatState
 				var center = strumLine.y + (Note.swagWidth / 2);
 
 			// i am so fucking sorry for these if conditions
-			if(FlxG.save.data.downscroll)
+			if (PreferencesMenu.getPref('downscroll'))
 			{
 				daNote.y = strumLine.y + 0.45 * (Conductor.songPosition - daNote.strumTime) * FlxMath.roundDecimal(SONG.speed, 2);
 					
@@ -1843,7 +1846,7 @@ class PlayState extends MusicBeatState
 				// daNote.y = (strumLine.y - (songTime - daNote.strumTime) * (0.45 * PlayState.SONG.speed));
 
 				var doKill = daNote.y < -daNote.height;
-				if(FlxG.save.data.downscroll)
+				if (PreferencesMenu.getPref('downscroll'))
 					doKill = daNote.y > FlxG.height;
 
 				if (doKill)
@@ -1863,7 +1866,7 @@ class PlayState extends MusicBeatState
 				}
 
 				var missNote:Bool = daNote.y < -daNote.height;
-				if(FlxG.save.data.downscroll)
+				if (PreferencesMenu.getPref('downscroll'))
 				{
 					missNote = daNote.y > FlxG.height;
 				}
@@ -1992,10 +1995,7 @@ class PlayState extends MusicBeatState
 		if (noteDiff <= Conductor.safeZoneOffset * 0.23)
 		{
 			daRating = 'sick';
-			if(FlxG.save.data.notesplash)
-				createNoteSplash(note);
-			else
-				// createNoteSplash(note);
+			createNoteSplash(note);
 			score = 350;
 		}
 		else if (noteDiff <= Conductor.safeZoneOffset * 0.7)
@@ -2014,7 +2014,16 @@ class PlayState extends MusicBeatState
 			score = 50;
 		}
 
-		songScore += score;
+		if (!practiceMode)
+			songScore += score;
+
+		/* if (combo > 60)
+				daRating = 'sick';
+			else if (combo > 12)
+				daRating = 'good'
+			else if (combo > 4)
+				daRating = 'bad';
+		 */
 
 		var pixelShitPart1:String = "";
 		var pixelShitPart2:String = '';
@@ -2219,15 +2228,7 @@ class PlayState extends MusicBeatState
 			}
 			else
 			{
-				if(FlxG.save.data.ghostTapping)
-				{
-					//badNoteCheck();
-				}
-				else
-				{
-					badNoteCheck();
-				}	
-					
+				badNoteCheck();		
 			}
 		}
 
@@ -2323,6 +2324,9 @@ class PlayState extends MusicBeatState
 				pixelShitPart2 = '-pixel';
 			}
 
+			if (!practiceMode)
+				songScore -= 10;
+			
 			var comboBr = new FlxSprite().loadGraphic(Paths.image(pixelShitPart1 + 'comboBreak' + pixelShitPart2));
 		//	comboBr.cameras = [camHUD];
 			comboBr.screenCenter();
@@ -2615,17 +2619,20 @@ class PlayState extends MusicBeatState
 		// FlxG.log.add('change bpm' + SONG.notes[Std.int(curStep / 16)].changeBPM);
 		wiggleShit.update(Conductor.crochet);
 
-		// HARDCODING FOR MILF ZOOMS!
-		if (curSong.toLowerCase() == 'milf' && curBeat >= 168 && curBeat < 200 && camZooming && FlxG.camera.zoom < 1.35)
+		if (PreferencesMenu.getPref('camera-zoom'))
 		{
-			FlxG.camera.zoom += 0.015;
-			camHUD.zoom += 0.03;
-		}
-
-		if (camZooming && FlxG.camera.zoom < 1.35 && curBeat % 4 == 0)
-		{
-			FlxG.camera.zoom += 0.015;
-			camHUD.zoom += 0.03;
+			// HARDCODING FOR MILF ZOOMS!
+			if (curSong.toLowerCase() == 'milf' && curBeat >= 168 && curBeat < 200 && camZooming && FlxG.camera.zoom < 1.35)
+			{
+				FlxG.camera.zoom += 0.015;
+				camHUD.zoom += 0.03;
+			}
+		
+			if (camZooming && FlxG.camera.zoom < 1.35 && curBeat % 4 == 0)
+			{
+				FlxG.camera.zoom += 0.015;
+				camHUD.zoom += 0.03;
+			}
 		}
 
 		iconP1.setGraphicSize(Std.int(iconP1.width + 30));
