@@ -202,11 +202,7 @@ class OptionsMenuState extends MusicBeatState
 						}	
 						else if(options[curSelected].getName() == "Exit")
 						{
-
-							if (ingame)
-								FlxG.switchState(new PlayState());
-							else
-								FlxG.switchState(new MainMenuState());
+							FlxG.switchState(new MainMenuState());
 
 							FlxG.sound.play(Paths.sound("cancelMenu"), false);
 						}
