@@ -425,7 +425,7 @@ class PlayState extends MusicBeatState
 		          {
 		                 curStage = 'school';
 
-		               //  defaultCamZoom = 0.5;
+		                // defaultCamZoom = 1.3;
 
 		                  var bgSky = new FlxSprite().loadGraphic(Paths.image('weeb/weebSky'));
 		                  bgSky.scrollFactor.set(0.1, 0.1);
@@ -490,7 +490,7 @@ class PlayState extends MusicBeatState
 		          }
 		          case 'thorns':
 		          {
-					     defaultCamZoom = 0.9;
+					     defaultCamZoom = 1.0;
 						
 		                  curStage = 'schoolEvil';
 
@@ -508,7 +508,7 @@ class PlayState extends MusicBeatState
 		                  bg.scale.set(7, 7);
 		                  add(bg);
 				  }
-				  case 'guns' | 'stress' | 'ugh':
+				  case 'ugh' | 'guns' | 'stress':
 				  {
 						defaultCamZoom = 0.9;
 
@@ -597,7 +597,6 @@ class PlayState extends MusicBeatState
 		          }
               }
 
-
 		var gfVersion:String = 'gf';
 
 		switch (curStage)
@@ -614,35 +613,29 @@ class PlayState extends MusicBeatState
 				gfVersion = 'gf-tankmen';
 		}
 
-		if (curStage == 'limo')
-			gfVersion = 'gf-car';
-
 		if (SONG.song.toLowerCase() == 'stress')
 			gfVersion = 'pico-speaker';
 
 		gf = new Character(400, 130, gfVersion);
 		gf.scrollFactor.set(0.95, 0.95);
-
 		if (gfVersion == 'pico-speaker')
 		{
 			gf.x -= 50;
 			gf.y -= 200;
-
 			var tankmen:TankmenBG = new TankmenBG(20, 500, true);
 			tankmen.strumTime = 10;
 			tankmen.resetShit(20, 600, true);
 			tankmanRun.add(tankmen);
-
-		/*	for (i in 0...TankmenBG.animationNotes.length)
+			for (i in 0...TankmenBG.animationNotes.length)
 			{
 				if (FlxG.random.bool(16))
 				{
-					var tankShit:TankmenBG = tankmanRun.recycle(TankmenBG);
-					tankShit.strumTime = TankmenBG.animationNotes[i][0];
-					tankShit.resetShit(500, 200 + FlxG.random.int(50, 100), TankmenBG.animationNotes[i][1] < 2);
-					tankmanRun.add(tankShit);
+					var man:TankmenBG = tankmanRun.recycle(TankmenBG);
+					man.strumTime = TankmenBG.animationNotes[i][0];
+					man.resetShit(500, 200 + FlxG.random.int(50, 100), TankmenBG.animationNotes[i][1] < 2);
+					tankmanRun.add(man);
 				}
-			}*/
+			}
 		}
 
 		dad = new Character(100, 100, SONG.player2);
@@ -755,7 +748,7 @@ class PlayState extends MusicBeatState
 		add(dad);
 		add(boyfriend);
 
-	// Week 7 shit
+		// Week 7 shit
 		if (curStage == 'tank')
 			add(foregroundSprites);
 

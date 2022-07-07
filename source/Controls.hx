@@ -613,7 +613,7 @@ class Controls extends FlxActionSet
 	public function loadKeyBinds()
 	{
 	
-		trace(FlxKey.fromString(FlxG.save.data.upBind));
+	//	trace(FlxKey.fromString(FlxG.save.data.upBind));
 
 		if(FlxG.save.data.upBind == null)
 			FlxG.save.data.upBind = "W";

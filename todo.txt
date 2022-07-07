@@ -3,10 +3,12 @@ N/A
 
 
 DOING:
-- Pico Shoot, & Tankmen running/getting shot during each beat [Practically complete, but more needs to be worked on.]
+N/A
+
 
 HOLD: (Putting these tasks on hold while i do other ones)
 N/A
+
 
 COMPLETED:
 - Update freeplay menu
@@ -17,3 +19,4 @@ COMPLETED:
 - Cutscene Handler
 - Make tank move in the back also every 10-20 seconds
 - Week 7 Stage Re-code
+- Pico Shoot, & Tankmen running/getting shot during each beat

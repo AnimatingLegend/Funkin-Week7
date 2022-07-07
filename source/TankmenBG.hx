@@ -16,7 +16,7 @@ class TankmenBG extends FlxSprite
 	override public function new(x:Float, y:Float, uhh:Bool)
 	{
 		super(x, y);
-		frames = Paths.getSparrowAtlas('tank/tankmanKilled1');
+		frames = Paths.getSparrowAtlas('warzone/tankmanKilled1');
 		antialiasing = true;
 		animation.addByPrefix('run', 'tankman running', 24, true);
 		animation.addByPrefix('shot', 'John Shot ' + FlxG.random.int(1, 2), 24, false);
@@ -39,13 +39,15 @@ class TankmenBG extends FlxSprite
 
 	override public function update(elapsed:Float)
 	{
+		super.update(elapsed);
+		
 		if (x >= FlxG.width * 1.2 || x <= FlxG.width * -0.5)
 		{
-			visible = true;
+			visible = false;
 		}
 		else
 		{
-			visible = false;
+			visible = true;
 		}
 
 		if (animation.curAnim.name == 'run')
@@ -74,7 +76,5 @@ class TankmenBG extends FlxSprite
 		
 		if (animation.curAnim.name == 'shot' && animation.curAnim.curFrame >= animation.curAnim.frames.length - 1)
 			kill();
-
-		super.update(elapsed);
 	}
 }
