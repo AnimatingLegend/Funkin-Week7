@@ -1,5 +1,8 @@
 package;
 
+import openfl.display.Sprite;
+import openfl.net.NetStream;
+import openfl.media.Video;
 #if desktop
 import Discord.DiscordClient;
 import sys.thread.Thread;
@@ -44,14 +47,16 @@ class TitleState extends MusicBeatState
 
 	var wackyImage:FlxSprite;
 
+	#if web
+	var video:Video;
+	var netStream:NetStream;
+	var overlay:Sprite;
+	#end
+
 	override public function create():Void
 	{
-
-		PlayerSettings.init();
-
 		curWacky = FlxG.random.getObject(getIntroTextShit());
 
-		// DEBUG BULLSHIT
 		swagShader = new ColorSwap();
 		super.create();
 
@@ -65,6 +70,8 @@ class TitleState extends MusicBeatState
 		FlxG.save.bind('funkin', 'ninjamuffin99');
 
 		Highscore.load();
+		Main.setupSaveData();
+		PlayerSettings.init();
 
 		if (FlxG.save.data.weekUnlocked != null)
 		{
@@ -80,19 +87,23 @@ class TitleState extends MusicBeatState
 				StoryMenuState.weekUnlocked[0] = true;
 		}
 
+		if (FlxG.save.data.seenVideo != null)
+		{
+			VideoState.seenVideo = FlxG.save.data.seenVideo;
+		}
+
 		#if FREEPLAY
 		FlxG.switchState(new FreeplayState());
 		#elseif CHARTING
 		FlxG.switchState(new ChartingState());
 		#elseif OPTIONS
 		FlxG.switchState(new OptionsMenuState());
-		#end
-		
+		#else	
 		new FlxTimer().start(1, function(tmr:FlxTimer)
 		{
 			startIntro();
 		});
-	
+		#end
 
 		#if desktop
 		DiscordClient.initialize();
@@ -102,6 +113,36 @@ class TitleState extends MusicBeatState
 		 });
 		#end
 	}
+
+	#if web
+	function client_onMetaData(e)
+	{
+		video.attachNetStream(netStream);
+		video.width = video.videoWidth;
+		video.height = video.videoHeight;
+	}
+
+	function netStream_onAsyncError(e)
+	{
+		trace("Error loading video");
+	}
+
+	function netConnection_onNetStatus(e)
+	{
+		if (e.info.code == 'NetStream.Play.Complete')
+		{
+			startIntro();
+		}
+		trace(e.toString());
+	}
+
+	function overlay_onMouseDown(e)
+	{
+		netStream.soundTransform.volume = 0.2;
+		netStream.soundTransform.pan = -1;
+		Lib.current.stage.removeChild(overlay);
+	}
+	#end
 
 	var swagShader:ColorSwap = null;
 	var logoBl:FlxSprite;
@@ -190,7 +231,7 @@ class TitleState extends MusicBeatState
 		ngSpr.antialiasing = true;
 		add(ngSpr);
 
-		FlxTween.tween(credTextShit, {y: credTextShit.y + 20}, 2.5, {ease: FlxEase.quadInOut, type: PINGPONG});
+		FlxTween.tween(credTextShit, {y: credTextShit.y + 20}, 2.9, {ease: FlxEase.quadInOut, type: PINGPONG});
 
 		FlxG.mouse.visible = false;
 
@@ -198,6 +239,14 @@ class TitleState extends MusicBeatState
 			skipIntro();
 		else
 			initialized = true;
+
+		if (FlxG.sound.music != null)
+		{
+			FlxG.sound.music.onComplete = function()
+			{
+				FlxG.switchState(new VideoState());
+			}
+		}
 	}
 
 	function getIntroTextShit():Array<Array<String>>
@@ -347,7 +396,7 @@ class TitleState extends MusicBeatState
 		else
 			gfDance.animation.play('danceLeft');
 
-	//	FlxG.log.add(curBeat);
+		FlxG.log.add(curBeat);
 
 		switch (curBeat)
 		{

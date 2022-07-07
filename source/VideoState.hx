@@ -6,6 +6,7 @@ import openfl.net.NetConnection;
 import openfl.media.Video;
 import openfl.net.NetStream;
 import flixel.FlxG;
+import flixel.FlxState;
 
 class VideoState extends MusicBeatState
 {
@@ -58,8 +59,9 @@ class VideoState extends MusicBeatState
         netStream.dispose();
         if (FlxG.game.contains(video))
             FlxG.game.removeChild(video);
-         #end
-
+        #end
+    
+    //  TitleState.initialized = false;
         FlxG.switchState(new TitleState());
     }
 
