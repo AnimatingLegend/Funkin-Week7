@@ -30,12 +30,13 @@ import flixel.util.FlxTimer;
 import io.newgrounds.NG;
 import lime.app.Application;
 import openfl.Assets;
+import openfl.Lib;
 
 using StringTools;
 
 class TitleState extends MusicBeatState
 {
-	static var initialized:Bool = false;
+	public static var initialized:Bool = false;
 
 	var blackScreen:FlxSprite;
 	var credGroup:FlxGroup;
@@ -46,6 +47,8 @@ class TitleState extends MusicBeatState
 	var curWacky:Array<String> = [];
 
 	var wackyImage:FlxSprite;
+	
+	var swagShader:ColorSwap;
 
 	#if web
 	var video:Video;
@@ -55,23 +58,25 @@ class TitleState extends MusicBeatState
 
 	override public function create():Void
 	{
-		curWacky = FlxG.random.getObject(getIntroTextShit());
+		/*#if polymod
+		polymod.Polymod.init({modRoot: "mods", dirs: ['introMod'], framework: OPENFL});
+		#end*/
+
+		FlxG.game.focusLostFramerate = 60;
 
 		swagShader = new ColorSwap();
+
+		FlxG.sound.muteKeys = [ZERO];
+
+		curWacky = FlxG.random.getObject(getIntroTextShit());
+		
 		super.create();
-
-		NGio.noLogin(APIStuff.API);
-
-		#if ng
-		var ng:NGio = new NGio(APIStuff.API, APIStuff.EncKey);
-		trace('NEWGROUNDS LOL');
-		#end
 
 		FlxG.save.bind('funkin', 'ninjamuffin99');
 
-		Highscore.load();
-		Main.setupSaveData();
 		PlayerSettings.init();
+		Main.setupSaveData();
+		Highscore.load();
 
 		if (FlxG.save.data.weekUnlocked != null)
 		{
@@ -96,9 +101,7 @@ class TitleState extends MusicBeatState
 		FlxG.switchState(new FreeplayState());
 		#elseif CHARTING
 		FlxG.switchState(new ChartingState());
-		#elseif OPTIONS
-		FlxG.switchState(new OptionsMenuState());
-		#else	
+		#else
 		new FlxTimer().start(1, function(tmr:FlxTimer)
 		{
 			startIntro();
@@ -144,7 +147,6 @@ class TitleState extends MusicBeatState
 	}
 	#end
 
-	var swagShader:ColorSwap = null;
 	var logoBl:FlxSprite;
 	var gfDance:FlxSprite;
 	var danceLeft:Bool = false;
@@ -184,24 +186,22 @@ class TitleState extends MusicBeatState
 		var bg:FlxSprite = new FlxSprite().makeGraphic(FlxG.width, FlxG.height, FlxColor.BLACK);
 		add(bg);
 
-		swagShader = new ColorSwap();
-
 		logoBl = new FlxSprite(-150, -100);
 		logoBl.frames = Paths.getSparrowAtlas('logoBumpin');
 		logoBl.antialiasing = true;
 		logoBl.animation.addByPrefix('bump', 'logo bumpin', 24);
-		logoBl.shader = swagShader.shader;
 		logoBl.animation.play('bump');
 		logoBl.updateHitbox();
-		add(logoBl);
+		logoBl.shader = swagShader.shader;
 
 		gfDance = new FlxSprite(FlxG.width * 0.4, FlxG.height * 0.07);
 		gfDance.frames = Paths.getSparrowAtlas('gfDanceTitle');
 		gfDance.animation.addByIndices('danceLeft', 'gfDance', [30, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14], "", 24, false);
 		gfDance.animation.addByIndices('danceRight', 'gfDance', [15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29], "", 24, false);
-		gfDance.shader = swagShader.shader;
 		gfDance.antialiasing = true;
 		add(gfDance);
+		gfDance.shader = swagShader.shader;
+		add(logoBl);
 
 		titleText = new FlxSprite(100, FlxG.height * 0.8);
 		titleText.frames = Paths.getSparrowAtlas('titleEnter');
@@ -211,6 +211,10 @@ class TitleState extends MusicBeatState
 		titleText.animation.play('idle');
 		titleText.updateHitbox();
 		add(titleText);
+
+		var logo:FlxSprite = new FlxSprite().loadGraphic(Paths.image('logo'));
+		logo.screenCenter();
+		logo.antialiasing = true;
 
 		credGroup = new FlxGroup();
 		add(credGroup);
@@ -222,7 +226,7 @@ class TitleState extends MusicBeatState
 		credTextShit = new Alphabet(0, 0, "ninjamuffin99\nPhantomArcade\nkawaisprite\nevilsk8er", false);
 		credTextShit.screenCenter();
 		credTextShit.visible = true;
-	
+
 		ngSpr = new FlxSprite(0, FlxG.height * 0.55).loadGraphic(Paths.image('newgrounds_logo'));
 		ngSpr.visible = false;
 		ngSpr.setGraphicSize(Std.int(ngSpr.width * 0.8));
@@ -265,6 +269,7 @@ class TitleState extends MusicBeatState
 	}
 
 	var transitioning:Bool = false;
+	var isRainbow:Bool = false;
 
 	override function update(elapsed:Float)
 	{
@@ -344,15 +349,13 @@ class TitleState extends MusicBeatState
 		}
 
 		if(swagShader != null)
-			{
-				if(controls.UI_LEFT) swagShader.hue -= elapsed * 0.1;
-				if(controls.UI_RIGHT) swagShader.hue += elapsed * 0.1;
-			}
+		{
+			if(controls.UI_LEFT) swagShader.hue -= elapsed * 0.1;
+			if(controls.UI_RIGHT) swagShader.hue += elapsed * 0.1;
+		}
 
 		super.update(elapsed);
 	}
-
-
 
 	function createCoolText(textArray:Array<String>)
 	{
@@ -422,7 +425,6 @@ class TitleState extends MusicBeatState
 				deleteCoolText();
 				ngSpr.visible = false;
 			// credTextShit.visible = false;
-
 			// credTextShit.text = 'Shoutouts Tom Fulp';
 			// credTextShit.screenCenter();
 			case 9:
@@ -443,8 +445,8 @@ class TitleState extends MusicBeatState
 				addMoreText('Night');
 			// credTextShit.text += '\nNight';
 			case 15:
-				addMoreText('Funkin'); // credTextShit.text += '\nFunkin';
-
+				addMoreText('Funkin'); 
+			// credTextShit.text += '\nFunkin';
 			case 16:
 				skipIntro();
 		}
