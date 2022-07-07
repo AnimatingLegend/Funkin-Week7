@@ -29,6 +29,7 @@ class OptionsMenuState extends MusicBeatState
 			new FPSOption(),
 			new FullscreenOption(),
 			new DownscrollOption(),
+			new GhostTappingOption(),
 			new NotesplashOption(),
 		]),
 		new OptionCatagory("Controls",[]),

@@ -2216,7 +2216,10 @@ class PlayState extends MusicBeatState
 					}
 				}
 				else
-					badNoteHit();
+				{
+					if(FlxG.save.data.ghostTapping = false)
+						badNoteHit();	
+				}	
 			}
 			if (boyfriend.holdTimer > 0.004 * Conductor.stepCrochet && !holdingArray.contains(true) && boyfriend.animation.curAnim.name.startsWith('sing') && !boyfriend.animation.curAnim.name.endsWith('miss'))
 			{
