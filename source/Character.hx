@@ -692,8 +692,8 @@ class Character extends FlxSprite
 			}
 		}
 		TankmenBG.animationNotes = animationNotes;
-		trace(animationNotes);
 		animationNotes.sort(sortAnims);
+	//	trace(animationNotes); 
 	}
 
 	function sortAnims(x, y)
@@ -726,6 +726,7 @@ class Character extends FlxSprite
 				case 'gf':
 					if (animation.curAnim.name == 'hairFall' && animation.curAnim.finished)
 						playAnim('danceRight');
+					
 				case 'pico-speaker':
 					if (animationNotes.length > 0 && Conductor.songPosition > animationNotes[0][0])
 					{

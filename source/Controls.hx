@@ -613,32 +613,33 @@ class Controls extends FlxActionSet
 	public function loadKeyBinds()
 	{
 	
-			//trace(FlxKey.fromString(FlxG.save.data.upBind));
-			if(FlxG.save.data.upBind == null)
-				FlxG.save.data.upBind = "W";
-			if(FlxG.save.data.downBind == null)
-				FlxG.save.data.downBind = "S";
-			if(FlxG.save.data.leftBind == null)
-				FlxG.save.data.leftBind = "A";
-			if(FlxG.save.data.rightBind == null)
-				FlxG.save.data.rightBind = "D";
-			if(FlxG.save.data.killBind == null)
-				FlxG.save.data.killBind = "R";
-			if(FlxG.save.data.pauseBindUI == null)
-				FlxG.save.data.pauseBindUI = "P";
-			if(FlxG.save.data.upBindUI == null)
-				FlxG.save.data.upBindUI = "W";
-			if(FlxG.save.data.downBindUI == null)
-				FlxG.save.data.downBindUI = "S";
-			if(FlxG.save.data.leftBindUI == null)
-				FlxG.save.data.leftBindUI = "A";
-			if(FlxG.save.data.rightBindUI == null)
-				FlxG.save.data.rightBindUI = "D";
-			if(FlxG.save.data.acceptBindUI == null)
-				FlxG.save.data.acceptBindUI = "Z";
-			if(FlxG.save.data.backBindUI == null)
-				FlxG.save.data.backBindUI = "X";
-			removeKeyboard();
+		trace(FlxKey.fromString(FlxG.save.data.upBind));
+
+		if(FlxG.save.data.upBind == null)
+			FlxG.save.data.upBind = "W";
+		if(FlxG.save.data.downBind == null)
+			FlxG.save.data.downBind = "S";
+		if(FlxG.save.data.leftBind == null)
+			FlxG.save.data.leftBind = "A";
+		if(FlxG.save.data.rightBind == null)
+			FlxG.save.data.rightBind = "D";
+		if(FlxG.save.data.killBind == null)
+			FlxG.save.data.killBind = "R";
+		if(FlxG.save.data.pauseBindUI == null)
+			FlxG.save.data.pauseBindUI = "P";
+		if(FlxG.save.data.upBindUI == null)
+			FlxG.save.data.upBindUI = "W";
+		if(FlxG.save.data.downBindUI == null)
+			FlxG.save.data.downBindUI = "S";
+		if(FlxG.save.data.leftBindUI == null)
+			FlxG.save.data.leftBindUI = "A";
+		if(FlxG.save.data.rightBindUI == null)
+			FlxG.save.data.rightBindUI = "D";
+		if(FlxG.save.data.acceptBindUI == null)
+			FlxG.save.data.acceptBindUI = "Z";
+		if(FlxG.save.data.backBindUI == null)
+			FlxG.save.data.backBindUI = "X";
+		removeKeyboard();
 			
 		inline bindKeys(Control.NOTE_UP, [FlxKey.fromString(FlxG.save.data.upBind), FlxKey.UP]);
 		inline bindKeys(Control.NOTE_DOWN, [FlxKey.fromString(FlxG.save.data.downBind), FlxKey.DOWN]);
