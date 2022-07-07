@@ -774,8 +774,6 @@ class Character extends FlxSprite
 						// do nothing, just act casual lol
 					case 'bf-holding-gf-dead':
 						// do nothing, just act casual lol	
-					case 'pico-speaker':
-						// do nothing, just act casual lol	
 					case 'spooky':
 						danced = !danced;
 	
