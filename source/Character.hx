@@ -154,7 +154,7 @@ class Character extends FlxSprite
 				addOffset('shoot3', 412, -64);
 				addOffset('shoot4', 439, -19);
 	
-				playAnim('idle');
+				playAnim('shoot1');
 
 				loadMappedAnims();
 
@@ -773,9 +773,7 @@ class Character extends FlxSprite
 					case 'bf-pixel-dead':
 						// do nothing, just act casual lol
 					case 'bf-holding-gf-dead':
-						// do nothing, just act casual lol	
-					case 'pico-speaker':
-						// do nothing, just act casual lol	
+						// do nothing, just act casual lol
 					case 'spooky':
 						danced = !danced;
 	

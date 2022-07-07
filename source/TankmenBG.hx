@@ -39,8 +39,6 @@ class TankmenBG extends FlxSprite
 
 	override public function update(elapsed:Float)
 	{
-		super.update(elapsed);
-		
 		if (x >= FlxG.width * 1.2 || x <= FlxG.width * -0.5)
 		{
 			visible = true;
@@ -76,5 +74,7 @@ class TankmenBG extends FlxSprite
 		
 		if (animation.curAnim.name == 'shot' && animation.curAnim.curFrame >= animation.curAnim.frames.length - 1)
 			kill();
+
+		super.update(elapsed);
 	}
 }

@@ -88,7 +88,7 @@ class TitleState extends MusicBeatState
 		FlxG.switchState(new OptionsMenuState());
 		#end
 		
-		new FlxTimer().start(0.5, function(tmr:FlxTimer)
+		new FlxTimer().start(1, function(tmr:FlxTimer)
 		{
 			startIntro();
 		});
@@ -296,8 +296,8 @@ class TitleState extends MusicBeatState
 
 		if(swagShader != null)
 			{
-				if(controls.LEFT) swagShader.hue -= elapsed * 0.1;
-				if(controls.RIGHT) swagShader.hue += elapsed * 0.1;
+				if(controls.UI_LEFT) swagShader.hue -= elapsed * 0.1;
+				if(controls.UI_RIGHT) swagShader.hue += elapsed * 0.1;
 			}
 
 		super.update(elapsed);

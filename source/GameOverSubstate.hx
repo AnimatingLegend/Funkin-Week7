@@ -61,8 +61,6 @@ class GameOverSubstate extends MusicBeatSubstate
 
 	override function update(elapsed:Float)
 	{
-		super.update(elapsed);
-
 		if (controls.ACCEPT)
 		{
 			endBullshit();
@@ -71,7 +69,6 @@ class GameOverSubstate extends MusicBeatSubstate
 		if (controls.BACK)
 		{
 			PlayState.deathCounter = 0;
-		//	PlayState.seenCutscene = false;
 
 			FlxG.sound.music.stop();
 
@@ -83,7 +80,7 @@ class GameOverSubstate extends MusicBeatSubstate
 
 		if (bf.animation.curAnim.name == 'firstDeath' && bf.animation.curAnim.curFrame == 12)
 		{
-			FlxG.camera.follow(camFollow, LOCKON, 0.01);
+			FlxG.camera.follow(camFollow, LOCKON, 0.02);
 		}
 
 		if (PlayState.storyWeek == 7)
@@ -99,6 +96,7 @@ class GameOverSubstate extends MusicBeatSubstate
 				});
 			}
 		}
+
 		else if (bf.animation.curAnim.name == 'firstDeath' && bf.animation.curAnim.finished)
 		{
 			bf.startedDeath = true;
@@ -109,6 +107,8 @@ class GameOverSubstate extends MusicBeatSubstate
 		{
 			Conductor.songPosition = FlxG.sound.music.time;
 		}
+
+		super.update(elapsed);
 	}
 
 	function coolStartDeath(startVol:Float = 1)

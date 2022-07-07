@@ -29,11 +29,9 @@ class OptionsMenuState extends MusicBeatState
 			new FPSOption(),
 			new FullscreenOption(),
 			new DownscrollOption(),
-			new GhostTappingOption(),
 			new NotesplashOption(),
 		]),
 		new OptionCatagory("Controls",[]),
-		new OptionCatagory("Login", []),
 		new OptionCatagory("Exit",[]),
 	];
 	
@@ -140,9 +138,9 @@ class OptionsMenuState extends MusicBeatState
 				curSelected = 0;
 				changeSelection(0);
 			}
-			if (controls.UP_P)
+			if (controls.UI_UP_P)
 				changeSelection(-1);
-			if (controls.DOWN_P)
+			if (controls.UI_DOWN_P)
 				changeSelection(1);
 			
 			if (isCat)
@@ -151,16 +149,16 @@ class OptionsMenuState extends MusicBeatState
 				{
 					if (FlxG.keys.pressed.SHIFT)
 						{
-							if (controls.RIGHT_P)
+							if (controls.UI_RIGHT_P)
 								currentSelectedCat.getOptions()[curSelected].right();
-							if (controls.LEFT_P)
+							if (controls.UI_LEFT_P)
 								currentSelectedCat.getOptions()[curSelected].left();
 						}
 					else
 					{
-						if (controls.RIGHT_P)
+						if (controls.UI_RIGHT_P)
 							currentSelectedCat.getOptions()[curSelected].right();
-						if (controls.LEFT_P)
+						if (controls.UI_LEFT_P)
 							currentSelectedCat.getOptions()[curSelected].left();
 					}
 				}
@@ -191,15 +189,6 @@ class OptionsMenuState extends MusicBeatState
 							FlxG.switchState(new ControlsSubState());
 
 						}
-						else if(options[curSelected].getName() == 'Login')
-						{
-							
-							#if linux
-							Sys.command('/usr/bin/xdg-open', ["https://www.newgrounds.com/login", "&"]);
-							#else
-							FlxG.openURL('https://www.newgrounds.com/login');
-							#end
-						}	
 						else if(options[curSelected].getName() == "Exit")
 						{
 							FlxG.switchState(new MainMenuState());
@@ -233,7 +222,7 @@ class OptionsMenuState extends MusicBeatState
 					
 				}
 			}
-			else if(controls.LEFT_P && isCat)
+			else if(controls.UI_LEFT_P && isCat)
 			{
 				if(currentSelectedCat.getOptions()[curSelected].left())
 				{
@@ -243,7 +232,7 @@ class OptionsMenuState extends MusicBeatState
 					ctrl.isMenuItem = true;
 				}
 			}
-			else if (controls.RIGHT_P && isCat)
+			else if (controls.UI_RIGHT_P && isCat)
 			{
 				if(currentSelectedCat.getOptions()[curSelected].right())
 				{

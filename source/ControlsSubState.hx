@@ -74,8 +74,6 @@ class ControlsSubState extends MusicBeatState
             if (k == null)
                 keys[i] = defaultKeys[i];
         }
-	
-		
 
 		persistentUpdate = persistentDraw = true;
 
@@ -175,13 +173,13 @@ class ControlsSubState extends MusicBeatState
                 rebindBG.visible = false;
                 rebindText.visible = false;
                 rebindText2.visible = false;
-                if (controls.UP_P)
+                if (controls.UI_UP_P)
 				{	
 					changeItem(-1);
                     FlxG.sound.play(Paths.sound("scrollMenu"), false);
 				}
 
-				if (controls.DOWN_P)
+				if (controls.UI_DOWN_P)
 				{
 					changeItem(1);
                     FlxG.sound.play(Paths.sound("scrollMenu"), false);
