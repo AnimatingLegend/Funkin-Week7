@@ -1,5 +1,9 @@
 # Friday Night Funkin' (Week 7 Port)
 
+## WARNING !!!
+This branch for Funkin-Week 7 has been archived due to commit issues, and old code. this branch will most likely not be worked on anymore so you shouldn't expect much here. If you want to be up to date with stuff then just follow the remaster branch instead lol; Thanks. ~ leg
+
+## About this Repository
 This is a Github repository for Friday Night Funkin' v0.2.8, one of the versions of the game thats only on a select few of web-pages, and no site of an OFFICIAL source code.
 
 ## Disclaimer !!
@@ -20,7 +24,7 @@ Support the project on my itch.io page: https://ninja-muffin24.itch.io/funkin
 - [PhantomArcade3K](https://twitter.com/phantomarcade3k) & [Evilsk8r](https://twitter.com/evilsk8r) - Art
 - [Kawaisprite](https://twitter.com/kawaisprite) - Musician
 
-- [Legend (me!!)](https://twitter.com/AnimatingLegend) - programmer
+- [Legend (thats me !!!)](https://twitter.com/AnimatingLegend) - programmer
 
 This game was made with love to Newgrounds and its community. Extra love to Tom Fulp.
 
