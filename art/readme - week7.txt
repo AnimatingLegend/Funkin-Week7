@@ -1,7 +1,6 @@
 READ BEFORE YOU PLAY:
 
-This is a Desktop Build for Friday Night Funkin' v0.2.8, one of the versions of the game thats only on a select few of web-pages, and no site of an public source code, or any public desktop build
-for that current version of the game.
+This is a Desktop Build for Friday Night Funkin' v0.2.8, one of the versions of the game thats only on a select few of web-pages, and no site of an public source code, or any public desktop build for that current version of the game.
 
 I just want to say i dont own any rights to these assets or songs, I only did this mini FNF project build for coding practice. it would be nice if you actually support the the ACTUAL team who put this all together.
 (Credits below...)
