@@ -5,6 +5,9 @@ N/A
 DOING:
 - Pico Shoot, & Tankmen running/getting shot during each beat [Practically complete, but more needs to be worked on.]
 
+HOLD: (Putting these tasks on hold while i do other ones)
+N/A
+
 COMPLETED:
 - Update freeplay menu
 - Update Options menu 
