@@ -31,7 +31,7 @@ class GameOverSubstate extends MusicBeatSubstate
 		}
 		if (PlayState.SONG.song.toLowerCase() == 'stress')
 		{
-			daBf = 'bf-holding-gf-dead';
+			daBf = 'bf-holding-gf-DEAD';
 		}
 
 		super();
