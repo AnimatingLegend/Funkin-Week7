@@ -77,6 +77,7 @@ class PlayState extends MusicBeatState
 	private var curSection:Int = 0;
 
 	private var camFollow:FlxObject;
+	private var camPos:FlxPoint;
 
 	private static var prevCamFollow:FlxObject;
 
@@ -637,7 +638,7 @@ class PlayState extends MusicBeatState
 
 		dad = new Character(100, 100, SONG.player2);
 
-		var camPos:FlxPoint = new FlxPoint(dad.getGraphicMidpoint().x, dad.getGraphicMidpoint().y);
+		camPos = new FlxPoint(dad.getGraphicMidpoint().x, dad.getGraphicMidpoint().y);
 
 		switch (SONG.player2)
 		{
@@ -959,10 +960,13 @@ class PlayState extends MusicBeatState
 		var senpaiEvil:FlxSprite = new FlxSprite();
 		senpaiEvil.frames = Paths.getSparrowAtlas('weeb/senpaiCrazy');
 		senpaiEvil.animation.addByPrefix('idle', 'Senpai Pre Explosion', 24, false);
-		senpaiEvil.setGraphicSize(Std.int(senpaiEvil.width * 6));
+		senpaiEvil.setGraphicSize(Std.int(senpaiEvil.width * daPixelZoom));
 		senpaiEvil.scrollFactor.set();
 		senpaiEvil.updateHitbox();
 		senpaiEvil.screenCenter();
+		senpaiEvil.x += senpaiEvil.width / 5;
+
+		camFollow.setPosition(camPos.x, camPos.y);
 
 		if (SONG.song.toLowerCase() == 'roses' || SONG.song.toLowerCase() == 'thorns')
 		{
@@ -971,6 +975,7 @@ class PlayState extends MusicBeatState
 			if (SONG.song.toLowerCase() == 'thorns')
 			{
 				add(red);
+				camHUD.visible = false;
 			}
 		}
 
@@ -1009,6 +1014,7 @@ class PlayState extends MusicBeatState
 									FlxG.camera.fade(FlxColor.WHITE, 0.01, true, function()
 									{
 										add(dialogueBox);
+										camHUD.visible = true;
 									}, true);
 								});
 								new FlxTimer().start(3.2, function(deadTime:FlxTimer)

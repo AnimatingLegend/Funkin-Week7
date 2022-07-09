@@ -5,7 +5,7 @@ TODO:
 
 
 DOING:
-- Week 6 Dialogue fixes
+- Input System fixes 
 
 HOLD: (Putting these tasks on hold while i do other ones)
 N/A
@@ -22,3 +22,4 @@ COMPLETED:
 - Week 7 Stage Re-code
 - Pico Shoot, & Tankmen running/getting shot during each beat
 - Added Monster [Week 2 shit]
+- Week 6 Dialogue fixes
