@@ -1,9 +1,12 @@
 TODO:
-N/A
+- Week 6 Dialogue fixes
+- Week 7 cutscenes [Desktop]
+- Pico Shoot tankmen bullshit [it looks fine but there are bugs behind it that need fixing]
+- Input System fixes 
 
 
 DOING:
-N/A
+- Adding Monster [Week 2 shit]
 
 
 HOLD: (Putting these tasks on hold while i do other ones)
