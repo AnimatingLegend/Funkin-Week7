@@ -28,15 +28,18 @@ class Main extends Sprite
 
 			if(FlxG.save.data.fps == null)
 				FlxG.save.data.fps = true;
-			
-			if(FlxG.save.data.fullscreen == null)
-				FlxG.save.data.fullscreen = false;
 
 			if(FlxG.save.data.ghostTapping == null)
 				FlxG.save.data.ghostTapping = false;
 
 			if(FlxG.save.data.notesplash == null)
 				FlxG.save.data.notesplash = true;
+
+			if(FlxG.save.data.cursingShit == null)
+				FlxG.save.data.cursingShit = false;
+
+			if(FlxG.save.data.camhudZoom == null)
+				FlxG.save.data.camhudZoom = true;
 		}
 
 	public static function main():Void

@@ -20,6 +20,7 @@ import flixel.text.FlxText;
 import flixel.tweens.FlxEase;
 import flixel.tweens.FlxTween;
 import flixel.util.FlxColor;
+import io.newgrounds.NG;
 import lime.app.Application;
 
 using StringTools;
@@ -37,8 +38,7 @@ class MainMenuState extends MusicBeatState
 	var magenta:FlxSprite;
 	var camFollow:FlxObject;
 
-	// got rid of the NG Api, + this source code is NO WHERE ELSE but github, so it makes sense lol
-	var versionTxt:String = ' (GitHub Exclusive Build)';
+	var versionTxt:String = '(Newgrounds exclusive preview)';
 
 	override function create()
 	{

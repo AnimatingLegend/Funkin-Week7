@@ -94,33 +94,8 @@ class FPSOption extends Option
 
 	private override function updateDisplay():String
 	{
-		return "FPS Counter ";
+		return "FPS counter ";
 	}
-}
-
-class FullscreenOption extends Option
-{
-	public function new()
-	{
-		super();
-	}
-
-	public override function press(changeData:Bool):Bool
-	{
-		if(changeData)
-			FlxG.save.data.fullscreen = !FlxG.save.data.fullscreen;
-		acceptValues = FlxG.save.data.fullscreen;
-		FlxG.fullscreen = FlxG.save.data.fullscreen;
-		
-		display = updateDisplay();
-		return true;
-	}
-
-	private override function updateDisplay():String
-	{
-		return "Fullscreen ";
-	}
-
 }
 
 class DownscrollOption extends Option
@@ -141,7 +116,7 @@ class DownscrollOption extends Option
 
 	private override function updateDisplay():String
 	{
-		return "Downscroll ";
+		return "downscroll ";
 	}
 }
 
@@ -163,7 +138,7 @@ class NotesplashOption extends Option
 
 	private override function updateDisplay():String
 	{
-		return "Note Splashes ";
+		return "notesplashes ";
 	}
 }
 
@@ -185,6 +160,50 @@ class GhostTappingOption extends Option
 
 	private override function updateDisplay():String
 	{
-		return "Ghost Tapping ";
+		return "ghost tapping ";
+	}
+}
+
+class NaughtyOption extends Option
+{
+	public function new()
+	{
+		super();
+	}
+
+	public override function press(changeData:Bool):Bool
+	{
+		if(changeData)
+			FlxG.save.data.cursingShit = !FlxG.save.data.cursingShit;
+		acceptValues = FlxG.save.data.cursingShit;
+		display = updateDisplay();
+		return true;
+	}
+
+	private override function updateDisplay():String
+	{
+		return "naughtyness";
+	}
+}
+
+class CameraZoomOption extends Option
+{
+	public function new()
+	{
+		super();
+	}
+
+	public override function press(changeData:Bool):Bool
+	{
+		if(changeData)
+			FlxG.save.data.camhudZoom = !FlxG.save.data.camhudZoom;
+		acceptValues = FlxG.save.data.camhudZoom;
+		display = updateDisplay();
+		return true;
+	}
+
+	private override function updateDisplay():String
+	{
+		return "camera zooming on beat";
 	}
 }
