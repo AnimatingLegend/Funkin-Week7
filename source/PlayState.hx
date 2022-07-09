@@ -2129,98 +2129,98 @@ class PlayState extends MusicBeatState
 
 
 	private function keyShit():Void
+	{
+		var holdingArray:Array<Bool> = [controls.NOTE_LEFT, controls.NOTE_DOWN, controls.NOTE_UP, controls.NOTE_RIGHT];
+		 var controlArray:Array<Bool> = [controls.NOTE_LEFT_P, controls.NOTE_DOWN_P, controls.NOTE_UP_P, controls.NOTE_RIGHT_P];
+	
+		if (holdingArray.contains(true) && generatedMusic)
 		{
-			var holdingArray:Array<Bool> = [controls.NOTE_LEFT, controls.NOTE_DOWN, controls.NOTE_UP, controls.NOTE_RIGHT];
-		    var controlArray:Array<Bool> = [controls.NOTE_LEFT_P, controls.NOTE_DOWN_P, controls.NOTE_UP_P, controls.NOTE_RIGHT_P];
-	
-			if (holdingArray.contains(true) && generatedMusic)
+			notes.forEachAlive(function(daNote:Note)
 			{
-				notes.forEachAlive(function(daNote:Note)
-				{
-					if (daNote.isSustainNote && daNote.canBeHit && daNote.mustPress && holdingArray[daNote.noteData])
-						goodNoteHit(daNote);
-				});
-			}
-			if (controlArray.contains(true) && generatedMusic)
+				if (daNote.isSustainNote && daNote.canBeHit && daNote.mustPress && holdingArray[daNote.noteData])
+					goodNoteHit(daNote);
+			});
+		}
+		if (controlArray.contains(true) && generatedMusic)
+		{
+			boyfriend.holdTimer = 0;
+	
+			var possibleNotes:Array<Note> = [];
+	
+			var ignoreList:Array<Int> = [];
+	
+			var removeList:Array<Note> = [];
+	
+			notes.forEachAlive(function(daNote:Note)
 			{
-				boyfriend.holdTimer = 0;
-	
-				var possibleNotes:Array<Note> = [];
-	
-				var ignoreList:Array<Int> = [];
-	
-				var removeList:Array<Note> = [];
-	
-				notes.forEachAlive(function(daNote:Note)
+				if (daNote.canBeHit && daNote.mustPress && !daNote.tooLate && !daNote.wasGoodHit)
 				{
-					if (daNote.canBeHit && daNote.mustPress && !daNote.tooLate && !daNote.wasGoodHit)
+					if (ignoreList.contains(daNote.noteData))
 					{
-						if (ignoreList.contains(daNote.noteData))
+						for (possibleNote in possibleNotes)
 						{
-							for (possibleNote in possibleNotes)
+							if (possibleNote.noteData == daNote.noteData && Math.abs(daNote.strumTime - possibleNote.strumTime) < 10)
 							{
-								if (possibleNote.noteData == daNote.noteData && Math.abs(daNote.strumTime - possibleNote.strumTime) < 10)
-								{
 									removeList.push(daNote);
-								}
-								else if (possibleNote.noteData == daNote.noteData && daNote.strumTime < possibleNote.strumTime)
-								{
+							}
+							else if (possibleNote.noteData == daNote.noteData && daNote.strumTime < possibleNote.strumTime)
+							{
 									possibleNotes.remove(possibleNote);
 									possibleNotes.push(daNote);
-								}
 							}
 						}
-						else
-						{
-							possibleNotes.push(daNote);
-							ignoreList.push(daNote.noteData);
-						}
-					}
-				});
-	
-				for (badNote in removeList)
-				{
-					badNote.kill();
-					notes.remove(badNote, true);
-					badNote.destroy();
-				}
-	
-				possibleNotes.sort(function(note1:Note, note2:Note)
-				{
-					return Std.int(note1.strumTime - note2.strumTime);
-				});
-	
-				if (perfectMode)
-				{
-					goodNoteHit(possibleNotes[0]);
-				}
-				else if (possibleNotes.length > 0)
-				{
-					for (i in 0...controlArray.length)
-					{
-						if (controlArray[i] && !ignoreList.contains(i))
-						{
-							badNoteHit();
-						}
-					}
-					for (possibleNote in possibleNotes)
-					{
-						if (controlArray[possibleNote.noteData])
-						{
-							goodNoteHit(possibleNote);
-						}
-					}
-				}
-				else
-				{
-					if (FlxG.save.data.ghostTapping)
-					{
-						// badNoteHit();
 					}
 					else
-						badNoteHit();
-				}	
+					{
+						possibleNotes.push(daNote);
+						ignoreList.push(daNote.noteData);
+					}
+				}
+			});
+	
+			for (badNote in removeList)
+			{
+				badNote.kill();
+				notes.remove(badNote, true);
+				badNote.destroy();
 			}
+	
+			possibleNotes.sort(function(note1:Note, note2:Note)
+			{
+				return Std.int(note1.strumTime - note2.strumTime);
+			});
+	
+			if (perfectMode)
+			{
+					goodNoteHit(possibleNotes[0]);
+			}
+			else if (possibleNotes.length > 0)
+			{
+				for (i in 0...controlArray.length)
+				{
+					if (controlArray[i] && !ignoreList.contains(i))
+					{
+						badNoteHit();
+					}
+				}
+				for (possibleNote in possibleNotes)
+				{
+					if (controlArray[possibleNote.noteData])
+					{
+						goodNoteHit(possibleNote);
+					}
+				}
+			}
+			else
+			{
+				if (FlxG.save.data.ghostTapping)
+				{
+					// badNoteHit();
+				}
+				else
+					badNoteHit();
+			}	
+		}
 			if (boyfriend.holdTimer > 0.004 * Conductor.stepCrochet && !holdingArray.contains(true) && boyfriend.animation.curAnim.name.startsWith('sing') && !boyfriend.animation.curAnim.name.endsWith('miss'))
 			{
 				boyfriend.playAnim('idle');
@@ -2341,16 +2341,6 @@ class PlayState extends MusicBeatState
 			noteMiss(2);
 		if (rightP)
 			noteMiss(3);
-	}
-
-	function noteCheck(keyP:Bool, note:Note):Void
-	{
-		if (keyP)
-			goodNoteHit(note);
-		else
-		{
-		//	badNoteCheck();
-		} 
 	}
 
 	function goodNoteHit(note:Note):Void
