@@ -237,13 +237,10 @@ class PlayState extends MusicBeatState
 
 		switch (SONG.song.toLowerCase())
 		{
-                        case 'spookeez' | 'monster' | 'south': 
+                        case 'spookeez' | 'south' | 'monster': 
                         {
                               curStage = 'spooky';
 	                          halloweenLevel = true;
-
-							// defaultCamZoom = 0.5;
-
 		                 	  var hallowTex = Paths.getSparrowAtlas('halloween_bg');
 
 	                          halloweenBG = new FlxSprite(-200, -100);
