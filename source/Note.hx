@@ -4,6 +4,7 @@ import flixel.FlxSprite;
 import flixel.graphics.frames.FlxAtlasFrames;
 import flixel.math.FlxMath;
 import flixel.util.FlxColor;
+import flixel.FlxG;
 #if polymod
 import polymod.format.ParseRules.TargetSignatureElement;
 #end
@@ -20,11 +21,11 @@ class Note extends FlxSprite
 	public var tooLate:Bool = false;
 	public var wasGoodHit:Bool = false;
 	public var prevNote:Note;
+	public var willMiss:Bool = false;
+	public var altNote:Bool = false;
 
 	public var sustainLength:Float = 0;
 	public var isSustainNote:Bool = false;
-
-	public var noteScore:Float = 1;
 
 	public static var swagWidth:Float = 160 * 0.7;
 	public static var PURP_NOTE:Int = 0;
@@ -122,8 +123,12 @@ class Note extends FlxSprite
 
 		if (isSustainNote && prevNote != null)
 		{
-			noteScore * 0.2;
 			alpha = 0.6;
+
+			if (FlxG.save.data.downscroll)
+			{
+				angle = 180;
+			}	
 
 			x += width / 2;
 
@@ -173,15 +178,24 @@ class Note extends FlxSprite
 
 		if (mustPress)
 		{
-			// The * 1.5 is so that it's easier to hit them too late, instead of too early
-			if (strumTime > Conductor.songPosition - (Conductor.safeZoneOffset * 1.5)
-				&& strumTime < Conductor.songPosition + (Conductor.safeZoneOffset * 0.5))
-				canBeHit = true;
-			else
+			if (willMiss && !wasGoodHit)
+			{
+				tooLate = true;
 				canBeHit = false;
-
-			/*if (strumTime < Conductor.songPosition - Conductor.safeZoneOffset && !wasGoodHit)
-				tooLate = true;*/
+			}
+			else
+			{
+				if (strumTime > Conductor.songPosition - Conductor.safeZoneOffset)
+				{
+					if (strumTime < Conductor.songPosition + 0.5 * Conductor.safeZoneOffset)
+						canBeHit = true;
+				}
+				else
+				{
+					willMiss = true;
+					canBeHit = true;
+				}
+			}		
 		}
 		else
 		{

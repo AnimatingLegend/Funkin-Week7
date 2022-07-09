@@ -1,7 +1,6 @@
 package;
 
 import animate.FlxAnimate;
-import ui.PreferencesMenu;
 import haxe.macro.Expr.Case;
 #if desktop
 import Discord.DiscordClient;
@@ -1222,6 +1221,7 @@ class PlayState extends MusicBeatState
 
 				var swagNote:Note = new Note(daStrumTime, daNoteData, oldNote);
 				swagNote.sustainLength = songNotes[2];
+				swagNote.altNote = songNotes[3];
 				swagNote.scrollFactor.set(0, 0);
 
 				var susLength:Float = swagNote.sustainLength;
@@ -1717,7 +1717,7 @@ class PlayState extends MusicBeatState
 			vocals.stop();
 			FlxG.sound.music.stop();
 
-			deathCounter += 0;
+			deathCounter ++;
 			
 			openSubState(new GameOverSubstate(boyfriend.getScreenPosition().x, boyfriend.getScreenPosition().y));
 			
@@ -1806,6 +1806,8 @@ class PlayState extends MusicBeatState
 						if (SONG.notes[Math.floor(curStep / 16)].altAnim)
 							altAnim = '-alt';
 					}
+					if (daNote.altNote)
+						altAnim = '-alt';
 
 					switch (Math.abs(daNote.noteData))
 					{
