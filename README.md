@@ -1,4 +1,4 @@
-# Friday Night Funkin' (Week 7 Port)
+# Friday Night Funkin' (Week 7 Port) [ARCHIVED BRANCH]
 
 ## WARNING !!!
 This branch for Funkin-Week 7 has been archived due to commit issues, and old code. this branch will most likely not be worked on anymore so you shouldn't expect much here. If you want to be up to date with stuff then just follow the remaster branch instead lol; Thanks. ~ leg
