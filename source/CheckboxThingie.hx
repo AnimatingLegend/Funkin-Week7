@@ -1,9 +1,6 @@
 package;
 
-import flixel.FlxG;
 import flixel.FlxSprite;
-import flixel.animation.FlxBaseAnimation;
-import flixel.graphics.frames.FlxAtlasFrames;
 import flixel.group.FlxSpriteGroup;
 
 using StringTools;
@@ -36,7 +33,7 @@ class CheckboxThingie extends FlxSprite
 				offset.set(5, 15);
 			case "selecting":
 				offset.set(25, 65);
-			case selected:
+			case "selected":
 				offset.set(35, 95);	
 		}
 

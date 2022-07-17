@@ -2030,7 +2030,7 @@ class PlayState extends MusicBeatState
 		{
 			rating.y -= 25;
 			rating.screenCenter();
-			rating.scrollFactor.set(1.5,0);
+			rating.scrollFactor.set(1,0);
 
 			var scaleX = rating.scale.x;
 			var scaleY = rating.scale.y;
@@ -2050,7 +2050,7 @@ class PlayState extends MusicBeatState
 		{
 			comboSpr.y -= 25;
 			comboSpr.screenCenter();
-			comboSpr.scrollFactor.set(1.5,0);
+			comboSpr.scrollFactor.set(1,0);
 
 			var scaleX = rating.scale.x;
 			var scaleY = rating.scale.y;
@@ -2095,7 +2095,7 @@ class PlayState extends MusicBeatState
 				numScore.y += 50;
 				numScore.x -= 50;
 				numScore.screenCenter();
-				numScore.scrollFactor.set(1.5,0);
+				numScore.scrollFactor.set(1,0);
 
 				var scaleX = numScore.scale.x;
 				var scaleY = numScore.scale.y;
@@ -2303,7 +2303,7 @@ class PlayState extends MusicBeatState
 			{
 				comboBr.y -= 25;
 				comboBr.screenCenter();
-				comboBr.scrollFactor.set(1.5,0);		
+				comboBr.scrollFactor.set(1,0);		
 			}
 			comboBr.x += 100;
 			comboBr.acceleration.y = 600;
