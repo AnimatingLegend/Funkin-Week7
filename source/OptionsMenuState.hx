@@ -27,8 +27,8 @@ class OptionsMenuState extends MusicBeatState
 	var options:Array<OptionCatagory> = [
 		new OptionCatagory("Preferences", [
 			new NaughtyOption(),
-			#if Desktop
-			new FramerateOption(), // HTML has Vsync on so this wont work
+			#if !html5
+			new FramerateOption(), // HTML5 has some Vsync enabled by default so this option is pretty much useless on web builds
 			#end
 			new DownscrollOption(),
 			new GhostTappingOption(),
