@@ -27,13 +27,16 @@ class OptionsMenuState extends MusicBeatState
 	var options:Array<OptionCatagory> = [
 		new OptionCatagory("Preferences", [
 			new NaughtyOption(),
-			new FramerateOption(),
+			#if Desktop
+			new FramerateOption(), // HTML has Vsync on so this wont work
+			#end
 			new DownscrollOption(),
 			new GhostTappingOption(),
 			new CameraZoomOption(),
 			new RatingHudOption(),
 			new NotesplashOption(),
 			new FPSOption(),
+			new MemoryCounterOption(),
 		]),
 		new OptionCatagory("Controls",[]),
 		new OptionCatagory("Exit",[]),

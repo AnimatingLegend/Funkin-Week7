@@ -98,6 +98,31 @@ class FPSOption extends Option
 	}
 }
 
+class MemoryCounterOption extends Option
+{
+	public function new()
+	{
+		super();
+	}
+
+	public override function press(changeData:Bool):Bool
+	{
+		if(changeData)
+		{
+			FlxG.save.data.mem = !FlxG.save.data.mem;
+		}
+		
+		acceptValues = FlxG.save.data.mem;
+		display = updateDisplay();
+		return true;
+	}
+
+	private override function updateDisplay():String
+	{
+		return "Memory Counter ";
+	}
+}
+
 class FramerateOption extends Option
 {
 	public function new()

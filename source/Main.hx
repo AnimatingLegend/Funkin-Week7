@@ -28,6 +28,9 @@ class Main extends Sprite
 
 			if(FlxG.save.data.fps == null)
 				FlxG.save.data.fps = true;
+
+			if(FlxG.save.data.mem == null)
+				FlxG.save.data.mem = true;
 			
 			if(FlxG.save.data.framerateDraw == null)
 				FlxG.save.data.framerateDraw = true;

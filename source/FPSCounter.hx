@@ -29,7 +29,7 @@ class FPSCounter extends TextField
 	{	
 		var mem:Float = Math.abs(FlxMath.roundDecimal(System.totalMemory / 1000000, 2));
 		if (mem > memMax) memMax = mem;
-		var memInfo = (FlxG.save.data.mem ? "RAM: " + mem + "/" + memMax + " MB" : "");
+		var memInfo = (FlxG.save.data.mem ? "RAM: " + mem + "/ " + memMax + " MB" : "");
 		if (visible)
 		{	
 			text = 
