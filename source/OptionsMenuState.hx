@@ -27,6 +27,7 @@ class OptionsMenuState extends MusicBeatState
 	var options:Array<OptionCatagory> = [
 		new OptionCatagory("Preferences", [
 			new NaughtyOption(),
+			new FramerateOption(),
 			new DownscrollOption(),
 			new GhostTappingOption(),
 			new CameraZoomOption(),

@@ -784,9 +784,30 @@ class PlayState extends MusicBeatState
 		add(camFollow);
 
 		FlxG.camera.zoom = defaultCamZoom;
+
+		// Default cam lock 60 FPS
 		FlxG.camera.follow(camFollow, LOCKON, 0.04);
 		FlxG.camera.focusOn(camFollow.getPosition());
 
+		// Whatever framerate you cap ur FPS at, the camrea speed stays the same instead of getting faster everytime
+		// There has to be a simpler way than this...
+		if(FlxG.save.data.framerateDraw == 120)
+		{
+			FlxG.camera.follow(camFollow, LOCKON, 0.01);
+		}
+		else if(FlxG.save.data.framerateDraw == 140)
+		{
+			FlxG.camera.follow(camFollow, LOCKON, 0.01);
+		}
+		else if(FlxG.save.data.framerateDraw == 160)
+		{
+			FlxG.camera.follow(camFollow, LOCKON, 0.01);
+		}
+		else if(FlxG.save.data.framerateDraw == 240)
+		{
+			FlxG.camera.follow(camFollow, LOCKON, 0.01);
+		}
+		
 		FlxG.worldBounds.set(0, 0, FlxG.width, FlxG.height);
 
 		FlxG.fixedTimestep = false;
@@ -2030,7 +2051,7 @@ class PlayState extends MusicBeatState
 		{
 			rating.y -= 25;
 			rating.screenCenter();
-			rating.scrollFactor.set(0.7);
+			rating.scrollFactor.set(1);
 
 			var scaleX = rating.scale.x;
 			var scaleY = rating.scale.y;
@@ -2050,7 +2071,7 @@ class PlayState extends MusicBeatState
 		{
 			comboSpr.y -= 25;
 			comboSpr.screenCenter();
-			comboSpr.scrollFactor.set(0.7);
+			comboSpr.scrollFactor.set(1);
 
 			var scaleX = rating.scale.x;
 			var scaleY = rating.scale.y;
@@ -2095,7 +2116,7 @@ class PlayState extends MusicBeatState
 				numScore.y += 50;
 				numScore.x -= 50;
 				numScore.screenCenter();
-				numScore.scrollFactor.set(0.7);
+				numScore.scrollFactor.set(1);
 
 				var scaleX = numScore.scale.x;
 				var scaleY = numScore.scale.y;

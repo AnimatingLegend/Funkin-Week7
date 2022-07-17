@@ -98,6 +98,45 @@ class FPSOption extends Option
 	}
 }
 
+class FramerateOption extends Option
+{
+	public function new()
+	{
+		withoutCheckboxes = true;
+		boldDisplay = false;
+		super();
+	}
+	public override function press(changeData:Bool):Bool
+	{
+		withoutCheckboxes = true;
+		boldDisplay = false;
+		return true;
+	}
+	public override function left():Bool
+	{
+		if(FlxG.drawFramerate > 60)
+			FlxG.drawFramerate -= 1 * (FlxG.keys.pressed.SHIFT || FlxG.keys.pressed.CONTROL ? 10 : 1);
+		FlxG.save.data.framerateDraw = FlxG.drawFramerate;
+		FlxG.updateFramerate = FlxG.drawFramerate;
+		display = updateDisplay();
+		return true;
+	}
+	public override function right():Bool
+	{
+		if(FlxG.drawFramerate < 360)
+			FlxG.drawFramerate += 1 * (FlxG.keys.pressed.SHIFT || FlxG.keys.pressed.CONTROL ? 10 : 1);
+		FlxG.save.data.framerateDraw = FlxG.drawFramerate;
+		FlxG.updateFramerate = FlxG.drawFramerate;
+		display = updateDisplay();
+		return true;
+	}
+	private override function updateDisplay():String
+	{
+		boldDisplay = false;
+		return "Framerate: " + FlxG.drawFramerate;
+	}
+}
+
 class DownscrollOption extends Option
 {
 	public function new()

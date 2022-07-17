@@ -28,6 +28,9 @@ class Main extends Sprite
 
 			if(FlxG.save.data.fps == null)
 				FlxG.save.data.fps = true;
+			
+			if(FlxG.save.data.framerateDraw == null)
+				FlxG.save.data.framerateDraw = true;
 
 			if(FlxG.save.data.ghostTapping == null)
 				FlxG.save.data.ghostTapping = false;
@@ -95,7 +98,7 @@ class Main extends Sprite
 		addChild(new FlxGame(gameWidth, gameHeight, initialState, zoom, framerate, framerate, skipSplash, startFullscreen));
 
 		#if !mobile
-		fpsCounter = new FPS(10, 3, 0xFFFFFFF);
+		fpsCounter = new FPSCounter(10, 3);
 		addChild(fpsCounter);
 		if(FlxG.save.data.fps == null)
 			FlxG.save.data.fps = true;
@@ -105,7 +108,7 @@ class Main extends Sprite
 		setupSaveData();
 		Conductor.offset = FlxG.save.data.notesOffset;
 	}
-	var fpsCounter:FPS;
+	var fpsCounter:FPSCounter;
 
 	public function toggleFPS(fpsEnabled:Bool):Void {
 		fpsCounter.visible = fpsEnabled;

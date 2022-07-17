@@ -119,7 +119,26 @@ class MainMenuState extends MusicBeatState
 			item.y = pos + (160 * i);
 		}
 
+		// Default Cam zoom 60 fps
 		FlxG.camera.follow(camFollow, null, 0.06);
+
+		// Im so fucking sorry for this, this is no other way...
+		if(FlxG.save.data.framerateDraw == 120)
+		{
+			FlxG.camera.follow(camFollow, null, 0.02);
+		}	
+		else if(FlxG.save.data.framerateDraw == 140)
+		{
+			FlxG.camera.follow(camFollow, null, 0.02);
+		}
+		else if(FlxG.save.data.framerateDraw == 160)
+		{
+			FlxG.camera.follow(camFollow, null, 0.02);
+		}
+		else if(FlxG.save.data.framerateDraw == 240)
+		{
+			FlxG.camera.follow(camFollow, null, 0.02);
+		}
 
 		var versionShit:FlxText = new FlxText(5, FlxG.height - 18, 0, "v" + Application.current.meta.get('version') + versionTxt, 12);
 		versionShit.scrollFactor.set();

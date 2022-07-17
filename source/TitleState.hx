@@ -404,7 +404,7 @@ class TitleState extends MusicBeatState
 		switch (curBeat)
 		{
 			case 2:
-				createCoolText(['ninjamuffin99', 'phantomArcade', 'kawaisprite', 'evilsk8er']);
+				createCoolText(['ninjamuffin', 'phantomArcade', 'kawaisprite', 'evilsker']);
 			// credTextShit.visible = false;
 			case 3:
 				addMoreText('present');

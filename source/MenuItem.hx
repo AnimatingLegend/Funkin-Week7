@@ -31,7 +31,28 @@ class MenuItem extends FlxSpriteGroup
 	// if it runs at 144 fps, fake framerate will be like 14, and will update the graphic every 0.016666 * 3 seconds still???
 	// so it runs basically every so many seconds, not dependant on framerate??
 	// I'm still learning how math works thanks whoever is reading this lol
-	var fakeFramerate:Int = Math.round((1 / FlxG.elapsed) / 14);
+	var fakeFramerate:Int = Math.round((1 / FlxG.elapsed) / 6);
+
+	// Im so fucking sorry for this, this is no other way...
+	public function fakeFramerateCaps() 
+	{
+		if(FlxG.save.data.framerateDraw == 120)
+		{
+			(fakeFramerate / 12);
+		}	
+		else if(FlxG.save.data.framerateDraw == 140)
+		{
+			(fakeFramerate / 14);
+		}
+		else if(FlxG.save.data.framerateDraw == 160)
+		{
+			(fakeFramerate / 16);
+		}
+		else if(FlxG.save.data.framerateDraw == 240)
+		{
+			(fakeFramerate / 24);
+		}
+	}
 
 	override function update(elapsed:Float)
 	{
