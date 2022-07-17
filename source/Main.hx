@@ -40,6 +40,9 @@ class Main extends Sprite
 
 			if(FlxG.save.data.camhudZoom == null)
 				FlxG.save.data.camhudZoom = true;
+
+			if(FlxG.save.data.ratingHUD == null)
+				FlxG.save.data.ratingHUD = false;
 		}
 
 	public static function main():Void

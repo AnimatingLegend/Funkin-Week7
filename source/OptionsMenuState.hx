@@ -30,6 +30,7 @@ class OptionsMenuState extends MusicBeatState
 			new DownscrollOption(),
 			new GhostTappingOption(),
 			new CameraZoomOption(),
+			new RatingHudOption(),
 			new NotesplashOption(),
 			new FPSOption(),
 		]),

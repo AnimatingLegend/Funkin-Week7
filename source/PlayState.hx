@@ -2026,6 +2026,17 @@ class PlayState extends MusicBeatState
 
 		rating.loadGraphic(Paths.image(pixelShitPart1 + daRating + pixelShitPart2));
 		rating.screenCenter();
+		if(FlxG.save.data.ratingHUD)
+		{
+			rating.y -= 25;
+			rating.screenCenter();
+			rating.scrollFactor.set(1.5,0);
+
+			var scaleX = rating.scale.x;
+			var scaleY = rating.scale.y;
+
+			rating.scale.scale(1.1);
+		}
 		rating.x = coolText.x - 40;
 		rating.y -= 60;	
 		rating.acceleration.y = 550;
@@ -2035,6 +2046,17 @@ class PlayState extends MusicBeatState
 
 		var comboSpr:FlxSprite = new FlxSprite().loadGraphic(Paths.image(pixelShitPart1 + 'combo' + pixelShitPart2));
 		comboSpr.screenCenter();
+		if(FlxG.save.data.ratingHUD)
+		{
+			comboSpr.y -= 25;
+			comboSpr.screenCenter();
+			comboSpr.scrollFactor.set(1.5,0);
+
+			var scaleX = rating.scale.x;
+			var scaleY = rating.scale.y;
+
+			comboSpr.scale.scale(1.1);
+		}
 		comboSpr.x = coolText.x + 55;
 		comboSpr.y += 50;
 		comboSpr.acceleration.y = 550;
@@ -2068,6 +2090,16 @@ class PlayState extends MusicBeatState
 		{
 			var numScore:FlxSprite = new FlxSprite().loadGraphic(Paths.image(pixelShitPart1 + 'num' + Std.int(i) + pixelShitPart2));
 			numScore.screenCenter();
+			if(FlxG.save.data.ratingHUD)
+			{
+				numScore.y += 50;
+				numScore.x -= 50;
+				numScore.screenCenter();
+				numScore.scrollFactor.set(1.5,0);
+
+				var scaleX = numScore.scale.x;
+				var scaleY = numScore.scale.y;
+			}	
 			numScore.x = coolText.x + (43 * daLoop) - 90;
 			numScore.y += 80;
 
@@ -2090,14 +2122,10 @@ class PlayState extends MusicBeatState
 				add(numScore);
 
 			if (combo >= 10)
-				{
-					add(comboSpr);
-				}
+				add(comboSpr);
 
 			if (combo == 0)
-				{
-					comboSpr.destroy();
-				}	
+				comboSpr.destroy();	
 		
 				
 			FlxTween.tween(numScore, {alpha: 0}, 0.2, {
@@ -2271,6 +2299,12 @@ class PlayState extends MusicBeatState
 
 			var comboBr = new FlxSprite().loadGraphic(Paths.image(pixelShitPart1 + 'comboBreak' + pixelShitPart2));
 			comboBr.screenCenter();
+			if(FlxG.save.data.ratingHUD)
+			{
+				comboBr.y -= 25;
+				comboBr.screenCenter();
+				comboBr.scrollFactor.set(1.5,0);		
+			}
 			comboBr.x += 100;
 			comboBr.acceleration.y = 600;
 			comboBr.velocity.y -= 150;
@@ -2288,11 +2322,9 @@ class PlayState extends MusicBeatState
 				comboBr.setGraphicSize(Std.int(comboBr.width * daPixelZoom * 0.02));
 			}
 
-			if (combo > 10)
-			{
+			if (combo > 10)	
 				add(comboBr);
-			}
-
+			
 			FlxTween.tween(comboBr, {alpha: 0.001}, 0.1, 
 			{
 			startDelay: Conductor.crochet * 0.001
@@ -2596,14 +2628,13 @@ class PlayState extends MusicBeatState
 		// hard coding because im just like that
 		if (dad.curCharacter == 'tankman' && SONG.song == 'Ugh')
 		{
-				if (curBeat == 14 || curBeat == 110 || curBeat == 131 || curBeat == 206)
-				{
-					dad.addOffset("singUP", -14, -8);
-					
-					dad.animation.getByName('singUP').frames = dad.animation.getByName('Ugh').frames;
-				}
+			if (curBeat == 14 || curBeat == 110 || curBeat == 131 || curBeat == 206)
+			{
+				dad.addOffset("singUP", -14, -8);	
+				dad.animation.getByName('singUP').frames = dad.animation.getByName('Ugh').frames;
+			}
 
-		 if (curBeat == 16 || curBeat == 112 || curBeat == 132 || curBeat == 208)
+		 	if (curBeat == 16 || curBeat == 112 || curBeat == 132 || curBeat == 208)
 			{
 				dad.addOffset("singUP", 54, 49);
 				dad.animation.getByName('singUP').frames = dad.animation.getByName('singUP-alt').frames;
@@ -2611,10 +2642,8 @@ class PlayState extends MusicBeatState
 		}
 				
 		if (curBeat == 184 && SONG.song == 'Stress' && dad.curCharacter == 'tankman')
-			{
-				dad.playAnim('Pretty Good', true);
-			}
-
+			dad.playAnim('Pretty Good', true);
+		
 		switch (curStage)
 		{
 			case 'tank':

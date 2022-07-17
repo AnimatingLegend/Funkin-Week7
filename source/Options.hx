@@ -207,3 +207,25 @@ class CameraZoomOption extends Option
 		return "camera zooming on beat";
 	}
 }
+
+class RatingHudOption extends Option
+{
+	public function new()
+	{
+		super();
+	}
+
+	public override function press(changeData:Bool):Bool
+	{
+		if(changeData)
+			FlxG.save.data.ratingHUD = !FlxG.save.data.ratingHUD;
+		acceptValues = FlxG.save.data.ratingHUD;
+		display = updateDisplay();
+		return true;
+	}
+
+	private override function updateDisplay():String
+	{
+		return "add judgements to hud";
+	}
+}
