@@ -2161,7 +2161,7 @@ class PlayState extends MusicBeatState
 	private function keyShit():Void
 	{
 		var holdingArray:Array<Bool> = [controls.NOTE_LEFT, controls.NOTE_DOWN, controls.NOTE_UP, controls.NOTE_RIGHT];
-		 var controlArray:Array<Bool> = [controls.NOTE_LEFT_P, controls.NOTE_DOWN_P, controls.NOTE_UP_P, controls.NOTE_RIGHT_P];
+		var controlArray:Array<Bool> = [controls.NOTE_LEFT_P, controls.NOTE_DOWN_P, controls.NOTE_UP_P, controls.NOTE_RIGHT_P];
 	
 		if (holdingArray.contains(true) && generatedMusic)
 		{
@@ -2191,12 +2191,11 @@ class PlayState extends MusicBeatState
 						{
 							if (possibleNote.noteData == daNote.noteData && Math.abs(daNote.strumTime - possibleNote.strumTime) < 10)
 							{
-									removeList.push(daNote);
+								removeList.push(daNote);
 							}
 							else if (possibleNote.noteData == daNote.noteData && daNote.strumTime < possibleNote.strumTime)
 							{
-									possibleNotes.remove(possibleNote);
-									possibleNotes.push(daNote);
+								possibleNotes.push(daNote);
 							}
 						}
 					}
@@ -2222,7 +2221,7 @@ class PlayState extends MusicBeatState
 	
 			if (perfectMode)
 			{
-					goodNoteHit(possibleNotes[0]);
+				goodNoteHit(possibleNotes[0]);
 			}
 			else if (possibleNotes.length > 0)
 			{
@@ -2271,7 +2270,7 @@ class PlayState extends MusicBeatState
 					spr.offset.y -= 13;
 				}
 			});
-		}
+	}
 
 	function noteMiss(direction:Int = 1):Void
 	{
