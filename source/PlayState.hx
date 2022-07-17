@@ -790,23 +790,18 @@ class PlayState extends MusicBeatState
 		FlxG.camera.focusOn(camFollow.getPosition());
 
 		// Whatever framerate you cap ur FPS at, the camrea speed stays the same instead of getting faster everytime
-		// There has to be a simpler way than this...
-		// Sorry in advance.
+		// There has to be a simpler way than this, sorry in advance...
 		if(FlxG.save.data.framerateDraw == 120)
 		{
 			FlxG.camera.follow(camFollow, LOCKON, 0.01);
 		}
 		else if(FlxG.save.data.framerateDraw == 140)
 		{
-			FlxG.camera.follow(camFollow, LOCKON, 0.001);
+			FlxG.camera.follow(camFollow, LOCKON, 0.01);
 		}
 		else if(FlxG.save.data.framerateDraw == 160)
 		{
-			FlxG.camera.follow(camFollow, LOCKON, 0.001);
-		}
-		else if(FlxG.save.data.framerateDraw == 240)
-		{
-			FlxG.camera.follow(camFollow, LOCKON, 0.001);
+			FlxG.camera.follow(camFollow, LOCKON, 0.01);
 		}
 		
 		FlxG.worldBounds.set(0, 0, FlxG.width, FlxG.height);

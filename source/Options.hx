@@ -148,7 +148,7 @@ class FramerateOption extends Option
 	}
 	public override function right():Bool
 	{
-		if(FlxG.drawFramerate < 360)
+		if(FlxG.drawFramerate < 165)
 			FlxG.drawFramerate += 1 * (FlxG.keys.pressed.SHIFT || FlxG.keys.pressed.CONTROL ? 10 : 1);
 		FlxG.save.data.framerateDraw = FlxG.drawFramerate;
 		FlxG.updateFramerate = FlxG.drawFramerate;

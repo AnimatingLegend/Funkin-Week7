@@ -33,7 +33,7 @@ class Main extends Sprite
 				FlxG.save.data.mem = true;
 			
 			if(FlxG.save.data.framerateDraw == null)
-				FlxG.save.data.framerateDraw = true;
+				FlxG.save.data.framerateDraw = 60;
 
 			if(FlxG.save.data.ghostTapping == null)
 				FlxG.save.data.ghostTapping = false;

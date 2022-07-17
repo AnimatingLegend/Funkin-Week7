@@ -33,7 +33,7 @@ class MenuItem extends FlxSpriteGroup
 	// I'm still learning how math works thanks whoever is reading this lol
 	var fakeFramerate:Int = Math.round((1 / FlxG.elapsed) / 6);
 
-	// Im so fucking sorry for this, this is no other way...
+	// There has to be a simpler way than this, sorry in advance...
 	public function fakeFramerateCaps() 
 	{
 		if(FlxG.save.data.framerateDraw == 120)
@@ -47,10 +47,6 @@ class MenuItem extends FlxSpriteGroup
 		else if(FlxG.save.data.framerateDraw == 160)
 		{
 			(fakeFramerate / 16);
-		}
-		else if(FlxG.save.data.framerateDraw == 240)
-		{
-			(fakeFramerate / 24);
 		}
 	}
 

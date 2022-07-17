@@ -88,6 +88,20 @@ class GameOverSubstate extends MusicBeatSubstate
 		{
 			FlxG.camera.follow(camFollow, LOCKON, 0.02);
 		}
+		
+		// There has to be a simpler way than this, sorry in advance...
+		if(FlxG.save.data.framerateDraw == 120)
+		{
+			FlxG.camera.follow(camFollow, LOCKON, 0.01);
+		}
+		else if(FlxG.save.data.framerateDraw == 140)
+		{
+			FlxG.camera.follow(camFollow, LOCKON, 0.01);
+		}
+		else if(FlxG.save.data.framerateDraw == 160)
+		{
+			FlxG.camera.follow(camFollow, LOCKON, 0.01);
+		}
 
 		if (PlayState.storyWeek == 7)
 		{

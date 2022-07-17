@@ -78,6 +78,9 @@ class TitleState extends MusicBeatState
 		Main.setupSaveData();
 		Highscore.load();
 
+		if(FlxG.save.data.framerateDraw)
+			FlxG.save.data.framerateDraw = true;
+
 		if (FlxG.save.data.weekUnlocked != null)
 		{
 			// FIX LATER!!!

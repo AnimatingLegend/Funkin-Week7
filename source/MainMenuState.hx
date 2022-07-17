@@ -122,10 +122,10 @@ class MainMenuState extends MusicBeatState
 		// Default Cam zoom 60 fps
 		FlxG.camera.follow(camFollow, null, 0.06);
 
-		// Im so fucking sorry for this, this is no other way...
+		// There has to be a simpler way than this, sorry in advance...
 		if(FlxG.save.data.framerateDraw == 120)
 		{
-			FlxG.camera.follow(camFollow, null, 0.02);
+			FlxG.camera.follow(camFollow, null, 0.03);
 		}	
 		else if(FlxG.save.data.framerateDraw == 140)
 		{
@@ -133,11 +133,7 @@ class MainMenuState extends MusicBeatState
 		}
 		else if(FlxG.save.data.framerateDraw == 160)
 		{
-			FlxG.camera.follow(camFollow, null, 0.02);
-		}
-		else if(FlxG.save.data.framerateDraw == 240)
-		{
-			FlxG.camera.follow(camFollow, null, 0.02);
+			FlxG.camera.follow(camFollow, null, 0.01);
 		}
 
 		var versionShit:FlxText = new FlxText(5, FlxG.height - 18, 0, "v" + Application.current.meta.get('version') + versionTxt, 12);

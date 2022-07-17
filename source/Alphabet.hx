@@ -415,7 +415,8 @@ class AlphaCharacter extends FlxSprite
 		animation.addByPrefix(letter, letter + " " + letterCase, 24);
 		animation.play(letter);
 		updateHitbox();
-		FlxG.log.add('the row' + row);
+	//	FlxG.log.add('the row' + row);
+		trace('the row' + row);
 		y = (80 - height);
 		y += row * 60;
 	}
