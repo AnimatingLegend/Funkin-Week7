@@ -1,14 +1,11 @@
 TODO:
 - Week 7 cutscenes [Desktop]
-- Pico Shoot tankmen bullshit [it looks fine but there are bugs behind it that need fixing]
-
 
 DOING:
 - Week 7 cutscenes [Desktop] [THIS IS GONNA TAKE FOREVER AGGHGHHHHHH]
 
 HOLD: (Putting these tasks on hold while i do other ones)
 N/A
-
 
 COMPLETED:
 - Update freeplay menu
