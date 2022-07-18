@@ -78,9 +78,6 @@ class TitleState extends MusicBeatState
 		Main.setupSaveData();
 		Highscore.load();
 
-		if(FlxG.save.data.framerateDraw)
-			FlxG.save.data.framerateDraw = true;
-
 		if (FlxG.save.data.weekUnlocked != null)
 		{
 			// FIX LATER!!!
@@ -118,6 +115,12 @@ class TitleState extends MusicBeatState
 			DiscordClient.shutdown();
 		 });
 		#end
+
+		if(FlxG.save.data.framerateDraw != null)
+		{
+			FlxG.updateFramerate = FlxG.save.data.framerateDraw;
+			FlxG.drawFramerate = FlxG.save.data.framerateDraw;
+		}
 	}
 
 	#if web

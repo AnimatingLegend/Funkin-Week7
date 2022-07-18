@@ -7,7 +7,7 @@ import openfl.system.System;
 import openfl.text.TextField;
 import openfl.text.TextFormat;
 import flixel.util.FlxColor;
-class FPSCounter extends TextField
+class FPSCounter extends TextField // Yoinked FPS Counter from tr1angle engine :))
 {
 	private var memMax:Float = 0;
 	
