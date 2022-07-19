@@ -57,6 +57,7 @@ class PlayState extends MusicBeatState
 	public static var storyDifficulty:Int = 1;
 	public static var deathCounter:Int = 0;
 	public static var practiceMode:Bool = false;
+	public static var seenCutscene:Bool = false;
 
 	public var noteData:Int = 0;
 	public var grpNoteSplashes:FlxTypedGroup<NoteSplash>;
@@ -850,8 +851,9 @@ class PlayState extends MusicBeatState
 		// cameras = [FlxG.cameras.list[1]];
 		startingSong = true;
 
-		if (isStoryMode)
+		if (isStoryMode && !seenCutscene)
 			{
+				seenCutscene = true;
 				switch (curSong.toLowerCase())
 				{
 					case "winter-horrorland":
@@ -1689,7 +1691,7 @@ class PlayState extends MusicBeatState
 			vocals.stop();
 			FlxG.sound.music.stop();
 
-			deathCounter ++;
+			deathCounter += 1;
 			
 			openSubState(new GameOverSubstate(boyfriend.getScreenPosition().x, boyfriend.getScreenPosition().y));
 			
@@ -1855,6 +1857,8 @@ class PlayState extends MusicBeatState
 
 	function endSong():Void
 	{
+		seenCutscene = false;
+		deathCounter = 0;
 		canPause = false;
 		FlxG.sound.music.volume = 0;
 		vocals.volume = 0;
