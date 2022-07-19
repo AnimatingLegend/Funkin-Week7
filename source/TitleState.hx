@@ -62,7 +62,7 @@ class TitleState extends MusicBeatState
 		polymod.Polymod.init({modRoot: "mods", dirs: ['introMod'], framework: OPENFL});
 		#end*/
 
-		FlxG.game.focusLostFramerate = 60;
+		FlxG.game.focusLostFramerate = 120;
 
 		swagShader = new ColorSwap();
 
@@ -116,11 +116,13 @@ class TitleState extends MusicBeatState
 		 });
 		#end
 
+		#if desktop
 		if(FlxG.save.data.framerateDraw != null)
 		{
 			FlxG.updateFramerate = FlxG.save.data.framerateDraw;
 			FlxG.drawFramerate = FlxG.save.data.framerateDraw;
 		}
+		#end
 	}
 
 	#if web
