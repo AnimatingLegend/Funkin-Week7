@@ -1882,10 +1882,7 @@ class PlayState extends MusicBeatState
 				transIn = FlxTransitionableState.defaultTransIn;
 				transOut = FlxTransitionableState.defaultTransOut;
 
-				if (storyWeek == 7)
-					FlxG.switchState(new VideoState());
-				else
-					FlxG.switchState(new StoryMenuState());
+				FlxG.switchState(new StoryMenuState());
 
 				// if ()
 				StoryMenuState.weekUnlocked[Std.int(Math.min(storyWeek + 1, StoryMenuState.weekUnlocked.length - 1))] = true;
@@ -1920,17 +1917,20 @@ class PlayState extends MusicBeatState
 					add(blackShit);
 					camHUD.visible = false;
 
-					FlxG.sound.play(Paths.sound('Lights_Shut_off'));
+					FlxG.sound.play(Paths.sound('Lights_Shut_off'), 1, false, null, true, function()
+					{
+						PlayState.SONG = Song.loadFromJson(PlayState.storyPlaylist[0].toLowerCase() + difficulty, PlayState.storyPlaylist[0]);
+						LoadingState.loadAndSwitchState(new PlayState());
+					});
 				}
-
-				FlxTransitionableState.skipNextTransIn = true;
-				FlxTransitionableState.skipNextTransOut = true;
-				prevCamFollow = camFollow;
-
-				PlayState.SONG = Song.loadFromJson(PlayState.storyPlaylist[0].toLowerCase() + difficulty, PlayState.storyPlaylist[0]);
-				FlxG.sound.music.stop();
-
-				LoadingState.loadAndSwitchState(new PlayState());
+				else
+				{
+					prevCamFollow = camFollow;
+		
+					PlayState.SONG = Song.loadFromJson(PlayState.storyPlaylist[0].toLowerCase() + difficulty, PlayState.storyPlaylist[0]);
+		
+					LoadingState.loadAndSwitchState(new PlayState());
+				}
 			}
 		}
 		else

@@ -62,7 +62,7 @@ class TitleState extends MusicBeatState
 		polymod.Polymod.init({modRoot: "mods", dirs: ['introMod'], framework: OPENFL});
 		#end*/
 
-		FlxG.game.focusLostFramerate = 120;
+	//	FlxG.game.focusLostFramerate = 60;
 
 		swagShader = new ColorSwap();
 
@@ -252,13 +252,13 @@ class TitleState extends MusicBeatState
 		else
 			initialized = true;
 
-		if (FlxG.sound.music != null)
+		/*if (FlxG.sound.music != null)
 		{
 			FlxG.sound.music.onComplete = function()
 			{
 				FlxG.switchState(new VideoState());
 			}
-		}
+		}*/
 	}
 
 	function getIntroTextShit():Array<Array<String>>
@@ -407,7 +407,7 @@ class TitleState extends MusicBeatState
 		else
 			gfDance.animation.play('danceLeft');
 
-		FlxG.log.add(curBeat);
+	//	FlxG.log.add(curBeat);
 
 		switch (curBeat)
 		{
