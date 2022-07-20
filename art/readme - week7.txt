@@ -18,7 +18,7 @@ What is changed in this week 7 build?
 - Fixed janky Input system
 - LOADS of gameplay fixes (Mostly week 6 & 7)
 - Some charting Changes
-- Options menu + Customizable Keybindings + Ghost tapping + NoteSplashes
+- Options menu + Customizable Keybindings + Ghost tapping + NoteSplashes, ETC
 - And MUCH more
 ---------------------------------------------
 If you want to check out those changes then its always open sourced. - https://github.com/LegendLOL/Funkin-Week7
