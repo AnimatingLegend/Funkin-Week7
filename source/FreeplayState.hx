@@ -51,31 +51,30 @@ class FreeplayState extends MusicBeatState
 		DiscordClient.changePresence("In the Menus", null);
 		#end
 
-		var isDebug:Bool = false;
+		if (!FlxG.sound.music.playing)
+		{
+			FlxG.sound.playMusic(Paths.music('freakyMenu'));
+		}	
 
-		#if debug
-		isDebug = true;
-		#end
-
-		if (StoryMenuState.weekUnlocked[2] || isDebug)
+		if (StoryMenuState.weekUnlocked[2])
 			addWeek(['Bopeebo', 'Fresh', 'Dadbattle'], 1, ['dad']);
 
-		if (StoryMenuState.weekUnlocked[2] || isDebug)
+		if (StoryMenuState.weekUnlocked[2])
 			addWeek(['Spookeez', 'South', 'Monster'], 2, ['spooky', 'spooky', 'monster']);
 
-		if (StoryMenuState.weekUnlocked[3] || isDebug)
+		if (StoryMenuState.weekUnlocked[3])
 			addWeek(['Pico', 'Philly', 'Blammed'], 3, ['pico']);
 
-		if (StoryMenuState.weekUnlocked[4] || isDebug)
+		if (StoryMenuState.weekUnlocked[4])
 			addWeek(['Satin-Panties', 'High', 'Milf'], 4, ['mom']);
 
-		if (StoryMenuState.weekUnlocked[5] || isDebug)
+		if (StoryMenuState.weekUnlocked[5])
 			addWeek(['Cocoa', 'Eggnog', 'Winter-Horrorland'], 5, ['parents-christmas', 'parents-christmas', 'monster-christmas']);
 
-		if (StoryMenuState.weekUnlocked[6] || isDebug)
+		if (StoryMenuState.weekUnlocked[6])
 			addWeek(['Senpai', 'Roses', 'Thorns'], 6, ['senpai', 'senpai', 'spirit']);
 		
-		if (StoryMenuState.weekUnlocked[7] || isDebug)
+		if (StoryMenuState.weekUnlocked[7])
 			addWeek(['Ugh', 'Guns', 'Stress'], 7, ['tankman']);
 
 		// LOAD MUSIC
