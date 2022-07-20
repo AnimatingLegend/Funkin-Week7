@@ -2104,7 +2104,6 @@ class PlayState extends MusicBeatState
 				onComplete: function(tween:FlxTween)
 				{
 					numScore.destroy();
-					comboSpr.destroy();
 				},
 				startDelay: Conductor.crochet * 0.002
 			});
@@ -2122,7 +2121,9 @@ class PlayState extends MusicBeatState
 		FlxTween.tween(comboSpr, {alpha: 0}, 0.2, {
 			onComplete: function(tween:FlxTween)
 			{
+				comboSpr.destroy();
 				coolText.destroy();
+				rating.destroy();
 			},
 			startDelay: Conductor.crochet * 0.001
 		});
@@ -2302,10 +2303,11 @@ class PlayState extends MusicBeatState
 				gf.playAnim('sad');
 			}
 
-		// Combo-Break Feature, dont mind this [Line 2344 - 2390] | amogus
+		// Combo-Break Feature, dont mind this [Line 2344 - 2350] | i made my life easier and just did this, now i can sleep. ~ leg
 
 			var pixelShitPart1:String = ""; // pixel prefixes
 			var pixelShitPart2:String = '';
+			var rating:FlxSprite = new FlxSprite();
 
 			if (curStage.startsWith('school'))
 			{
@@ -2316,37 +2318,35 @@ class PlayState extends MusicBeatState
 			if (!practiceMode)
 				songScore -= 10;
 
-			var comboBr = new FlxSprite().loadGraphic(Paths.image(pixelShitPart1 + 'comboBreak' + pixelShitPart2));
-			comboBr.screenCenter();
+			rating.loadGraphic(Paths.image(pixelShitPart1 + "comboBreak" + pixelShitPart2));
+			rating.screenCenter();
 			if(FlxG.save.data.ratingHUD)
 			{
-				comboBr.y -= 25;
-				comboBr.screenCenter();
-				comboBr.scrollFactor.set(0.7);		
+				rating.y -= 25;
+				rating.screenCenter();
+				rating.scrollFactor.set(0.7);		
 			}
-			comboBr.x += 100;
-			comboBr.acceleration.y = 600;
-			comboBr.velocity.y -= 150;
-			comboBr.antialiasing = true;
-			comboBr.updateHitbox();
-			comboBr.velocity.x += FlxG.random.int(1, 10);
-	
+			rating.x += 100;
+			rating.acceleration.y = 600;
+			rating.velocity.y -= 150;
+			rating.antialiasing = true;
+			rating.velocity.x += FlxG.random.int(1, 10);
 			if (!curStage.startsWith('school'))
 			{
-				comboBr.setGraphicSize(Std.int(comboBr.width * 0.7));
-				comboBr.antialiasing = true;
+				rating.setGraphicSize(Std.int(rating.width * 0.7));
+				rating.antialiasing = true;
 			}
 			else
 			{
-				comboBr.setGraphicSize(Std.int(comboBr.width * daPixelZoom * 0.02));
+				rating.setGraphicSize(Std.int(rating.width * daPixelZoom * 0.02));
 			}
 
 			if (combo > 10)	
-				add(comboBr);
+				add(rating);
 			
-			FlxTween.tween(comboBr, {alpha: 0.001}, 0.1, 
+			FlxTween.tween(rating, {alpha: 0.003}, 0.2, 
 			{
-			startDelay: Conductor.crochet * 0.001
+				startDelay: Conductor.crochet * 0.0001
 			});
 
 			combo = 0;
