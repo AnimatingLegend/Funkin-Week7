@@ -74,7 +74,7 @@ class ChartingState extends MusicBeatState
 	**/
 	var curSelectedNote:Array<Dynamic>;
 
-	var tempBpm:Float = 0;
+	var tempBpm:Int = 0;
 
 	var vocals:FlxSound;
 
@@ -437,7 +437,7 @@ class ChartingState extends MusicBeatState
 			}
 			else if (wname == 'song_bpm')
 			{
-				tempBpm = nums.value;
+				tempBpm = Std.int(nums.value);
 				Conductor.mapBPMChanges(_song);
 				Conductor.changeBPM(nums.value);
 			}
@@ -664,7 +664,7 @@ class ChartingState extends MusicBeatState
 			}
 		}
 
-	//	_song.bpm = tempBpm;
+		_song.bpm = tempBpm;
 
 		/* if (FlxG.keys.justPressed.UP)
 				Conductor.changeBPM(Conductor.bpm + 1);
