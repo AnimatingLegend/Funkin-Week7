@@ -13,6 +13,7 @@ import flixel.addons.ui.FlxUICheckBox;
 import flixel.addons.ui.FlxUIDropDownMenu;
 import flixel.addons.ui.FlxUIInputText;
 import flixel.addons.ui.FlxUINumericStepper;
+// import flixel.addons.transition.FlxTransitionableState;
 import flixel.addons.ui.FlxUITabMenu;
 import flixel.addons.ui.FlxUITooltip.FlxUITooltipStyle;
 import flixel.group.FlxGroup.FlxTypedGroup;
@@ -862,7 +863,7 @@ class ChartingState extends MusicBeatState
 		else
 		{
 			// get last bpm
-			var daBPM:Float = _song.bpm;
+			var daBPM:Int = _song.bpm;
 			for (i in 0...curSection)
 				if (_song.notes[i].changeBPM)
 					daBPM = _song.notes[i].bpm;
