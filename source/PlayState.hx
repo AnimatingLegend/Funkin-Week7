@@ -512,36 +512,36 @@ class PlayState extends MusicBeatState
 
 						curStage = 'tank';
 						
-						var sky:BGSprite = new BGSprite('warzone/tankSky', -400, -400, 0, 0);
+						var sky:BGSprite = new BGSprite('tank/tankSky', -400, -400, 0, 0);
 						add(sky);
 						
-						var clouds:BGSprite = new BGSprite('warzone/tankClouds', FlxG.random.int(-700, -100), FlxG.random.int(-20, 20), 0.1, 0.1);
+						var clouds:BGSprite = new BGSprite('tank/tankClouds', FlxG.random.int(-700, -100), FlxG.random.int(-20, 20), 0.1, 0.1);
 						clouds.active = true;
 						clouds.velocity.x = FlxG.random.float(5, 15);
 						add(clouds);
 						
-						var mountains:BGSprite = new BGSprite('warzone/tankMountains', -300, -20, 0.2, 0.2);
+						var mountains:BGSprite = new BGSprite('tank/tankMountains', -300, -20, 0.2, 0.2);
 						mountains.setGraphicSize(Std.int(mountains.width * 1.2));
 						mountains.updateHitbox();
 						add(mountains);
 						
-						var buildings:BGSprite = new BGSprite('warzone/tankBuildings', -200, 0, 0.3, 0.3);
+						var buildings:BGSprite = new BGSprite('tank/tankBuildings', -200, 0, 0.3, 0.3);
 						buildings.setGraphicSize(Std.int(buildings.width * 1.1));
 						buildings.updateHitbox();
 						add(buildings);
 						
-						var ruins:BGSprite = new BGSprite('warzone/tankRuins', -200, 0, 0.35, 0.35);
+						var ruins:BGSprite = new BGSprite('tank/tankRuins', -200, 0, 0.35, 0.35);
 						ruins.setGraphicSize(Std.int(ruins.width * 1.1));
 						ruins.updateHitbox();
 						add(ruins);
 						
-						var smokeL:BGSprite = new BGSprite('warzone/smokeLeft', -200, -100, 0.4, 0.4, ['SmokeBlurLeft'], true);
+						var smokeL:BGSprite = new BGSprite('tank/smokeLeft', -200, -100, 0.4, 0.4, ['SmokeBlurLeft'], true);
 						add(smokeL);
 						
-						var smokeR:BGSprite = new BGSprite('warzone/smokeRight', 1100, -100, 0.4, 0.4, ['SmokeRight'], true);
+						var smokeR:BGSprite = new BGSprite('tank/smokeRight', 1100, -100, 0.4, 0.4, ['SmokeRight'], true);
 						add(smokeR);
 						
-						tankWatchtower = new BGSprite('warzone/tankWatchtower', 100, 50, 0.5, 0.5, ['watchtower gradient color']);
+						tankWatchtower = new BGSprite('tank/tankWatchtower', 100, 50, 0.5, 0.5, ['watchtower gradient color']);
 						add(tankWatchtower);
 						
 						tankGround = new BGSprite('tank/tankRolling', 300, 300, 0.5, 0.5, ['BG tank w lighting'], true);
@@ -550,7 +550,7 @@ class PlayState extends MusicBeatState
 						tankmanRun = new FlxTypedGroup<TankmenBG>();
 						add(tankmanRun);
 						
-						var ground:BGSprite = new BGSprite('warzone/tankGround', -420, -150);
+						var ground:BGSprite = new BGSprite('tank/tankGround', -420, -150);
 						ground.setGraphicSize(Std.int(ground.width * 1.15));
 						ground.updateHitbox();
 						add(ground);
@@ -793,17 +793,13 @@ class PlayState extends MusicBeatState
 		// Whatever framerate you cap ur FPS at, the camrea speed stays the same instead of getting faster everytime
 		// There has to be a simpler way than this, sorry in advance...
 		if(FlxG.save.data.framerateDraw == 120)
-		{
+			FlxG.camera.follow(camFollow, LOCKON, 0.03);
+
+		if(FlxG.save.data.framerateDraw == 140)
+			FlxG.camera.follow(camFollow, LOCKON, 0.02);
+
+		if(FlxG.save.data.framerateDraw == 160)
 			FlxG.camera.follow(camFollow, LOCKON, 0.01);
-		}
-		else if(FlxG.save.data.framerateDraw == 140)
-		{
-			FlxG.camera.follow(camFollow, LOCKON, 0.01);
-		}
-		else if(FlxG.save.data.framerateDraw == 160)
-		{
-			FlxG.camera.follow(camFollow, LOCKON, 0.01);
-		}
 		
 		FlxG.worldBounds.set(0, 0, FlxG.width, FlxG.height);
 
@@ -2006,7 +2002,7 @@ class PlayState extends MusicBeatState
 		{
 			rating.y -= 25;
 			rating.screenCenter();
-			rating.scrollFactor.set(1);
+			rating.scrollFactor.set(0.7);
 
 			var scaleX = rating.scale.x;
 			var scaleY = rating.scale.y;
@@ -2026,7 +2022,7 @@ class PlayState extends MusicBeatState
 		{
 			comboSpr.y -= 25;
 			comboSpr.screenCenter();
-			comboSpr.scrollFactor.set(1);
+			comboSpr.scrollFactor.set(0.7);
 
 			var scaleX = rating.scale.x;
 			var scaleY = rating.scale.y;
@@ -2071,7 +2067,7 @@ class PlayState extends MusicBeatState
 				numScore.y += 50;
 				numScore.x -= 50;
 				numScore.screenCenter();
-				numScore.scrollFactor.set(1);
+				numScore.scrollFactor.set(0.7);
 
 				var scaleX = numScore.scale.x;
 				var scaleY = numScore.scale.y;
@@ -2318,19 +2314,21 @@ class PlayState extends MusicBeatState
 			if (!practiceMode)
 				songScore -= 10;
 
-			rating.loadGraphic(Paths.image(pixelShitPart1 + "comboBreak" + pixelShitPart2));
+			rating = new FlxSprite().loadGraphic(Paths.image(pixelShitPart1 + 'comboBreak' + pixelShitPart2));
 			rating.screenCenter();
 			if(FlxG.save.data.ratingHUD)
 			{
 				rating.y -= 25;
 				rating.screenCenter();
-				rating.scrollFactor.set(0.7);		
-			}
+				rating.scrollFactor.set(0.7);
+			}	
 			rating.x += 100;
 			rating.acceleration.y = 600;
 			rating.velocity.y -= 150;
 			rating.antialiasing = true;
+			rating.updateHitbox();
 			rating.velocity.x += FlxG.random.int(1, 10);
+	
 			if (!curStage.startsWith('school'))
 			{
 				rating.setGraphicSize(Std.int(rating.width * 0.7));
@@ -2341,12 +2339,11 @@ class PlayState extends MusicBeatState
 				rating.setGraphicSize(Std.int(rating.width * daPixelZoom * 0.02));
 			}
 
-			if (combo > 10)	
+			if (combo > 10)
 				add(rating);
-			
-			FlxTween.tween(rating, {alpha: 0.003}, 0.2, 
-			{
-				startDelay: Conductor.crochet * 0.0001
+
+			FlxTween.tween(rating, {alpha: 0.001}, 0.1, {
+				startDelay: Conductor.crochet * 0.001
 			});
 
 			combo = 0;
