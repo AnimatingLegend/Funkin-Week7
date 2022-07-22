@@ -2300,7 +2300,7 @@ class PlayState extends MusicBeatState
 
 			var pixelShitPart1:String = ""; // pixel prefixes
 			var pixelShitPart2:String = '';
-			var rating:FlxSprite = new FlxSprite();
+			var comboBr:FlxSprite = new FlxSprite();
 
 			if (curStage.startsWith('school'))
 			{
@@ -2311,36 +2311,36 @@ class PlayState extends MusicBeatState
 			if (!practiceMode)
 				songScore -= 10;
 
-			rating = new FlxSprite().loadGraphic(Paths.image(pixelShitPart1 + 'comboBreak' + pixelShitPart2));
-			rating.screenCenter();
+			comboBr = new FlxSprite().loadGraphic(Paths.image(pixelShitPart1 + 'comboBreak' + pixelShitPart2));
+			comboBr.screenCenter();
 			if(FlxG.save.data.ratingHUD)
 			{
-				rating.y -= 25;
-				rating.screenCenter();
-				rating.scrollFactor.set(0.7);
+				comboBr.y -= 45;
+				comboBr.screenCenter();
+				comboBr.scrollFactor.set(0.7);
 			}	
-			rating.x += 100;
-			rating.acceleration.y = 600;
-			rating.velocity.y -= 150;
-			rating.antialiasing = true;
-			rating.updateHitbox();
-			rating.velocity.x += FlxG.random.int(1, 10);
+			comboBr.x += 100;
+			comboBr.acceleration.y = 600;
+			comboBr.velocity.y -= 150;
+			comboBr.antialiasing = true;
+			comboBr.updateHitbox();
+			comboBr.velocity.x += FlxG.random.int(1, 10);
 	
 			if (!curStage.startsWith('school'))
 			{
-				rating.setGraphicSize(Std.int(rating.width * 0.7));
-				rating.antialiasing = true;
+				comboBr.setGraphicSize(Std.int(comboBr.width * 0.7));
+				comboBr.antialiasing = true;
 			}
 			else
 			{
-				rating.setGraphicSize(Std.int(rating.width * daPixelZoom * 0.02));
+				comboBr.setGraphicSize(Std.int(comboBr.width * daPixelZoom * 0.02));
 			}
 
 			if (combo > 10)
-				add(rating);
+				add(comboBr);
 
-			FlxTween.tween(rating, {alpha: 0.001}, 0.1, {
-				startDelay: Conductor.crochet * 0.001
+			FlxTween.tween(comboBr, {alpha: 0.005}, 0.1, {
+				startDelay: Conductor.crochet * 0.0001
 			});
 
 			combo = 0;
