@@ -48,7 +48,7 @@ class StoryMenuState extends MusicBeatState
 	];
 
 	var weekNames:Array<String> = [
-		"",
+		"how to funk",
 		"daddy dearest",
 		"spooky month",
 		"pico",
@@ -73,6 +73,8 @@ class StoryMenuState extends MusicBeatState
 	var sprDifficulty:FlxSprite;
 	var leftArrow:FlxSprite;
 	var rightArrow:FlxSprite;
+
+	var flipX:Bool;
 
 	override function create()
 	{
@@ -420,7 +422,7 @@ class StoryMenuState extends MusicBeatState
 				grpWeekCharacters.members[0].setGraphicSize(Std.int(grpWeekCharacters.members[0].width * 1.5));
 
 			case 'senpai':
-				grpWeekCharacters.members[0].offset.set(130, 0);
+				grpWeekCharacters.members[0].offset.set(130, -30);
 				grpWeekCharacters.members[0].setGraphicSize(Std.int(grpWeekCharacters.members[0].width * 1.4));
 
 			case 'mom':
@@ -430,6 +432,11 @@ class StoryMenuState extends MusicBeatState
 			case 'dad':
 				grpWeekCharacters.members[0].offset.set(120, 200);
 				grpWeekCharacters.members[0].setGraphicSize(Std.int(grpWeekCharacters.members[0].width * 1));
+
+			case 'pico':
+				grpWeekCharacters.members[0].offset.set(130, 100);
+				grpWeekCharacters.members[0].setGraphicSize(Std.int(grpWeekCharacters.members[0].width * 1.1));
+			//	grpWeekCharacters.members[0].flipX = true; | Dont try this at home kids.
 
 			case 'tankman':
 				grpWeekCharacters.members[0].offset.set(30, -60);
