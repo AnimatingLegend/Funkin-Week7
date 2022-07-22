@@ -2,12 +2,12 @@ TODO:
 - Week 7 cutscenes [Desktop]
 
 DOING:
-- Week 7 cutscenes [Desktop] [Still being worked on, will push another update when this is finished.]
+- Week 7 cutscenes [Desktop]
 
 HOLD: (Putting these tasks on hold while i do other ones)
-N/A
 
 COMPLETED:
+- Asset Overhaul shit
 - Update freeplay menu
 - Update Options menu 
 - Add NoteSplashes
