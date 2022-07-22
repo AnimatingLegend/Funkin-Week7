@@ -36,6 +36,11 @@ class HealthIcon extends FlxSprite
 		{
 			changeIcon('bf');
 		}
+		
+		if (PlayState.storyWeek == 6 && !isOldIcon)
+		{	
+			changeIcon('bf-pixel');
+		}	
 	}
 
 	public function changeIcon(char:String)
