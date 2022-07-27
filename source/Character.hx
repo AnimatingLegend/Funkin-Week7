@@ -439,8 +439,8 @@ class Character extends FlxSprite
 				frames = Paths.getSparrowAtlas('characters/bfPixel');
 				animation.addByPrefix('idle', 'BF IDLE', 24, false);
 				animation.addByPrefix('singUP', 'BF UP NOTE', 24, false);
-				animation.addByPrefix('singLEFT', 'BF LEFT NOTE', 24, false);
-				animation.addByPrefix('singRIGHT', 'BF RIGHT NOTE', 24, false);
+				animation.addByPrefix('singLEFT', 'BF RIGHT NOTE', 24, false);
+				animation.addByPrefix('singRIGHT', 'BF LEFT NOTE', 24, false);
 				animation.addByPrefix('singDOWN', 'BF DOWN NOTE', 24, false);
 
 				addOffset('idle');
@@ -449,7 +449,7 @@ class Character extends FlxSprite
 				addOffset("singLEFT");
 				addOffset("singDOWN");
 
-				setGraphicSize(Std.int(width * 6));
+				setGraphicSize(Std.int(width * 7));
 				updateHitbox();
 
 				playAnim('idle');
@@ -458,8 +458,6 @@ class Character extends FlxSprite
 				height -= 100;
 
 				antialiasing = false;
-
-				flipX = true;
 
 			case 'bf-pixel-dead':
 				frames = Paths.getSparrowAtlas('characters/bfPixelsDEAD');

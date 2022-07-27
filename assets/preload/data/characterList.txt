@@ -2,6 +2,7 @@ bf
 bf-car
 bf-christmas
 bf-pixel
+bf-pixel-opponent
 bf-holding-gf
 dad
 gf

@@ -255,7 +255,7 @@ class PlayState extends MusicBeatState
 		                  	  isHalloween = true;
 		          }
 		          case 'pico' | 'blammed' | 'philly': 
-                        {
+                    {
 		                  curStage = 'philly';
 
 		                  var bg:FlxSprite = new FlxSprite(-100).loadGraphic(Paths.image('philly/sky'));
@@ -296,6 +296,7 @@ class PlayState extends MusicBeatState
 		                  var street:FlxSprite = new FlxSprite(-40, streetBehind.y).loadGraphic(Paths.image('philly/street'));
 	                          add(street);
 		          }
+
 		          case 'milf' | 'satin-panties' | 'high':
 		          {
 		                  curStage = 'limo';
@@ -343,6 +344,7 @@ class PlayState extends MusicBeatState
 		                  fastCar = new FlxSprite(-300, 160).loadGraphic(Paths.image('limo/fastCarLol'));
 		                  // add(limo);
 		          }
+
 		          case 'cocoa' | 'eggnog':
 		          {
 	                     curStage = 'mall';
@@ -399,26 +401,29 @@ class PlayState extends MusicBeatState
 		                  santa.antialiasing = true;
 		                  add(santa);
 		          }
+
 		          case 'winter-horrorland':
 		          {
-		                  curStage = 'mallEvil';
-		                  var bg:FlxSprite = new FlxSprite(-400, -500).loadGraphic(Paths.image('christmas/evilBG'));
-		                  bg.antialiasing = true;
-		                  bg.scrollFactor.set(0.2, 0.2);
-		                  bg.active = false;
-		                  bg.setGraphicSize(Std.int(bg.width * 0.8));
-		                  bg.updateHitbox();
-		                  add(bg);
+		             	curStage = 'mallEvil';
 
-		                  var evilTree:FlxSprite = new FlxSprite(300, -300).loadGraphic(Paths.image('christmas/evilTree'));
-		                  evilTree.antialiasing = true;
-		                  evilTree.scrollFactor.set(0.2, 0.2);
-		                  add(evilTree);
+		             	var bg:FlxSprite = new FlxSprite(-400, -500).loadGraphic(Paths.image('christmas/evilBG'));
+		             	bg.antialiasing = true;
+		             	bg.scrollFactor.set(0.2, 0.2);
+		             	bg.active = false;
+		             	bg.setGraphicSize(Std.int(bg.width * 0.8));
+		             	bg.updateHitbox();
+		             	add(bg);
 
-		                  var evilSnow:FlxSprite = new FlxSprite(-200, 700).loadGraphic(Paths.image("christmas/evilSnow"));
-	                          evilSnow.antialiasing = true;
-		                  add(evilSnow);
-                        }
+		             	var evilTree:FlxSprite = new FlxSprite(300, -300).loadGraphic(Paths.image('christmas/evilTree'));
+		            	evilTree.antialiasing = true;
+		            	evilTree.scrollFactor.set(0.2, 0.2);
+		            	add(evilTree);
+
+		                var evilSnow:FlxSprite = new FlxSprite(-200, 700).loadGraphic(Paths.image("christmas/evilSnow"));
+	               	    evilSnow.antialiasing = true;
+		             	add(evilSnow);
+                  }
+
 		          case 'senpai' | 'roses':
 		          {
 		                 curStage = 'school';
@@ -486,6 +491,7 @@ class PlayState extends MusicBeatState
 		                  bgGirls.updateHitbox();
 		                  add(bgGirls);
 		          }
+
 		          case 'thorns':
 		          {
 					     defaultCamZoom = 1.0;
@@ -506,6 +512,7 @@ class PlayState extends MusicBeatState
 		                  bg.scale.set(7, 7);
 		                  add(bg);
 				  }
+
 				  case 'ugh' | 'guns' | 'stress':
 				  {
 						defaultCamZoom = 0.9;
@@ -678,6 +685,9 @@ class PlayState extends MusicBeatState
 				camPos.set(dad.getGraphicMidpoint().x + 300, dad.getGraphicMidpoint().y);
 			case 'tankman':
 				dad.y += 180;
+			case 'bf-pixel-opponent':
+				dad.x -= 100;
+				dad.y += 460;
 		}
 
 		boyfriend = new Boyfriend(770, 450, SONG.player1);
@@ -793,7 +803,7 @@ class PlayState extends MusicBeatState
 		// Whatever framerate you cap ur FPS at, the camrea speed stays the same instead of getting faster everytime
 		// There has to be a simpler way than this, sorry in advance...
 		if(FlxG.save.data.framerateDraw == 120)
-			FlxG.camera.follow(camFollow, LOCKON, 0.03);
+			FlxG.camera.follow(camFollow, LOCKON, 0.02);
 
 		if(FlxG.save.data.framerateDraw == 140)
 			FlxG.camera.follow(camFollow, LOCKON, 0.02);
@@ -2004,7 +2014,7 @@ class PlayState extends MusicBeatState
 			var scaleX = rating.scale.x;
 			var scaleY = rating.scale.y;
 
-			rating.scale.scale(1.1);
+			rating.scale.scale(1.2);
 		}
 		rating.x = coolText.x - 40;
 		rating.y -= 60;	
@@ -2017,14 +2027,14 @@ class PlayState extends MusicBeatState
 		comboSpr.screenCenter();
 		if(FlxG.save.data.ratingHUD)
 		{
-			comboSpr.y -= 25;
+			comboSpr.y += 90;
 			comboSpr.screenCenter();
 			comboSpr.scrollFactor.set(0.7);
 
 			var scaleX = rating.scale.x;
 			var scaleY = rating.scale.y;
 
-			comboSpr.scale.scale(1.1);
+			comboSpr.scale.scale(1.2);
 		}
 		comboSpr.x = coolText.x + 55;
 		comboSpr.y += 50;
@@ -2336,8 +2346,8 @@ class PlayState extends MusicBeatState
 				comboBr.setGraphicSize(Std.int(comboBr.width * daPixelZoom * 0.02));
 			}
 
-			if (combo > 10)
-				add(comboBr);
+			/*if (combo > 10)
+				add(comboBr);*/
 
 			FlxTween.tween(comboBr, {alpha: 0.005}, 0.1, {
 				startDelay: Conductor.crochet * 0.0001
