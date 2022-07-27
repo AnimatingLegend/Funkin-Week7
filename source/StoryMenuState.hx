@@ -438,6 +438,10 @@ class StoryMenuState extends MusicBeatState
 				grpWeekCharacters.members[0].setGraphicSize(Std.int(grpWeekCharacters.members[0].width * 1.1));
 			//	grpWeekCharacters.members[0].flipX = true; | Dont try this at home kids.
 
+			case 'spooky':
+				grpWeekCharacters.members[0].offset.set(150, 120);
+				grpWeekCharacters.members[0].setGraphicSize(Std.int(grpWeekCharacters.members[0].width * 1.2));
+
 			case 'tankman':
 				grpWeekCharacters.members[0].offset.set(30, -60);
 				grpWeekCharacters.members[0].setGraphicSize(Std.int(grpWeekCharacters.members[0].width * 1.1));
