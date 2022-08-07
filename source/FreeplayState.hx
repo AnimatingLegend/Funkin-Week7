@@ -51,9 +51,8 @@ class FreeplayState extends MusicBeatState
 		DiscordClient.changePresence("In the Menus", null);
 		#end
 
-		// im a dumbass, but it works now so whatever.
 		#if debug
-		FlxG.sound.playMusic(Paths.music('freakyMenu'));
+		// do nothing lol
 		#else
 		if (!FlxG.sound.music.playing)
 		{
