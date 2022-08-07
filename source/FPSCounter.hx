@@ -17,7 +17,7 @@ class FPSCounter extends TextField // Yoinked FPS Counter from tr1angle engine :
 		this.x = x;
 		this.y = y;
 		selectable = false;
-		defaultTextFormat = new TextFormat("_sans", 13, FlxColor.WHITE);
+		defaultTextFormat = new TextFormat("_sans", 12, FlxColor.WHITE);
 
 		addEventListener(Event.ENTER_FRAME, onEnter);
 		autoSize = LEFT;
