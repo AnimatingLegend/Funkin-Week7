@@ -59,9 +59,7 @@ class GameOverSubstate extends MusicBeatSubstate
 		randomGameover = FlxG.random.int(1, 25, exclude);
 
 		if (FlxG.save.data.cursingShit)
-		{
 			exclude = [1, 3, 8, 13, 17, 21];
-		}	
 	}
 
 	override function update(elapsed:Float)
@@ -86,21 +84,8 @@ class GameOverSubstate extends MusicBeatSubstate
 
 		if (bf.animation.curAnim.name == 'firstDeath' && bf.animation.curAnim.curFrame == 12)
 		{
-			FlxG.camera.follow(camFollow, LOCKON, 0.02);
-		}
-		
-		// There has to be a simpler way than this, sorry in advance...
-		if(FlxG.save.data.framerateDraw == 120)
-		{
-			FlxG.camera.follow(camFollow, LOCKON, 0.01);
-		}
-		else if(FlxG.save.data.framerateDraw == 140)
-		{
-			FlxG.camera.follow(camFollow, LOCKON, 0.01);
-		}
-		else if(FlxG.save.data.framerateDraw == 160)
-		{
-			FlxG.camera.follow(camFollow, LOCKON, 0.01);
+			// OldFlag was here
+			FlxG.camera.follow(camFollow, LOCKON, 0.02 * (30 / FlxG.save.data.framerateDraw));
 		}
 
 		if (PlayState.storyWeek == 7)
@@ -140,7 +125,7 @@ class GameOverSubstate extends MusicBeatSubstate
 	{
 		super.beatHit();
 
-		FlxG.log.add('beat');
+		//FlxG.log.add('beat');\\
 	}
 
 	var isEnding:Bool = false;
