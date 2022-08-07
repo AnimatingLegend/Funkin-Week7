@@ -36,18 +36,7 @@ class MenuItem extends FlxSpriteGroup
 	// There has to be a simpler way than this, sorry in advance...
 	public function fakeFramerateCaps() 
 	{
-		if(FlxG.save.data.framerateDraw == 120)
-		{
-			(fakeFramerate / 12);
-		}	
-		else if(FlxG.save.data.framerateDraw == 140)
-		{
-			(fakeFramerate / 14);
-		}
-		else if(FlxG.save.data.framerateDraw == 160)
-		{
-			(fakeFramerate / 16);
-		}
+		(fakeFramerate * (30 / FlxG.save.data.framerateDraw));
 	}
 
 	override function update(elapsed:Float)

@@ -644,14 +644,10 @@ class PlayState extends MusicBeatState
 				case 6:
 					gfCheck = 'gf-pixel';
 				case 7:
-					if (SONG.song.toLowerCase() == 'Stress')
-					{
+					if (SONG.song.toLowerCase() == 'stress')
 						gfCheck = 'pico-speaker';
-					}
 					else
-					{
 						gfCheck = 'gf-tankmen';
-					}
 			}
 		}
 		else
@@ -855,6 +851,11 @@ class PlayState extends MusicBeatState
 		// Default cam lock 60 FPS
 		FlxG.camera.follow(camFollow, LOCKON, 0.04);
 		FlxG.camera.focusOn(camFollow.getPosition());
+
+		// did this to avoid camera locking onto a character w/o the smooth camera tween
+		#if !html5
+		FlxG.camera.follow(camFollow, LOCKON, 0.04);
+		#end
 
 		// Godbless OldFlag for making my life a lot easier <3
 		FlxG.camera.follow(camFollow, LOCKON, 0.04 * (30 / FlxG.save.data.framerateDraw));
