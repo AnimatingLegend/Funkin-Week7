@@ -84,6 +84,11 @@ class GameOverSubstate extends MusicBeatSubstate
 
 		if (bf.animation.curAnim.name == 'firstDeath' && bf.animation.curAnim.curFrame == 12)
 		{
+			// did this to avoid camera locking onto a character w/o the smooth camera tween
+			#if html5
+			FlxG.camera.follow(camFollow, LOCKON, 0.02);
+			#end
+			
 			// OldFlag was here
 			FlxG.camera.follow(camFollow, LOCKON, 0.02 * (30 / FlxG.save.data.framerateDraw));
 		}

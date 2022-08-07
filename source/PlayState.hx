@@ -854,6 +854,11 @@ class PlayState extends MusicBeatState
 		FlxG.camera.follow(camFollow, LOCKON, 0.04);
 		FlxG.camera.focusOn(camFollow.getPosition());
 
+		// did this to avoid camera locking onto a character w/o the smooth camera tween
+		#if !html5
+		FlxG.camera.follow(camFollow, LOCKON, 0.04);
+		#end
+		
 		// Godbless OldFlag for making my life a lot easier <3
 		FlxG.camera.follow(camFollow, LOCKON, 0.04 * (30 / FlxG.save.data.framerateDraw));
 
