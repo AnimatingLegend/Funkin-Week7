@@ -37,9 +37,8 @@ using StringTools;
 class ChartingState extends MusicBeatState
 {
 	/*
-	charting menu fixes and changes by @OldFlag (thanks man !! :D)
-	*/
-	
+		charting menu fixes and changes by @OldFlag (thanks man !! :D)
+	 */
 	var _file:FileReference;
 
 	var UI_box:FlxUITabMenu;
@@ -114,6 +113,8 @@ class ChartingState extends MusicBeatState
 				needsVoices: true,
 				player1: 'bf',
 				player2: 'dad',
+				stage: 'stage',
+				gfVersion: 'gf',
 				speed: 1,
 				validScore: false
 			};
@@ -161,7 +162,8 @@ class ChartingState extends MusicBeatState
 		var tabs = [
 			{name: "Song", label: 'Song'},
 			{name: "Section", label: 'Section'},
-			{name: "Note", label: 'Note'}
+			{name: "Note", label: 'Note'},
+			{name: "Assets", label: 'Assets'}
 		];
 
 		UI_box = new FlxUITabMenu(null, tabs, true);
@@ -174,6 +176,7 @@ class ChartingState extends MusicBeatState
 		addSongUI();
 		addSectionUI();
 		addNoteUI();
+		addAssetsUI();
 
 		add(curRenderedNotes);
 		add(curRenderedSustains);
@@ -234,21 +237,8 @@ class ChartingState extends MusicBeatState
 
 		var characters:Array<String> = CoolUtil.coolTextFile(Paths.txt('characterList'));
 
-		var player1DropDown = new FlxUIDropDownMenu(10, 100, FlxUIDropDownMenu.makeStrIdLabelArray(characters, true), function(character:String)
-		{
-			_song.player1 = characters[Std.parseInt(character)];
-		});
-		player1DropDown.selectedLabel = _song.player1;
-
-		var player2DropDown = new FlxUIDropDownMenu(140, 100, FlxUIDropDownMenu.makeStrIdLabelArray(characters, true), function(character:String)
-		{
-			_song.player2 = characters[Std.parseInt(character)];
-		});
-
 		var speedLabel = new FlxText(70, 80, 64, 'Song speed');
 		var bpmLabel = new FlxText(70, 65, 64, 'BPM');
-
-		player2DropDown.selectedLabel = _song.player2;
 
 		var tab_group_song = new FlxUI(null, UI_box);
 		tab_group_song.name = "Song";
@@ -262,8 +252,6 @@ class ChartingState extends MusicBeatState
 		tab_group_song.add(loadAutosaveBtn);
 		tab_group_song.add(stepperBPM);
 		tab_group_song.add(stepperSpeed);
-		tab_group_song.add(player1DropDown);
-		tab_group_song.add(player2DropDown);
 
 		tab_group_song.add(speedLabel);
 		tab_group_song.add(bpmLabel);
@@ -272,6 +260,57 @@ class ChartingState extends MusicBeatState
 		UI_box.scrollFactor.set();
 
 		FlxG.camera.follow(strumLine);
+	}
+
+	function addAssetsUI()
+	{
+		var tab_group_assets = new FlxUI(null, UI_box);
+		tab_group_assets.name = "Assets";
+
+		var characters:Array<String> = CoolUtil.coolTextFile(Paths.txt('characterList'));
+		var gfVersions:Array<String> = CoolUtil.coolTextFile(Paths.txt('gfVersionList'));
+		var stages:Array<String> = CoolUtil.coolTextFile(Paths.txt('stageList'));
+
+		var player1DropDown = new FlxUIDropDownMenu(10, 30, FlxUIDropDownMenu.makeStrIdLabelArray(characters, true), function(character:String)
+		{
+			_song.player1 = characters[Std.parseInt(character)];
+		});
+		player1DropDown.selectedLabel = _song.player1;
+
+		var player2DropDown = new FlxUIDropDownMenu(140, 30, FlxUIDropDownMenu.makeStrIdLabelArray(characters, true), function(character:String)
+		{
+			_song.player2 = characters[Std.parseInt(character)];
+		});
+		player2DropDown.selectedLabel = _song.player2;
+
+		var gfVersionDropDown = new FlxUIDropDownMenu(10, 80, FlxUIDropDownMenu.makeStrIdLabelArray(gfVersions, true), function(gfVersion:String)
+		{
+			_song.gfVersion = gfVersions[Std.parseInt(gfVersion)];
+		});
+		gfVersionDropDown.selectedLabel = _song.gfVersion;
+
+		var stageDropDown = new FlxUIDropDownMenu(140, 80, FlxUIDropDownMenu.makeStrIdLabelArray(stages, true), function(stage:String)
+		{
+			_song.stage = stages[Std.parseInt(stage)];
+		});
+		stageDropDown.selectedLabel = _song.stage;
+
+		var player1Label = new FlxText(10, 10, 64, 'Player');
+		var player2Label = new FlxText(140, 10, 64, 'Opponent');
+		var gfVersionLabel = new FlxText(10, 60, 64, 'Girlfriend');
+		var stageLabel = new FlxText(140, 60, 64, 'Stage');
+
+		tab_group_assets.add(player1DropDown);
+		tab_group_assets.add(player2DropDown);
+		tab_group_assets.add(gfVersionDropDown);
+		tab_group_assets.add(stageDropDown);
+
+		tab_group_assets.add(player1Label);
+		tab_group_assets.add(player2Label);
+		tab_group_assets.add(stageLabel);
+		tab_group_assets.add(gfVersionLabel);
+
+		UI_box.addGroup(tab_group_assets);
 	}
 
 	var stepperLength:FlxUINumericStepper;

@@ -4,7 +4,7 @@ import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.graphics.frames.FlxAtlasFrames;
 
-class NoteSplash extends FlxSprite // Updated Code a lil bit, Code originally taken from tr1angle engine.
+class NoteSplash extends FlxSprite // Updated Code a lil bit, Code originally take from tr1angle engine.
 {
 	public function new(x:Float, y:Float, ?notedata:Int = 0)
 	{
@@ -30,8 +30,8 @@ class NoteSplash extends FlxSprite // Updated Code a lil bit, Code originally ta
 		setPosition(x, y);
 		alpha = 0.6;
 		animation.play('note' + notedata + '-' + FlxG.random.int(0, 1), true);
+	  /*animation.curAnim.frameRate += FlxG.random.int(-2, 2);*/
 		updateHitbox();
-		
 		offset.set(width * 0.3, height * 0.3);
 	}
 
