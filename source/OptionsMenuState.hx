@@ -27,18 +27,18 @@ class OptionsMenuState extends MusicBeatState
 
 	var options:Array<OptionCatagory> = [
 		new OptionCatagory("Preferences", [
-			new NaughtyOption("if checked, any explicit content will be censored/removed from the game. (for the kiddos :D)"),
+			new NaughtyOption("If checked, any explicit content will be censored/removed from the game. (for the children lol)"),
 			#if !html5
 			new FramerateOption("self explanatory"), // HTML5 has some Vsync enabled by default so this option is pretty much useless on web builds
 			#end
-			new DownscrollOption("note strums go down lol"),
-			new GhostTappingOption("desc"),
-			new CameraZoomOption("if unchecked, the camera wont zoom every concurring beat"),
-			new RatingHudOption("if checked, the rating sprites with go into the games HUD"),
-			new NotesplashOption("if unchecked, note particles (or fireworks) will not show"),
-			new OpponentLightStrums("if checked, your opponents note light up whenever its their turn to sing"),
-			new FPSOption("self explanatory"),
-			new MemoryCounterOption("also self explanatory"),
+			new DownscrollOption("If checked, notes go down instead of up."),
+			new GhostTappingOption("If checked, you won't get misses from mashing keys while there are no notes to hit."),
+			new CameraZoomOption("If unchecked, the camera wont zoom on every concurring beat."),
+			new RatingHudOption("If checked, the rating sprites with appear on the games HUD."),
+			new NotesplashOption("If unchecked, hitting 'Sick!' notes wont show firework particles."),
+			new OpponentLightStrums("If checked, your opponents note light up whenever its their turn to sing."),
+			new FPSOption("If unchecked, your fps counter & memory counter disappears."),
+		//	new MemoryCounterOption("also self explanatory"),
 		]),
 		new OptionCatagory("Controls", []),
 		new OptionCatagory("Exit", []),
