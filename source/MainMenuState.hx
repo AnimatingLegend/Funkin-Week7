@@ -38,8 +38,7 @@ class MainMenuState extends MusicBeatState
 	var magenta:FlxSprite;
 	var camFollow:FlxObject;
 
-	// this SC (source code) and Desktop Build is no where else but github
-	var versionTxt:String = '(GitHub exclusive build)';
+	var versionTxt:String = ' (GitHub exclusive build)';
 
 	override function create()
 	{
