@@ -24,6 +24,7 @@ Support the Kickstarter https://www.kickstarter.com/projects/funkin/friday-night
 - [Kawaisprite](https://twitter.com/kawaisprite) - Musician
 
 - [Legend (thats me!!)](https://twitter.com/AnimatingLegend) - Week 7 port programmer
+- [OldFlag](https://github.com/ItzOldFlagDEV) - Week 7 port programmer
 
 This game was made with love to Newgrounds and its community. Extra love to Tom Fulp.
 
