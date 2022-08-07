@@ -55,13 +55,13 @@ class GameOverSubstate extends MusicBeatSubstate
 		bf.playAnim('firstDeath');
 
 		var exclude = [];
-		
+
 		randomGameover = FlxG.random.int(1, 25, exclude);
 
 		if (FlxG.save.data.cursingShit)
 		{
 			exclude = [1, 3, 8, 13, 17, 21];
-		}	
+		}
 	}
 
 	override function update(elapsed:Float)
@@ -79,29 +79,23 @@ class GameOverSubstate extends MusicBeatSubstate
 				FlxG.switchState(new StoryMenuState());
 			else
 				FlxG.switchState(new FreeplayState());
-			
-			PlayState.deathCounter = 0;
 
+			PlayState.deathCounter = 0;
 		}
 
 		if (bf.animation.curAnim.name == 'firstDeath' && bf.animation.curAnim.curFrame == 12)
 		{
+			// did this to avoid camera locking onto a character w/o the smooth camera tween
+			#if html5
 			FlxG.camera.follow(camFollow, LOCKON, 0.02);
+			#end
+
+			// OldFlag was here
+			FlxG.camera.follow(camFollow, LOCKON, 0.02 * (30 / FlxG.save.data.framerateDraw));
 		}
-		
-		// There has to be a simpler way than this, sorry in advance...
-		if(FlxG.save.data.framerateDraw == 120)
-		{
-			FlxG.camera.follow(camFollow, LOCKON, 0.01);
-		}
-		else if(FlxG.save.data.framerateDraw == 140)
-		{
-			FlxG.camera.follow(camFollow, LOCKON, 0.01);
-		}
-		else if(FlxG.save.data.framerateDraw == 160)
-		{
-			FlxG.camera.follow(camFollow, LOCKON, 0.01);
-		}
+
+		// OldFlag was here
+		FlxG.camera.follow(camFollow, LOCKON, 0.02 * (30 / FlxG.save.data.framerateDraw));
 
 		if (PlayState.storyWeek == 7)
 		{
@@ -116,7 +110,6 @@ class GameOverSubstate extends MusicBeatSubstate
 				});
 			}
 		}
-
 		else if (bf.animation.curAnim.name == 'firstDeath' && bf.animation.curAnim.finished)
 		{
 			bf.startedDeath = true;

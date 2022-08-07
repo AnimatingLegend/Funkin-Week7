@@ -38,7 +38,7 @@ class MainMenuState extends MusicBeatState
 	var magenta:FlxSprite;
 	var camFollow:FlxObject;
 
- // this SC (source code) and Desktop Build is no where else but github
+	// this SC (source code) and Desktop Build is no where else but github
 	var versionTxt:String = '(GitHub exclusive build)';
 
 	override function create()
@@ -119,28 +119,13 @@ class MainMenuState extends MusicBeatState
 			item.y = pos + (160 * i);
 		}
 
-		// Default Cam zoom 60 fps
-		FlxG.camera.follow(camFollow, null, 0.06);
-
-		// There has to be a simpler way than this, sorry in advance...
-		if(FlxG.save.data.framerateDraw == 120)
-		{
-			FlxG.camera.follow(camFollow, null, 0.03);
-		}	
-		else if(FlxG.save.data.framerateDraw == 140)
-		{
-			FlxG.camera.follow(camFollow, null, 0.02);
-		}
-		else if(FlxG.save.data.framerateDraw == 160)
-		{
-			FlxG.camera.follow(camFollow, null, 0.01);
-		}
+		// OldFlags doing (Thanks Again !!)
+		FlxG.camera.follow(camFollow, null, 0.06 * (30 / FlxG.save.data.framerateDraw));
 
 		var versionShit:FlxText = new FlxText(5, FlxG.height - 18, 0, "v" + Application.current.meta.get('version') + versionTxt, 12);
 		versionShit.scrollFactor.set();
 		versionShit.setFormat("VCR OSD Mono", 16, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		add(versionShit);
-		
 
 		super.create();
 	}
@@ -155,11 +140,14 @@ class MainMenuState extends MusicBeatState
 	{
 		camFollow.setPosition(item.getGraphicMidpoint().x, item.getGraphicMidpoint().y);
 	}
-	
+
 	function selectDonate()
 	{
 		#if linux
-		Sys.command('/usr/bin/xdg-open', ["https://www.kickstarter.com/projects/funkin/friday-night-funkin-the-full-ass-game/", "&"]);
+		Sys.command('/usr/bin/xdg-open', [
+			"https://www.kickstarter.com/projects/funkin/friday-night-funkin-the-full-ass-game/",
+			"&"
+		]);
 		#else
 		FlxG.openURL('https://www.kickstarter.com/projects/funkin/friday-night-funkin-the-full-ass-game/');
 		#end
@@ -172,7 +160,7 @@ class MainMenuState extends MusicBeatState
 		{
 			if (menuItems.selectedIndex != item.ID)
 			{
-				FlxTween.tween(item, { alpha: 0 }, 0.4, { ease: FlxEase.quadOut });
+				FlxTween.tween(item, {alpha: 0}, 0.4, {ease: FlxEase.quadOut});
 			}
 			else
 			{
