@@ -89,13 +89,9 @@ class GameOverSubstate extends MusicBeatSubstate
 			#if html5
 			FlxG.camera.follow(camFollow, LOCKON, 0.02);
 			#end
-
 			// OldFlag was here
 			FlxG.camera.follow(camFollow, LOCKON, 0.02 * (30 / FlxG.save.data.framerateDraw));
 		}
-
-		// OldFlag was here
-		FlxG.camera.follow(camFollow, LOCKON, 0.02 * (30 / FlxG.save.data.framerateDraw));
 
 		if (PlayState.storyWeek == 7)
 		{
