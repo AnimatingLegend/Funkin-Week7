@@ -849,7 +849,7 @@ class PlayState extends MusicBeatState
 		FlxG.camera.zoom = defaultCamZoom;
 
 		// Default cam lock 60 FPS
-		FlxG.camera.follow(camFollow, LOCKON, 0.04);
+	//	FlxG.camera.follow(camFollow, LOCKON, 0.04);
 		FlxG.camera.focusOn(camFollow.getPosition());
 
 		// did this to avoid camera locking onto a character w/o the smooth camera tween
