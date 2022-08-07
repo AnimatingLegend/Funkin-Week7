@@ -38,8 +38,8 @@ class MainMenuState extends MusicBeatState
 	var magenta:FlxSprite;
 	var camFollow:FlxObject;
 
- // this SC (source code) and Desktop Build is no where else but github
-	var versionTxt:String = '(GitHub exclusive build)';
+	// peep version txt teehee
+	var versionTxt:String = ' (GitHub exclusive build)';
 
 	override function create()
 	{
@@ -119,22 +119,8 @@ class MainMenuState extends MusicBeatState
 			item.y = pos + (160 * i);
 		}
 
-		// Default Cam zoom 60 fps
-		FlxG.camera.follow(camFollow, null, 0.06);
-
-		// There has to be a simpler way than this, sorry in advance...
-		if(FlxG.save.data.framerateDraw == 120)
-		{
-			FlxG.camera.follow(camFollow, null, 0.03);
-		}	
-		else if(FlxG.save.data.framerateDraw == 140)
-		{
-			FlxG.camera.follow(camFollow, null, 0.02);
-		}
-		else if(FlxG.save.data.framerateDraw == 160)
-		{
-			FlxG.camera.follow(camFollow, null, 0.01);
-		}
+		// OldFlags doing (Thanks Again !!)
+		FlxG.camera.follow(camFollow, null, 0.06 * (30 / FlxG.save.data.framerateDraw));
 
 		var versionShit:FlxText = new FlxText(5, FlxG.height - 18, 0, "v" + Application.current.meta.get('version') + versionTxt, 12);
 		versionShit.scrollFactor.set();
