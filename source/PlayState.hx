@@ -643,14 +643,10 @@ class PlayState extends MusicBeatState
 				case 6:
 					gfCheck = 'gf-pixel';
 				case 7:
-					if (SONG.song.toLowerCase() == 'Stress')
-					{
+					if (SONG.song.toLowerCase() == 'stress')
 						gfCheck = 'pico-speaker';
-					}
 					else
-					{
 						gfCheck = 'gf-tankmen';
-					}
 			}
 		}
 		else
