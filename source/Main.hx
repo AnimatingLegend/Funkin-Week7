@@ -8,6 +8,7 @@ import openfl.display.FPS;
 import openfl.display.Sprite;
 import openfl.events.Event;
 import flixel.FlxG;
+import ui.FPSCounter;
 
 class Main extends Sprite
 {
@@ -22,34 +23,34 @@ class Main extends Sprite
 	// You can pretty much ignore everything from here on - your code should go in your states.
 
 	public static function setupSaveData()
-		{
-			if(FlxG.save.data.downscroll == null)
-				FlxG.save.data.downscroll = false;
+	{
+		if(FlxG.save.data.downscroll == null)
+			FlxG.save.data.downscroll = false;
 
-			if(FlxG.save.data.fps == null)
-				FlxG.save.data.fps = true;
+		if(FlxG.save.data.fps == null)
+			FlxG.save.data.fps = true;
 
-			if(FlxG.save.data.mem == null)
-				FlxG.save.data.mem = true;
+		if(FlxG.save.data.mem == null)
+			FlxG.save.data.mem = true;
 			
-			if(FlxG.save.data.framerateDraw == null)
-				FlxG.save.data.framerateDraw = 120;
+		if(FlxG.save.data.framerateDraw == null)
+			FlxG.save.data.framerateDraw = 120;
 
-			if(FlxG.save.data.ghostTapping == null)
-				FlxG.save.data.ghostTapping = false;
+		if(FlxG.save.data.ghostTapping == null)
+			FlxG.save.data.ghostTapping = false;
 
-			if(FlxG.save.data.notesplash == null)
-				FlxG.save.data.notesplash = true;
+		if(FlxG.save.data.notesplash == null)
+			FlxG.save.data.notesplash = true;
 
-			if(FlxG.save.data.cursingShit == null)
-				FlxG.save.data.cursingShit = false;
+		if(FlxG.save.data.cursingShit == null)
+			FlxG.save.data.cursingShit = false;
 
-			if(FlxG.save.data.camhudZoom == null)
-				FlxG.save.data.camhudZoom = true;
+		if(FlxG.save.data.camhudZoom == null)
+			FlxG.save.data.camhudZoom = true;
 
-			if(FlxG.save.data.ratingHUD == null)
-				FlxG.save.data.ratingHUD = false;
-		}
+		if(FlxG.save.data.ratingHUD == null)
+			FlxG.save.data.ratingHUD = false;
+	}
 
 	public static function main():Void
 	{
@@ -101,19 +102,25 @@ class Main extends Sprite
 		addChild(new FlxGame(gameWidth, gameHeight, initialState, zoom, framerate, framerate, skipSplash, startFullscreen));
 
 		#if !mobile
-		fpsCounter = new FPSCounter(10, 3);
+		fpsCounter = new FPSCounter(10, 3, 0xFFFFFF);
 		addChild(fpsCounter);
+
 		if(FlxG.save.data.fps == null)
+		{
 			FlxG.save.data.fps = true;
+		}
+
 		toggleFPS(FlxG.save.data.fps);
 		#end
 
 		setupSaveData();
 		Conductor.offset = FlxG.save.data.notesOffset;
 	}
+
 	var fpsCounter:FPSCounter;
 
-	public function toggleFPS(fpsEnabled:Bool):Void {
+	public function toggleFPS(fpsEnabled:Bool):Void 
+	{
 		fpsCounter.visible = fpsEnabled;
 	}
 }
