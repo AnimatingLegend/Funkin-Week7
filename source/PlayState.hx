@@ -83,6 +83,7 @@ class PlayState extends MusicBeatState
 
 	private var strumLineNotes:FlxTypedGroup<FlxSprite>;
 	private var playerStrums:FlxTypedGroup<FlxSprite>;
+	private var opponentStrums:FlxTypedGroup<FlxSprite>;
 
 	private var camZooming:Bool = false;
 	private var curSong:String = "";
@@ -643,10 +644,14 @@ class PlayState extends MusicBeatState
 				case 6:
 					gfCheck = 'gf-pixel';
 				case 7:
-					if (SONG.song.toLowerCase() == 'stress')
+					if (SONG.song.toLowerCase() == 'Stress')
+					{
 						gfCheck = 'pico-speaker';
+					}
 					else
+					{
 						gfCheck = 'gf-tankmen';
+					}
 			}
 		}
 		else
@@ -824,6 +829,7 @@ class PlayState extends MusicBeatState
 		add(grpNoteSplashes);
 
 		playerStrums = new FlxTypedGroup<FlxSprite>();
+		opponentStrums = new FlxTypedGroup<FlxSprite>();
 
 		if (FlxG.save.data.downscroll)
 		{
@@ -850,11 +856,6 @@ class PlayState extends MusicBeatState
 		FlxG.camera.follow(camFollow, LOCKON, 0.04);
 		FlxG.camera.focusOn(camFollow.getPosition());
 
-		// did this to avoid camera locking onto a character w/o the smooth camera tween
-		#if !html5
-		FlxG.camera.follow(camFollow, LOCKON, 0.04);
-		#end
-		
 		// Godbless OldFlag for making my life a lot easier <3
 		FlxG.camera.follow(camFollow, LOCKON, 0.04 * (30 / FlxG.save.data.framerateDraw));
 
@@ -1443,14 +1444,22 @@ class PlayState extends MusicBeatState
 
 			babyArrow.ID = i;
 
-			if (player == 1)
+			switch (player)
 			{
-				playerStrums.add(babyArrow);
+				case 0:
+					opponentStrums.add(babyArrow);
+				case 1:
+					playerStrums.add(babyArrow);
 			}
 
 			babyArrow.animation.play('static');
 			babyArrow.x += 50;
 			babyArrow.x += ((FlxG.width / 2) * player);
+
+			opponentStrums.forEach(function(spr:FlxSprite)
+			{
+				spr.centerOffsets();
+			});
 
 			strumLineNotes.add(babyArrow);
 		}
@@ -1637,6 +1646,18 @@ class PlayState extends MusicBeatState
 			iconP2.animation.curAnim.curFrame = 1;
 		else
 			iconP2.animation.curAnim.curFrame = 0;
+
+		opponentStrums.forEach(function(spr:FlxSprite)
+		{
+			if (spr.animation.curAnim.name == 'confirm' && !curStage.startsWith('school'))
+			{
+				spr.centerOffsets();
+				spr.offset.x -= 13;
+				spr.offset.y -= 13;
+			}
+			else
+				spr.centerOffsets();
+		});
 
 		#if debug
 		if (FlxG.keys.justPressed.EIGHT)
@@ -1853,6 +1874,25 @@ class PlayState extends MusicBeatState
 					if (SONG.needsVoices)
 						vocals.volume = 1;
 
+					if (FlxG.save.data.glowStrums)
+					{
+						opponentStrums.forEach(function(spr:FlxSprite)
+						{
+							if (Math.abs(daNote.noteData) == spr.ID)
+							{
+								spr.animation.play('confirm', true);
+							}
+							if (spr.animation.curAnim.name == 'confirm' && !curStage.startsWith('school'))
+							{
+								spr.centerOffsets();
+								spr.offset.x -= 13;
+								spr.offset.y -= 13;
+							}
+							else
+								spr.centerOffsets();
+						});
+					}
+
 					daNote.kill();
 					notes.remove(daNote, true);
 					daNote.destroy();
@@ -1895,6 +1935,18 @@ class PlayState extends MusicBeatState
 
 						vocals.volume = 0;
 					}
+				}
+			});
+		}
+
+		if (FlxG.save.data.glowStrums)
+		{
+			opponentStrums.forEach(function(spr:FlxSprite)
+			{
+				if (spr.animation.finished)
+				{
+					spr.animation.play('static');
+					spr.centerOffsets();
 				}
 			});
 		}
