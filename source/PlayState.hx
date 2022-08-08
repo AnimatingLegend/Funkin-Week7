@@ -50,6 +50,7 @@ using StringTools;
 class PlayState extends MusicBeatState
 {
 	public static var curStage:String = '';
+	public static var stageCheck:String = 'stage';
 	public static var SONG:SwagSong;
 	public static var isStoryMode:Bool = false;
 	public static var storyWeek:Int = 0;
@@ -236,8 +237,6 @@ class PlayState extends MusicBeatState
 		DiscordClient.changePresence(detailsText, SONG.song + " (" + storyDifficultyText + ")", iconRPC);
 		#end
 
-		var stageCheck:String = 'stage';
-
 		if (SONG.stage == null)
 		{
 			switch (storyWeek)
@@ -250,22 +249,14 @@ class PlayState extends MusicBeatState
 					stageCheck = 'limo';
 				case 5:
 					if (SONG.song.toLowerCase() == 'winter-horrorland')
-					{
 						stageCheck = 'mallEvil';
-					}
 					else
-					{
 						stageCheck = 'mall';
-					}
 				case 6:
 					if (SONG.song.toLowerCase() == 'thorns')
-					{
 						stageCheck = 'schoolEvil';
-					}
 					else
-					{
 						stageCheck = 'school';
-					}
 				case 7:
 					stageCheck = 'tank';
 			}
@@ -2429,38 +2420,6 @@ class PlayState extends MusicBeatState
 
 			if (!practiceMode)
 				songScore -= 10;
-
-			comboBr = new FlxSprite().loadGraphic(Paths.image(pixelShitPart1 + 'comboBreak' + pixelShitPart2));
-			comboBr.screenCenter();
-			if (FlxG.save.data.ratingHUD)
-			{
-				comboBr.y -= 45;
-				comboBr.screenCenter();
-				comboBr.scrollFactor.set(0.7);
-			}
-			comboBr.x += 100;
-			comboBr.acceleration.y = 600;
-			comboBr.velocity.y -= 150;
-			comboBr.antialiasing = true;
-			comboBr.updateHitbox();
-			comboBr.velocity.x += FlxG.random.int(1, 10);
-
-			if (!curStage.startsWith('school'))
-			{
-				comboBr.setGraphicSize(Std.int(comboBr.width * 0.7));
-				comboBr.antialiasing = true;
-			}
-			else
-			{
-				comboBr.setGraphicSize(Std.int(comboBr.width * daPixelZoom * 0.02));
-			}
-
-			/*if (combo > 10)
-				add(comboBr); */
-
-			FlxTween.tween(comboBr, {alpha: 0.005}, 0.1, {
-				startDelay: Conductor.crochet * 0.0001
-			});
 
 			combo = 0;
 
