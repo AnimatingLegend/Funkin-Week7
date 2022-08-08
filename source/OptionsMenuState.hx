@@ -27,7 +27,7 @@ class OptionsMenuState extends MusicBeatState
 
 	var options:Array<OptionCatagory> = [
 		new OptionCatagory("Preferences", [
-			new NaughtyOption("If checked, any explicit content will be censored/removed from the game. (for the children lol)"),
+			new NaughtyOption("If checked, any explicit content will be censored/removed from the game."),
 			#if !html5
 			new FramerateOption("self explanatory"), // HTML5 has some Vsync enabled by default so this option is pretty much useless on web builds
 			#end
@@ -40,6 +40,7 @@ class OptionsMenuState extends MusicBeatState
 			new FPSOption("If unchecked, your fps counter & memory counter disappears."),
 		//	new MemoryCounterOption("also self explanatory"),
 		]),
+	  //new OptionCatagory("Graphics", []), || Coming eventually, idk lol
 		new OptionCatagory("Controls", []),
 		new OptionCatagory("Exit", []),
 	];
@@ -201,10 +202,13 @@ class OptionsMenuState extends MusicBeatState
 				{
 					FlxG.switchState(new ControlsSubState());
 				}
+				/*else if (options[curSelected].getName() == 'Graphics')
+				{
+					FlxG.switchState(new GraphicsSubState());
+				}*/
 				else if (options[curSelected].getName() == "Exit")
 				{
 					FlxG.switchState(new MainMenuState());
-
 					FlxG.sound.play(Paths.sound("cancelMenu"), false);
 				}
 				else
