@@ -18,12 +18,12 @@ Support the project on my itch.io page: https://ninja-muffin24.itch.io/funkin
 Support the Kickstarter https://www.kickstarter.com/projects/funkin/friday-night-funkin-the-full-ass-game
 
 ## Credits / shoutouts
-** Funkin crew**
+**Funkin crew**
 - [ninjamuffin99](https://twitter.com/ninja_muffin99) - Programmer
 - [PhantomArcade3K](https://twitter.com/phantomarcade3k) & [Evilsk8r](https://twitter.com/evilsk8r) - Art
 - [Kawaisprite](https://twitter.com/kawaisprite) - Musician
 
-** Week 7 porters**
+**Week 7 porters**
 - [Legend (thats me!!!)](https://twitter.com/AnimatingLegend) - Programmer (Week 7 port)
 - [OldFlag](https://github.com/ItzOldFlagDEV) - Additional Programmer (Week 7 port)
 
