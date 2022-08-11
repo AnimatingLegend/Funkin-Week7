@@ -819,9 +819,8 @@ class PlayState extends MusicBeatState
 		opponentStrums = new FlxTypedGroup<FlxSprite>();
 
 		if (FlxG.save.data.downscroll)
-		{
 			strumLine.y = FlxG.height - 150;
-		}
+
 
 		generateSong(SONG.song);
 
@@ -838,9 +837,6 @@ class PlayState extends MusicBeatState
 		add(camFollow);
 
 		FlxG.camera.zoom = defaultCamZoom;
-
-		// Default cam lock 60 FPS
-	//	FlxG.camera.follow(camFollow, LOCKON, 0.04);
 		FlxG.camera.focusOn(camFollow.getPosition());
 
 		// did this to avoid camera locking onto a character w/o the smooth camera tween
@@ -1312,6 +1308,15 @@ class PlayState extends MusicBeatState
 					{
 						sustainNote.x += FlxG.width / 2; // general offset
 					}
+					else if (!swagNote.mustPress && FlxG.save.data.middlescroll)
+					{
+						sustainNote.alpha = 0; // general offset
+					}
+	
+					if (sustainNote.mustPress && FlxG.save.data.middlescroll)
+					{
+						sustainNote.x += -270; // general offset
+					}
 				}
 
 				swagNote.mustPress = gottaHitNote;
@@ -1320,8 +1325,14 @@ class PlayState extends MusicBeatState
 				{
 					swagNote.x += FlxG.width / 2; // general offset
 				}
-				else
+				else if (!swagNote.mustPress && FlxG.save.data.middlescroll)
 				{
+					swagNote.alpha = 0; // general offset
+				}
+	
+				if (swagNote.mustPress && FlxG.save.data.middlescroll)
+				{
+					swagNote.x += -270; // general offset
 				}
 			}
 			daBeats += 1;
@@ -1431,7 +1442,8 @@ class PlayState extends MusicBeatState
 			{
 				babyArrow.y -= 10;
 				babyArrow.alpha = 0;
-				FlxTween.tween(babyArrow, {y: babyArrow.y + 10, alpha: 1}, 1, {ease: FlxEase.circOut, startDelay: 0.5 + (0.2 * i)});
+				if (!FlxG.save.data.middlescroll || player != 0)
+					FlxTween.tween(babyArrow, {y: babyArrow.y + 10, alpha: 1}, 1, {ease: FlxEase.circOut, startDelay: 0.5 + (0.2 * i)});
 			}
 
 			babyArrow.ID = i;
@@ -1442,6 +1454,16 @@ class PlayState extends MusicBeatState
 					opponentStrums.add(babyArrow);
 				case 1:
 					playerStrums.add(babyArrow);
+			}
+
+			if (FlxG.save.data.middlescroll && player == 1)
+			{
+				babyArrow.x -= 270;
+			}
+	
+			if (FlxG.save.data.middlescroll && player == 0)
+			{
+				babyArrow.x -= 2000;
 			}
 
 			babyArrow.animation.play('static');

@@ -120,32 +120,6 @@ class FPSOption extends Option
 	}
 }
 
-class MemoryCounterOption extends Option
-{
-	public function new(desc:String)
-	{
-		super();
-		description = desc;
-	}
-
-	public override function press(changeData:Bool):Bool
-	{
-		if (changeData)
-		{
-			FlxG.save.data.mem = !FlxG.save.data.mem;
-		}
-
-		acceptValues = FlxG.save.data.mem;
-		display = updateDisplay();
-		return true;
-	}
-
-	private override function updateDisplay():String
-	{
-		return "Memory Counter ";
-	}
-}
-
 class FramerateOption extends Option
 {
 	public function new(desc:String)
@@ -210,6 +184,29 @@ class DownscrollOption extends Option
 	private override function updateDisplay():String
 	{
 		return "downscroll ";
+	}
+}
+
+class MiddlescrollOption extends Option
+{
+	public function new(desc:String)
+	{
+		super();
+		description = desc;
+	}
+
+	public override function press(changeData:Bool):Bool
+	{
+		if (changeData)
+			FlxG.save.data.middlescroll = !FlxG.save.data.middlescroll;
+		acceptValues = FlxG.save.data.middlescroll;
+		display = updateDisplay();
+		return true;
+	}
+
+	private override function updateDisplay():String
+	{
+		return "middlescroll ";
 	}
 }
 

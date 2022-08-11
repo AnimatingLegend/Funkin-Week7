@@ -21,7 +21,6 @@ class OptionsMenuState extends MusicBeatState
 {
 	var selector:FlxText;
 	var curSelected:Int = 0;
-	private var descTxt:FlxText;
 
 	public static var ingame:Bool = false;
 
@@ -31,16 +30,15 @@ class OptionsMenuState extends MusicBeatState
 			#if !html5
 			new FramerateOption("self explanatory"), // HTML5 has some Vsync enabled by default so this option is pretty much useless on web builds
 			#end
-			new DownscrollOption("If checked, notes go down instead of up."),
+			new DownscrollOption("If checked, your note strums appears on the bottom of the screen instead of up."),
+			new MiddlescrollOption("If checked, your note strums appear in the middle of the screen, & your opponents note strums disappear."),
 			new GhostTappingOption("If checked, you won't get misses from mashing keys while there are no notes to hit."),
-			new CameraZoomOption("If unchecked, the camera wont zoom on every concurring beat."),
+			new CameraZoomOption("If unchecked, the camera won't zoom on every concurring beat."),
 			new RatingHudOption("If checked, the rating sprites with appear on the games HUD."),
-			new NotesplashOption("If unchecked, hitting 'Sick!' notes wont show firework particles."),
-			new OpponentLightStrums("If checked, your opponents note light up whenever its their turn to sing."),
-			new FPSOption("If unchecked, your fps counter & memory counter disappears."),
-		//	new MemoryCounterOption("also self explanatory"),
+			new NotesplashOption("If unchecked, hitting 'Sick!' notes won't show firework particles."),
+			new OpponentLightStrums("If checked, your opponents note strums light up whenever its their turn to sing."),
+			new FPSOption("If unchecked, your fps counter & memory counter disappear's."),
 		]),
-	  //new OptionCatagory("Graphics", []), || Coming eventually, idk lol
 		new OptionCatagory("Controls", []),
 		new OptionCatagory("Exit", []),
 	];
@@ -48,10 +46,13 @@ class OptionsMenuState extends MusicBeatState
 	private var currentDescription:String = "";
 	private var grpControls:FlxTypedGroup<Alphabet>;
 	private var checkBoxesArray:Array<CheckboxThingie> = [];
+	private var descTxt:FlxText;
 
 	var currentSelectedCat:OptionCatagory;
+	var checkbox:CheckboxThingie;
 	var camFollow:FlxObject;
 	var menuBG:FlxSprite;
+	var textBG:FlxSprite;
 
 	override function create()
 	{
@@ -80,15 +81,12 @@ class OptionsMenuState extends MusicBeatState
 			grpControls.add(controlLabel);
 		}
 
-		currentDescription = "Please select a category";
-
-		var textBG:FlxSprite = new FlxSprite(0, FlxG.height - 26).makeGraphic(FlxG.width, 26, 0xFF000000);
+		textBG = new FlxSprite(0, FlxG.height - 45).makeGraphic(FlxG.width, 50, 0xFF000000);
 		textBG.alpha = 0.6;
-		add(textBG);
-		descTxt = new FlxText(textBG.x, textBG.y + 4, FlxG.width, currentDescription, 20);
+
+		descTxt = new FlxText(textBG.x, textBG.y + 4, FlxG.width, currentDescription, 30);
 		descTxt.setFormat(Paths.font("vcr.ttf"), 20, FlxColor.WHITE, CENTER);
 		descTxt.scrollFactor.set();
-		add(descTxt);
 
 		FlxG.camera.follow(camFollow, null, 0.06);
 
@@ -152,6 +150,10 @@ class OptionsMenuState extends MusicBeatState
 				grpControls.add(controlLabel);
 				// DONT PUT X IN THE FIRST PARAMETER OF new ALPHABET() !!
 			}
+
+			remove(textBG);
+			remove(descTxt);
+
 			curSelected = 0;
 			changeSelection(0);
 		}
@@ -202,10 +204,6 @@ class OptionsMenuState extends MusicBeatState
 				{
 					FlxG.switchState(new ControlsSubState());
 				}
-				/*else if (options[curSelected].getName() == 'Graphics')
-				{
-					FlxG.switchState(new GraphicsSubState());
-				}*/
 				else if (options[curSelected].getName() == "Exit")
 				{
 					FlxG.switchState(new MainMenuState());
@@ -214,7 +212,6 @@ class OptionsMenuState extends MusicBeatState
 				else
 				{
 					currentSelectedCat = options[curSelected];
-					isCat = true;
 					grpControls.clear();
 					for (i in 0...currentSelectedCat.getOptions().length)
 					{
@@ -233,6 +230,11 @@ class OptionsMenuState extends MusicBeatState
 					}
 					curSelected = 0;
 					updateCheckboxes();
+
+					isCat = true;
+
+					add(textBG);
+					add(descTxt);
 				}
 			}
 		}
@@ -274,10 +276,12 @@ class OptionsMenuState extends MusicBeatState
 		for (i in 0...currentSelectedCat.getOptions().length)
 		{
 			currentSelectedCat.getOptions()[i].press(false);
-			var checkbox:CheckboxThingie = new CheckboxThingie(0, (70 * i) + 30, currentSelectedCat.getOptions()[i].getAccept());
+			checkbox = new CheckboxThingie(0, (70 * i) + 30, currentSelectedCat.getOptions()[i].getAccept());
 			checkbox.sprTracker = grpControls.members[i];
-			// using a FlxGroup is too much fuss!
+			
+		 // using a FlxGroup is too much fuss!
 			checkBoxesArray.push(checkbox);
+
 			if (!currentSelectedCat.getOptions()[i].withoutCheckboxes)
 				add(checkbox);
 		}
@@ -297,7 +301,7 @@ class OptionsMenuState extends MusicBeatState
 		if (isCat)
 			currentDescription = currentSelectedCat.getOptions()[curSelected].getDescription();
 		else
-			currentDescription = "Please select a category";
+			currentDescription = 'Please select a category.';
 
 		camFollow.screenCenter();
 

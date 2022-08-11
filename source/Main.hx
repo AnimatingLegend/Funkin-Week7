@@ -27,20 +27,23 @@ class Main extends Sprite
 		if(FlxG.save.data.downscroll == null)
 			FlxG.save.data.downscroll = false;
 
-		if(FlxG.save.data.fps == null)
-			FlxG.save.data.fps = true;
+		if(FlxG.save.data.middlescroll == null)
+			FlxG.save.data.middlescroll = false;
 
-		if(FlxG.save.data.mem == null)
-			FlxG.save.data.mem = true;
-			
 		if(FlxG.save.data.framerateDraw == null)
 			FlxG.save.data.framerateDraw = 120;
+
+		if(FlxG.save.data.fps == null)
+			FlxG.save.data.fps = true;
 
 		if(FlxG.save.data.ghostTapping == null)
 			FlxG.save.data.ghostTapping = false;
 
 		if(FlxG.save.data.notesplash == null)
 			FlxG.save.data.notesplash = true;
+
+		if(FlxG.save.data.glowStrums == null)
+			FlxG.save.data.glowStrums = true;
 
 		if(FlxG.save.data.cursingShit == null)
 			FlxG.save.data.cursingShit = false;
@@ -106,9 +109,7 @@ class Main extends Sprite
 		addChild(fpsCounter);
 
 		if(FlxG.save.data.fps == null)
-		{
 			FlxG.save.data.fps = true;
-		}
 
 		toggleFPS(FlxG.save.data.fps);
 		#end
