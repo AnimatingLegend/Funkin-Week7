@@ -181,6 +181,7 @@ class ChartingState extends MusicBeatState
 		add(curRenderedNotes);
 		add(curRenderedSustains);
 
+		changeSection();
 		super.create();
 	}
 
