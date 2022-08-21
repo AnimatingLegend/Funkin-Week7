@@ -2,6 +2,7 @@ package;
 
 import flixel.FlxSprite;
 import flixel.graphics.frames.FlxAtlasFrames;
+import flixel.FlxG;
 
 class BGSprite extends FlxSprite
 {
@@ -13,7 +14,8 @@ class BGSprite extends FlxSprite
 		
 		if (animations != null)
 		{
-			frames = Paths.getSparrowAtlas(image);
+			// im only using BGSprite for the week 7 stage only, so im adding its library here so it wont be a hassle preloading its assets in the chart editor.
+			frames = Paths.getSparrowAtlas(image, 'week7');
 			for (anim in animations)
 			{
 				animation.addByPrefix(anim, anim, 24, loopAnims);
@@ -24,7 +26,7 @@ class BGSprite extends FlxSprite
 		}
 		else
 		{
-			loadGraphic(Paths.image(image));
+			loadGraphic(Paths.image(image, 'week7'));
 			active = false;
 		}
 		scrollFactor.set(scrollX, scrollY);
