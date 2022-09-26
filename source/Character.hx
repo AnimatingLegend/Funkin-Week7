@@ -141,13 +141,11 @@ class Character extends FlxSprite
 				
 				tex = Paths.getSparrowAtlas('charactersAssets/picoSpeaker', 'shared');
 				frames = tex;
-					
 				animation.addByIndices('idle', 'Pico shoot 1', [10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24], "", 24, true);
-	
-				animation.addByIndices('shoot1', 'Pico shoot 1', [0, 1, 2, 3, 4, 5, 6, 7], "", 24, true);
-				animation.addByIndices('shoot2', 'Pico shoot 2', [0, 1, 2, 3, 4, 5, 6, 7], "", 24, false);
-				animation.addByIndices('shoot3', 'Pico shoot 3', [0, 1, 2, 3, 4, 5, 6, 7], "", 24, false);
-				animation.addByIndices('shoot4', 'Pico shoot 4', [0, 1, 2, 3, 4, 5, 6, 7], "", 24, false);
+				animation.addByPrefix('shoot1', 'Pico shoot 1', 24, false);
+				animation.addByPrefix('shoot2', 'Pico shoot 2', 24, false);
+				animation.addByPrefix('shoot3', 'Pico shoot 3', 24, false);
+				animation.addByPrefix('shoot4', 'Pico shoot 4', 24, false);
 
 				addOffset('shoot1', 0, 0);
 				addOffset('shoot2', -1, -128);
@@ -228,12 +226,23 @@ class Character extends FlxSprite
 				// CUZ DAVE IS DUMB!
 				animation.addByPrefix('singRIGHT', 'Mom Pose Left', 24, false);
 
+				animation.addByIndices('idle-loop', "Mom Idle", [10, 11, 12, 13], "", 24, true);
+				animation.addByIndices('singUP-loop', "Mom Up Pose", [10, 11, 12, 13], "", 24, true);
+				animation.addByIndices('singDOWN-loop', "MOM DOWN POSE", [10, 11, 12, 13], "", 24, true);
+				animation.addByIndices('singLEFT-loop', 'Mom Left Pose', [10, 11, 12, 13], "", 24, true);
+				animation.addByIndices('singRIGHT-loop', 'Mom Pose Left', [10, 11, 12, 13], "", 24, true);
+
 				addOffset('idle');
 				addOffset("singUP", 14, 71);
 				addOffset("singRIGHT", 10, -60);
 				addOffset("singLEFT", 250, -23);
 				addOffset("singDOWN", 20, -160);
 
+				addOffset('idle-loop');
+				addOffset("singUP-loop", 14, 71);
+				addOffset("singRIGHT-loop",  10, -60);
+				addOffset("singLEFT-loop", 250, -23);
+				addOffset("singDOWN-loop", 20, -160);
 				playAnim('idle');
 
 			case 'monster':
@@ -383,20 +392,35 @@ class Character extends FlxSprite
 				animation.addByPrefix('singLEFT', 'BF NOTE LEFT0', 24, false);
 				animation.addByPrefix('singRIGHT', 'BF NOTE RIGHT0', 24, false);
 				animation.addByPrefix('singDOWN', 'BF NOTE DOWN0', 24, false);
+
 				animation.addByPrefix('singUPmiss', 'BF NOTE UP MISS', 24, false);
 				animation.addByPrefix('singLEFTmiss', 'BF NOTE LEFT MISS', 24, false);
 				animation.addByPrefix('singRIGHTmiss', 'BF NOTE RIGHT MISS', 24, false);
 				animation.addByPrefix('singDOWNmiss', 'BF NOTE DOWN MISS', 24, false);
 
+				animation.addByIndices('idle-loop', 'BF idle dance', [10, 11, 12, 13], '', 24, true);
+				animation.addByIndices('singUP-loop', 'BF NOTE UP0', [10, 11, 12, 13], '', 24, true);
+				animation.addByIndices('singDOWN-loop', 'BF NOTE DOWN0', [10, 11, 12, 13], '', 24, true);
+				animation.addByIndices('singRIGHT-loop', 'BF NOTE RIGHT0', [10, 11, 12, 13], '', 24, true);
+				animation.addByIndices('singLEFT-loop', 'BF NOTE LEFT0', [10, 11, 12, 13], '', 24, true);
+				
 				addOffset('idle', -5);
 				addOffset("singUP", -29, 27);
 				addOffset("singRIGHT", -38, -7);
 				addOffset("singLEFT", 12, -6);
 				addOffset("singDOWN", -10, -50);
+
 				addOffset("singUPmiss", -29, 27);
 				addOffset("singRIGHTmiss", -30, 21);
 				addOffset("singLEFTmiss", 12, 24);
 				addOffset("singDOWNmiss", -11, -19);
+
+				// due to hair physics freezing & fucked offsets, i made this
+				addOffset('idle-loop', -5);
+				addOffset("singUP-loop", -29, 27);
+				addOffset("singRIGHT-loop", -38, -7);
+				addOffset("singLEFT-loop", 12, -6);
+				addOffset("singDOWN-loop", -10, -50);
 				playAnim('idle');
 
 				flipX = true;
@@ -683,7 +707,7 @@ class Character extends FlxSprite
 		}
 		TankmenBG.animationNotes = animationNotes;
 		animationNotes.sort(sortAnims);
-	//	trace(animationNotes); 
+		trace(animationNotes); 
 	}
 
 	function sortAnims(x, y)
@@ -710,34 +734,40 @@ class Character extends FlxSprite
 				holdTimer = 0;
 			}
 		}
+
+		if (!debugMode)
+		{
+			if(animation.curAnim.finished && animation.getByName(animation.curAnim.name + '-loop') != null)
+				playAnim(animation.curAnim.name + '-loop');		
+		}
 		
-			switch (curCharacter)
-			{
-				case 'gf':
-					if (animation.curAnim.name == 'hairFall' && animation.curAnim.finished)
-						playAnim('danceRight');
+		switch (curCharacter)
+		{
+			case 'gf':
+				if (animation.curAnim.name == 'hairFall' && animation.curAnim.finished)
+					playAnim('danceRight');
 					
-				case 'pico-speaker':
-					if (animationNotes.length > 0 && Conductor.songPosition > animationNotes[0][0])
+			case 'pico-speaker':
+				if (animationNotes.length > 0 && Conductor.songPosition > animationNotes[0][0])
+				{
+				//	trace("played shoot anim" + animationNotes[0][1]);
+					var shotDirection:Int = 1;
+					if (animationNotes[0][1] >= 2)
 					{
-					 // trace("played shoot anim" + animationNotes[0][1]);
-						var shotDirection:Int = 1;
-						if (animationNotes[0][1] >= 2)
-						{
-							shotDirection = 3;
-						}
-						shotDirection += FlxG.random.int(0, 1);
+						shotDirection = 3;
+					}
+					shotDirection += FlxG.random.int(0, 1);
 						
-						playAnim('shoot' + shotDirection, true);
-						animationNotes.shift();
-					}
-					if (animation.curAnim.finished)
-					{
-						playAnim(animation.curAnim.name, false, false, animation.curAnim.frames.length - 3);
-					}
-			}
+					playAnim('shoot' + shotDirection, true);
+					animationNotes.shift();
+				}
+				if (animation.curAnim.finished)
+				{
+					playAnim(animation.curAnim.name, false, false, animation.curAnim.frames.length - 3);
+				}
+		}
 	
-			super.update(elapsed);
+		super.update(elapsed);
 	}
 
 	private var danced:Bool = false;
@@ -764,6 +794,8 @@ class Character extends FlxSprite
 					case 'bf-pixel-dead':
 						// do nothing, just act casual lol
 					case 'bf-holding-gf-DEAD':
+						// do nothing, just act casual lol
+					case 'pico-speaker':
 						// do nothing, just act casual lol
 					case 'spooky':
 						danced = !danced;
