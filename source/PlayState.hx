@@ -867,7 +867,7 @@ class PlayState extends MusicBeatState
 		add(healthBar); // <--- health bar
 
 		scoreTxt = new FlxText(healthBarBG.x + healthBarBG.width - 190, healthBarBG.y + 30, 0, "", 20);
-		scoreTxt.setFormat(Paths.font("vcr.ttf"), 16, FlxColor.WHITE, RIGHT);
+		scoreTxt.setFormat(Paths.font("vcr.ttf"), 16, FlxColor.WHITE, RIGHT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		scoreTxt.scrollFactor.set();
 		add(scoreTxt);
 
@@ -1372,7 +1372,7 @@ class PlayState extends MusicBeatState
 					babyArrow.animation.add('green', [6]);
 					babyArrow.animation.add('red', [7]);
 					babyArrow.animation.add('blue', [5]);
-					babyArrow.animation.add('purple', [4]);
+					babyArrow.animation.add('purplel', [4]);
 
 					babyArrow.setGraphicSize(Std.int(babyArrow.width * daPixelZoom));
 					babyArrow.updateHitbox();
@@ -1416,22 +1416,22 @@ class PlayState extends MusicBeatState
 					{
 						case 0:
 							babyArrow.x += Note.swagWidth * 0;
-							babyArrow.animation.addByPrefix('static', 'arrowLEFT');
+							babyArrow.animation.addByPrefix('static', 'arrow static instance 1');
 							babyArrow.animation.addByPrefix('pressed', 'left press', 24, false);
 							babyArrow.animation.addByPrefix('confirm', 'left confirm', 24, false);
 						case 1:
 							babyArrow.x += Note.swagWidth * 1;
-							babyArrow.animation.addByPrefix('static', 'arrowDOWN');
+							babyArrow.animation.addByPrefix('static', 'arrow static instance 2');
 							babyArrow.animation.addByPrefix('pressed', 'down press', 24, false);
 							babyArrow.animation.addByPrefix('confirm', 'down confirm', 24, false);
 						case 2:
 							babyArrow.x += Note.swagWidth * 2;
-							babyArrow.animation.addByPrefix('static', 'arrowUP');
+							babyArrow.animation.addByPrefix('static', 'arrow static instance 4');
 							babyArrow.animation.addByPrefix('pressed', 'up press', 24, false);
 							babyArrow.animation.addByPrefix('confirm', 'up confirm', 24, false);
 						case 3:
 							babyArrow.x += Note.swagWidth * 3;
-							babyArrow.animation.addByPrefix('static', 'arrowRIGHT');
+							babyArrow.animation.addByPrefix('static', 'arrow static instance 3');
 							babyArrow.animation.addByPrefix('pressed', 'right press', 24, false);
 							babyArrow.animation.addByPrefix('confirm', 'right confirm', 24, false);
 					}
@@ -1444,6 +1444,7 @@ class PlayState extends MusicBeatState
 			{
 				babyArrow.y -= 10;
 				babyArrow.alpha = 0;
+
 				if (!FlxG.save.data.middlescroll || player != 0)
 					FlxTween.tween(babyArrow, {y: babyArrow.y + 10, alpha: 1}, 1, {ease: FlxEase.circOut, startDelay: 0.5 + (0.2 * i)});
 			}
@@ -1459,14 +1460,10 @@ class PlayState extends MusicBeatState
 			}
 
 			if (FlxG.save.data.middlescroll && player == 1)
-			{
 				babyArrow.x -= 270;
-			}
 	
-			if (FlxG.save.data.middlescroll && player == 0)
-			{
+			else if (FlxG.save.data.middlescroll && player == 0)
 				babyArrow.x -= 2000;
-			}
 
 			babyArrow.animation.play('static');
 			babyArrow.x += 50;
@@ -1639,8 +1636,8 @@ class PlayState extends MusicBeatState
 			#end
 		}
 
-		iconP1.setGraphicSize(Std.int(FlxMath.lerp(150, iconP1.width, 0.50)));
-		iconP2.setGraphicSize(Std.int(FlxMath.lerp(150, iconP2.width, 0.50)));
+		iconP1.setGraphicSize(Std.int(FlxMath.lerp(150, iconP1.width, 0.80)));
+		iconP2.setGraphicSize(Std.int(FlxMath.lerp(150, iconP2.width, 0.80)));
 
 		iconP1.updateHitbox();
 		iconP2.updateHitbox();
