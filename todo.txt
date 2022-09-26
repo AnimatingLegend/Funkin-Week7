@@ -1,8 +1,5 @@
 TODO:
 - Week 7 cutscenes [Desktop]
-- Update Animation Debug Menu [make it more like psych engine]
-- Fix issue where stages only preload when ur on a specific week
-- More Framerate bugs
 
 DOING:
 - Week 7 cutscenes [Desktop]
@@ -24,3 +21,4 @@ COMPLETED:
 - Week 6 Dialogue fixes
 - Input System fixes 
 - Fix stupid checkbox layering issue
+- Fix issue where stages only preload when ur on a specific week
