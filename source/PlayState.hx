@@ -823,7 +823,6 @@ class PlayState extends MusicBeatState
 		if (FlxG.save.data.downscroll)
 			strumLine.y = FlxG.height - 150;
 
-
 		generateSong(SONG.song);
 
 		camFollow = new FlxObject(0, 0, 1, 1);
@@ -841,13 +840,11 @@ class PlayState extends MusicBeatState
 		FlxG.camera.zoom = defaultCamZoom;
 		FlxG.camera.focusOn(camFollow.getPosition());
 
-		// did this to avoid camera locking onto a character w/o the smooth camera tween
-		#if !html5
+		#if desktop
+		FlxG.camera.follow(camFollow, LOCKON, 0.04 * (30 / FlxG.save.data.framerateDraw));
+		#else
 		FlxG.camera.follow(camFollow, LOCKON, 0.04);
 		#end
-
-		// Godbless OldFlag for making my life a lot easier <3
-		FlxG.camera.follow(camFollow, LOCKON, 0.04 * (30 / FlxG.save.data.framerateDraw));
 
 		FlxG.worldBounds.set(0, 0, FlxG.width, FlxG.height);
 
@@ -855,7 +852,9 @@ class PlayState extends MusicBeatState
 
 		healthBarBG = new FlxSprite(0, FlxG.height * 0.9).loadGraphic(Paths.image('healthBar'));
 		if (FlxG.save.data.downscroll)
+		{
 			healthBarBG.y = FlxG.height * 0.1;
+		}
 		healthBarBG.screenCenter(X);
 		healthBarBG.scrollFactor.set();
 		add(healthBarBG);
@@ -2069,7 +2068,7 @@ class PlayState extends MusicBeatState
 
 		var coolText:FlxText = new FlxText(0, 0, 0, placement, 32);
 		coolText.screenCenter();
-		coolText.x = FlxG.width * 0.55;
+		coolText.x = FlxG.width * 0.35;
 
 		var rating:FlxSprite = new FlxSprite();
 		var score:Int = 350;
@@ -2078,9 +2077,12 @@ class PlayState extends MusicBeatState
 		if (noteDiff <= Conductor.safeZoneOffset * 0.23)
 		{
 			daRating = 'sick';
-			if (FlxG.save.data.notesplash)
-				createNoteSplash(note);
 			score = 350;
+
+			if (FlxG.save.data.notesplash)
+			{
+				createNoteSplash(note);
+			}
 		}
 		else if (noteDiff <= Conductor.safeZoneOffset * 0.7)
 		{
@@ -2101,14 +2103,6 @@ class PlayState extends MusicBeatState
 		if (!practiceMode)
 			songScore += score;
 
-		/* if (combo > 60)
-				daRating = 'sick';
-			else if (combo > 12)
-				daRating = 'good'
-			else if (combo > 4)
-				daRating = 'bad';
-		 */
-
 		var pixelShitPart1:String = "";
 		var pixelShitPart2:String = '';
 
@@ -2122,14 +2116,8 @@ class PlayState extends MusicBeatState
 		rating.screenCenter();
 		if (FlxG.save.data.ratingHUD)
 		{
-			rating.y -= 25;
+			rating.cameras = [camHUD];
 			rating.screenCenter();
-			rating.scrollFactor.set(0.7);
-
-			var scaleX = rating.scale.x;
-			var scaleY = rating.scale.y;
-
-			rating.scale.scale(1.2);
 		}
 		rating.x = coolText.x - 40;
 		rating.y -= 60;
@@ -2142,17 +2130,11 @@ class PlayState extends MusicBeatState
 		comboSpr.screenCenter();
 		if (FlxG.save.data.ratingHUD)
 		{
-			comboSpr.y += 90;
+			comboSpr.cameras = [camHUD];
 			comboSpr.screenCenter();
-			comboSpr.scrollFactor.set(0.7);
-
-			var scaleX = rating.scale.x;
-			var scaleY = rating.scale.y;
-
-			comboSpr.scale.scale(1.2);
 		}
 		comboSpr.x = coolText.x + 55;
-		comboSpr.y += 50;
+		comboSpr.y += 90;
 		comboSpr.acceleration.y = 550;
 		comboSpr.velocity.y -= 150;
 		comboSpr.velocity.x += FlxG.random.int(1, 10);
@@ -2166,8 +2148,8 @@ class PlayState extends MusicBeatState
 		}
 		else
 		{
-			rating.setGraphicSize(Std.int(rating.width * daPixelZoom * 0.7));
-			comboSpr.setGraphicSize(Std.int(comboSpr.width * daPixelZoom * 0.7));
+			rating.setGraphicSize(Std.int(rating.width * daPixelZoom * 0.75));
+			comboSpr.setGraphicSize(Std.int(comboSpr.width * daPixelZoom * 0.75));
 		}
 
 		comboSpr.updateHitbox();
@@ -2186,13 +2168,8 @@ class PlayState extends MusicBeatState
 			numScore.screenCenter();
 			if (FlxG.save.data.ratingHUD)
 			{
-				numScore.y += 50;
-				numScore.x -= 50;
+				numScore.cameras = [camHUD];
 				numScore.screenCenter();
-				numScore.scrollFactor.set(0.7);
-
-				var scaleX = numScore.scale.x;
-				var scaleY = numScore.scale.y;
 			}
 			numScore.x = coolText.x + (43 * daLoop) - 90;
 			numScore.y += 80;
@@ -2211,7 +2188,7 @@ class PlayState extends MusicBeatState
 			numScore.acceleration.y = FlxG.random.int(200, 300);
 			numScore.velocity.y -= FlxG.random.int(140, 160);
 			numScore.velocity.x = FlxG.random.float(-5, 5);
-
+		
 			if (combo >= 10 || combo == 0)
 				add(numScore);
 
@@ -2300,7 +2277,13 @@ class PlayState extends MusicBeatState
 
 	private function keyShit():Void
 	{
-		var holdingArray:Array<Bool> = [controls.NOTE_LEFT, controls.NOTE_DOWN, controls.NOTE_UP, controls.NOTE_RIGHT];
+		var holdingArray:Array<Bool> = [
+			controls.NOTE_LEFT, 
+			controls.NOTE_DOWN, 
+			controls.NOTE_UP, 
+			controls.NOTE_RIGHT
+		];
+
 		var controlArray:Array<Bool> = [
 			controls.NOTE_LEFT_P,
 			controls.NOTE_DOWN_P,
