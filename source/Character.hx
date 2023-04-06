@@ -126,7 +126,7 @@ class Character extends FlxSprite
 
 			case 'gf-tankmen':
 				frames = Paths.getSparrowAtlas('charactersAssets/gfTankmen', 'shared');
-				animation.addByIndices('sad', 'GF Crying at Gunpoint ', [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12], "", 24, false);
+				animation.addByIndices('sad', 'GF Crying at Gunpoint ', [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12], "", 24, true);
 				animation.addByIndices('danceLeft', 'GF Dancing at Gunpoint', [30, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14], "", 24, false);
 				animation.addByIndices('danceRight', 'GF Dancing at Gunpoint', [15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29], "", 24, false);
 	
@@ -134,7 +134,6 @@ class Character extends FlxSprite
 				addOffset('danceLeft', 0, -9);
 				addOffset('danceRight', 0, -9);
 						
-		
 				playAnim('danceRight');	
 
 			case 'pico-speaker':
@@ -623,10 +622,6 @@ class Character extends FlxSprite
 	
 				animation.addByPrefix('singUP-alt', 'TANKMAN UGH', 24, false);
 				animation.addByPrefix('singDOWN-alt', 'PRETTY GOOD', 24, false);
-
-				// Dont Mind this
-				animation.addByPrefix('singLEFT-alt', 'Tankman UP note', 24, false);
-	
 	
 				addOffset('idle');
 				addOffset("singUP", 54, 49);
@@ -636,8 +631,6 @@ class Character extends FlxSprite
 
 				addOffset("singUP-alt", -14, -8);
 				addOffset("singDOWN-alt", 2, 16);
-
-				addOffset("singLEFT-alt", 54, 49);
 				
 				playAnim('idle');
 				

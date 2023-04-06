@@ -1,8 +1,8 @@
 TODO:
-- Week 7 cutscenes [Desktop]
+- N/A
 
 DOING:
-- Week 7 cutscenes [Desktop]
+- N/A
 
 HOLD: (Putting these tasks on hold while i do other ones)
 
@@ -22,3 +22,4 @@ COMPLETED:
 - Input System fixes 
 - Fix stupid checkbox layering issue
 - Fix issue where stages only preload when ur on a specific week
+- Week 7 cutscenes [Desktop] (sry for the year wait lmao, BUT ITS DONE SO WHATEVER)
