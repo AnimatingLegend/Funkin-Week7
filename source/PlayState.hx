@@ -1099,7 +1099,7 @@ class PlayState extends MusicBeatState
 		tankCutscene.frames = Paths.getSparrowAtlas('cutscenes/tankTalkSong3-pt1');
 		tankCutscene.animation.addByPrefix('tankyguy', 'TANK TALK 3 P1 UNCUT', 24, false);
 		tankCutscene.animation.play('tankyguy');
-		tankCutscene.antialiasing = FlxG.save.data.lowData;
+		tankCutscene.antialiasing = true;
 		bfTankCutsceneLayer.add(tankCutscene);
 
 		var alsoTankCutscene:FlxSprite = new FlxSprite(20, 320);
