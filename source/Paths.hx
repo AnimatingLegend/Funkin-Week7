@@ -3,7 +3,9 @@ package;
 import flixel.FlxG;
 import flixel.graphics.frames.FlxAtlasFrames;
 import openfl.utils.AssetType;
+import openfl.system.System;
 import openfl.utils.Assets as OpenFlAssets;
+import flixel.graphics.FlxGraphic;
 
 class Paths
 {
@@ -33,6 +35,63 @@ class Paths
 		}
 
 		return getPreloadPath(file);
+	}
+
+	public static function excludeAsset(key:String) 
+	{
+		if (!dumpExclusions.contains(key))
+			dumpExclusions.push(key);
+	}
+
+	public static var dumpExclusions:Array<String> =
+	[
+		'assets/music/freakyMenu.$SOUND_EXT',
+		'assets/shared/music/breakfast.$SOUND_EXT',
+	];
+
+	public static var currentTrackedAssets:Map<String, FlxGraphic> = [];
+	public static var localTrackedAssets:Array<String> = [];
+	public static function clearUnusedMemory() 
+	{
+		for (key in currentTrackedAssets.keys()) 
+		{
+			if (!localTrackedAssets.contains(key) && !dumpExclusions.contains(key)) 
+			{
+				var obj = currentTrackedAssets.get(key);
+				@:privateAccess
+				
+				if (obj != null) 
+				{
+					openfl.Assets.cache.removeBitmapData(key);
+					FlxG.bitmap._cache.remove(key);
+					obj.destroy();
+					currentTrackedAssets.remove(key);
+				}
+			}
+		}
+
+		// run the garbage collector for good measure lmfao
+		System.gc();
+	}
+
+	public static function clearStoredMemory(?cleanUnused:Bool = false) 
+	{
+		// clear anything not in the tracked assets list
+		@:privateAccess
+		for (key in FlxG.bitmap._cache.keys())
+		{
+			var obj = FlxG.bitmap._cache.get(key);
+			if (obj != null && !currentTrackedAssets.exists(key)) 
+			{
+				openfl.Assets.cache.removeBitmapData(key);
+				FlxG.bitmap._cache.remove(key);
+				obj.destroy();
+			}
+		}
+
+		// flags everything to be cleared out next unused memory clear
+		localTrackedAssets = [];
+		#if !html5 openfl.Assets.cache.clear("songs"); #end
 	}
 
 	static public function getLibraryPath(file:String, library = "preload")

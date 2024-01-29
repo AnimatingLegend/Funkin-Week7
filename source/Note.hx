@@ -43,7 +43,7 @@ class Note extends FlxSprite
 		this.prevNote = prevNote;
 		isSustainNote = sustainNote;
 
-		x += 50;
+		x += (FlxG.save.data.middlescroll) + 50;
 		// MAKE SURE ITS DEFINITELY OFF SCREEN?
 		y -= 2000;
 		this.strumTime = strumTime;
@@ -55,7 +55,7 @@ class Note extends FlxSprite
 		switch (daStage)
 		{
 			case 'school' | 'schoolEvil':
-				loadGraphic(Paths.image('weeb/pixelUI/arrows-pixels'), true, 17, 17);
+				loadGraphic(Paths.image('weeb/pixelUI/arrows-pixels', 'week6'), true, 17, 17);
 
 				animation.add('greenScroll', [6]);
 				animation.add('redScroll', [7]);
@@ -64,7 +64,7 @@ class Note extends FlxSprite
 
 				if (isSustainNote)
 				{
-					loadGraphic(Paths.image('weeb/pixelUI/arrowEnds'), true, 7, 6);
+					loadGraphic(Paths.image('weeb/pixelUI/arrowEnds', 'week6'), true, 7, 6);
 
 					animation.add('purpleholdend', [4]);
 					animation.add('greenholdend', [6]);
@@ -103,32 +103,34 @@ class Note extends FlxSprite
 				antialiasing = true;
 		}
 
-		switch (noteData)
+		/**
+		 * Code originally from psych engine; with tweaks from FNF' Definitive Edition
+		 * Doing this 'if' check to fix the warnings on Senpai songs
+		 */
+		x += swagWidth * (noteData % 4);
+		if (!isSustainNote) 
 		{
-			case 0:
-				x += swagWidth * 0;
-				animation.play('purpleScroll');
-			case 1:
-				x += swagWidth * 1;
-				animation.play('blueScroll');
-			case 2:
-				x += swagWidth * 2;
-				animation.play('greenScroll');
-			case 3:
-				x += swagWidth * 3;
-				animation.play('redScroll');
+			var animToPlay:String = '';	
+			switch (noteData % 4)
+			{
+				case 0:
+					animToPlay = 'purple';
+				case 1:
+					animToPlay = 'blue';
+				case 2:
+					animToPlay = 'green';
+				case 3:
+					animToPlay = 'red';
+			}
+			animation.play(animToPlay + 'Scroll');
 		}
-
-		// trace(prevNote);
 
 		if (isSustainNote && prevNote != null)
 		{
 			alpha = 0.6;
 
 			if (FlxG.save.data.downscroll)
-			{
 				angle = 180;
-			}	
 
 			x += width / 2;
 
@@ -167,7 +169,6 @@ class Note extends FlxSprite
 
 				prevNote.scale.y *= Conductor.stepCrochet / 100 * 1.5 * PlayState.SONG.speed;
 				prevNote.updateHitbox();
-			 // prevNote.setGraphicSize();
 			}
 		}
 	}

@@ -28,14 +28,15 @@ class CoolUtil
 		return daList;
 	}
 
-	public static function camLerpShit(a:Float):Float
-		{
-			return FlxG.elapsed / 0.016666666666666666 * a;
-		}
-		public static function coolLerp(a:Float, b:Float, c:Float):Float
-		{
-			return a + CoolUtil.camLerpShit(c) * (b - a);
-		}
+	public static function camLerpShit(ratio:Float)
+	{
+		return FlxG.elapsed / (1 / 60) * ratio;
+	}
+
+	public static function coolLerp(a:Float, b:Float, ratio:Float)
+	{
+		return a + camLerpShit(ratio) * (b - a);
+	}
 
 	public static function numberArray(max:Int, ?min = 0):Array<Int>
 	{
@@ -45,5 +46,10 @@ class CoolUtil
 			dumbArray.push(i);
 		}
 		return dumbArray;
+	}
+
+	inline public static function boundTo(value:Float, min:Float, max:Float):Float 
+	{
+		return Math.max(min, Math.min(max, value));
 	}
 }

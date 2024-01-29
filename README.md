@@ -25,7 +25,10 @@ Support the Kickstarter https://www.kickstarter.com/projects/funkin/friday-night
 
 **Week 7 porters**
 - [Legend (thats me!!!)](https://twitter.com/AnimatingLegend) - Programmer (Week 7 port)
-- [OldFlag](https://github.com/ItzOldFlagDEV) - Additional Programmer (Week 7 port)
+
+**shoutout**
+- [OldFlag](https://github.com/ItzOldFlagDEV) - Additional Programmer (optimized a majority of the week7 port!!)
+- [TackDrawz](https://www.youtube.com/channel/UCAPDPJuunLWQJzOXA_3yEfw) - Art (made a couple of assets for my engine!)
 
 This game was made with love to Newgrounds and its community. Extra love to Tom Fulp.
 

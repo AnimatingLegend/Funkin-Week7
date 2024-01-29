@@ -1,5 +1,6 @@
 package;
 
+import lime.app.Application;
 import openfl.text.FontType;
 import flixel.util.FlxColor;
 import Controls.KeyboardScheme;
@@ -91,6 +92,39 @@ class Option
 	{
 		return false;
 	}
+
+	public static function setupSaveData()
+	{
+		if(FlxG.save.data.downscroll == null)
+			FlxG.save.data.downscroll = false;
+
+		if(FlxG.save.data.middlescroll == null)
+			FlxG.save.data.middlescroll = false;
+
+		if(FlxG.save.data.framerateDraw == null)
+			FlxG.save.data.framerateDraw = 120;
+
+		if(FlxG.save.data.ghostTapping == null)
+			FlxG.save.data.ghostTapping = false;
+
+		if(FlxG.save.data.notesplash == null)
+			FlxG.save.data.notesplash = true;
+
+		if(FlxG.save.data.glowStrums == null)
+			FlxG.save.data.glowStrums = true;
+
+		if(FlxG.save.data.explicitContent == null)
+			FlxG.save.data.explicitContent = true;
+
+		if(FlxG.save.data.camhudZoom == null)
+			FlxG.save.data.camhudZoom = true;
+
+		if(FlxG.save.data.weekUnlocked == null)
+			FlxG.save.data.weekUnlocked = 8;
+
+		if(FlxG.save.data.fps == null)
+			FlxG.save.data.fps = true;
+	}
 }
 
 class FPSOption extends Option
@@ -133,7 +167,6 @@ class FramerateOption extends Option
 	public override function press(changeData:Bool):Bool
 	{
 		withoutCheckboxes = true;
-		boldDisplay = false;
 		return true;
 	}
 
@@ -159,8 +192,7 @@ class FramerateOption extends Option
 
 	private override function updateDisplay():String
 	{
-		boldDisplay = false;
-		return "Framerate: " + FlxG.drawFramerate;
+		return "FPS Cap " + FlxG.drawFramerate;
 	}
 }
 
@@ -267,8 +299,8 @@ class NaughtyOption extends Option
 	public override function press(changeData:Bool):Bool
 	{
 		if (changeData)
-			FlxG.save.data.cursingShit = !FlxG.save.data.cursingShit;
-		acceptValues = FlxG.save.data.cursingShit;
+			FlxG.save.data.explicitContent = !FlxG.save.data.explicitContent;
+		acceptValues = FlxG.save.data.explicitContent;
 		display = updateDisplay();
 		return true;
 	}
@@ -302,29 +334,6 @@ class CameraZoomOption extends Option
 	}
 }
 
-class RatingHudOption extends Option
-{
-	public function new(desc:String)
-	{
-		super();
-		description = desc;
-	}
-
-	public override function press(changeData:Bool):Bool
-	{
-		if (changeData)
-			FlxG.save.data.ratingHUD = !FlxG.save.data.ratingHUD;
-		acceptValues = FlxG.save.data.ratingHUD;
-		display = updateDisplay();
-		return true;
-	}
-
-	private override function updateDisplay():String
-	{
-		return "add judgements to hud";
-	}
-}
-
 class OpponentLightStrums extends Option
 {
 	public function new(desc:String)
@@ -345,5 +354,140 @@ class OpponentLightStrums extends Option
 	private override function updateDisplay():String
 	{
 		return "Opponents light strums ";
+	}
+}
+
+class LockWeeksOption extends Option
+{
+	var confirm:Bool = false;
+
+	public function new(desc:String)
+	{
+		super();
+		withoutCheckboxes = true;
+		description = desc;
+	}
+
+	public override function press(changeData:Bool):Bool
+	{
+		withoutCheckboxes = true;
+
+		if (!confirm)
+		{
+			confirm = true;
+			display = updateDisplay();
+			return true;
+		}
+
+		if (changeData)
+			FlxG.save.data.weekUnlocked = !FlxG.save.data.weekUnlocked;
+
+		FlxG.save.data.weekUnlocked = 1;
+		StoryMenuState.weekUnlocked = [true, true];
+		trace('Weeks Locked');
+
+		acceptValues = FlxG.save.data.weekUnlocked;
+		display = updateDisplay();
+		return true;
+	}
+
+	private override function updateDisplay():String
+	{
+		return confirm ? "Confirm Story Reset" : "Reset Story Progress";
+	}
+}
+
+class ResetHighscore extends Option
+{
+	var confirm:Bool = false;
+
+	public function new(desc:String)
+	{
+		super();
+		withoutCheckboxes = true;
+		description = desc;
+	}
+
+	public override function press(changeData:Bool):Bool
+	{
+		withoutCheckboxes = true;
+
+		if (!confirm)
+		{
+			confirm = true;
+			display = updateDisplay();
+			return true;
+		}
+
+		if (changeData)
+			FlxG.save.data.resetHighscore = !FlxG.save.data.resetHighscore;
+
+		FlxG.save.data.songScores = null;
+		for (key in Highscore.songScores.keys())
+		{
+			Highscore.songScores[key] = 0;
+		}
+
+		FlxG.save.data.songCombos = null;
+		trace('Highscores Wiped');
+
+		acceptValues = FlxG.save.data.resetHighscore;
+		display = updateDisplay();
+		return true;
+	}
+
+	private override function updateDisplay():String
+	{
+		return confirm ? "Confirm Score Reset" : "Reset Score";
+	}
+}
+
+class ResetSettings extends Option
+{
+	var confirm:Bool = false;
+
+	public function new(desc:String)
+	{
+		super();
+		withoutCheckboxes = true;
+		description = desc;
+	}
+
+	public override function press(changeData:Bool):Bool
+	{
+		withoutCheckboxes = true;
+
+		if (!confirm)
+		{
+			confirm = true;
+			display = updateDisplay();
+			return true;
+		}
+
+		if (changeData)
+			FlxG.save.data.resetSettings = !FlxG.save.data.resetSettings;
+
+		FlxG.save.data.downscroll = null;
+		FlxG.save.data.middlescroll = null;
+		FlxG.save.data.framerateDraw = null;
+		FlxG.save.data.fps = null;
+		FlxG.save.data.ghostTapping = null;
+		FlxG.save.data.notesplash = null;
+		FlxG.save.data.glowStrums = null;
+		FlxG.save.data.cursingShit = null;
+		FlxG.save.data.camhudZoom = null;
+		FlxG.save.data.weekUnlocked = null;
+
+		Option.setupSaveData();
+		trace('All settings have been reset');
+
+		acceptValues = FlxG.save.data.resetSettings;
+		display = updateDisplay();
+		return true;
+	}
+
+	private override function updateDisplay():String
+	{
+		return confirm ? "Confirm Settings Reset" : "Reset Settings";
 	}
 }

@@ -31,6 +31,8 @@ import io.newgrounds.NG;
 import lime.app.Application;
 import openfl.Assets;
 import openfl.Lib;
+import shaderslmao.ColorSwap;
+import Options.Option;
 
 using StringTools;
 
@@ -58,11 +60,7 @@ class TitleState extends MusicBeatState
 
 	override public function create():Void
 	{
-		/*#if polymod
-		polymod.Polymod.init({modRoot: "mods", dirs: ['introMod'], framework: OPENFL});
-		#end*/
-
-	//	FlxG.game.focusLostFramerate = 60;
+		Paths.clearStoredMemory();
 
 		swagShader = new ColorSwap();
 
@@ -75,25 +73,10 @@ class TitleState extends MusicBeatState
 		FlxG.save.bind('funkin', 'ninjamuffin99');
 
 		PlayerSettings.init();
-		Main.setupSaveData();
+		Option.setupSaveData();
 		Highscore.load();
 
-		if (FlxG.save.data.weekUnlocked != null)
-		{
-			// FIX LATER!!!
-			// WEEK UNLOCK PROGRESSION!!
-			// StoryMenuState.weekUnlocked = FlxG.save.data.weekUnlocked;
-
-			if (StoryMenuState.weekUnlocked.length < 4)
-				StoryMenuState.weekUnlocked.insert(0, true);
-
-			// QUICK PATCH OOPS!
-			if (!StoryMenuState.weekUnlocked[0])
-				StoryMenuState.weekUnlocked[0] = true;
-		}
-
-		if (FlxG.save.data.seenVideo != null)
-		{
+		if (FlxG.save.data.seenVideo != null) {
 			VideoState.seenVideo = FlxG.save.data.seenVideo;
 		}
 
@@ -125,36 +108,6 @@ class TitleState extends MusicBeatState
 		#end
 	}
 
-	#if web
-	function client_onMetaData(e)
-	{
-		video.attachNetStream(netStream);
-		video.width = video.videoWidth;
-		video.height = video.videoHeight;
-	}
-
-	function netStream_onAsyncError(e)
-	{
-		trace("Error loading video");
-	}
-
-	function netConnection_onNetStatus(e)
-	{
-		if (e.info.code == 'NetStream.Play.Complete')
-		{
-			startIntro();
-		}
-		trace(e.toString());
-	}
-
-	function overlay_onMouseDown(e)
-	{
-		netStream.soundTransform.volume = 0.2;
-		netStream.soundTransform.pan = -1;
-		Lib.current.stage.removeChild(overlay);
-	}
-	#end
-
 	var logoBl:FlxSprite;
 	var gfDance:FlxSprite;
 	var danceLeft:Bool = false;
@@ -176,14 +129,6 @@ class TitleState extends MusicBeatState
 			transIn = FlxTransitionableState.defaultTransIn;
 			transOut = FlxTransitionableState.defaultTransOut;
 
-			// HAD TO MODIFY SOME BACKEND SHIT
-			// IF THIS PR IS HERE IF ITS ACCEPTED UR GOOD TO GO
-			// https://github.com/HaxeFlixel/flixel-addons/pull/348
-
-			// var music:FlxSound = new FlxSound();
-			// music.loadStream(Paths.music('freakyMenu'));
-			// FlxG.sound.list.add(music);
-			// music.play();
 			FlxG.sound.playMusic(Paths.music('freakyMenu'), 0);
 			FlxG.sound.music.fadeIn(4, 0, 0.7);
 		}
@@ -252,13 +197,7 @@ class TitleState extends MusicBeatState
 		else
 			initialized = true;
 
-		/*if (FlxG.sound.music != null)
-		{
-			FlxG.sound.music.onComplete = function()
-			{
-				FlxG.switchState(new VideoState());
-			}
-		}*/
+		Paths.clearUnusedMemory();
 	}
 
 	function getIntroTextShit():Array<Array<String>>
@@ -407,12 +346,10 @@ class TitleState extends MusicBeatState
 		else
 			gfDance.animation.play('danceLeft');
 
-	//	FlxG.log.add(curBeat);
-
 		switch (curBeat)
 		{
 			case 2:
-				createCoolText(['ninjamuffin', 'phantomArcade', 'kawaisprite', 'evilsker']);
+				createCoolText(['ninjamuffin99', 'phantomArcade', 'kawaisprite', 'evilsk8er']);
 			// credTextShit.visible = false;
 			case 3:
 				addMoreText('present');

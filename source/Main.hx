@@ -9,6 +9,11 @@ import openfl.display.Sprite;
 import openfl.events.Event;
 import flixel.FlxG;
 import ui.FPSCounter;
+import Options.Option;
+
+#if html5
+import lime.graphics.Image;
+#end
 
 class Main extends Sprite
 {
@@ -21,39 +26,6 @@ class Main extends Sprite
 	var startFullscreen:Bool = false; // Whether to start the game in fullscreen on desktop targets
 
 	// You can pretty much ignore everything from here on - your code should go in your states.
-
-	public static function setupSaveData()
-	{
-		if(FlxG.save.data.downscroll == null)
-			FlxG.save.data.downscroll = false;
-
-		if(FlxG.save.data.middlescroll == null)
-			FlxG.save.data.middlescroll = false;
-
-		if(FlxG.save.data.framerateDraw == null)
-			FlxG.save.data.framerateDraw = 120;
-
-		if(FlxG.save.data.fps == null)
-			FlxG.save.data.fps = true;
-
-		if(FlxG.save.data.ghostTapping == null)
-			FlxG.save.data.ghostTapping = false;
-
-		if(FlxG.save.data.notesplash == null)
-			FlxG.save.data.notesplash = true;
-
-		if(FlxG.save.data.glowStrums == null)
-			FlxG.save.data.glowStrums = true;
-
-		if(FlxG.save.data.cursingShit == null)
-			FlxG.save.data.cursingShit = false;
-
-		if(FlxG.save.data.camhudZoom == null)
-			FlxG.save.data.camhudZoom = true;
-
-		if(FlxG.save.data.ratingHUD == null)
-			FlxG.save.data.ratingHUD = false;
-	}
 
 	public static function main():Void
 	{
@@ -114,7 +86,11 @@ class Main extends Sprite
 		toggleFPS(FlxG.save.data.fps);
 		#end
 
-		setupSaveData();
+		#if html5
+		var icon = Image.fromFile("icon.png");
+		#end
+
+		Option.setupSaveData();
 		Conductor.offset = FlxG.save.data.notesOffset;
 	}
 

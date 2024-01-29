@@ -1,4 +1,5 @@
 package ui;
+import flixel.text.FlxText.FlxTextBorderStyle;
 import flixel.FlxG;
 import flixel.math.FlxMath;
 import haxe.Timer;
@@ -7,7 +8,8 @@ import openfl.system.System;
 import openfl.text.TextField;
 import openfl.text.TextFormat;
 import flixel.util.FlxColor;
-class FPSCounter extends TextField // Updated Code a lil bit, Code originally take from tr1angle engine.
+
+class FPSCounter extends TextField
 {
 	private var memMax:Float = 0;
 
@@ -49,8 +51,7 @@ class FPSCounter extends TextField // Updated Code a lil bit, Code originally ta
 		currentTime += deltaTime;
 		times.push(currentTime);
 
-		while (times[0] < currentTime - 1000)
-		{
+		while (times[0] < currentTime - 1000) {
 			times.shift();
 		}
 
@@ -60,10 +61,19 @@ class FPSCounter extends TextField // Updated Code a lil bit, Code originally ta
 		if (mem > memMax) 
 			memMax = mem;
 
-		var memInfo = (FlxG.save.data.mem ? "RAM: " + mem + "/ " + memMax + " MB" : "");
+		var memInfo = (FlxG.save.data.fps ? "MEM: " + mem + " MB" + "\n"
+		+ "MEM PEAK: " + memMax + " MB" : "");
 
 		if (visible && currentCount != cacheCount)
-			text = "FPS: " + Math.round((currentCount + cacheCount) / 2) + "\n" + memInfo + "\n";
+			text = "FPS: " + Math.round((currentCount + cacheCount) / 2) 
+		+ "\n" + memInfo 
+		+ "\n";
+		
+		textColor = 0xFFFFFFFF;
+
+		if (memMax > 3000 || currentCount <= FlxG.save.data.framerateDraw / 2) {
+				textColor = 0xFFFF0000;
+			}
 
 		cacheCount = currentCount;
 	}

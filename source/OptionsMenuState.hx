@@ -27,20 +27,27 @@ class OptionsMenuState extends MusicBeatState
 	var options:Array<OptionCatagory> = [
 		new OptionCatagory("Preferences", [
 			new NaughtyOption("If unchecked, any explicit content will be censored/removed from the game."),
+			new DownscrollOption("If checked, your note strums appears on the bottom of the screen instead of up."),
+			new MiddlescrollOption("If checked, your note strums appear in the middle of the screen, & your opponents note strums disappear."),
+			new CameraZoomOption("If unchecked, the camera won't zoom on every concurring beat."),
+			new FPSOption("If unchecked, your fps counter & memory counter disappear's."),
 			#if !html5
 			new FramerateOption("Self explanatory. Use your left and right arrow keys to switch between your framerate. [DEFAULT: 120]"), 
 			// HTML5 has some Vsync enabled by default so this option is pretty much useless on web builds
 			#end
-			new DownscrollOption("If checked, your note strums appears on the bottom of the screen instead of up."),
-			new MiddlescrollOption("If checked, your note strums appear in the middle of the screen, & your opponents note strums disappear."),
-			new CameraZoomOption("If unchecked, the camera won't zoom on every concurring beat."),
 			new GhostTappingOption("If checked, you won't get misses from mashing keys while there are no notes to hit."),
-			new RatingHudOption("If checked, the rating sprites with appear on the games HUD."),
 			new NotesplashOption("If unchecked, hitting 'Sick!' notes won't show firework particles."),
 			new OpponentLightStrums("If checked, your opponents note strums light up whenever its their turn to sing."),
-			new FPSOption("If unchecked, your fps counter & memory counter disappear's."),
 		]),
+
 		new OptionCatagory("Controls", []),
+
+		new OptionCatagory("Saves", [
+			new LockWeeksOption("Reset your story mode progress. This is irreversible!"),
+			new ResetHighscore("Reset your score on all songs and weeks. This is irreversible!"),
+			new ResetSettings("Reset ALL your settings. This is irreversible!"),
+		]),
+
 		new OptionCatagory("Exit", []),
 	];
 
@@ -131,7 +138,16 @@ class OptionsMenuState extends MusicBeatState
 			});
 		}
 
-		if (controls.BACK)
+		if (controls.BACK && !isCat)
+		{
+			FlxG.sound.play(Paths.sound("cancelMenu"), false);
+
+			new FlxTimer().start(0.5, function(tmr:FlxTimer)
+			{
+				FlxG.switchState(new MainMenuState());
+			});
+		}
+		else if (controls.BACK)
 		{
 			isCat = false;
 			grpControls.clear();
@@ -149,7 +165,6 @@ class OptionsMenuState extends MusicBeatState
 				controlLabel.screenCenter();
 				controlLabel.y += (100 * (i - (options.length / 2))) + 50;
 				grpControls.add(controlLabel);
-				// DONT PUT X IN THE FIRST PARAMETER OF new ALPHABET() !!
 			}
 
 			remove(textBG);
@@ -301,8 +316,6 @@ class OptionsMenuState extends MusicBeatState
 
 		if (isCat)
 			currentDescription = currentSelectedCat.getOptions()[curSelected].getDescription();
-		else
-			currentDescription = 'Please select a category.';
 
 		camFollow.screenCenter();
 

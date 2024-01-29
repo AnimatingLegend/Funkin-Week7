@@ -42,6 +42,8 @@ class MainMenuState extends MusicBeatState
 
 	override function create()
 	{
+		Paths.clearStoredMemory();
+
 		#if desktop
 		// Updating Discord Rich Presence
 		DiscordClient.changePresence("In the Menus", null);
@@ -79,7 +81,7 @@ class MainMenuState extends MusicBeatState
 		magenta.visible = false;
 		magenta.antialiasing = true;
 		magenta.color = 0xFFFD719B;
-		// magenta.scrollFactor.set();
+		magenta.scrollFactor.set();
 
 		menuItems = new MainMenuList();
 		add(menuItems);
@@ -97,12 +99,10 @@ class MainMenuState extends MusicBeatState
 		{
 			startExitState(new FreeplayState());
 		});
-		if (VideoState.seenVideo)
-		{
+		// asset only visible when week7 is either beaten, or unlocked.
+		if (FlxG.save.data.weekUnlocked[7] /**|| StoryMenuState.weekUnlocked[7]**/) {
 			menuItems.createItem(null, null, "kickstarter", selectDonate, true);
-		}
-		else
-		{
+		} else {
 			menuItems.createItem(null, null, "donate", selectDonate, true);
 		}
 		menuItems.createItem(0, 0, "options", function()
@@ -127,6 +127,8 @@ class MainMenuState extends MusicBeatState
 		add(versionShit);
 
 		super.create();
+
+		Paths.clearUnusedMemory();
 	}
 
 	override function finishTransIn()

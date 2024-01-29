@@ -4,28 +4,22 @@ import flixel.FlxSprite;
 import flixel.group.FlxGroup.FlxTypedGroup;
 import flixel.math.FlxPoint;
 import flixel.system.FlxSound;
+import flixel.FlxG;
 
 using StringTools;
 
 class TankCutscene extends FlxSprite
 {
-	public var startSyncAudio:FlxSound;
+	public var layInFront:Array<Array<FlxSprite>> = [[], [], []];
+	public var swagBacks:Map<String, Dynamic> = [];
 
 	public function new(x:Float, y:Float)
 	{
 		super(x, y);
 	}
 
-	var startedPlayingSound:Bool = false;
-
 	override function update(elapsed:Float)
 	{
-		if (animation.curAnim.curFrame >= 1 && !startedPlayingSound)
-		{
-			startSyncAudio.play();
-			startedPlayingSound = true;
-		}
-
 		super.update(elapsed);
 	}
 }
@@ -50,7 +44,6 @@ class CutsceneCharacter extends FlxTypedGroup<FlxSprite>
 
 	// shitshow, oh well
 	var arrayLMFAOOOO:Array<String> = [];
-
 	function parseOffsets()
 	{
 		var splitShit:Array<String> = CoolUtil.coolTextFile(Paths.file('images/cutscenes/' + imageShit + "CutsceneOffsets.txt"));

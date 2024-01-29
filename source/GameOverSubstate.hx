@@ -19,7 +19,7 @@ class GameOverSubstate extends MusicBeatSubstate
 
 	public function new(x:Float, y:Float)
 	{
-		var daStage = PlayState.stageCheck;
+		var daStage = PlayState.curStage;
 		var daBf:String = '';
 		switch (daStage)
 		{
@@ -47,8 +47,6 @@ class GameOverSubstate extends MusicBeatSubstate
 		FlxG.sound.play(Paths.sound('fnf_loss_sfx' + stageSuffix));
 		Conductor.changeBPM(100);
 
-		// FlxG.camera.followLerp = 1;
-		// FlxG.camera.focusOn(FlxPoint.get(FlxG.width / 2, FlxG.height / 2));
 		FlxG.camera.scroll.set();
 		FlxG.camera.target = null;
 
@@ -58,10 +56,8 @@ class GameOverSubstate extends MusicBeatSubstate
 
 		randomGameover = FlxG.random.int(1, 25, exclude);
 
-		if (FlxG.save.data.cursingShit)
-		{
+		if (FlxG.save.data.explicitContent)
 			exclude = [1, 3, 8, 13, 17, 21];
-		}
 	}
 
 	override function update(elapsed:Float)

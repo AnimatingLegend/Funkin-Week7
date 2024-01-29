@@ -8,14 +8,13 @@ class BGSprite extends FlxSprite
 {
 	public var idleAnim:String = null;
 
-	override public function new(image:String, x:Float = 0, y:Float = 0, scrollX:Float = 1, scrollY:Float = 1, animations:Array<String> = null, loopAnims:Bool = false)
+	override public function new(image:String, x:Float = 0, y:Float = 0, scrollX:Float = 1, scrollY:Float = 1, animations:Array<String> = null, loopAnims:Bool = false, ?library:String)
 	{
 		super(x, y);
 		
 		if (animations != null)
 		{
-			// im only using BGSprite for the week 7 stage only, so im adding its library here so it wont be a hassle preloading its assets in the chart editor.
-			frames = Paths.getSparrowAtlas(image, 'week7');
+			frames = Paths.getSparrowAtlas(image, library);
 			for (anim in animations)
 			{
 				animation.addByPrefix(anim, anim, 24, loopAnims);
@@ -26,7 +25,7 @@ class BGSprite extends FlxSprite
 		}
 		else
 		{
-			loadGraphic(Paths.image(image, 'week7'));
+			loadGraphic(Paths.image(image, library));
 			active = false;
 		}
 		scrollFactor.set(scrollX, scrollY);
