@@ -99,8 +99,7 @@ class MainMenuState extends MusicBeatState
 		{
 			startExitState(new FreeplayState());
 		});
-		// asset only visible when week7 is either beaten, or unlocked.
-		if (FlxG.save.data.weekUnlocked[7] /**|| StoryMenuState.weekUnlocked[7]**/) {
+		if (!FlxG.save.data.weekUnlocked || StoryMenuState.weekUnlocked[7]) {
 			menuItems.createItem(null, null, "kickstarter", selectDonate, true);
 		} else {
 			menuItems.createItem(null, null, "donate", selectDonate, true);

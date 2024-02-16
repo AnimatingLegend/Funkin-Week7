@@ -80,6 +80,11 @@ class TitleState extends MusicBeatState
 			VideoState.seenVideo = FlxG.save.data.seenVideo;
 		}
 
+		if (FlxG.save.data.weekUnlocked != null) {
+			StoryMenuState.weekUnlocked = StoryMenuState.unlockWeeks();
+			FlxG.save.flush();
+		}
+
 		#if FREEPLAY
 		FlxG.switchState(new FreeplayState());
 		#elseif CHARTING
