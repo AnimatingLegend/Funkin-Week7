@@ -99,7 +99,8 @@ class MainMenuState extends MusicBeatState
 		{
 			startExitState(new FreeplayState());
 		});
-		if (!FlxG.save.data.weekUnlocked || StoryMenuState.weekUnlocked[7]) {
+		if (!FlxG.save.data.weekUnlocked || StoryMenuState.weekUnlocked[7])
+		{
 			menuItems.createItem(null, null, "kickstarter", selectDonate, true);
 		} else {
 			menuItems.createItem(null, null, "donate", selectDonate, true);

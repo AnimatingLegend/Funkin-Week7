@@ -476,7 +476,7 @@ class ResetSettings extends Option
 		FlxG.save.data.glowStrums = null;
 		FlxG.save.data.cursingShit = null;
 		FlxG.save.data.camhudZoom = null;
-		FlxG.save.data.weekUnlocked = null;
+		// FlxG.save.data.weekUnlocked = null;
 
 		Option.setupSaveData();
 		trace('All settings have been reset');

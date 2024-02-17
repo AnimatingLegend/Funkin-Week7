@@ -75,9 +75,9 @@ class FreeplayState extends MusicBeatState
 				FlxG.sound.playMusic(Paths.music('freakyMenu'));
 		}
 
-		if (!FlxG.save.data.weekUnlocked)
+		if (!FlxG.save.data.WeekUnlocked)
 		{
-			if (StoryMenuState.weekUnlocked[1] || isDebug)
+			if (StoryMenuState.weekUnlocked[1]|| isDebug)
 				addWeek(['Bopeebo', 'Fresh', 'Dadbattle'], 1, ['dad']);
 	
 			if (StoryMenuState.weekUnlocked[2] || isDebug)
